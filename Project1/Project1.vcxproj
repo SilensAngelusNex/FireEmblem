@@ -166,7 +166,6 @@
     <ClInclude Include="Experience.h" />
     <ClInclude Include="FairDice.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="Tests.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="ObservableDamage.h" />

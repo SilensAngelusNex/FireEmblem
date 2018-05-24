@@ -1,5 +1,4 @@
-#ifndef EXPERIENCE_H
-#define EXPERIENCE_H
+#pragma once
 
 #include "AttributeList.h"
 #include "Dice.h"
@@ -36,5 +35,3 @@ protected:
 	void levelUp();
 	AttributeList getLevelGrowths() const;
 };
-
-#endif // !EXPERIENCE_H

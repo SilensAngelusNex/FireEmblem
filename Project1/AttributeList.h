@@ -1,5 +1,4 @@
-#ifndef ATTRIBUTELIST_H
-#define ATTRIBUTELIST_H
+#pragma once
 
 #include <array>
 
@@ -12,5 +11,3 @@ using AttribType = Enum<_ATTRIB_TYPES>;
 using AttributeList = EnumContainer<AttribType>;
 
 bool runAttributeListTests();
-
-#endif // !ATTRIBUTELIST_H

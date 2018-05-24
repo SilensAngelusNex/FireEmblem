@@ -1,5 +1,4 @@
-#ifndef ITEM_H
-#define ITEM_H
+#pragma once
 
 #include <string>
 #include <stdexcept>
@@ -30,5 +29,3 @@ public:
 		throw GameException("Item cannot be equipped.");
 	}
 };
-
-#endif // !ITEM_H

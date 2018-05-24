@@ -1,5 +1,4 @@
-#ifndef FAIR_DICE_H
-#define FAIR_DICE_H
+#pragma once
 
 #include "Dice.h"
 #include <random>
@@ -32,5 +31,3 @@ public:
 		return _distribution(_generator);
 	}
 };
-
-#endif //!FAIR_DICE_H

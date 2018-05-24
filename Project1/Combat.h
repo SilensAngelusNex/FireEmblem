@@ -1,5 +1,4 @@
-#ifndef COMBAT_H
-#define COMBAT_H
+#pragma once
 
 #include "ObservableDamage.h"
 #include "Component.h"
@@ -27,6 +26,3 @@ public:
 protected:
 	std::pair<int, int> do_combat(Unit& defender);
 };
-
-
-#endif // !COMBAT_H

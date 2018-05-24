@@ -1,5 +1,4 @@
-#ifndef INVENTORY_COMMANDABLE_H
-#define INVENTORY_COMMANDABLE_H
+#pragma once
 
 #include "InventoryViewable.h"
 
@@ -25,5 +24,3 @@ protected:
 	std::unique_ptr<Item> dequip0(EquipSlot slot);
 	void equip0(EquipSlot slot, std::unique_ptr<Item> item);
 };
-
-#endif // !INVENTORY_COMMANDABLE_H

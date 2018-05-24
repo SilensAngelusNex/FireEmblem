@@ -1,5 +1,4 @@
-#ifndef ITEM_EQUIP_H
-#define ITEM_EQUIP_H
+#pragma once
 
 #include "Item.h"
 #include "AttributeList.h"
@@ -32,5 +31,3 @@ public:
 	virtual AttribType dmg_type() const = 0;
 
 };
-
-#endif // !ITEM_EQUIP_H

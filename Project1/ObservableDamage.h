@@ -1,5 +1,4 @@
-#ifndef OBSERVABLE_DAMAGE_H
-#define OBSERVABLE_DAMAGE_H
+#pragma once
 
 #include <string>
 
@@ -14,5 +13,3 @@ protected:
 	void notifyAllCrit(const std::string&  name, int dealt);
 	void notifyAllHeal(const std::string&  name, int amount);
 };
-
-#endif // !OBSERVABLE_DAMAGE_H

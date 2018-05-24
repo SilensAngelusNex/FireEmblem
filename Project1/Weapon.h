@@ -1,5 +1,4 @@
-#ifndef WEAPON_H
-#define WEAPON_H
+#pragma once
 
 #include "ItemEquip.h"
 #include "AttributeList.h"
@@ -25,5 +24,3 @@ public:
 	int atk_spd(const AttributeList& stats) const override;
 	AttribType dmg_type() const override;
 };
-
-#endif // !WEAPON_H

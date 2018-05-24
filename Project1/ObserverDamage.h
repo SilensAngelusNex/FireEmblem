@@ -1,5 +1,4 @@
-#ifndef OBSERVER_DAMAGE_H
-#define OBSERVER_DAMAGE_H
+#pragma once
 
 #include <string>
 #include "Damage.h"
@@ -12,5 +11,3 @@ public:
 	virtual void notifyCrit(const std::string&, int) = 0;
 	virtual void notifyHeal(const std::string&, int) = 0;
 };
-
-#endif // !OBSERVER_DAMAGE_H

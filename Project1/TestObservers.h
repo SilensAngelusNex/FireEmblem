@@ -1,5 +1,4 @@
-#ifndef TEST_OBSERVER_H
-#define TEST_OBSERVER_H
+#pragma once
 
 #include <string>
 
@@ -22,5 +21,3 @@ public:
 	void notifyCrit(const std::string&  name, int dmg) override;
 	void notifyHeal(const std::string&  name, int heal) override;
 };
-
-#endif // !TEST_OBSERVER_H

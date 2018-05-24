@@ -1,5 +1,4 @@
-#ifndef DAMAGE_H 
-#define DAMAGE_H
+#pragma once
 
 #define PERCENT_REDUX_CONSTANT 5.0
 #define FLAT_REDUX_CONSTANT 2
@@ -35,6 +34,3 @@ protected:
 	int getPercentReduction(int armor);
 	virtual int getArmor(Unit& defender);
 };
-
-
-#endif // DAMAGE_H 

@@ -1,5 +1,4 @@
-#ifndef INVENTORY_VIEWABLE_H
-#define INVENTORY_VIEWABLE_H
+#pragma once
 
 #include "InventoryBase.h"
 #include "Passkey.h"
@@ -19,5 +18,3 @@ public:
 protected:
 	explicit InventoryViewable(Unit& owner);
 };
-
-#endif // !INVENTORY_VIEWABLE_H

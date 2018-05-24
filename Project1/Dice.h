@@ -1,5 +1,4 @@
-#ifndef DICE_H
-#define DICE_H
+#pragma once
 
 template <int sides>
 class Dice {
@@ -22,5 +21,3 @@ public:
 		return result;
 	}
 };
-
-#endif // !DICE_H

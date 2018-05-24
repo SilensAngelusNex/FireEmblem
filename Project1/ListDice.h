@@ -1,5 +1,4 @@
-#ifndef LIST_DICE_H
-#define LIST_DICE_H
+#pragma once
 
 #include <deque>
 #include <vector>
@@ -58,5 +57,3 @@ public:
 
 	}
 };
-
-#endif //!LIST_DICE_H

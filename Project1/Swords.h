@@ -1,5 +1,4 @@
-#ifndef SWORDS_H
-#define SWORDS_H
+#pragma once
 
 #include "Weapon.h"
 
@@ -22,5 +21,3 @@ public:
 	int crit(const AttributeList& stats) const override;
 	int might(const AttributeList& stats) const override;
 };
-
-#endif // !SWORDS_H

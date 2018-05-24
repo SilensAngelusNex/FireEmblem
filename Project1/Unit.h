@@ -1,5 +1,4 @@
-#ifndef UNIT_H
-#define UNIT_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -80,5 +79,3 @@ public:
 		_exp.detach(observer);
 	}
 };
-
-#endif // !UNIT_H

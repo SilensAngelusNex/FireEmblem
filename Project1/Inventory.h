@@ -1,5 +1,4 @@
-#ifndef INVENTORY_H
-#define INVENTORY_H
+#pragma once
 
 #include "InventoryCommandable.h"
 #include "Damage.h"
@@ -15,4 +14,3 @@ public:
 	Damage getNormalDamage(const Unit& defender);
 	Damage getCritDamage(const Unit& defender);
 };
-#endif // !INVENTORY_H

@@ -155,9 +155,6 @@
     <ClInclude Include="ObserverDamage.h">
       <Filter>inc\util\observer</Filter>
     </ClInclude>
-    <ClInclude Include="Tests.h">
-      <Filter>inc\tests</Filter>
-    </ClInclude>
     <ClInclude Include="AttributeList.h">
       <Filter>inc\unit</Filter>
     </ClInclude>

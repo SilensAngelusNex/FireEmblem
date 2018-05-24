@@ -1,5 +1,4 @@
-#ifndef OBSERVABLE_H
-#define OBSERVABLE_H
+#pragma once
 
 #include <set>
 
@@ -24,5 +23,3 @@ public:
 		_observers.erase(&observer);
 	}
 };
-
-#endif // !OBSERVABLE_H
