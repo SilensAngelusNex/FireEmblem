@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="inc">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="inc\dice">
+      <UniqueIdentifier>{58a8ee2d-6be4-4f85-b6ef-a86095944d28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\unit">
+      <UniqueIdentifier>{fa96d752-8e26-434c-84cf-6b6a82182e92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\unit">
+      <UniqueIdentifier>{64b3b0ed-9925-4f55-8449-29c9d299f305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\tests">
+      <UniqueIdentifier>{0468dec6-42c6-4b79-a116-4280aa923973}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\tests">
+      <UniqueIdentifier>{45ee5713-38c5-41d8-b2b3-6348fd61b243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\item">
+      <UniqueIdentifier>{fc4eefcf-c708-4e07-abcd-fc07628b271f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\item">
+      <UniqueIdentifier>{d42f3138-b78c-4f0c-93fd-dfdb186a4b99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\item\items">
+      <UniqueIdentifier>{707c9c60-0213-4054-927a-ad443c22d344}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\item\items">
+      <UniqueIdentifier>{c1ef03ce-ac9d-4708-baed-ce397020585f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\unit\component">
+      <UniqueIdentifier>{ece53b6d-ce2c-4acd-b0bc-aaa198a7c989}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\unit\component">
+      <UniqueIdentifier>{2ad7ca08-2820-41ef-916b-7a0dad034e86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\unit\component\inventory">
+      <UniqueIdentifier>{7d10c95e-e0e2-4191-bc76-86ca72450443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\unit\component\inventory">
+      <UniqueIdentifier>{42d897be-a0bd-43b2-a828-2df0b218e646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\util">
+      <UniqueIdentifier>{7f2d4e84-93d5-4f01-a7b5-64537a8176b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\util\observer">
+      <UniqueIdentifier>{dc457683-4e61-4d29-91ae-23a31b195452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\util\observer\observable">
+      <UniqueIdentifier>{7893fe35-6db2-4b8b-a0ea-4f1fa86be459}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util">
+      <UniqueIdentifier>{413d3732-1f63-407c-a84a-773cd7958501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util\observer">
+      <UniqueIdentifier>{072fd7d5-3880-44b4-b6ca-80406515b9c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\util\observer\observable">
+      <UniqueIdentifier>{afbf591e-37c8-462e-ad7e-842d2438ec06}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="DiceTest.cpp">
+      <Filter>src\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitTest.cpp">
+      <Filter>src\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Swords.cpp">
+      <Filter>src\item\items</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>src\item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemEquip.cpp">
+      <Filter>src\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="ObservableExp.cpp">
+      <Filter>src\util\observer\observable</Filter>
+    </ClCompile>
+    <ClCompile Include="ObservableDamage.cpp">
+      <Filter>src\util\observer\observable</Filter>
+    </ClCompile>
+    <ClCompile Include="TestObservers.cpp">
+      <Filter>src\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Combat.cpp">
+      <Filter>src\unit\component</Filter>
+    </ClCompile>
+    <ClCompile Include="Experience.cpp">
+      <Filter>src\unit\component</Filter>
+    </ClCompile>
+    <ClCompile Include="Stats.cpp">
+      <Filter>src\unit\component</Filter>
+    </ClCompile>
+    <ClCompile Include="Damage.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>src\unit\component</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>src\unit\component\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryViewable.cpp">
+      <Filter>src\unit\component\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryBase.cpp">
+      <Filter>src\unit\component\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryCommandable.cpp">
+      <Filter>src\unit\component\inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeList.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponList.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ListDice.h">
+      <Filter>inc\dice</Filter>
+    </ClInclude>
+    <ClInclude Include="Dice.h">
+      <Filter>inc\dice</Filter>
+    </ClInclude>
+    <ClInclude Include="FairDice.h">
+      <Filter>inc\dice</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Observable.h">
+      <Filter>inc\util\observer\observable</Filter>
+    </ClInclude>
+    <ClInclude Include="ObserverDamage.h">
+      <Filter>inc\util\observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests.h">
+      <Filter>inc\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="AttributeList.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>inc\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Swords.h">
+      <Filter>inc\item\items</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>inc\item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemEquip.h">
+      <Filter>inc\item</Filter>
+    </ClInclude>
+    <ClInclude Include="ObservableDamage.h">
+      <Filter>inc\util\observer\observable</Filter>
+    </ClInclude>
+    <ClInclude Include="ObserverExp.h">
+      <Filter>inc\util\observer</Filter>
+    </ClInclude>
+    <ClInclude Include="ObservableExp.h">
+      <Filter>inc\util\observer\observable</Filter>
+    </ClInclude>
+    <ClInclude Include="TestObservers.h">
+      <Filter>inc\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponList.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>inc\unit\component</Filter>
+    </ClInclude>
+    <ClInclude Include="Combat.h">
+      <Filter>inc\unit\component</Filter>
+    </ClInclude>
+    <ClInclude Include="Experience.h">
+      <Filter>inc\unit\component</Filter>
+    </ClInclude>
+    <ClInclude Include="Stats.h">
+      <Filter>inc\unit\component</Filter>
+    </ClInclude>
+    <ClInclude Include="Damage.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>inc\unit\component\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryCommandable.h">
+      <Filter>inc\unit\component\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryViewable.h">
+      <Filter>inc\unit\component\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>inc\unit\component</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryBase.h">
+      <Filter>inc\unit\component\inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Passkey.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumContainer.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
