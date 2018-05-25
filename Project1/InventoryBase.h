@@ -9,13 +9,15 @@ class Stats;
 
 #define INVENTORY_MAX_NUMBER_ITEMS 5
 
-
 class InventoryBase : public Component<Unit> {
+private:
+	template<typename T>
+	using EquipArray = EnumContainer<T, EquipSlot>;
 protected:
 	Stats* _stats;
 
-	std::array<ItemEquip*, EQUIP_SLOTS_ENUM_END> _equipment{};
-	std::array<std::unique_ptr<Item>, EQUIP_SLOTS_ENUM_END> _equipment_owners{};
+	EquipArray<ItemEquip*> _equipment{};
+	EquipArray<std::unique_ptr<Item>> _equipment_owners{};
 	std::array<std::unique_ptr<Item>, INVENTORY_MAX_NUMBER_ITEMS> _items{};
 
 	int _number_items_held{0};
