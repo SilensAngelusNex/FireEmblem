@@ -8,7 +8,9 @@
 class Unit;
 using GameException = std::runtime_error;
 
-enum EquipSlot { ON_HAND, OFF_HAND, CHEST, EQUIP_SLOTS_ENUM_END };
+enum _EQUIP_SLOTS { ON_HAND, OFF_HAND, CHEST, ENUM_END };
+using EquipSlot = Enum<_EQUIP_SLOTS>;
+
 
 /**
 	
