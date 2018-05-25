@@ -12,8 +12,9 @@
 #include "Combat.h"
 #include "Dice.h"
 #include "Experience.h"
-#define IDENTITY std::string
-#define CONTEXT Dice<100>
+
+using IDENTITY = std::string;
+using CONTEXT = Dice<100>;
 
 class Unit : public Observable<ObserverDamage>, public Observable<ObserverExp> {
 private:
@@ -26,7 +27,7 @@ private:
 	Combat _combat;
 	//Location& _loc;
 public:
-	Unit(IDENTITY, CONTEXT&, AttributeList stats);
+	Unit(IDENTITY name, CONTEXT& context, AttributeList stats);
 
 	// Viewable Unit
 	const IDENTITY& getIdentity() const;

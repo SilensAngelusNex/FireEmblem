@@ -18,7 +18,7 @@ namespace Weapon_Advantages {
 	WeaponList drk({ neu, adv, dis, dis, adv, adv, adv, adv, adv, dis, neu });
 
 	std::array<WeaponList, WeaponType::size> matchups = { swd, axe, lnc, knf, bow, eth, air, fir, wtr, lgt, drk };
-}
+} // namespace Weapon_Advantages
 
 int compare(WeaponType lhs, WeaponType rhs) {
 	return Weapon_Advantages::matchups[lhs.pos()][rhs];

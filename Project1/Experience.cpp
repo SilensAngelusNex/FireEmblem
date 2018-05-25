@@ -7,7 +7,7 @@ Experience::Experience(Unit& owner, Dice<100>& dice) : Experience(owner, dice, 0
 Experience::Experience(Unit& owner, Dice<100>& dice, int level) :
 	Component<Unit>(owner),
 	_dice(dice),
-	_exp(EXP_PER_LEVEL * level)
+	_exp(_EXP_PER_LEVEL * level)
 {}
 
 void Experience::init() {
@@ -18,12 +18,12 @@ void Experience::init() {
 void Experience::gainExp(int gains) {
 	while (gains > 0) {
 		int current_exp = getExp();
-		if (gains >= EXP_PER_LEVEL - current_exp) {
-			int change = EXP_PER_LEVEL - current_exp;
+		if (gains >= _EXP_PER_LEVEL - current_exp) {
+			int change = _EXP_PER_LEVEL - current_exp;
 			gains -= change;
 			_exp += change;
 
-			notifyAllExp(current_exp, EXP_PER_LEVEL);
+			notifyAllExp(current_exp, _EXP_PER_LEVEL);
 			levelUp();
 		} else {
 			_exp += gains;
@@ -51,13 +51,13 @@ void Experience::gainCombatExp(Unit& enemy, int largest_strike) {
 }
 
 int Experience::getExp() const {
-	return _exp % EXP_PER_LEVEL;
+	return _exp % _EXP_PER_LEVEL;
 }
 int Experience::getLevel() const {
-	return _exp / EXP_PER_LEVEL;
+	return _exp / _EXP_PER_LEVEL;
 }
 int Experience::getTier() const {
-	return _exp / (EXP_PER_LEVEL * LEVELS_PER_TIER);
+	return _exp / (_EXP_PER_LEVEL * _LEVELS_PER_TIER);
 }
 
 void Experience::levelUp() {
@@ -65,7 +65,7 @@ void Experience::levelUp() {
 	notifyAllLevel(getLevel(), growths);
 	_stats->getAttribs() += growths;
 
-	if (getLevel() % LEVELS_PER_TIER == 0) {
+	if (getLevel() % _LEVELS_PER_TIER == 0) {
 		// TODO(Weston): trigger class-change
 		notifyAllTier(getTier());
 	}
@@ -77,10 +77,10 @@ AttributeList Experience::getLevelGrowths() const {
 	for (AttribType i : AttribType::list) {
 		int growth_rate = growth_rates[i];
 		while (growth_rate > 0) {
-			if (_dice.roll() < std::min(growth_rate, MAX_GROWTH_CHANCE)) {
+			if (_dice.roll() < std::min(growth_rate, _MAX_GROWTH_CHANCE)) {
 				result[i]++;
 			}
-			growth_rate -= MAX_GROWTH_CHANCE;
+			growth_rate -= _MAX_GROWTH_CHANCE;
 		}
 	}
 	return result;
