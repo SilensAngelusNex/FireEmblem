@@ -10,6 +10,9 @@ using GameException = std::runtime_error;
 
 enum EquipSlot { ON_HAND, OFF_HAND, CHEST, EQUIP_SLOTS_ENUM_END };
 
+/**
+	
+*/
 class Item {
 public:
 	Item() = default;
