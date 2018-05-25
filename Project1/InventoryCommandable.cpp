@@ -8,7 +8,7 @@ InventoryCommandable::InventoryCommandable(Unit& owner) :
 
 
 void InventoryCommandable::add(std::unique_ptr<Item> item) {
-	Expects(_number_items_held < INVENTORY_MAX_NUMBER_ITEMS);
+	Expects(_number_items_held < _MAX_NUMBER_ITEMS);
 	_items[_number_items_held] = std::move(item);
 	_number_items_held++;
 }
@@ -73,7 +73,7 @@ void InventoryCommandable::equip(EquipSlot slot, Item& item) {
 }
 
 void InventoryCommandable::equip(EquipSlot slot, std::unique_ptr<Item> item) {
-	Expects(item->is_equippable() && (_equipment[slot] == nullptr || _number_items_held < INVENTORY_MAX_NUMBER_ITEMS));
+	Expects(item->is_equippable() && (_equipment[slot] == nullptr || _number_items_held < _MAX_NUMBER_ITEMS));
 	if (_equipment[slot] != nullptr) {
 		dequip(slot);
 	}
@@ -82,7 +82,7 @@ void InventoryCommandable::equip(EquipSlot slot, std::unique_ptr<Item> item) {
 }
 
 void InventoryCommandable::dequip(EquipSlot slot) {
-	Expects(_number_items_held < INVENTORY_MAX_NUMBER_ITEMS);
+	Expects(_number_items_held < _MAX_NUMBER_ITEMS);
 	add(dequip0(slot));
 }
 

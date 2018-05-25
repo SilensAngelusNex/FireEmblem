@@ -44,12 +44,12 @@ bool Damage::isCrit() {
 }
 
 int Damage::getFlatReduction(int armor) {
-	return (10 * armor) / FLAT_REDUX_CONSTANT - 10 * _flat_pen;
+	return (10 * armor) / _FLAT_REDUX_CONSTANT - 10 * _flat_pen;
 }
 
 int Damage::getPercentReduction(int armor) {
 	// The 1005 and / 10 makes the result be rounded instead of truncating.
-	auto base_redux = static_cast<int>(1005 / (std::sqrt(armor / PERCENT_REDUX_CONSTANT + 1) * 10));
+	auto base_redux = static_cast<int>(1005 / (std::sqrt(armor / _PERCENT_REDUX_CONSTANT + 1) * 10));
 	return base_redux * (100 - _percent_pen) / 100;
 }
 

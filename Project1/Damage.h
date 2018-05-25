@@ -1,14 +1,14 @@
 #pragma once
 
-#define PERCENT_REDUX_CONSTANT 5.0
-#define FLAT_REDUX_CONSTANT 2
-
 #include "AttributeList.h"
 
 class Unit;
 
 class Damage {
 protected:
+	constexpr static float _PERCENT_REDUX_CONSTANT = 5.0;
+	constexpr static int _FLAT_REDUX_CONSTANT = 2;
+
 	int _raw_damage;
 	AttribType _armor_type;
 	bool _is_crit;
