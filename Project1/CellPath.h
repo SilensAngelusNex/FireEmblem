@@ -5,8 +5,8 @@
 class CellPath
 {
 private:
-		std::list<GridCell*> _tiles;
-		int _cost = 0;
+	std::list<GridCell*> _tiles;
+	int _cost = 0;
 public:
 	CellPath();
 	CellPath(GridCell* _start_tile);

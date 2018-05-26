@@ -11,7 +11,7 @@ CellEdge::~CellEdge()
 {
 }
 /**
-This function allows me to use lis.remove() on CellEdge. Probably a bad idea
+This function allows me to use list.remove() on CellEdge. Probably a bad idea
 */
 bool CellEdge::operator== (const CellEdge& c) const
 {
