@@ -2,7 +2,7 @@
 
 
 
-CellEdge::CellEdge()
+CellEdge::CellEdge(): _cell()
 {
 }
 

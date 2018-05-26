@@ -27,7 +27,7 @@ GridCell* CellPath::getHead()
 }
 int CellPath::getCost()
 {
-
+	return 0;
 }
 
 

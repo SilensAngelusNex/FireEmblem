@@ -1,6 +1,6 @@
 #pragma once
 #include "Terrain.h"
-#include "TileEdge.h"
+#include "CellEdge.h"
 #include <vector>
 #include "Unit.h"
 class Tile

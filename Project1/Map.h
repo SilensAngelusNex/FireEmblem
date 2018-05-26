@@ -2,7 +2,7 @@
 #include <vector>
 #include "Unit.h"
 #include "Tile.h"
-#include "TilePath.h"
+#include "CellPath.h"
 #include "GridCell.h"
 
 class Map

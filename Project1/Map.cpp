@@ -13,5 +13,5 @@ Map::~Map()
 
 std::vector<CellPath> getUnitMoveableTiles(Tile* tile)
 {
-
+	return std::vector<CellPath>();
 }
