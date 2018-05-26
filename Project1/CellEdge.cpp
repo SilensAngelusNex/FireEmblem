@@ -6,10 +6,6 @@ CellEdge::CellEdge(GridCell* cell, int cost): _cell(cell), _cost(cost)
 {
 }
 
-
-CellEdge::~CellEdge()
-{
-}
 /**
 This function allows me to use list.remove() on CellEdge. Probably a bad idea
 */

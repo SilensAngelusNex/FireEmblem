@@ -8,12 +8,10 @@ private:
 	std::list<GridCell*> _tiles;
 	int _cost = 0;
 public:
-	CellPath();
 	CellPath(GridCell* _start_tile);
 	bool insertTile(GridCell* _new_tile);
 	GridCell* getTail();
 	GridCell* getHead();
 	int getCost();
-	~CellPath();
 };
 

@@ -13,7 +13,6 @@ public:
 	int _cost;
 	GridCell* _cell;
 	CellEdge(GridCell* cell, int cost);
-	~CellEdge();
 	bool operator==(const CellEdge & c) const;
 };
 

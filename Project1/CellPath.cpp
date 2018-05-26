@@ -1,10 +1,7 @@
 #include "CellPath.h"
 
 
-CellPath::CellPath()
-{
 
-}
 CellPath::CellPath(GridCell* _start_tile) : _tiles({ _start_tile })
 {
 
@@ -32,6 +29,3 @@ int CellPath::getCost()
 }
 
 
-CellPath::~CellPath()
-{
-}

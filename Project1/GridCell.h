@@ -2,9 +2,10 @@
 #include "Tile.h"
 #include <algorithm>
 #include <list>
+/** GridCell that composes the Map. Holds a Tile.
+*/
 class GridCell
 {
-
 private:
 
 	Tile _tile;
@@ -13,7 +14,6 @@ private:
 	CellEdge getEdge(GridCell* other_cell);
 
 public:
-
 	GridCell();
 	~GridCell();
 	bool addAdjacentCell(GridCell* _new_cell, int cost);

@@ -3,6 +3,8 @@
 #include "CellEdge.h"
 #include <vector>
 #include "Unit.h"
+/** Tile held within a GridCell. Has no position information to keep the implementation OO
+*/
 class Tile
 {
 private:
