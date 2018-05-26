@@ -12,6 +12,7 @@ CellPath::CellPath(GridCell* _start_tile) : _tiles({ _start_tile })
 bool CellPath::insertTile(GridCell* _new_tile)
 {
 	if (this->getTail()->isAdjacent(_new_tile)) {
+		_cost += _tiles.back()->getEdgeCost(_new_tile);
 		_tiles.push_back(_new_tile);
 		return true;
 	}
@@ -27,7 +28,7 @@ GridCell* CellPath::getHead()
 }
 int CellPath::getCost()
 {
-	return 0;
+	return _cost;
 }
 
 
