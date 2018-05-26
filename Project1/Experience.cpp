@@ -10,10 +10,6 @@ Experience::Experience(Unit& owner, Dice<100>& dice, int level) :
 	_exp(_EXP_PER_LEVEL * level)
 {}
 
-void Experience::init() {
-	_stats = &_owner.getStats();
-}
-
 
 void Experience::gainExp(int gains) {
 	while (gains > 0) {
@@ -63,7 +59,7 @@ int Experience::getTier() const {
 void Experience::levelUp() {
 	AttributeList growths = getLevelGrowths();
 	notifyAllLevel(getLevel(), growths);
-	_stats->getAttribs() += growths;
+	_owner.getStats().getAttribs() += growths;
 
 	if (getLevel() % _LEVELS_PER_TIER == 0) {
 		// TODO(Weston): trigger class-change
@@ -72,7 +68,7 @@ void Experience::levelUp() {
 }
 AttributeList Experience::getLevelGrowths() const {
 	AttributeList result;
-	const AttributeList& growth_rates = _stats->getGrowths();
+	const AttributeList& growth_rates = _owner.getStats().getGrowths();
 
 	for (AttribType i : AttribType::list) {
 		int growth_rate = growth_rates[i];

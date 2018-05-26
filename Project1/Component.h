@@ -13,6 +13,4 @@ protected:
 	explicit Component(T& owner) :
 		_owner(owner)
 	{}
-
-	void init() {}
 };
