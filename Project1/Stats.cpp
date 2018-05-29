@@ -19,10 +19,6 @@ Stats::Stats(Unit& owner, AttributeList attribs, AttributeList growths, WeaponLi
 	_health(_growths[AttribType::values::CON])
 {}
 
-void Stats::init() {
-	_inv = &_owner.getInventory();
-}
-
 
 AttributeList& Stats::getAttribs() {
 	return _attribs;
@@ -45,25 +41,25 @@ const WeaponList& Stats::getWeaponProficiencies() const {
 }
 
 int Stats::avoid() const {
-	return _inv->avoid(Passkey<Stats>());
+	return _owner.getInventory().avoid(Passkey<Stats>());
 }
 
 int Stats::dodge() const {
-	return _inv->dodge(Passkey<Stats>());
+	return _owner.getInventory().dodge(Passkey<Stats>());
 }
 
 int Stats::hit() const {
-	return _inv->hit(Passkey<Stats>());
+	return _owner.getInventory().hit(Passkey<Stats>());
 }
 
 int Stats::crit() const {
-	return _inv->crit(Passkey<Stats>());
+	return _owner.getInventory().crit(Passkey<Stats>());
 }
 
 int Stats::might() const {
-	return _inv->might(Passkey<Stats>());
+	return _owner.getInventory().might(Passkey<Stats>());
 }
 
 int Stats::atk_spd() const {
-	return _inv->atk_spd(Passkey<Stats>());
+	return _owner.getInventory().atk_spd(Passkey<Stats>());
 }

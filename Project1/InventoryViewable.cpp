@@ -2,6 +2,7 @@
 
 #include "InventoryViewable.h"
 #include "Stats.h"
+#include "Unit.h"
 
 
 InventoryViewable::InventoryViewable(Unit & owner) :
@@ -18,21 +19,21 @@ const ItemEquip& InventoryViewable::getEquip(EquipSlot slot) const {
 }
 
 int InventoryViewable::avoid(Passkey<Stats> key) const {
-	return stats_help(_stats->getAttribs(), &ItemEquip::avoid);
+	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::avoid);
 }
 int InventoryViewable::dodge(Passkey<Stats> key) const {
-	return stats_help(_stats->getAttribs(), &ItemEquip::dodge);
+	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::dodge);
 }
 int InventoryViewable::hit(Passkey<Stats> key) const {
-	return stats_help(_stats->getAttribs(), &ItemEquip::hit);
+	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::hit);
 }
 int InventoryViewable::crit(Passkey<Stats> key) const {
-	return stats_help(_stats->getAttribs(), &ItemEquip::crit);
+	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::crit);
 }
 int InventoryViewable::might(Passkey<Stats> key) const {
-	return stats_help(_stats->getAttribs(), &ItemEquip::might);
+	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::might);
 }
 int InventoryViewable::atk_spd(Passkey<Stats> key) const {
-	return stats_help(_stats->getAttribs(), &ItemEquip::atk_spd);
+	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::atk_spd);
 }
 

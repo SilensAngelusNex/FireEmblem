@@ -8,16 +8,11 @@
 
 class Unit;
 
-class Combat : public Component<Unit>, public ObservableDamage {
+class Combat : Component<Unit>, public ObservableDamage {
 private:
-	Inventory* _inv{};
-	Stats* _stats{};
-	Experience* _exp{};
-
 	// Combat and Strike Skills
 public:
 	explicit Combat(Unit& owner);
-	void init();
 
 	void combat(Unit& defender);
 	bool doesDodge(Unit& attacker);
