@@ -20,5 +20,7 @@ public:
 	bool removeAdjacentCell(GridCell* _new_cell);
 	bool isAdjacent(GridCell* _other_cell);
 	int getEdgeCost(GridCell* _other_cell);
+	Tile* getTile();
+	std::vector<GridCell*> getAdjacentCells();
 };
 

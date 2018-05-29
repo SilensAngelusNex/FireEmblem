@@ -10,23 +10,27 @@ Tile::Tile(): _unit(nullptr), _terrain()
 Tile::~Tile()
 {
 }
-bool Tile::insertUnit(Unit* _unit) {
-	if (_unit == NULL) {
-		this->_unit = _unit;
-		return true;
+bool Tile::insertUnit(Unit* unit) {
+	if (hasUnit()) {
+		return false;
 	}
 	else {
-		return false;
+		_unit = unit;
+		return true;
 	}
 }
-bool Tile::removeUnit() {
-	if (_unit == NULL) {
-		return false;
-	}
-	else {
-		this->_unit = NULL;
-		return true;
-	}
+Unit* Tile::removeUnit() {
+	if (hasUnit()) {
+		Unit* temp = _unit;
+		this->_unit = nullptr;
+		return temp;
+	} else return nullptr;
+}
+bool Tile::hasUnit() {
+	return _unit != nullptr;
+}
+Unit* Tile::getUnit() {
+	return _unit;
 }
 Terrain* Tile::getTerrain() {
 	return this->_terrain;

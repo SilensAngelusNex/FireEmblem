@@ -65,3 +65,13 @@ int GridCell::getEdgeCost(GridCell* other_cell) {
 	else return -1;
 
 }
+Tile* GridCell::getTile() {
+	return &(this->_tile);
+}
+std::vector<GridCell*> GridCell::getAdjacentCells() {
+	std::vector<GridCell*> _adj_cells = std::vector<GridCell*>();
+	for (std::list<CellEdge>::iterator it = _adjacent_cells.begin(); it != _adjacent_cells.end(); it++) {
+		_adj_cells.push_back(it->_cell);
+	}
+	return _adj_cells;
+}

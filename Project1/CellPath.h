@@ -9,9 +9,12 @@ private:
 	int _cost = 0;
 public:
 	CellPath(GridCell* _start_tile);
+	CellPath copy();
 	bool insertTile(GridCell* _new_tile);
 	GridCell* getTail();
 	GridCell* getHead();
 	int getCost();
+	bool operator<(const CellPath & c) const;
+	bool operator>(const CellPath & c) const;
 };
 

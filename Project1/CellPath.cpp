@@ -6,6 +6,13 @@ CellPath::CellPath(GridCell* _start_tile) : _tiles({ _start_tile })
 {
 
 }
+
+CellPath CellPath::copy() {
+	CellPath copy = CellPath(this->getHead());
+	copy._cost = this->_cost;
+	copy._tiles = this->_tiles;
+	return copy;
+}
 bool CellPath::insertTile(GridCell* _new_tile)
 {
 	if (this->getTail()->isAdjacent(_new_tile)) {
@@ -27,5 +34,11 @@ int CellPath::getCost()
 {
 	return _cost;
 }
+bool CellPath::operator<(const CellPath & c) const {
+	return this->_cost < c._cost;
+}
 
+bool CellPath::operator>(const CellPath & c) const {
+	return this->_cost > c._cost;
+}
 
