@@ -8,8 +8,7 @@
 class Unit;
 class InventoryViewable;
 
-class Stats : public Component<Unit> {
-	InventoryViewable* _inv{};
+class Stats : Component<Unit> {
 	AttributeList _attribs;
 	AttributeList _growths;
 	WeaponList _proficiencies;
@@ -20,7 +19,6 @@ public:
 	explicit Stats(Unit& owner, AttributeList attribs);
 	explicit Stats(Unit& owner, AttributeList attribs, AttributeList growths);
 	explicit Stats(Unit& owner, AttributeList attribs, AttributeList growths, WeaponList proficiencies);
-	void init();
 
 	AttributeList& getAttribs();
 	AttributeList& getGrowths();

@@ -4,16 +4,12 @@
 #include "ItemEquip.h"
 #include "Unit.h"
 
-InventoryBase::InventoryBase(Unit & owner) :
+InventoryBase::InventoryBase(Unit& owner) :
 	Component<Unit>(owner)
 {}
 
-void InventoryBase::init() {
-	_stats = &_owner.getStats();
-}
 
 InventoryBase& InventoryBase::operator=(InventoryBase&& that) {
-	_stats = that._stats;
 	_equipment = that._equipment;
 	_equipment_owners = std::move(that._equipment_owners);
 	_items = std::move(that._items);

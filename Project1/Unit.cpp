@@ -9,12 +9,7 @@ Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
 	_exp(*this, context),
 	_inv(*this),
 	_combat(*this)
-{
-	_stats.init();
-	_exp.init();
-	_inv.init();
-	_combat.init();
-}
+{}
 
 const IDENTITY& Unit::getIdentity() const {
 	return _id;

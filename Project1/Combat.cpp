@@ -4,17 +4,11 @@
 
 Combat::Combat(Unit& owner) : Component<Unit>(owner) {}
 
-void Combat::init() {
-	_inv = &_owner.getInventoryInternal();
-	_stats = &_owner.getStats();
-	_exp = &_owner.getExperience();
-}
-
 
 void Combat::combat(Unit& defender) {
 	std::pair<int, int> largest_strikes = do_combat(defender);
 
-	_exp->gainCombatExp(defender, largest_strikes.first);
+	_owner.getExperience().gainCombatExp(defender, largest_strikes.first);
 	defender.getExperience().gainCombatExp(_owner, largest_strikes.second);
 }
 
@@ -23,7 +17,7 @@ bool Combat::doesDodge(Unit& attacker) {
 
 	int hit_chance = attacker.getStats().hit();
 	int hit_roll = dice.rollX(2);
-	int avo = _stats->avoid();
+	int avo = _owner.getStats().avoid();
 
 	if (hit_roll >= 2 * hit_chance - avo) {
 		notifyAllMiss(_owner.getIdentity());
@@ -49,11 +43,11 @@ int Combat::strike(Unit& defender) {
 	// trigger this strike skills
 	// trigger defender struck skills
 
-	int crit_chance = _stats->crit() - defender.getStats().dodge();
+	int crit_chance = _owner.getStats().crit() - defender.getStats().dodge();
 	if (dice.roll() < 2 * crit_chance) {
-		return defender.getCombat().takeDamage(_inv->getCritDamage(defender));
+		return defender.getCombat().takeDamage(_owner.getInventoryInternal().getCritDamage(defender));
 	}
-	return defender.getCombat().takeDamage(_inv->getNormalDamage(defender));	
+	return defender.getCombat().takeDamage(_owner.getInventoryInternal().getNormalDamage(defender));
 }
 
 int Combat::takeDamage(Damage dealt) {
@@ -74,7 +68,7 @@ std::pair<int, int> Combat::do_combat(Unit& defender) {
 
 	std::pair<int, int> result = std::pair<int, int>(-1, -1);
 
-	int spd_adv = _stats->atk_spd() - defender.getStats().atk_spd();
+	int spd_adv = _owner.getStats().atk_spd() - defender.getStats().atk_spd();
 
 	result.first = std::max(result.first, strike(defender));
 	result.second = std::max(result.second, defender.getCombat().strike(_owner));

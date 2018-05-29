@@ -7,7 +7,7 @@
 #include "Stats.h"
 class Unit;
 
-class Experience : public Component<Unit>, public ObservableExp {
+class Experience : Component<Unit>, public ObservableExp {
 private:
 	constexpr static int _EXP_PER_LEVEL = 100;
 	constexpr static int _LEVELS_PER_TIER = 20;
@@ -16,14 +16,12 @@ private:
 	// for growth is made with 80% chance of success, then checks proceed with original rate minus 80
 	// Ex. Growth of 250 will roll 4 checks total with growth percentages: 80, 80, 80, 10
 
-	Stats* _stats{};
 	Dice<100>& _dice;
 	// TODO(Weston): Add caps for exp/level
 	int _exp;
 public:
 	Experience(Unit& owner, Dice<100>& dice);
 	Experience(Unit& owner, Dice<100>& dice, int level);
-	void init();
 
 	void gainExp(int gains);
 	void gainCombatExp(Unit& enemy, int largest_strike);
