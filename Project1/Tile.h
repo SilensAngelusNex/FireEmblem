@@ -5,8 +5,7 @@
 #include "Unit.h"
 /** Tile held within a GridCell. Has no position information to keep the implementation OO
 */
-class Tile
-{
+class Tile {
 private:
 	
 	Terrain* _terrain; //Not sure how i want to do terrain yet, this is placeholder i think it should be some kind of pointer to some static object.

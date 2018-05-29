@@ -2,8 +2,7 @@
 
 
 
-GridCell::GridCell(): _tile()
-{
+GridCell::GridCell(): _tile() {
 }
 
 CellEdge GridCell::getEdge(GridCell* other_cell) {
@@ -17,14 +16,12 @@ CellEdge GridCell::getEdge(GridCell* other_cell) {
 	return CellEdge(nullptr, -1);
 }
 
-GridCell::~GridCell()
-{
+GridCell::~GridCell() {
 }
 /** Adds _new_cell to the adjacency vector
 	Returns true if succesful, false if _new_cell is already in the adjacency vector
 */
-bool GridCell::addAdjacentCell(GridCell* new_cell, int cost) 
-{
+bool GridCell::addAdjacentCell(GridCell* new_cell, int cost) {
 	if (new_cell != nullptr) {
 		CellEdge edge= getEdge(new_cell);
 		if (_found) {
@@ -37,8 +34,7 @@ bool GridCell::addAdjacentCell(GridCell* new_cell, int cost)
 	} else 	return false;
 }
 
-bool GridCell::removeAdjacentCell(GridCell* delete_cell)
-{
+bool GridCell::removeAdjacentCell(GridCell* delete_cell) {
 	if (delete_cell == nullptr) {
 		return false;
 	}

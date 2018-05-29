@@ -1,8 +1,7 @@
 #pragma once
 #include <string>
 //TODO: TURN INTO SOME KIND OF ENUM? NOT SURE
-class Terrain
-{
+class Terrain {
 private:
 	std::string _name;
 public:

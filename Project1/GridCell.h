@@ -4,8 +4,7 @@
 #include <list>
 /** GridCell that composes the Map. Holds a Tile.
 */
-class GridCell
-{
+class GridCell {
 private:
 
 	Tile _tile;

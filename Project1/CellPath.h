@@ -2,8 +2,7 @@
 #include <list>
 #include "GridCell.h"
 //TODO: ADD MULTIPLE PATH TYPES, currently only accepts adjacent, grounded paths.
-class CellPath
-{
+class CellPath {
 private:
 	std::list<GridCell*> _tiles;
 	int _cost = 0;

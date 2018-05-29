@@ -5,8 +5,7 @@ class GridCell;
 /**
 Represents a Path through some tiles, basically a struct
 */
-class CellEdge
-{
+class CellEdge {
 
 public:
 	std::array<int, NUM_MOVEMENT_TYPES> _movement_costs;
