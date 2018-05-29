@@ -21,9 +21,7 @@ std::vector<GridCell*> Map::getAccesibleCells(GridCell* start) {
 	return cells;
 }
 CellPath Map::getShortestPath(GridCell* start, GridCell* destination) {
-	if (start != _shortest_path_start) {
-		findShortestPaths(start);
-	}
+	findShortestPaths(start);
 	if (start == destination) {
 		return CellPath(start);
 	}
