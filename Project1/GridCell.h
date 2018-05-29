@@ -16,10 +16,10 @@ private:
 public:
 	GridCell();
 	~GridCell();
-	bool addAdjacentCell(GridCell* _new_cell, int cost);
-	bool removeAdjacentCell(GridCell* _new_cell);
-	bool isAdjacent(GridCell* _other_cell);
-	int getEdgeCost(GridCell* _other_cell);
+	bool addAdjacentCell(GridCell* new_cell, int cost);
+	bool removeAdjacentCell(GridCell* new_cell);
+	bool isAdjacent(GridCell* other_cell);
+	int getEdgeCost(GridCell* other_cell);
 	Tile* getTile();
 	std::vector<GridCell*> getAdjacentCells();
 };

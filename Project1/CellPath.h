@@ -8,9 +8,9 @@ private:
 	std::list<GridCell*> _tiles;
 	int _cost = 0;
 public:
-	CellPath(GridCell* _start_tile);
+	CellPath(GridCell* start_tile);
 	CellPath copy();
-	bool insertTile(GridCell* _new_tile);
+	bool insertTile(GridCell* new_tile);
 	GridCell* getTail();
 	GridCell* getHead();
 	int getCost();

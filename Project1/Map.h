@@ -11,14 +11,12 @@
 /**
 Map class. Holds a Matrix of GridCells and all of the units. Should be initialized at the start of each chapter.
 */
-class Map
-{
+class Map {
 private:
 	struct prev_cost_pair {
 		GridCell* _prev_cell;
 		int _cost;
-		bool operator<(const prev_cost_pair& a) const
-		{
+		bool operator<(const prev_cost_pair& a) const {
 			return (_cost < a._cost);
 		}
 	};
@@ -30,7 +28,7 @@ private:
 	void findShortestPaths(std::priority_queue<prev_cost_pair>& queue);
 
 public:
-	Map(int _width, int _height);
+	Map(int width, int height);
 	bool moveUnit(GridCell* start, GridCell* destination);
 	std::vector<GridCell*> getAccesibleCells(GridCell* start);
 	CellPath getShortestPath(GridCell* start, GridCell* destination);

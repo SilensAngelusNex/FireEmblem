@@ -1,14 +1,7 @@
 #include "Tile.h"
-
-
-
-Tile::Tile(): _unit(nullptr), _terrain()
-{
+Tile::Tile(): _unit(nullptr), _terrain() {
 }
-
-
-Tile::~Tile()
-{
+Tile::~Tile() {
 }
 bool Tile::insertUnit(Unit* unit) {
 	if (hasUnit()) {
@@ -35,6 +28,6 @@ Unit* Tile::getUnit() {
 Terrain* Tile::getTerrain() {
 	return this->_terrain;
 }
-void Tile::setTerrain(Terrain* _new_terrain) {
+void Tile::setTerrain(Terrain* new_terrain) {
 	this->_terrain = _new_terrain;
 }

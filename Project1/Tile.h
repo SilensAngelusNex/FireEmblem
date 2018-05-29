@@ -14,12 +14,12 @@ private:
 public:
 	Tile();
 	~Tile();
-	bool insertUnit(Unit* _unit);
+	bool insertUnit(Unit* unit);
 	Unit* removeUnit();
 	bool hasUnit();
 	Unit * getUnit();
 	Terrain* getTerrain();
-	void setTerrain(Terrain* _new_terrain);
+	void setTerrain(Terrain* new_terrain);
 
 };
 

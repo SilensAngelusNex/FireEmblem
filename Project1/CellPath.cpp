@@ -2,8 +2,7 @@
 
 
 
-CellPath::CellPath(GridCell* _start_tile) : _tiles({ _start_tile })
-{
+CellPath::CellPath(GridCell* start_tile) : _tiles({ _start_tile }) {
 
 }
 
@@ -13,8 +12,7 @@ CellPath CellPath::copy() {
 	copy._tiles = this->_tiles;
 	return copy;
 }
-bool CellPath::insertTile(GridCell* _new_tile)
-{
+bool CellPath::insertTile(GridCell*_new_tile) {
 	if (this->getTail()->isAdjacent(_new_tile)) {
 		_cost += _tiles.back()->getEdgeCost(_new_tile);
 		_tiles.push_back(_new_tile);
@@ -22,16 +20,13 @@ bool CellPath::insertTile(GridCell* _new_tile)
 	}
 	return false;
 }
-GridCell* CellPath::getTail()
-{
+GridCell* CellPath::getTail() {
 	return this->_tiles.back();
 }
-GridCell* CellPath::getHead()
-{
+GridCell* CellPath::getHead() {
 	return this->_tiles.front();
 }
-int CellPath::getCost()
-{
+int CellPath::getCost() {
 	return _cost;
 }
 bool CellPath::operator<(const CellPath & c) const {

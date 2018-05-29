@@ -1,11 +1,6 @@
 #include "Map.h"
-
-
-
-Map::Map(int _width, int _height) : _grid(_width, std::vector<GridCell>(_height, GridCell()))
-{
+Map::Map(int width, int height) : _grid(width, std::vector<GridCell>(height, GridCell())) {
 }
-
 bool Map::moveUnit(GridCell* start, GridCell* destination) {
 	if (!start->getTile()->hasUnit() || destination->getTile()->hasUnit()) {
 		return false;
@@ -55,8 +50,8 @@ void Map::findShortestPaths(std::priority_queue<prev_cost_pair>& queue) {
 	}
 	prev_cost_pair top = queue.top();
 	queue.pop();
-	std::vector<GridCell*> _adj_cells = top._prev_cell->getAdjacentCells();
-	for (std::vector<GridCell*>::iterator it = _adj_cells.begin(); it != _adj_cells.end(); it++) {
+	std::vector<GridCell*> adj_cells = top._prev_cell->getAdjacentCells();
+	for (std::vector<GridCell*>::iterator it = adj_cells.begin(); it != adj_cells.end(); it++) {
 		if (_shortest_path_map.find(*it) == _shortest_path_map.end()) {//no shortest path found
 			prev_cost_pair new_element_insert;
 			prev_cost_pair new_element_push;
@@ -78,7 +73,6 @@ void Map::findShortestPaths(std::priority_queue<prev_cost_pair>& queue) {
 		}
 	}
 	findShortestPaths(queue);
-
 }
 
 /*std::vector<GridCell> cellsWithinWeaponRange(GridCell start) {
