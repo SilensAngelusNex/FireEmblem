@@ -77,6 +77,7 @@ void Map::findShortestPaths(std::priority_queue<prev_cost_pair>& queue) {
 			queue.push(new_element_push);
 		}
 	}
+	findShortestPaths(queue);
 
 }
 
