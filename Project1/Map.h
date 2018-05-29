@@ -26,8 +26,6 @@ private:
 	std::vector<Unit> _units;
 	std::map<GridCell*, prev_cost_pair> _shortest_path_map = std::map<GridCell*, prev_cost_pair>();
 	GridCell* _shortest_path_start = nullptr;
-	CellPath constructShortestPath(GridCell* start, GridCell* destination);
-	CellPath getShortestPath(GridCell* start, GridCell* destination);
 	void findShortestPaths(GridCell* start);
 	void findShortestPaths(std::priority_queue<prev_cost_pair>& queue);
 
@@ -35,6 +33,7 @@ public:
 	Map(int _width, int _height);
 	bool moveUnit(GridCell* start, GridCell* destination);
 	std::vector<GridCell*> getAccesibleCells(GridCell* start);
+	CellPath getShortestPath(GridCell* start, GridCell* destination);
 	//std::vector<GridCell*> cellsWithinWeaponRange(GridCell start);
 
 };

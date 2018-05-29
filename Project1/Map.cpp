@@ -29,13 +29,10 @@ CellPath Map::getShortestPath(GridCell* start, GridCell* destination) {
 	if (start != _shortest_path_start) {
 		findShortestPaths(start);
 	}
-	return constructShortestPath(start, destination);
-}
-CellPath Map::constructShortestPath(GridCell* start, GridCell* destination) {
 	if (start == destination) {
 		return CellPath(start);
 	}
-	CellPath path = constructShortestPath(start, _shortest_path_map.at(destination)._prev_cell);
+	CellPath path = getShortestPath(start, _shortest_path_map.at(destination)._prev_cell);
 	path.insertTile(destination);
 	return path;
 }
