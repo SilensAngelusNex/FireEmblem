@@ -29,5 +29,4 @@ public:
 	virtual int might(const AttributeList& stats) const = 0;
 	virtual int atk_spd(const AttributeList& stats) const = 0;
 	virtual AttribType dmg_type() const = 0;
-
 };
