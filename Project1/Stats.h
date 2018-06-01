@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AttributeList.h"
+#include "MobilityList.h"
 #include "Component.h"
 #include "WeaponList.h"
 #include "Health.h"
@@ -8,11 +9,13 @@
 class Unit;
 class InventoryViewable;
 
+
 class Stats : Component<Unit> {
 	AttributeList _attribs;
 	AttributeList _growths;
 	WeaponList _proficiencies;
 	Health _health;
+	MobilityType _mobility;
 
 public:
 	explicit Stats(Unit& owner);
@@ -23,6 +26,7 @@ public:
 	AttributeList& getAttribs();
 	AttributeList& getGrowths();
 	WeaponList& getWeaponProficiencies();
+	MobilityType& getMobilityType();
 	
 	const AttributeList& getAttribs() const;
 	const AttributeList& getGrowths() const;

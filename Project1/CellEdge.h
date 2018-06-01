@@ -1,17 +1,18 @@
 #pragma once
 class GridCell;
 #include <array>
-#define NUM_MOVEMENT_TYPES 2 //temp, for ground and flying
+#include "MobilityList.h"
 /**
 Represents a Path through some tiles, basically a struct
 */
 class CellEdge {
-
+	MobilityList _costs;
+	MobilityList _traversable;
 public:
-	std::array<int, NUM_MOVEMENT_TYPES> _movement_costs;
-	int _cost;
 	GridCell* _cell;
-	CellEdge(GridCell* cell, int cost);
+	CellEdge(GridCell* cell, MobilityList costs);
+	int getCost(MobilityType mobility);
+	bool canTraverse(MobilityType mobility);
 	bool operator==(const CellEdge & c) const;
 };
 

@@ -272,5 +272,8 @@
     <ClInclude Include="GridCell.h">
       <Filter>inc\map\cell</Filter>
     </ClInclude>
+    <ClInclude Include="MobilityList.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

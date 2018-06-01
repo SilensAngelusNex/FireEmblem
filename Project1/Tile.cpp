@@ -29,5 +29,5 @@ Terrain* Tile::getTerrain() {
 	return this->_terrain;
 }
 void Tile::setTerrain(Terrain* new_terrain) {
-	this->_terrain = _new_terrain;
+	this->_terrain = new_terrain;
 }

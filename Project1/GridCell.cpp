@@ -13,7 +13,7 @@ CellEdge GridCell::getEdge(GridCell* other_cell) {
 		}
 	}
 	_found = false;
-	return CellEdge(nullptr, -1);
+	return CellEdge(nullptr, MobilityList({-1}));
 }
 
 GridCell::~GridCell() {
@@ -21,14 +21,14 @@ GridCell::~GridCell() {
 /** Adds _new_cell to the adjacency vector
 	Returns true if succesful, false if _new_cell is already in the adjacency vector
 */
-bool GridCell::addAdjacentCell(GridCell* new_cell, int cost) {
+bool GridCell::addAdjacentCell(GridCell* new_cell, MobilityList costs) {
 	if (new_cell != nullptr) {
 		CellEdge edge= getEdge(new_cell);
 		if (_found) {
 			return false;
 		}
 		else {
-			_adjacent_cells.push_back(CellEdge(new_cell, cost));
+			_adjacent_cells.push_back(CellEdge(new_cell, costs));
 			return true;
 		}
 	} else 	return false;
@@ -51,14 +51,6 @@ bool GridCell::removeAdjacentCell(GridCell* delete_cell) {
 bool GridCell::isAdjacent(GridCell* other_cell) {
 	getEdge(other_cell);
 	return _found;
-
-}
-int GridCell::getEdgeCost(GridCell* other_cell) {
-	CellEdge temp = getEdge(other_cell);
-	if (_found) {
-		return temp._cost;
-	}
-	else return -1;
 
 }
 Tile* GridCell::getTile() {

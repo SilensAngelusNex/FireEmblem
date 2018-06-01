@@ -20,18 +20,25 @@ private:
 			return (_cost < a._cost);
 		}
 	};
+	std::map<Unit*, GridCell*> _unit_to_cell;
 	std::vector<std::vector<GridCell>> _grid;
 	std::vector<Unit> _units;
 	std::map<GridCell*, prev_cost_pair> _shortest_path_map = std::map<GridCell*, prev_cost_pair>();
 	GridCell* _shortest_path_start = nullptr;
 	void findShortestPaths(GridCell* start);
-	void findShortestPaths(std::priority_queue<prev_cost_pair>& queue);
+	void findShortestPaths(GridCell * start, int max_move, MobilityType mobility);
+	void findShortestPaths(std::priority_queue<prev_cost_pair>& queue, int max_move, MobilityType mobility);
+
+	
 
 public:
 	Map(int width, int height);
 	bool moveUnit(GridCell* start, GridCell* destination);
-	std::vector<GridCell*> getAccesibleCells(GridCell* start);
+	bool insertUnit(Unit * new_unit, GridCell * destination);
+	void removeUnit(Unit * unit);
+	std::vector<GridCell*> getAccesibleCells(Unit * unit);
 	CellPath getShortestPath(GridCell* start, GridCell* destination);
+	std::vector<GridCell*> getAlliedCells(GridCell * unit_cell);
 	//std::vector<GridCell*> cellsWithinWeaponRange(GridCell start);
 
 };

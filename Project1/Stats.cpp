@@ -16,7 +16,8 @@ Stats::Stats(Unit& owner, AttributeList attribs, AttributeList growths, WeaponLi
 	_attribs(std::move(attribs)),
 	_growths(std::move(growths)),
 	_proficiencies(std::move(proficiencies)),
-	_health(_growths[AttribType::values::CON])
+	_health(_growths[AttribType::values::CON]), 
+	_mobility(MobilityType::values::GROUNDED)
 {}
 
 
@@ -28,6 +29,11 @@ AttributeList& Stats::getGrowths() {
 }
 WeaponList& Stats::getWeaponProficiencies() {
 	return _proficiencies;
+}
+
+MobilityType & Stats::getMobilityType()
+{
+	return _mobility;
 }
 
 const AttributeList& Stats::getAttribs() const {

@@ -10,15 +10,14 @@ private:
 	Tile _tile;
 	std::list<CellEdge> _adjacent_cells;
 	bool _found = false; //flag
-	CellEdge getEdge(GridCell* other_cell);
 
 public:
 	GridCell();
 	~GridCell();
-	bool addAdjacentCell(GridCell* new_cell, int cost);
+	bool addAdjacentCell(GridCell* new_cell, MobilityList costs);
 	bool removeAdjacentCell(GridCell* new_cell);
 	bool isAdjacent(GridCell* other_cell);
-	int getEdgeCost(GridCell* other_cell);
+	CellEdge getEdge(GridCell * other_cell);
 	Tile* getTile();
 	std::vector<GridCell*> getAdjacentCells();
 };
