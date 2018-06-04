@@ -28,11 +28,13 @@ private:
 	void findShortestPaths(GridCell* start);
 	void findShortestPaths(GridCell * start, int max_move, MobilityType mobility);
 	void findShortestPaths(std::priority_queue<prev_cost_pair>& queue, int max_move, MobilityType mobility);
+	void insertAdjacencies();
 
 	
 
 public:
 	Map(int width, int height);
+	GridCell& getGridCell(int x_pos, int y_pos);
 	bool moveUnit(GridCell* start, GridCell* destination);
 	bool insertUnit(Unit * new_unit, GridCell * destination);
 	void removeUnit(Unit * unit);

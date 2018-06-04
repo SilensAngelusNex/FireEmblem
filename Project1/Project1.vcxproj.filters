@@ -165,6 +165,9 @@
     <ClCompile Include="GridCell.cpp">
       <Filter>src\map\cell</Filter>
     </ClCompile>
+    <ClCompile Include="MapTest.cpp">
+      <Filter>src\tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">

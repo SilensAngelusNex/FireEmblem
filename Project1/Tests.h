@@ -9,6 +9,7 @@ namespace test {
 
 	bool runDiceTest();
 	bool runUnitTest();
+	bool runMapTest();
 }
 
 #endif // !TESTS_H
