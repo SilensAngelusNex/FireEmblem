@@ -22,6 +22,7 @@ bool test::runMapTest() {
 	cells = map.getAccesibleCells(&mia);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(10, 10).getAdjacentCells().size() << std::endl;
+	std::cout << map.getShortestPath(&map.getGridCell(10, 10), &map.getGridCell(10, 10)).getCost() << std::endl;
 
 	return true;
 }

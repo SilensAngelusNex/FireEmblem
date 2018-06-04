@@ -76,7 +76,7 @@ void Map::findShortestPaths(GridCell* start) {
 	_shortest_path_map.clear();
 	_shortest_path_map.insert(std::pair<GridCell*, prev_cost_pair>(start, first));
 	queue.push(first);
-	findShortestPaths(queue, -1, _MOBILITY_TYPES::ENUM_END);
+	findShortestPaths(queue, -1, _MOBILITY_TYPES::GROUNDED);//assume grounded for now
 }
 void Map::findShortestPaths(GridCell* start, int max_move, MobilityType mobility) {
 	if (start == _shortest_path_start) { //need another flag for if the map is changed
