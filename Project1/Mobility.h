@@ -1,0 +1,17 @@
+#pragma once
+#include "MobilityList.h"
+class Mobility
+{
+	int _movement;
+	MobilityList<bool> _mobility;
+public:
+	Mobility(int move, MobilityList<bool> mobility_type);
+
+	const MobilityList<bool>& getMobilityType() const;
+	const int& getMove() const;
+
+	MobilityList<bool>& getMobilityType();
+	int& getMove();
+
+};
+

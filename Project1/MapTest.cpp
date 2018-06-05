@@ -10,8 +10,8 @@ bool test::runMapTest() {
 
 	FairDice<100> d;
 
-	Unit mia("Mia", d, AttributeList({ 5, 0, 8, 10, 19, 4, 6, 1, 50 }));
-	Unit ike("Ike", d, AttributeList({ 5, 1, 6, 7, 19, 5, 5, 0, 50 }));
+	Unit mia("Mia", d, AttributeList({ 5, 0, 8, 10, 19, 4, 6, 1}));
+	Unit ike("Ike", d, AttributeList({ 5, 1, 6, 7, 19, 5, 5, 0}));
 
 	Map map = Map(20, 20); // create a 20 x 20 map
 	map.insertUnit(&mia, &map.getGridCell(10, 10));

@@ -12,8 +12,8 @@ bool test::runUnitTest() {
 	ExpObserver o2 = ExpObserver();
 	FairDice<100> d;
 
-	Unit mia("Mia", d, AttributeList({ 5, 0, 8, 10, 19, 4, 6, 1, 50 }));
-	Unit ike("Ike", d, AttributeList({ 5, 1, 6, 7, 19, 5, 5, 0, 50 }));
+	Unit mia("Mia", d, AttributeList({ 5, 0, 8, 10, 19, 4, 6, 1}));
+	Unit ike("Ike", d, AttributeList({ 5, 1, 6, 7, 19, 5, 5, 0 }));
 	mia.attach(o1);
 	ike.attach(o1);
 	mia.attach(o2);

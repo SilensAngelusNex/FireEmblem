@@ -168,6 +168,9 @@
     <ClCompile Include="MapTest.cpp">
       <Filter>src\tests</Filter>
     </ClCompile>
+    <ClCompile Include="Mobility.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -276,6 +279,9 @@
       <Filter>inc\map\cell</Filter>
     </ClInclude>
     <ClInclude Include="MobilityList.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Mobility.h">
       <Filter>inc\unit</Filter>
     </ClInclude>
   </ItemGroup>

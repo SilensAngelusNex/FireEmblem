@@ -12,6 +12,7 @@
 #include "Combat.h"
 #include "Dice.h"
 #include "Experience.h"
+#include "Mobility.h"
 
 using IDENTITY = std::string;
 using CONTEXT = Dice<100>;
@@ -25,6 +26,8 @@ private:
 	Experience _exp;
 	Inventory _inv;
 	Combat _combat;
+	Mobility _mobility;
+
 	//Location& _loc;
 public:
 	Unit(IDENTITY name, CONTEXT& context, AttributeList stats);
@@ -32,6 +35,7 @@ public:
 	// Viewable Unit
 	const IDENTITY& getIdentity() const;
 	const Stats& getStats() const;
+	const Mobility& getMobility() const;
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
 	//virtual const Location& getLocation() const;
@@ -43,6 +47,7 @@ public:
 
 	// Unit Internals
 	Stats& getStats();
+	Mobility& getMobility();
 	Experience& getExperience();
 	Inventory& getInventoryInternal();
 	CONTEXT& getContext();
