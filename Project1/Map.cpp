@@ -22,10 +22,8 @@ void Map::insertAdjacencies() {
 			}
 		}
 	}
-	_changed = true;
 }
 bool Map::moveUnit(GridCell* start, GridCell* destination) {
-	_changed = true;
 	if (!start->getTile().hasUnit() || destination->getTile().hasUnit()) {
 		return false;
 	}
@@ -36,7 +34,6 @@ bool Map::moveUnit(GridCell* start, GridCell* destination) {
 	}
 }
 bool Map::insertUnit(Unit* new_unit, GridCell* destination) {
-	_changed = true;
 	if (destination->getTile().hasUnit()) {
 		return false;
 	}
@@ -47,7 +44,6 @@ bool Map::insertUnit(Unit* new_unit, GridCell* destination) {
 	}
 }
 void Map::removeUnit(Unit* unit) { //throws exceptions if the space is not empty.
-	_changed = true;
 	_unit_to_cell.at(unit)->getTile().removeUnit();
 	_unit_to_cell.erase(unit);
 }
@@ -73,9 +69,6 @@ CellPath& Map::getShortestPath(GridCell* start, GridCell* destination) {
 }
 */
 void Map::findShortestPaths(GridCell* start) {
-	if (start == _shortest_path_start && !_changed) { //need another flag for Mobility Type
-		return;
-	}
 	std::priority_queue<prev_cost_pair> queue = std::priority_queue<prev_cost_pair>();
 	prev_cost_pair first;
 	first._cost = 0;
@@ -84,13 +77,8 @@ void Map::findShortestPaths(GridCell* start) {
 	_shortest_path_map.insert(std::pair<GridCell*, prev_cost_pair>(start, first));
 	queue.push(first);
 	findShortestPaths(queue, -1, _MOBILITY_TYPES::GROUNDED);//assume grounded for now
-	_changed = false;
-	_shortest_path_start = start;
 }
 void Map::findShortestPaths(GridCell* start, int max_move, MobilityType mobility) {
-	if (start == _shortest_path_start && !_changed) { //need another flag for Mobility Type
-		return;
-	}
 	std::priority_queue<prev_cost_pair> queue = std::priority_queue<prev_cost_pair>();
 	prev_cost_pair first;
 	first._cost = 0;
@@ -99,8 +87,6 @@ void Map::findShortestPaths(GridCell* start, int max_move, MobilityType mobility
 	_shortest_path_map.insert(std::pair<GridCell*, prev_cost_pair>(start, first));
 	queue.push(first);
 	findShortestPaths(queue, max_move, mobility);
-	_changed = false;
-	_shortest_path_start = start;
 }
 void Map::findShortestPaths(std::priority_queue<prev_cost_pair>& queue, int max_move, MobilityType mobility) {
 	if (queue.size() == 0) {
