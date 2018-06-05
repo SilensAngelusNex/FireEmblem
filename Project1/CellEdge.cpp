@@ -7,9 +7,9 @@ CellEdge::CellEdge(GridCell* cell, MobilityList<std::optional<int>> costs) :
 	_costs(costs)
 {}
 
-int CellEdge::getCost(MobilityType mobility)
+std::optional<int> CellEdge::getCost(MobilityType mobility)
 {
-	return _costs[mobility].value();
+	return _costs[mobility];
 }
 
 bool CellEdge::canTraverse(MobilityType mobility)

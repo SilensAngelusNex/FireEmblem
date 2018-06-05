@@ -11,7 +11,7 @@ class CellEdge {
 public:
 	GridCell* _cell;
 	CellEdge(GridCell* cell, MobilityList<std::optional<int>> costs);
-	int getCost(MobilityType mobility);
+	std::optional<int> getCost(MobilityType mobility);
 	bool canTraverse(MobilityType mobility);
 	bool operator==(const CellEdge & c) const;
 };

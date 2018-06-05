@@ -97,9 +97,9 @@ std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(std::prior
 		bool found_cost = false;
 		for (MobilityType mobility : MobilityType::list) {
 			if (mobility_types[mobility] && edge.canTraverse(mobility) && !edge._cell->getTile().hasUnit()) { // if we can step on the tile
-				if (!found_cost || cost > top.first + edge.getCost(mobility)) { // if the cost is best found yet 
+				if (!found_cost || cost > top.first + edge.getCost(mobility).value()) { // if the cost is best found yet 
 					found_cost = true;
-					cost = top.first + edge.getCost(mobility);
+					cost = top.first + edge.getCost(mobility).value();
 				}
 			}
 		}
