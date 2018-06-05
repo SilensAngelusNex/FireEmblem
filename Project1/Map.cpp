@@ -91,29 +91,29 @@ std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(std::prior
 	}
 	std::pair<int, GridCell*> top = queue.top();
 	queue.pop();
-	std::vector<GridCell*> adj_cells = top.second->getAdjacentCells();
-	for ( auto& cell: adj_cells) {
+	std::list<CellEdge> adj_edges = top.second->getEdges();
+	for ( auto& edge: adj_edges) {
 		int cost;
 		bool found_cost = false;
 		for (MobilityType mobility : MobilityType::list) {
-			if (mobility_types[mobility] && top.second->getEdge(cell).value().canTraverse(mobility) && !cell->getTile().hasUnit()) { // if we can step on the tile
-				if (!found_cost || cost > top.first + top.second->getEdge(cell).value().getCost(mobility)) { // if the cost is best found yet 
+			if (mobility_types[mobility] && edge.canTraverse(mobility) && !edge._cell->getTile().hasUnit()) { // if we can step on the tile
+				if (!found_cost || cost > top.first + edge.getCost(mobility)) { // if the cost is best found yet 
 					found_cost = true;
-					cost = top.first + top.second->getEdge(cell).value().getCost(mobility);
+					cost = top.first + edge.getCost(mobility);
 				}
 			}
 		}
-		if (found_cost && path_map.count(cell) == 0) {//no shortest path found
+		if (found_cost && path_map.count(edge._cell) == 0) {//no shortest path found
 			if (cost <= max_move || max_move == -1) {
-				queue.emplace(cost, cell);
-				path_map.try_emplace(cell, std::pair<int, GridCell*>(cost, top.second));
+				queue.emplace(cost, edge._cell);
+				path_map.try_emplace(edge._cell, std::pair<int, GridCell*>(cost, top.second));
 			}
 		}
-		else if (found_cost && cost < path_map.at(cell).first) { //found a new shortest path
-					std::pair<int, GridCell*>& modify_element = path_map.at(cell);
+		else if (found_cost && cost < path_map.at(edge._cell).first) { //found a new shortest path
+					std::pair<int, GridCell*>& modify_element = path_map.at(edge._cell);
 					modify_element.first = cost;
 					modify_element.second = top.second;
-					queue.emplace(cost, cell);
+					queue.emplace(cost, edge._cell);
 		}
 	}
 	return findShortestPaths(queue, path_map, max_move, mobility_types);

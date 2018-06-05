@@ -48,3 +48,6 @@ std::vector<GridCell*> GridCell::getAdjacentCells() {
 	}
 	return adj_cells;
 }
+std::list<CellEdge> GridCell::getEdges() {
+	return _adjacent_cells;
+}

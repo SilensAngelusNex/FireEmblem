@@ -16,5 +16,6 @@ public:
 	std::optional<CellEdge> getEdge(GridCell * other_cell);
 	Tile& getTile();
 	std::vector<GridCell*> getAdjacentCells();
+	std::list<CellEdge> getEdges();
 };
 
