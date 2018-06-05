@@ -7,8 +7,8 @@ GridCell & Map::getGridCell(int x_pos, int y_pos)
 	return _grid[x_pos][y_pos];
 }
 void Map::insertAdjacencies() {
-	int width = _grid.size();
-	int height = _grid[0].size();
+	int width = (int)_grid.size();
+	int height = (int)_grid[0].size();
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
 			if (x > 0) {
@@ -22,8 +22,10 @@ void Map::insertAdjacencies() {
 			}
 		}
 	}
+	_changed = true;
 }
 bool Map::moveUnit(GridCell* start, GridCell* destination) {
+	_changed = true;
 	if (!start->getTile().hasUnit() || destination->getTile().hasUnit()) {
 		return false;
 	}
@@ -34,6 +36,7 @@ bool Map::moveUnit(GridCell* start, GridCell* destination) {
 	}
 }
 bool Map::insertUnit(Unit* new_unit, GridCell* destination) {
+	_changed = true;
 	if (destination->getTile().hasUnit()) {
 		return false;
 	}
@@ -44,6 +47,7 @@ bool Map::insertUnit(Unit* new_unit, GridCell* destination) {
 	}
 }
 void Map::removeUnit(Unit* unit) { //throws exceptions if the space is not empty.
+	_changed = true;
 	_unit_to_cell.at(unit)->getTile().removeUnit();
 	_unit_to_cell.erase(unit);
 }
@@ -56,17 +60,20 @@ std::vector<GridCell*> Map::getAccesibleCells(Unit* unit) {
 	}
 	return cells;
 }
-CellPath Map::getShortestPath(GridCell* start, GridCell* destination) {
+/*
+CellPath& Map::getShortestPath(GridCell* start, GridCell* destination) {
 	findShortestPaths(start);
 	if (start == destination) {
-		return CellPath(start);
+		CellPath path = CellPath(start);
+		return path;
 	}
 	CellPath path = getShortestPath(start, _shortest_path_map.at(destination)._prev_cell);
 	path.insertTile(destination);
 	return path;
 }
+*/
 void Map::findShortestPaths(GridCell* start) {
-	if (start == _shortest_path_start) { //need another flag for if the map is changed
+	if (start == _shortest_path_start && !_changed) { //need another flag for Mobility Type
 		return;
 	}
 	std::priority_queue<prev_cost_pair> queue = std::priority_queue<prev_cost_pair>();
@@ -77,9 +84,11 @@ void Map::findShortestPaths(GridCell* start) {
 	_shortest_path_map.insert(std::pair<GridCell*, prev_cost_pair>(start, first));
 	queue.push(first);
 	findShortestPaths(queue, -1, _MOBILITY_TYPES::GROUNDED);//assume grounded for now
+	_changed = false;
+	_shortest_path_start = start;
 }
 void Map::findShortestPaths(GridCell* start, int max_move, MobilityType mobility) {
-	if (start == _shortest_path_start) { //need another flag for if the map is changed
+	if (start == _shortest_path_start && !_changed) { //need another flag for Mobility Type
 		return;
 	}
 	std::priority_queue<prev_cost_pair> queue = std::priority_queue<prev_cost_pair>();
@@ -90,6 +99,8 @@ void Map::findShortestPaths(GridCell* start, int max_move, MobilityType mobility
 	_shortest_path_map.insert(std::pair<GridCell*, prev_cost_pair>(start, first));
 	queue.push(first);
 	findShortestPaths(queue, max_move, mobility);
+	_changed = false;
+	_shortest_path_start = start;
 }
 void Map::findShortestPaths(std::priority_queue<prev_cost_pair>& queue, int max_move, MobilityType mobility) {
 	if (queue.size() == 0) {
@@ -101,7 +112,7 @@ void Map::findShortestPaths(std::priority_queue<prev_cost_pair>& queue, int max_
 	for (std::vector<GridCell*>::iterator it = adj_cells.begin(); it != adj_cells.end(); it++) {
 		if (top._prev_cell->getEdge(*it).canTraverse(mobility) && !(*it)->getTile().hasUnit()) { //if we can step on this tile
 			int cost = top._cost + top._prev_cell->getEdge(*it).getCost(mobility);
-			if (_shortest_path_map.find(*it) == _shortest_path_map.end()) {//no shortest path found
+			if (_shortest_path_map.count(*it) == 0) {//no shortest path found
 				if (cost <= max_move || max_move == -1) {
 					prev_cost_pair new_element_insert;
 					prev_cost_pair new_element_push;
@@ -114,7 +125,7 @@ void Map::findShortestPaths(std::priority_queue<prev_cost_pair>& queue, int max_
 				}
 			}
 			else if (cost < _shortest_path_map.at(*it)._cost) { //found a new shortest path
-				prev_cost_pair modify_element = _shortest_path_map.at(*it);
+				prev_cost_pair& modify_element = _shortest_path_map.at(*it);
 				modify_element._cost = top._cost + top._prev_cell->getEdge(*it).getCost(mobility);
 				modify_element._prev_cell = top._prev_cell;
 				prev_cost_pair new_element_push;

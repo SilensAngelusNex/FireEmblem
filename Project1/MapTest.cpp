@@ -16,13 +16,17 @@ bool test::runMapTest() {
 	Map map = Map(20, 20); // create a 20 x 20 map
 	map.insertUnit(&mia, &map.getGridCell(10, 10));
 	std::vector <GridCell*> cells = map.getAccesibleCells(&mia);
+	std::cout << "Cost to move 0: " << map._shortest_path_map.at(&map.getGridCell(10, 10))._cost << std::endl;
+	std::cout << "Cost to move 10 " << map._shortest_path_map.at(&map.getGridCell(10, 11))._cost << std::endl;
+	std::cout << "Cost to move 20: " << map._shortest_path_map.at(&map.getGridCell(10, 12))._cost << std::endl;
+	std::cout << "Cost to move 30: " << map._shortest_path_map.at(&map.getGridCell(10, 13))._cost << std::endl;
+	std::cout << "Cost to move 40: " << map._shortest_path_map.at(&map.getGridCell(10, 14))._cost << std::endl;
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(10, 10).getAdjacentCells().size() << std::endl;
 	map.insertUnit(&ike, &map.getGridCell(10, 11));
 	cells = map.getAccesibleCells(&mia);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(10, 10).getAdjacentCells().size() << std::endl;
-	std::cout << map.getShortestPath(&map.getGridCell(10, 10), &map.getGridCell(10, 10)).getCost() << std::endl;
 
 	return true;
 }
