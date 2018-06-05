@@ -21,8 +21,6 @@ private:
 	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(std::priority_queue<std::pair<int, GridCell*>>& queue, std::map<GridCell*, std::pair<int, GridCell*>> &path_map, int max_move, MobilityType mobility);
 	void insertAdjacencies();
 
-	
-
 public:
 	Map(int width, int height);
 	GridCell& getGridCell(int x_pos, int y_pos);

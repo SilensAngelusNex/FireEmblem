@@ -12,13 +12,13 @@ std::optional<CellEdge> GridCell::getEdge(GridCell* other_cell) {
 /** Adds _new_cell to the adjacency vector
 	Returns true if succesful, false if _new_cell is already in the adjacency vector
 */
-bool GridCell::addAdjacentCell(GridCell* new_cell, MobilityList<int> costs, MobilityList<bool> traversable) {
+bool GridCell::addAdjacentCell(GridCell* new_cell, MobilityList<std::optional<int>> costs) {
 	if (new_cell != nullptr) {
 		if (getEdge(new_cell).has_value()) {
 			return false;
 		}
 			
-		_adjacent_cells.push_back(CellEdge(new_cell, costs, traversable));
+		_adjacent_cells.push_back(CellEdge(new_cell, costs));
 		return true;
 	} else 	return false;
 }

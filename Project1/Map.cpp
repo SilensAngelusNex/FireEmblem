@@ -12,13 +12,13 @@ void Map::insertAdjacencies() {
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
 			if (x > 0) {
-				_grid[x][y].addAdjacentCell(&(_grid[x - 1][y]), MobilityList<int>({ 10, 10, 10 }), MobilityList<bool>({true, true, true}));
+				_grid[x][y].addAdjacentCell(&(_grid[x - 1][y]), MobilityList<std::optional<int>>({ 10, 10, 10 }));
 			} if (x < width - 1) {
-				_grid[x][y].addAdjacentCell(&(_grid[x + 1][y]), MobilityList<int>({ 10, 10, 10 }), MobilityList<bool>({ true, true, true }));
+				_grid[x][y].addAdjacentCell(&(_grid[x + 1][y]), MobilityList<std::optional<int>>({ 10, 10, 10 }));
 			}if (y > 0) {
-				_grid[x][y].addAdjacentCell(&(_grid[x][y - 1]), MobilityList<int>({ 10, 10, 10 }), MobilityList<bool>({ true, true, true }));
+				_grid[x][y].addAdjacentCell(&(_grid[x][y - 1]), MobilityList<std::optional<int>>({ 10, 10, 10 }));
 			} if (y < height - 1) {
-				_grid[x][y].addAdjacentCell(&(_grid[x][y + 1]), MobilityList<int>({ 10, 10, 10 }), MobilityList<bool>({ true, true, true }));
+				_grid[x][y].addAdjacentCell(&(_grid[x][y + 1]), MobilityList<std::optional<int>>({ 10, 10, 10 }));
 			}
 		}
 	}

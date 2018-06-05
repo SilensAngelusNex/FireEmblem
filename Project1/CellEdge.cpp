@@ -2,17 +2,19 @@
 
 
 
-CellEdge::CellEdge(GridCell* cell, MobilityList<int> costs, MobilityList<bool> traversable): _cell(cell), _costs(costs), _traversable(traversable) {
-}
+CellEdge::CellEdge(GridCell* cell, MobilityList<std::optional<int>> costs) :
+	_cell(cell), 
+	_costs(costs)
+{}
 
 int CellEdge::getCost(MobilityType mobility)
 {
-	return _costs[mobility];
+	return _costs[mobility].value();
 }
 
 bool CellEdge::canTraverse(MobilityType mobility)
 {
-	return bool(_traversable[mobility]);
+	return bool(_costs[mobility].has_value());
 }
 
 /**
