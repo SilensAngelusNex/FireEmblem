@@ -1,7 +1,7 @@
 #pragma once
 #include <list>
 #include "GridCell.h"
-//TODO: ADD MULTIPLE PATH TYPES, currently only accepts adjacent, grounded paths.
+//TODO(Torrey): ADD MULTIPLE PATH TYPES, currently only accepts adjacent, grounded paths. Is also just an awful class and needs to be remade from scratch
 class CellPath {
 private:
 	std::list<GridCell*> _tiles;

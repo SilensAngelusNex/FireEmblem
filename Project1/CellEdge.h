@@ -7,7 +7,7 @@ class GridCell;
 Represents an Edge to a GridCell, basically a struct
 */
 class CellEdge {
-	MobilityList<std::optional<int>> _costs;
+	 const MobilityList<std::optional<int>> _costs;
 public:
 	GridCell* _cell;
 	CellEdge(GridCell* cell, MobilityList<std::optional<int>> costs);

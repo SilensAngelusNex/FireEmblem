@@ -12,10 +12,10 @@ CellPath CellPath::copy() {
 	copy._tiles = this->_tiles;
 	return copy;
 }
-bool CellPath::insertTile(GridCell*_new_tile) {
-	if (this->getTail()->isAdjacent(_new_tile)) {
-		_cost += _tiles.back()->getEdge(_new_tile).value().getCost(MobilityType::values::GROUNDED);//assume grounded for now
-		_tiles.push_back(_new_tile);
+bool CellPath::insertTile(GridCell* new_tile) {
+	if (this->getTail()->isAdjacent(new_tile)) {
+		_cost += _tiles.back()->getEdge(new_tile).value().getCost(MobilityType::values::GROUNDED);//assume grounded for now
+		_tiles.push_back(new_tile);
 		return true;
 	}
 	return false;
