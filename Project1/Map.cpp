@@ -8,8 +8,8 @@ GridCell & Map::getGridCell(int x_pos, int y_pos) {
 	return _grid[x_pos][y_pos];
 }
 void Map::insertAdjacencies() {
-	int width = (int)_grid.size();
-	int height = (int)_grid[0].size();
+	auto width = static_cast<int>(_grid.size());
+	auto height = static_cast<int>(_grid[0].size());
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
 			if (x > 0) {
@@ -28,21 +28,21 @@ bool Map::moveUnit(GridCell* start, GridCell* destination) {
 	if (!start->getTile().hasUnit() || destination->getTile().hasUnit()) {
 		return false;
 	}
-	else {
+	
 		_unit_to_cell.at(start->getTile().getUnit()) = destination; // Map the Unit to the destination.
 		destination->getTile().insertUnit(start->getTile().removeUnit()); // Put the Unit in the destination Tile
 		return true;
-	}
+	
 }
 bool Map::insertUnit(Unit* new_unit, GridCell* destination) {
 	if (destination->getTile().hasUnit()) {
 		return false;
 	}
-	else {
+	
 		_unit_to_cell.insert(std::pair<Unit*, GridCell*>(new_unit, destination));// Map the Unit to the destination.
 		destination->getTile().insertUnit(new_unit);
 		return true;
-	}
+	
 }
 void Map::removeUnit(Unit* unit) { //throws exceptions if the space is not empty.
 	_unit_to_cell.at(unit)->getTile().removeUnit();
@@ -86,7 +86,7 @@ std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(GridCell* 
 	return path_map;
 }
 std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(std::priority_queue<std::pair<int, GridCell*>>& queue, std::map<GridCell*, std::pair<int, GridCell*>>& path_map, int max_move, MobilityList<bool> mobility_types) {
-	if (queue.size() == 0) {
+	if (queue.empty()) {
 		return path_map;
 	}
 	std::pair<int, GridCell*> top = queue.top();

@@ -1,5 +1,3 @@
 #include "Terrain.h"
-Terrain::Terrain() {
-}
-Terrain::~Terrain() {
-}
+Terrain::Terrain() = default;
+Terrain::~Terrain() = default;

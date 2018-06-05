@@ -18,7 +18,7 @@ private:
 	std::vector<Unit> _units;
 	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(GridCell* start);
 	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(GridCell* start, int max_move, MobilityList<bool> mobility);
-	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(std::priority_queue<std::pair<int, GridCell*>>& queue, std::map<GridCell*, std::pair<int, GridCell*>> &path_map, int max_move, MobilityList<bool> mobility);
+	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(std::priority_queue<std::pair<int, GridCell*>>& queue, std::map<GridCell*, std::pair<int, GridCell*>>& path_map, int max_move, MobilityList<bool> mobility_types);
 	void insertAdjacencies();
 
 public:

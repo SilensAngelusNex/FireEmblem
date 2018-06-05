@@ -3,8 +3,9 @@
 
 std::optional<CellEdge> GridCell::getEdge(GridCell* other_cell) {
 	for (CellEdge edge: _adjacent_cells) {
-		if (edge._cell == other_cell)
+		if (edge._cell == other_cell) {
 			return edge;
+		}
 	}
 	return {};
 }
@@ -16,11 +17,11 @@ bool GridCell::addAdjacentCell(GridCell* new_cell, MobilityList<std::optional<in
 	if (new_cell != nullptr) {
 		if (getEdge(new_cell).has_value()) {
 			return false;
-		}
-			
-		_adjacent_cells.push_back(CellEdge(new_cell, costs));
+		}			
+		_adjacent_cells.emplace_back(new_cell, costs);
 		return true;
-	} else 	return false;
+	}  {	return false;
+}
 }
 
 bool GridCell::removeAdjacentCell(GridCell* delete_cell) {
@@ -31,11 +32,8 @@ bool GridCell::removeAdjacentCell(GridCell* delete_cell) {
 	if (edge.has_value()) {
 		_adjacent_cells.remove(edge.value());
 		return true;
-	}
-	else {
+	}	
 		return false;
-	}
-	
 }
 bool GridCell::isAdjacent(GridCell* other_cell) {
 	return getEdge(other_cell).has_value();

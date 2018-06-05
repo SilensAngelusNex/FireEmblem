@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-//TODO: TURN INTO SOME KIND OF ENUM? NOT SURE
+//TODO(Torrey): TURN INTO SOME KIND OF ENUM? NOT SURE
 class Terrain {
 private:
 	std::string _name;

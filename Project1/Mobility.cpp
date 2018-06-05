@@ -2,9 +2,9 @@
 
 
 
-Mobility::Mobility(int move, MobilityList<bool> mobilityType) :
+Mobility::Mobility(int move, MobilityList<bool> mobility_type) :
 	_movement(move), 
-	_mobility(mobilityType)
+	_mobility(mobility_type)
 {}
 
 const MobilityList<bool>& Mobility::getMobilityType() const
