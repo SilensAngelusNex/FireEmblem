@@ -17,7 +17,7 @@ public:
 	bool addAdjacentCell(GridCell * new_cell, MobilityList costs, MobilityList traversable);
 	bool removeAdjacentCell(GridCell* new_cell);
 	bool isAdjacent(GridCell* other_cell);
-	CellEdge getEdge(GridCell * other_cell);
+	CellEdge& getEdge(GridCell * other_cell);
 	Tile& getTile();
 	std::vector<GridCell*> getAdjacentCells();
 };

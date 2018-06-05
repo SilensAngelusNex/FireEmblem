@@ -1,5 +1,7 @@
 #include "Tile.h"
-Tile::Tile(): _unit(nullptr), _terrain() {
+Tile::Tile(): 
+	_unit(),
+	_terrain() {
 }
 Tile::~Tile() {
 }

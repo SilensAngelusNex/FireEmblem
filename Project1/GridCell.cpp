@@ -3,11 +3,11 @@
 GridCell::GridCell(): _tile() {
 }
 
-CellEdge GridCell::getEdge(GridCell* other_cell) {
-	for (std::list<CellEdge>::iterator it = _adjacent_cells.begin(); it != _adjacent_cells.end(); it++) {
-		if (it->_cell == other_cell) {
+CellEdge& GridCell::getEdge(GridCell* other_cell) {
+	for (CellEdge edge: _adjacent_cells) {
+		if (edge._cell == other_cell) {
 			_found = true;
-			return (*it);
+			return edge;
 		}
 	}
 	_found = false;

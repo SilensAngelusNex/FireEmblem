@@ -13,28 +13,17 @@ Map class. Holds a Matrix of GridCells and all of the units. Should be initializ
 */
 class Map {
 private:
-	struct prev_cost_pair {
-		GridCell* _prev_cell;
-		int _cost;
-		bool operator<(const prev_cost_pair& a) const {
-			return (_cost < a._cost);
-		}
-	};
 	std::map<Unit*, GridCell*> _unit_to_cell;
 	std::vector<std::vector<GridCell>> _grid;
 	std::vector<Unit> _units;
-	bool _changed = true;
-
-	GridCell* _shortest_path_start = nullptr;
-	void findShortestPaths(GridCell* start);
-	void findShortestPaths(GridCell * start, int max_move, MobilityType mobility);
-	void findShortestPaths(std::priority_queue<prev_cost_pair>& queue, int max_move, MobilityType mobility);
+	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(GridCell* start);
+	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(GridCell * start, int max_move, MobilityType mobility);
+	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(std::priority_queue<std::pair<int, GridCell*>>& queue, std::map<GridCell*, std::pair<int, GridCell*>> &path_map, int max_move, MobilityType mobility);
 	void insertAdjacencies();
 
 	
 
 public:
-	std::map<GridCell*, prev_cost_pair> _shortest_path_map = std::map<GridCell*, prev_cost_pair>();
 	Map(int width, int height);
 	GridCell& getGridCell(int x_pos, int y_pos);
 	bool moveUnit(GridCell* start, GridCell* destination);
