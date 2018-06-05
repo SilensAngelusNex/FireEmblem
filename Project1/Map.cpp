@@ -12,13 +12,13 @@ void Map::insertAdjacencies() {
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
 			if (x > 0) {
-				_grid[x][y].addAdjacentCell(&(_grid[x - 1][y]), MobilityList({ 10, 10, 10 }), MobilityList({true, true, true}));
+				_grid[x][y].addAdjacentCell(&(_grid[x - 1][y]), MobilityList<int>({ 10, 10, 10 }), MobilityList<bool>({true, true, true}));
 			} if (x < width - 1) {
-				_grid[x][y].addAdjacentCell(&(_grid[x + 1][y]), MobilityList({ 10, 10, 10 }), MobilityList({ true, true, true }));
+				_grid[x][y].addAdjacentCell(&(_grid[x + 1][y]), MobilityList<int>({ 10, 10, 10 }), MobilityList<bool>({ true, true, true }));
 			}if (y > 0) {
-				_grid[x][y].addAdjacentCell(&(_grid[x][y - 1]), MobilityList({ 10, 10, 10 }), MobilityList({ true, true, true }));
+				_grid[x][y].addAdjacentCell(&(_grid[x][y - 1]), MobilityList<int>({ 10, 10, 10 }), MobilityList<bool>({ true, true, true }));
 			} if (y < height - 1) {
-				_grid[x][y].addAdjacentCell(&(_grid[x][y + 1]), MobilityList({ 10, 10, 10 }), MobilityList({ true, true, true }));
+				_grid[x][y].addAdjacentCell(&(_grid[x][y + 1]), MobilityList<int>({ 10, 10, 10 }), MobilityList<bool>({ true, true, true }));
 			}
 		}
 	}
@@ -92,8 +92,8 @@ std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(std::prior
 	queue.pop();
 	std::vector<GridCell*> adj_cells = top.second->getAdjacentCells();
 	for ( auto& cell: adj_cells) {
-		if (top.second->getEdge(cell).canTraverse(mobility) && !cell->getTile().hasUnit()) { //if we can step on this tile
-			int cost = top.first + top.second->getEdge(cell).getCost(mobility);
+		if (top.second->getEdge(cell).value().canTraverse(mobility) && !cell->getTile().hasUnit()) { //if we can step on this tile
+			int cost = top.first + top.second->getEdge(cell).value().getCost(mobility);
 			if (path_map.count(cell) == 0) {//no shortest path found
 				if (cost <= max_move || max_move == -1) {
 					queue.emplace(std::pair<int, GridCell*>(cost, cell));
@@ -102,7 +102,7 @@ std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(std::prior
 			}
 			else if (cost < path_map.at(cell).first) { //found a new shortest path
 				std::pair<int, GridCell*>& modify_element = path_map.at(cell);
-				modify_element.first = top.first + top.second->getEdge(cell).getCost(mobility);
+				modify_element.first = top.first + top.second->getEdge(cell).value().getCost(mobility);
 				modify_element.second = top.second;
 				queue.emplace(std::pair<int, GridCell*>(cost, cell));
 			}

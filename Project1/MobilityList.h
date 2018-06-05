@@ -6,4 +6,5 @@
 
 enum class _MOBILITY_TYPES { GROUNDED, FLYING, AQUATIC, ENUM_END };
 using MobilityType = Enum<_MOBILITY_TYPES>;
-using MobilityList = EnumContainer<int, MobilityType>;
+template<typename T>
+using MobilityList = EnumContainer<T, MobilityType>;

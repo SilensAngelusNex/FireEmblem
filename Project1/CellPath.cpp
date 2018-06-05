@@ -14,7 +14,7 @@ CellPath CellPath::copy() {
 }
 bool CellPath::insertTile(GridCell*_new_tile) {
 	if (this->getTail()->isAdjacent(_new_tile)) {
-		_cost += _tiles.back()->getEdge(_new_tile).getCost(MobilityType::values::GROUNDED);//assume grounded for now
+		_cost += _tiles.back()->getEdge(_new_tile).value().getCost(MobilityType::values::GROUNDED);//assume grounded for now
 		_tiles.push_back(_new_tile);
 		return true;
 	}

@@ -2,7 +2,7 @@
 
 
 
-CellEdge::CellEdge(GridCell* cell, MobilityList costs, MobilityList traversable): _cell(cell), _costs(costs), _traversable(traversable) {
+CellEdge::CellEdge(GridCell* cell, MobilityList<int> costs, MobilityList<bool> traversable): _cell(cell), _costs(costs), _traversable(traversable) {
 }
 
 int CellEdge::getCost(MobilityType mobility)
