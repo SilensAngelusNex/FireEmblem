@@ -1,9 +1,10 @@
 #include "Map.h"
-Map::Map(int width, int height) : _grid(width, std::vector<GridCell>(height, GridCell())) {
+Map::Map(int width, int height) : 
+	_grid(width, std::vector<GridCell>(height, GridCell()))
+{
 	insertAdjacencies();
 }
-GridCell & Map::getGridCell(int x_pos, int y_pos)
-{
+GridCell & Map::getGridCell(int x_pos, int y_pos) {
 	return _grid[x_pos][y_pos];
 }
 void Map::insertAdjacencies() {

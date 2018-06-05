@@ -2,8 +2,8 @@
 
 
 
-CellPath::CellPath(GridCell* start_tile) : _tiles({ start_tile }) {
-
+CellPath::CellPath(GridCell* start_tile) :
+	_tiles({ start_tile }) {
 }
 
 CellPath CellPath::copy() {
