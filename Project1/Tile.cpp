@@ -1,15 +1,16 @@
 #include "Tile.h"
-Tile::Tile()
-	= default;
+Tile::Tile() :
+	 
+	_terrain()
+{}
+
 Tile::~Tile() = default;
 bool Tile::insertUnit(Unit* unit) {
 	if (hasUnit()) {
 		return false;
-	}
-	
+	}	
 		_unit = unit;
-		return true;
-	
+		return true;	
 }
 Unit* Tile::removeUnit() {
 	if (hasUnit()) {
@@ -24,10 +25,4 @@ bool Tile::hasUnit() {
 }
 Unit* Tile::getUnit() {
 	return _unit;
-}
-Terrain Tile::getTerrain() {
-	return this->_terrain;
-}
-void Tile::setTerrain(Terrain* new_terrain) {
-	this->_terrain = *new_terrain;
 }

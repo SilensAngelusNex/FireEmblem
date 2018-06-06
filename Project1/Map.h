@@ -6,8 +6,6 @@
 #include "GridCell.h"
 #include <map>
 #include <queue>
-
-//Should this class be a singleton?
 /**
 Map class. Holds a Matrix of GridCells and all of the units. Should be initialized at the start of each chapter.
 */
