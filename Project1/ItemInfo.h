@@ -18,10 +18,11 @@ public:
 
 	EquipInfo();
 	EquipInfo(std::string name);
-	EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats, const std::array<bool, 32> range);
+	EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats);
+	EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats, std::array<bool, 32> range);
 
 	int operator[] (CombatStats stat) const;
-	bool operator[] (size_t range) const;
+	bool operator[] (size_t distance) const;
 };
 
 class WeaponInfo : public EquipInfo {
@@ -34,4 +35,8 @@ public:
 	WeaponInfo(std::string name, WeaponType type);
 	WeaponInfo(std::string name, WeaponType type, std::array<int, CombatStats::size> base_stats);
 	WeaponInfo(std::string name, WeaponType type, AttribType offensive_stat, AttribType defensive_stat, std::array<int, CombatStats::size> base_stats);
+	WeaponInfo(std::string name, WeaponType type, AttribType offensive_stat, AttribType defensive_stat, std::array<int, CombatStats::size> base_stats, std::array<bool, 32> range);
+
+	WeaponInfo(EquipInfo info, WeaponType type);
+	WeaponInfo(EquipInfo info, WeaponType type, AttribType offensive_stat, AttribType defensive_stat);
 };

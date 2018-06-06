@@ -22,7 +22,7 @@ Damage Weapon::get_crit_damage(const Unit& attacker, const Unit&  /*defender*/) 
 }
 
 std::array<bool, 32> Weapon::getRange() const {
-	_info->_range;
+	return _info->_range;
 }
 
 int Weapon::avoid(const AttributeList& stats) const {
