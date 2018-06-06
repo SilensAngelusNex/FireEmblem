@@ -10,6 +10,11 @@ std::optional<CellEdge> GridCell::getEdge(GridCell* other_cell) {
 	return {};
 }
 
+bool GridCell::addAdjacentCell(GridCell * new_cell)
+{
+	return addAdjacentCell(new_cell, new_cell->getTile()._terrain.getCosts());
+}
+
 /** Adds _new_cell to the adjacency vector
 	Returns true if succesful, false if _new_cell is already in the adjacency vector
 */

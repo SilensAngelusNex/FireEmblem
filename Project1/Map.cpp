@@ -1,4 +1,5 @@
 #include "Map.h"
+//TODO(Torrey): Make more useful constructors, Implement Weapon Range Calculations
 Map::Map(int width, int height) : 
 	_grid(width, std::vector<GridCell>(height, GridCell()))
 {
@@ -7,19 +8,21 @@ Map::Map(int width, int height) :
 GridCell & Map::getGridCell(int x_pos, int y_pos) {
 	return _grid[x_pos][y_pos];
 }
+/**Inserts Eucildian Adjacencies
+*/
 void Map::insertAdjacencies() {
 	auto width = static_cast<int>(_grid.size());
 	auto height = static_cast<int>(_grid[0].size());
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
 			if (x > 0) {
-				_grid[x][y].addAdjacentCell(&(_grid[x - 1][y]), MobilityList<std::optional<int>>({ 10, 10, 10}));
+				_grid[x][y].addAdjacentCell(&(_grid[x - 1][y]));
 			} if (x < width - 1) {
-				_grid[x][y].addAdjacentCell(&(_grid[x + 1][y]), MobilityList<std::optional<int>>({ 10, 10, 10 }));
+				_grid[x][y].addAdjacentCell(&(_grid[x + 1][y]));
 			}if (y > 0) {
-				_grid[x][y].addAdjacentCell(&(_grid[x][y - 1]), MobilityList<std::optional<int>>({ 10, 10, 10 }));
+				_grid[x][y].addAdjacentCell(&(_grid[x][y - 1]));
 			} if (y < height - 1) {
-				_grid[x][y].addAdjacentCell(&(_grid[x][y + 1]), MobilityList<std::optional<int>>({ 10, 10, 10 }));
+				_grid[x][y].addAdjacentCell(&(_grid[x][y + 1]));
 			}
 		}
 	}
@@ -44,13 +47,13 @@ bool Map::insertUnit(Unit* new_unit, GridCell* destination) {
 		return true;
 	
 }
-void Map::removeUnit(Unit* unit) { //throws exceptions if the space is not empty.
+void Map::removeUnit(Unit* unit) { //throws exceptions if the space is empty.
 	_unit_to_cell.at(unit)->getTile().removeUnit();
 	_unit_to_cell.erase(unit);
 }
 
 std::vector<GridCell*> Map::getAccesibleCells(Unit* unit) {
-	std::map<GridCell*, std::pair<int, GridCell*>> map = findShortestPaths(_unit_to_cell.at(unit), unit->getMobility().getMove(), unit->getMobility().getMobilityType());
+	PathMap map = findShortestPaths(unit);
 	std::vector<GridCell*> cells = std::vector<GridCell*>();
 	for (auto& pair: map) {
 		cells.push_back(pair.first);
@@ -69,23 +72,21 @@ CellPath& Map::getShortestPath(GridCell* start, GridCell* destination) {
 	return path;
 }
 */
-std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(GridCell* start) {
-	std::priority_queue<std::pair<int, GridCell*>> queue = std::priority_queue<std::pair<int, GridCell*>>();
-	std::map<GridCell*, std::pair<int, GridCell*>> path_map = std::map<GridCell*, std::pair<int, GridCell*>>();
-	path_map.try_emplace(start, std::pair<int, GridCell*>(0, start));
-	queue.emplace(0, start);
-	findShortestPaths(queue, path_map, -1, MobilityList<bool>({true, false, false}));//assume grounded for now
-	return path_map;
+PathMap Map::findShortestPaths(GridCell* start) {
+	return findShortestPaths(start, INT_MAX, MobilityList<bool>({true, false, false}));//
 }
-std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(GridCell* start, int max_move, MobilityList<bool> mobility) {
-	std::priority_queue<std::pair<int, GridCell*>> queue = std::priority_queue<std::pair<int, GridCell*>>();
-	std::map<GridCell*, std::pair<int, GridCell*>> path_map = std::map<GridCell*, std::pair<int, GridCell*>>();
+PathMap Map::findShortestPaths(Unit* unit) {
+	return findShortestPaths(_unit_to_cell.at(unit), unit->getMobility().getMove(), unit->getMobility().getMobilityType());
+}
+PathMap Map::findShortestPaths(GridCell* start, int max_move, MobilityList<bool> mobility) {
+	PathQueue queue = PathQueue();
+	PathMap path_map = PathMap();
 	path_map.try_emplace(start, std::pair<int, GridCell*>(0, start));
 	queue.emplace(0, start);
 	findShortestPaths(queue, path_map, max_move, mobility);
 	return path_map;
 }
-std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(std::priority_queue<std::pair<int, GridCell*>>& queue, std::map<GridCell*, std::pair<int, GridCell*>>& path_map, int max_move, MobilityList<bool> mobility_types) {
+PathMap Map::findShortestPaths(PathQueue& queue, PathMap& path_map, int max_move, MobilityList<bool> mobility_types) {
 	if (queue.empty()) {
 		return path_map;
 	}
@@ -94,7 +95,7 @@ std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(std::prior
 	std::list<CellEdge> adj_edges = top.second->getEdges();
 	for ( auto& edge: adj_edges) {
 		int cost;
-		bool found_cost = false;
+		bool found_cost = false; //flag is love, flag is life
 		for (MobilityType mobility : MobilityType::list) {
 			if (mobility_types[mobility] && edge.canTraverse(mobility) && !edge._cell->getTile().hasUnit()) { // if we can step on the tile
 				if (!found_cost || cost > top.first + edge.getCost(mobility).value()) { // if the cost is best found yet 
@@ -104,7 +105,7 @@ std::map<GridCell*, std::pair<int, GridCell*>> Map::findShortestPaths(std::prior
 			}
 		}
 		if (found_cost && path_map.count(edge._cell) == 0) {//no shortest path found
-			if (cost <= max_move || max_move == -1) {
+			if (cost <= max_move) {
 				queue.emplace(cost, edge._cell);
 				path_map.try_emplace(edge._cell, std::pair<int, GridCell*>(cost, top.second));
 			}

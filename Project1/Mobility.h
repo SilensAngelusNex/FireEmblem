@@ -5,6 +5,7 @@ class Mobility
 	int _movement;
 	MobilityList<bool> _mobility;
 public:
+	Mobility();
 	Mobility(int move, MobilityList<bool> mobility_type);
 
 	const MobilityList<bool>& getMobilityType() const;

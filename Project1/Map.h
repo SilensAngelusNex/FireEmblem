@@ -9,14 +9,17 @@
 /**
 Map class. Holds a Matrix of GridCells and all of the units. Should be initialized at the start of each chapter.
 */
+using PathMap = std::map<GridCell*, std::pair<int, GridCell*>>;
+using PathQueue = std::priority_queue<std::pair<int, GridCell*>>;
 class Map {
 private:
 	std::map<Unit*, GridCell*> _unit_to_cell;
 	std::vector<std::vector<GridCell>> _grid;
 	std::vector<Unit> _units;
-	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(GridCell* start);
-	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(GridCell* start, int max_move, MobilityList<bool> mobility);
-	std::map<GridCell*, std::pair<int, GridCell*>> findShortestPaths(std::priority_queue<std::pair<int, GridCell*>>& queue, std::map<GridCell*, std::pair<int, GridCell*>>& path_map, int max_move, MobilityList<bool> mobility_types);
+	PathMap findShortestPaths(GridCell* start);
+	PathMap findShortestPaths(Unit * unit);
+	PathMap findShortestPaths(GridCell* start, int max_move, MobilityList<bool> mobility);
+	PathMap findShortestPaths(PathQueue& queue, PathMap& path_map, int max_move, MobilityList<bool> mobility_types);
 	void insertAdjacencies();
 
 public:
