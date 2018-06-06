@@ -2,7 +2,7 @@
 #include "MobilityList.h"
 class Mobility
 {
-	int _movement;
+	int _movement{50};
 	MobilityList<bool> _mobility;
 public:
 	Mobility();
