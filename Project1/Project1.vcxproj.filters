@@ -171,6 +171,9 @@
     <ClCompile Include="Mobility.cpp">
       <Filter>src\unit</Filter>
     </ClCompile>
+    <ClCompile Include="Party.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="Mobility.h">
       <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Party.h">
+      <Filter>inc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

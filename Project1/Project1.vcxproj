@@ -146,6 +146,7 @@
     <ClCompile Include="Mobility.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
     <ClCompile Include="ObservableDamage.cpp" />
+    <ClCompile Include="Party.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestObservers.cpp" />
     <ClCompile Include="Stats.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="MobilityList.h" />
     <ClInclude Include="ObservableExp.h" />
     <ClInclude Include="ObserverExp.h" />
+    <ClInclude Include="Party.h" />
     <ClInclude Include="Passkey.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="Swords.h" />

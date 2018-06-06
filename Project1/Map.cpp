@@ -1,8 +1,11 @@
 #include "Map.h"
 //TODO(Torrey): Make more useful constructors, Implement Weapon Range Calculations
-Map::Map(int width, int height) : 
+Map::Map(int width, int height, std::vector<PartyData> party_data) : 
 	_grid(width, std::vector<GridCell>(height, GridCell()))
 {
+	for (PartyData data : party_data) {
+		_parties.emplace_back(data);
+	}
 	insertAdjacencies();
 }
 GridCell & Map::getGridCell(int x_pos, int y_pos) {
@@ -30,22 +33,18 @@ void Map::insertAdjacencies() {
 bool Map::moveUnit(GridCell* start, GridCell* destination) {
 	if (!start->getTile().hasUnit() || destination->getTile().hasUnit()) {
 		return false;
-	}
-	
-		_unit_to_cell.at(start->getTile()._unit) = destination; // Map the Unit to the destination.
-		destination->getTile().insertUnit(start->getTile().removeUnit()); // Put the Unit in the destination Tile
-		return true;
-	
+	}	
+	_unit_to_cell.at(start->getTile()._unit) = destination; // Map the Unit to the destination.
+	destination->getTile().insertUnit(start->getTile().removeUnit()); // Put the Unit in the destination Tile
+	return true;	
 }
 bool Map::insertUnit(Unit* new_unit, GridCell* destination) {
 	if (destination->getTile().hasUnit()) {
 		return false;
 	}
-	
 		_unit_to_cell.insert(std::pair<Unit*, GridCell*>(new_unit, destination));// Map the Unit to the destination.
-		destination->getTile().insertUnit(new_unit);
-		return true;
-	
+	destination->getTile().insertUnit(new_unit);
+	return true;
 }
 void Map::removeUnit(Unit* unit) { //throws exceptions if the space is empty.
 	_unit_to_cell.at(unit)->getTile().removeUnit();
@@ -65,6 +64,7 @@ std::vector<GridCell*> Map::getAccesibleCells(Unit* unit) {
 std::vector<GridCell*> Map::getAttackableCells(Unit* unit) {
 	return getAttackableCells(unit, _unit_to_cell.at(unit));
 }
+
 /*Get Cells a Unit could attack, if it were standing on cell
 */
 std::vector<GridCell*> Map::getAttackableCells(Unit* unit, GridCell* cell) {
@@ -80,8 +80,7 @@ std::vector<GridCell*> Map::getAttackableCells(Unit* unit, GridCell* cell) {
 			}
 		}
 	}
-	return cells;
-	
+	return cells;	
 }
 /*Get Cells a Unit can Attack including movement
 */

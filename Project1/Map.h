@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "Unit.h"
+#include "Party.h"
 #include "GridCell.h"
 #include "CellPath.h"
 #include "GridCell.h"
@@ -15,16 +15,17 @@ class Map {
 private:
 	std::map<Unit*, GridCell*> _unit_to_cell;
 	std::vector<std::vector<GridCell>> _grid;
-	std::vector<Unit> _units;
+	std::vector<Party> _parties = std::vector<Party>();
 	PathMap findShortestPaths(GridCell* start);
-	PathMap findShortestPaths(Unit * unit);
+	PathMap findShortestPaths(Unit* unit);
 	PathMap findShortestPaths(GridCell* start, int max_move, MobilityList<bool> mobility);
 	PathMap findShortestPaths(PathQueue& queue, PathMap& path_map, int max_move, MobilityList<bool> mobility_types);
-	std::vector<GridCell*> getAttackableCells(Unit * unit, GridCell * cell);
+	std::vector<GridCell*> getAttackableCells(Unit* unit, GridCell* cell);
 	void insertAdjacencies();
 
 public:
-	Map(int width, int height);
+	Map(int width, int height) : Map(width, height, std::vector<PartyData>()) {};
+	Map(int width, int height, std::vector<PartyData> party_data);
 	GridCell& getGridCell(int x_pos, int y_pos);
 	bool moveUnit(GridCell* start, GridCell* destination);
 	bool insertUnit(Unit * new_unit, GridCell * destination);

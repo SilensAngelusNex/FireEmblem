@@ -17,6 +17,11 @@
 using IDENTITY = std::string;
 using CONTEXT = Dice<100>;
 
+struct UnitData {
+	IDENTITY name;
+	CONTEXT& context;
+	AttributeList stats;
+};
 class Unit : public Observable<ObserverDamage>, public Observable<ObserverExp> {
 private:
 	IDENTITY _id;
@@ -31,6 +36,7 @@ private:
 	//Location& _loc;
 public:
 	Unit(IDENTITY name, CONTEXT& context, AttributeList stats);
+	Unit(UnitData data) : Unit(data.name, data.context, data.stats) {};
 
 	// Viewable Unit
 	const IDENTITY& getIdentity() const;
