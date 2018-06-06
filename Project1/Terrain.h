@@ -9,7 +9,6 @@ private:
 	MobilityList<std::optional<int>> _costs;
 public:
 	Terrain();
-	~Terrain();
 	std::string getName() const	{
 		return _name;
 	};

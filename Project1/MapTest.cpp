@@ -17,10 +17,13 @@ bool test::runMapTest() {
 	map.insertUnit(&mia, &map.getGridCell(10, 10));
 	std::vector <GridCell*> cells = map.getAccesibleCells(&mia);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
-	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(10, 10).getAdjacentCells().size() << std::endl;
+	cells = map.getAllAttackableCells(&mia);
+	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	map.insertUnit(&ike, &map.getGridCell(10, 11));
 	cells = map.getAccesibleCells(&mia);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
+	cells = map.getAllAttackableCells(&mia);
+	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(10, 10).getAdjacentCells().size() << std::endl;
 
 	return true;

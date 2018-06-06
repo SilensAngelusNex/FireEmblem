@@ -20,6 +20,7 @@ private:
 	PathMap findShortestPaths(Unit * unit);
 	PathMap findShortestPaths(GridCell* start, int max_move, MobilityList<bool> mobility);
 	PathMap findShortestPaths(PathQueue& queue, PathMap& path_map, int max_move, MobilityList<bool> mobility_types);
+	std::vector<GridCell*> getAttackableCells(Unit * unit, GridCell * cell);
 	void insertAdjacencies();
 
 public:
@@ -29,6 +30,8 @@ public:
 	bool insertUnit(Unit * new_unit, GridCell * destination);
 	void removeUnit(Unit * unit);
 	std::vector<GridCell*> getAccesibleCells(Unit * unit);
+	std::vector<GridCell*> getAttackableCells(Unit * unit);
+	std::vector<GridCell*> getAllAttackableCells(Unit * unit);
 	//CellPath& getShortestPath(GridCell* start, GridCell* destination);
 	std::vector<GridCell*> getAlliedCells(GridCell * unit_cell);
 	//std::vector<GridCell*> cellsWithinWeaponRange(GridCell start);

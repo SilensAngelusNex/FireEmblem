@@ -60,6 +60,44 @@ std::vector<GridCell*> Map::getAccesibleCells(Unit* unit) {
 	}
 	return cells;
 }
+/* Get Cells that a unit can attack without moving
+*/
+std::vector<GridCell*> Map::getAttackableCells(Unit* unit) {
+	return getAttackableCells(unit, _unit_to_cell.at(unit));
+}
+/*Get Cells a Unit could attack, if it were standing on cell
+*/
+std::vector<GridCell*> Map::getAttackableCells(Unit* unit, GridCell* cell) {
+	const std::array<bool, 32> ranges = { false, true }; //temporary range 1 weapon range
+	std::vector<GridCell*> cells = std::vector<GridCell*>();
+	for (int i = 0; i < ranges.size(); i++) {
+		if (ranges[i]) {
+			PathMap map = findShortestPaths(cell, i, MobilityList<bool>({ false, false, false, true }));
+			for (auto& pair : map) {
+				if (pair.second.first == i) {
+					cells.push_back(pair.first);
+				}
+			}
+		}
+	}
+	return cells;
+	
+}
+/*Get Cells a Unit can Attack including movement
+*/
+std::vector<GridCell*> Map::getAllAttackableCells(Unit* unit) {
+	std::vector<GridCell*> cells = std::vector<GridCell*>();;
+	std::vector<GridCell*> accesible_cells = getAccesibleCells(unit);
+	for (GridCell* acc_cell : accesible_cells) {
+		std::vector<GridCell*> attack_cells = getAttackableCells(unit, acc_cell);
+		for (GridCell* atk_cell : attack_cells) {
+			if (std::count(cells.begin(), cells.end(), atk_cell) == 0) {
+				cells.push_back(atk_cell);
+			}
+		}
+	}
+	return cells;
+}
 /*
 CellPath& Map::getShortestPath(GridCell* start, GridCell* destination) {
 	findShortestPaths(start);
@@ -90,6 +128,7 @@ PathMap Map::findShortestPaths(PathQueue& queue, PathMap& path_map, int max_move
 	if (queue.empty()) {
 		return path_map;
 	}
+	bool passable = mobility_types[MobilityType::values::PROJECTILE] || mobility_types[MobilityType::values::ETHEREAL];
 	std::pair<int, GridCell*> top = queue.top();
 	queue.pop();
 	std::list<CellEdge> adj_edges = top.second->getEdges();
@@ -97,7 +136,7 @@ PathMap Map::findShortestPaths(PathQueue& queue, PathMap& path_map, int max_move
 		int cost;
 		bool found_cost = false; //flag is love, flag is life
 		for (MobilityType mobility : MobilityType::list) {
-			if (mobility_types[mobility] && edge.canTraverse(mobility) && !edge._cell->getTile().hasUnit()) { // if we can step on the tile
+			if (mobility_types[mobility] && edge.canTraverse(mobility) && (passable || !edge._cell->getTile().hasUnit())) { // if we can step on the tile
 				if (!found_cost || cost > top.first + edge.getCost(mobility).value()) { // if the cost is best found yet 
 					found_cost = true;
 					cost = top.first + edge.getCost(mobility).value();
