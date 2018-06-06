@@ -7,7 +7,7 @@ private:
 	inline static std::shared_ptr<WeaponInfo> _shared_info = std::make_shared<WeaponInfo>(
 		"Bronze Sword",
 		WeaponType::values::SWD,
-		std::array<int, CombatStats::size>{ 5, 90, 0, 5, 0 }
+		std::array<int, CombatStats::size>{ 5, 90, 0, 5, 0, 0 }
 	);
 public:
 	BronzeSword();

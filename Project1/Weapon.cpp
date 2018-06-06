@@ -34,7 +34,7 @@ int Weapon::hit(const AttributeList& stats) const {
 }
 
 int Weapon::crit(const AttributeList& stats) const {
-	return (*_info)[CombatStats::values::AVOID] + (2 * stats[AttribType::values::SKL] + stats[AttribType::values::CHA]) / 3;
+	return (*_info)[CombatStats::values::CRIT] + (2 * stats[AttribType::values::SKL] + stats[AttribType::values::CHA]) / 3;
 }
 
 int Weapon::might(const AttributeList& stats) const {
@@ -42,9 +42,9 @@ int Weapon::might(const AttributeList& stats) const {
 }
 
 int Weapon::atk_spd(const AttributeList& stats) const {
-	return stats[_info->_defensive];
+	return (*_info)[CombatStats::values::ATK_SPD] + stats[AttribType::values::SPD];
 }
 
 AttribType Weapon::dmg_type() const {
-	return AttribType::values::DEF;
+	return _info->_defensive;
 }
