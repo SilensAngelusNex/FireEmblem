@@ -21,6 +21,10 @@ Damage Weapon::get_crit_damage(const Unit& attacker, const Unit&  /*defender*/) 
 	return Damage(attacker.getStats().might(), dmg_type(), true);
 }
 
+std::array<bool, 32> Weapon::getRange() const {
+	_info->_range;
+}
+
 int Weapon::avoid(const AttributeList& stats) const {
 	return (*_info)[CombatStats::values::AVOID] + 2 * stats[AttribType::values::SPD] + stats[AttribType::values::SKL];
 }

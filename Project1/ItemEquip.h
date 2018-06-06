@@ -22,6 +22,8 @@ public:
 	virtual Damage get_normal_damage(const Unit& attacker, const Unit& defender) const;
 	virtual Damage get_crit_damage(const Unit& attacker, const Unit& defender) const;
 
+	virtual std::array<bool, 32> getRange() const;
+
 	virtual int avoid(const AttributeList& stats) const = 0;
 	virtual int dodge(const AttributeList& stats) const = 0;
 	virtual int hit(const AttributeList& stats) const = 0;
