@@ -14,7 +14,6 @@ public:
 	Unit* _unit;
 	bool insertUnit(Unit* unit);
 	Unit* removeUnit();
-	bool hasUnit();
-	Unit * getUnit();
+	bool hasUnit() const;
 };
 

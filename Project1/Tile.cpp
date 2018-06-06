@@ -6,23 +6,17 @@ Tile::Tile() :
 
 Tile::~Tile() = default;
 bool Tile::insertUnit(Unit* unit) {
-	if (hasUnit()) {
-		return false;
-	}	
-		_unit = unit;
-		return true;	
+	return (!hasUnit()) ? (_unit = unit) : nullptr;
 }
 Unit* Tile::removeUnit() {
 	if (hasUnit()) {
 		Unit* temp = _unit;
 		this->_unit = nullptr;
 		return temp;
-	}  {return nullptr;
+	}  
+		return nullptr;	
 }
-}
-bool Tile::hasUnit() {
+bool Tile::hasUnit() const{
 	return _unit != nullptr;
 }
-Unit* Tile::getUnit() {
-	return _unit;
-}
+

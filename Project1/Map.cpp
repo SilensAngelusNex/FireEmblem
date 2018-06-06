@@ -32,7 +32,7 @@ bool Map::moveUnit(GridCell* start, GridCell* destination) {
 		return false;
 	}
 	
-		_unit_to_cell.at(start->getTile().getUnit()) = destination; // Map the Unit to the destination.
+		_unit_to_cell.at(start->getTile()._unit) = destination; // Map the Unit to the destination.
 		destination->getTile().insertUnit(start->getTile().removeUnit()); // Put the Unit in the destination Tile
 		return true;
 	
