@@ -10,9 +10,9 @@ private:
 	Tile _tile;
 	std::list<CellEdge> _adjacent_cells;
 public:
-	bool addAdjacentCell(GridCell* new_cell);
-	bool addAdjacentCell(GridCell * new_cell, MobilityList<std::optional<int>> costs);
-	bool removeAdjacentCell(GridCell* delete_cell);
+	void addAdjacentCell(GridCell* new_cell);
+	void addAdjacentCell(GridCell * new_cell, MobilityList<std::optional<int>> costs);
+	void removeAdjacentCell(GridCell* delete_cell);
 	bool isAdjacent(GridCell* other_cell);
 	std::optional<CellEdge> getEdge(GridCell * other_cell);
 	Tile& getTile();

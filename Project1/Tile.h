@@ -12,7 +12,7 @@ public:
 	~Tile();
 	const Terrain _terrain;
 	Unit* _unit;
-	bool insertUnit(Unit* unit);
+	void insertUnit(Unit* unit);
 	Unit* removeUnit();
 	bool hasUnit() const;
 };

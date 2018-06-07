@@ -5,16 +5,16 @@ Tile::Tile() :
 {}
 
 Tile::~Tile() = default;
-bool Tile::insertUnit(Unit* unit) {
-	return (!hasUnit()) ? (_unit = unit) : nullptr;
+void Tile::insertUnit(Unit* unit) {
+	//return !hasUnit() ? _unit = unit : false;
+	Expects(unit != nullptr && !hasUnit());
+	_unit = unit;
 }
 Unit* Tile::removeUnit() {
-	if (hasUnit()) {
-		Unit* temp = _unit;
-		this->_unit = nullptr;
-		return temp;
-	}  
-		return nullptr;	
+	Expects(hasUnit());
+	Unit* temp = _unit;
+	this->_unit = nullptr;
+	return temp;
 }
 bool Tile::hasUnit() const{
 	return _unit != nullptr;

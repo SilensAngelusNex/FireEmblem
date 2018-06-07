@@ -10,35 +10,23 @@ std::optional<CellEdge> GridCell::getEdge(GridCell* other_cell) {
 	return {};
 }
 
-bool GridCell::addAdjacentCell(GridCell * new_cell)
-{
-	return addAdjacentCell(new_cell, new_cell->getTile()._terrain.getCosts());
+void GridCell::addAdjacentCell(GridCell * new_cell) {
+	Expects(new_cell != nullptr);
+	addAdjacentCell(new_cell, new_cell->getTile()._terrain.getCosts());
 }
 
 /** Adds _new_cell to the adjacency vector
 	Returns true if succesful, false if _new_cell is already in the adjacency vector
 */
-bool GridCell::addAdjacentCell(GridCell* new_cell, MobilityList<std::optional<int>> costs) {
-	if (new_cell != nullptr) {
-		if (getEdge(new_cell).has_value()) {
-			return false;
-		}			
-		_adjacent_cells.emplace_back(new_cell, costs);
-		return true;
-	}  {	return false;
-}
+void GridCell::addAdjacentCell(GridCell* new_cell, MobilityList<std::optional<int>> costs) {
+	Expects(new_cell != nullptr && !getEdge(new_cell).has_value());
+	_adjacent_cells.emplace_back(new_cell, costs);
 }
 
-bool GridCell::removeAdjacentCell(GridCell* delete_cell) {
-	if (delete_cell == nullptr) {
-		return false;
-	}
+void GridCell::removeAdjacentCell(GridCell* delete_cell) {
 	std::optional<CellEdge> edge = getEdge(delete_cell);
-	if (edge.has_value()) {
-		_adjacent_cells.remove(edge.value());
-		return true;
-	}	
-		return false;
+	Expects(edge.has_value());
+	_adjacent_cells.remove(edge.value());
 }
 bool GridCell::isAdjacent(GridCell* other_cell) {
 	return getEdge(other_cell).has_value();

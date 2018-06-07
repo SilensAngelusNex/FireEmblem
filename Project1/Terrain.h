@@ -2,7 +2,7 @@
 #include <string>
 #include <optional>
 #include "MobilityList.h"
-//TODO(Torrey): TURN INTO SOME KIND OF ENUM? NOT SURE
+//TODO(Torrey): FACTORY
 class Terrain {
 private:
 	std::string _name;

@@ -12,13 +12,11 @@ CellPath CellPath::copy() {
 	copy._tiles = this->_tiles;
 	return copy;
 }
-bool CellPath::insertTile(GridCell* new_tile) {
+void CellPath::insertTile(GridCell* new_tile) {
 	if (this->getTail()->isAdjacent(new_tile)) {
 		_cost += _tiles.back()->getEdge(new_tile).value().getCost(MobilityType::values::GROUNDED).value();//assume grounded for now
 		_tiles.push_back(new_tile);
-		return true;
 	}
-	return false;
 }
 GridCell* CellPath::getTail() {
 	return this->_tiles.back();

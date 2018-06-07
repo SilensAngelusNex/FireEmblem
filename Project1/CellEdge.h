@@ -14,7 +14,7 @@ public:
 	GridCell * const _cell;
 	CellEdge(GridCell* cell, MobilityList<std::optional<int>> costs);
 	std::optional<int> getCost(MobilityType mobility);
-	std::optional<int> getCost(MobilityList<bool> mobility_type, bool passable);
+	std::optional<int> getCost(MobilityList<bool> mobility_type, bool intangible);
 	bool canTraverse(MobilityType mobility);
 	bool operator==(const CellEdge & c) const;
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "GridCell.h"
+#include "CellEdge.h"
 //TODO(Torrey): ADD MULTIPLE PATH TYPES, currently only accepts adjacent, grounded paths. Is also just an awful class and needs to be remade from scratch
 class CellPath {
 private:
@@ -9,7 +10,7 @@ private:
 public:
 	CellPath(GridCell* start_tile);
 	CellPath copy();
-	bool insertTile(GridCell* new_tile);
+	void insertTile(GridCell* new_tile);
 	GridCell* getTail();
 	GridCell* getHead();
 	int getCost();

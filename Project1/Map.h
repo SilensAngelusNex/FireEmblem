@@ -19,15 +19,18 @@ private:
 	PathMap findShortestPaths(GridCell* start);
 	PathMap findShortestPaths(Unit * unit);
 	PathMap findShortestPaths(GridCell* start, int max_move, MobilityList<bool> mobility);
-	PathMap findShortestPaths(PathQueue& queue, PathMap& path_map, int max_move, MobilityList<bool> mobility_types);
 	std::vector<GridCell*> getAttackableCells(Unit * unit, GridCell * cell);
 	void insertAdjacencies();
 
 public:
+	Map(const Map& map) = delete;
+	Map& operator=(const Map & map) = delete;
+	Map(Map&& map) = default;
+	Map& operator=(Map&& map) = default;
 	Map(int width, int height);
 	GridCell& getGridCell(int x_pos, int y_pos);
-	bool moveUnit(GridCell* start, GridCell* destination);
-	bool insertUnit(Unit * new_unit, GridCell * destination);
+	void moveUnit(GridCell* start, GridCell* destination);
+	void insertUnit(Unit * new_unit, GridCell * destination);
 	void removeUnit(Unit * unit);
 	std::vector<GridCell*> getAccesibleCells(Unit * unit);
 	std::vector<GridCell*> getAttackableCells(Unit * unit);
