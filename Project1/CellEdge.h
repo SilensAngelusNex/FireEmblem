@@ -7,11 +7,14 @@ class GridCell;
 Represents an Edge to a GridCell, basically a struct
 */
 class CellEdge {
-	 const MobilityList<std::optional<int>> _costs;
+private:
+	const MobilityList<std::optional<int>> _costs;
+	bool canPass(bool intangible);
 public:
-	GridCell* const _cell;
+	GridCell * const _cell;
 	CellEdge(GridCell* cell, MobilityList<std::optional<int>> costs);
 	std::optional<int> getCost(MobilityType mobility);
+	std::optional<int> getCost(MobilityList<bool> mobility_type, bool passable);
 	bool canTraverse(MobilityType mobility);
 	bool operator==(const CellEdge & c) const;
 };
