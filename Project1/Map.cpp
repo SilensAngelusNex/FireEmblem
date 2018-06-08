@@ -5,7 +5,7 @@ Map::Map(int width, int height) :
 {
 	insertAdjacencies();
 }
-GridCell & Map::getGridCell(int x_pos, int y_pos) {
+GridCell& Map::getGridCell(int x_pos, int y_pos) {
 	return _grid[x_pos][y_pos];
 }
 /**Inserts Eucildian Adjacencies
@@ -16,30 +16,31 @@ void Map::insertAdjacencies() {
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
 			if (x > 0) {
-				_grid[x][y].addAdjacentCell(&(_grid[x - 1][y]));
+				_grid[x][y].addAdjacentCell(_grid[x - 1][y]);
 			} if (x < width - 1) {
-				_grid[x][y].addAdjacentCell(&(_grid[x + 1][y]));
+				_grid[x][y].addAdjacentCell(_grid[x + 1][y]);
 			}if (y > 0) {
-				_grid[x][y].addAdjacentCell(&(_grid[x][y - 1]));
+				_grid[x][y].addAdjacentCell(_grid[x][y - 1]);
 			} if (y < height - 1) {
-				_grid[x][y].addAdjacentCell(&(_grid[x][y + 1]));
+				_grid[x][y].addAdjacentCell(_grid[x][y + 1]);
 			}
 		}
 	}
 }
-void Map::moveUnit(GridCell* start, GridCell* destination) {
-	Expects(start->getTile().hasUnit() && !destination->getTile().hasUnit());
-	_unit_to_cell.at(start->getTile()._unit) = destination; // Map the Unit to the destination.
-	destination->getTile().insertUnit(start->getTile().removeUnit()); // Put the Unit in the destination Tile
+void Map::moveUnit(GridCell& start, GridCell& destination) {
+	Expects(start.getTile().hasUnit() && !destination.getTile().hasUnit());
+	Unit* unit = start.getTile()._unit;
+	removeUnit(unit);
+	insertUnit(unit, destination);
 }
-void Map::insertUnit(Unit* new_unit, GridCell* destination) {
-	Expects(!destination->getTile().hasUnit());
-	_unit_to_cell.insert(std::pair<Unit*, GridCell*>(new_unit, destination));// Map the Unit to the destination.
-	destination->getTile().insertUnit(new_unit);
+void Map::insertUnit(Unit* new_unit, GridCell& destination) {
+	Expects(!destination.getTile().hasUnit());
+	_unit_to_cell.emplace(new_unit, &destination);// Map the Unit to the destination.
+	destination.getTile().insertUnit(new_unit);
 }
 void Map::removeUnit(Unit* unit) { //Expects(unit) to exist
 	Expects(_unit_to_cell.count(unit) > 0);
-	_unit_to_cell.at(unit)->getTile().removeUnit();
+	_unit_to_cell[unit]->getTile().removeUnit();
 	_unit_to_cell.erase(unit);
 }
 
@@ -123,14 +124,13 @@ PathMap Map::findShortestPaths(GridCell* start, int max_move, MobilityList<bool>
 			std::optional<int> cost = edge.getCost(mobility, intangible);
 			if (cost.has_value()) {
 				cost = top.first + cost.value();
-				if (cost.value() <= max_move && (path_map.count(edge._cell) == 0 || cost.value() < path_map[edge._cell].first)) {
-					path_map.insert_or_assign(edge._cell, std::pair<int, GridCell*>(cost.value(), top.second));
-					queue.emplace(cost.value(), edge._cell);
+				if (cost.value() <= max_move && (path_map.count(&(edge._cell)) == 0 || cost.value() < path_map[&edge._cell].first)) {
+					path_map.insert_or_assign(&edge._cell, std::pair<int, GridCell*>(cost.value(), top.second));
+					queue.emplace(cost.value(), &edge._cell);
 				}
 			}
 		}
 	}
-
 	return path_map;
 }
 std::vector<GridCell*> Map::getAlliedCells(GridCell* unit_cell) {

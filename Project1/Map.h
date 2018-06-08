@@ -2,7 +2,6 @@
 #include <vector>
 #include "Unit.h"
 #include "GridCell.h"
-#include "CellPath.h"
 #include "GridCell.h"
 #include <map>
 #include <queue>
@@ -29,8 +28,8 @@ public:
 	Map& operator=(Map&& map) = default;
 	Map(int width, int height);
 	GridCell& getGridCell(int x_pos, int y_pos);
-	void moveUnit(GridCell* start, GridCell* destination);
-	void insertUnit(Unit * new_unit, GridCell * destination);
+	void moveUnit(GridCell& start, GridCell& destination);
+	void insertUnit(Unit * new_unit, GridCell& destination);
 	void removeUnit(Unit * unit);
 	std::vector<GridCell*> getAccesibleCells(Unit * unit);
 	std::vector<GridCell*> getAttackableCells(Unit * unit);

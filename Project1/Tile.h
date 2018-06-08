@@ -9,11 +9,14 @@ class Tile {
 private:
 public:
 	Tile();
+	Tile(Terrain terrain);
 	~Tile();
 	const Terrain _terrain;
 	Unit* _unit;
 	void insertUnit(Unit* unit);
 	Unit* removeUnit();
 	bool hasUnit() const;
+
+	bool operator==(const Tile& cell) const;
 };
 

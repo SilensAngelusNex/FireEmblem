@@ -2,22 +2,20 @@
 #include "GridCell.h"
 
 
-CellEdge::CellEdge(GridCell* cell, MobilityList<std::optional<int>> costs) :
+CellEdge::CellEdge(GridCell& cell, MobilityList<std::optional<int>> costs) :
 	_cell(cell),
 	_costs(costs)
 {}
 
-std::optional<int> CellEdge::getCost(MobilityType mobility)
-{
+std::optional<int> CellEdge::getCost(MobilityType mobility) const {
 	return _costs[mobility];
 }
 
-bool CellEdge::canTraverse(MobilityType mobility)
-{
+bool CellEdge::canTraverse(MobilityType mobility) const {
 	return bool(_costs[mobility].has_value());
 }
 
-std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type, bool intangible) {
+std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type, bool intangible) const{
 
 	std::optional<int> cost;
 	for (MobilityType mobility : MobilityType::list) {
@@ -33,8 +31,8 @@ std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type, bool inta
 	return cost;
 }
 
-bool CellEdge::canPass(bool intangible) {
-	return intangible || !(_cell->getTile().hasUnit());
+bool CellEdge::canPass(bool intangible) const{
+	return intangible || !(_cell.getTile().hasUnit());
 }
 
 

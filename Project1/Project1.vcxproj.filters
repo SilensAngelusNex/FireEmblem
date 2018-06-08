@@ -147,17 +147,14 @@
     <ClCompile Include="WeaponList.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="MapTest.cpp">
+      <Filter>src\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Mobility.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>src\map</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>src\map\cell</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>src\map\cell</Filter>
-    </ClCompile>
-    <ClCompile Include="CellPath.cpp">
-      <Filter>src\map\cell</Filter>
     </ClCompile>
     <ClCompile Include="CellEdge.cpp">
       <Filter>src\map\cell</Filter>
@@ -165,11 +162,11 @@
     <ClCompile Include="GridCell.cpp">
       <Filter>src\map\cell</Filter>
     </ClCompile>
-    <ClCompile Include="MapTest.cpp">
-      <Filter>src\tests</Filter>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>src\map\cell</Filter>
     </ClCompile>
-    <ClCompile Include="Mobility.cpp">
-      <Filter>src\unit</Filter>
+    <ClCompile Include="Tile.cpp">
+      <Filter>src\map\cell</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,8 +257,14 @@
     <ClInclude Include="EnumContainer.h">
       <Filter>inc\util</Filter>
     </ClInclude>
+    <ClInclude Include="MobilityList.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Mobility.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>inc\map</Filter>
+      <Filter>inc\map\cell</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>inc\map\cell</Filter>
@@ -269,20 +272,11 @@
     <ClInclude Include="Terrain.h">
       <Filter>inc\map\cell</Filter>
     </ClInclude>
-    <ClInclude Include="CellPath.h">
+    <ClInclude Include="GridCell.h">
       <Filter>inc\map\cell</Filter>
     </ClInclude>
     <ClInclude Include="CellEdge.h">
       <Filter>inc\map\cell</Filter>
-    </ClInclude>
-    <ClInclude Include="GridCell.h">
-      <Filter>inc\map\cell</Filter>
-    </ClInclude>
-    <ClInclude Include="MobilityList.h">
-      <Filter>inc\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="Mobility.h">
-      <Filter>inc\unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

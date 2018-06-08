@@ -3,6 +3,9 @@ Tile::Tile() :
 	 
 	_terrain()
 {}
+Tile::Tile(Terrain terrain) :
+	_terrain(terrain)
+{}
 
 Tile::~Tile() = default;
 void Tile::insertUnit(Unit* unit) {
@@ -18,5 +21,10 @@ Unit* Tile::removeUnit() {
 }
 bool Tile::hasUnit() const{
 	return _unit != nullptr;
+}
+
+bool Tile::operator==(const Tile & tile) const
+{
+	return this->_terrain == tile._terrain && this->_unit == tile._unit;
 }
 
