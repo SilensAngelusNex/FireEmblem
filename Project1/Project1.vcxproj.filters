@@ -70,18 +70,6 @@
     <Filter Include="src\util\observer\observable">
       <UniqueIdentifier>{afbf591e-37c8-462e-ad7e-842d2438ec06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\map">
-      <UniqueIdentifier>{2f0d6ae8-3aa7-4dbd-b8d4-06e82876a4bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="inc\map">
-      <UniqueIdentifier>{251fa628-c0af-4fcd-8ff0-13e8436af5be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="inc\map\cell">
-      <UniqueIdentifier>{c2c0bcee-6a63-4975-9662-140b82543abd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\map\cell">
-      <UniqueIdentifier>{fe284ff5-6651-478b-a2aa-b4d562a59e43}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -144,31 +132,20 @@
     <ClCompile Include="WeaponList.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>src\map</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>src\map\cell</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>src\map\cell</Filter>
-    </ClCompile>
-    <ClCompile Include="CellPath.cpp">
-      <Filter>src\map\cell</Filter>
-    </ClCompile>
-    <ClCompile Include="CellEdge.cpp">
-      <Filter>src\map\cell</Filter>
-    </ClCompile>
-    <ClCompile Include="GridCell.cpp">
-      <Filter>src\map\cell</Filter>
-    </ClCompile>
-    <ClCompile Include="MapTest.cpp">
-      <Filter>src\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Mobility.cpp">
-      <Filter>src\unit</Filter>
     <ClCompile Include="ItemInfo.cpp">
       <Filter>src\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="CellPath.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="CellEdge.cpp">
+      <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Swords.cpp">
       <Filter>src\item\items</Filter>
@@ -262,29 +239,6 @@
     <ClInclude Include="EnumContainer.h">
       <Filter>inc\util</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>inc\map</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>inc\map\cell</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>inc\map\cell</Filter>
-    </ClInclude>
-    <ClInclude Include="CellPath.h">
-      <Filter>inc\map\cell</Filter>
-    </ClInclude>
-    <ClInclude Include="CellEdge.h">
-      <Filter>inc\map\cell</Filter>
-    </ClInclude>
-    <ClInclude Include="GridCell.h">
-      <Filter>inc\map\cell</Filter>
-    </ClInclude>
-    <ClInclude Include="MobilityList.h">
-      <Filter>inc\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="Mobility.h">
-      <Filter>inc\unit</Filter>
     <ClInclude Include="ItemInfo.h">
       <Filter>inc\item</Filter>
     </ClInclude>
