@@ -6,6 +6,7 @@ Map::Map(int width, int height) :
 	insertAdjacencies();
 }
 GridCell& Map::getGridCell(int x_pos, int y_pos) {
+	Expects(x_pos > 0 && y_pos > 0 && x_pos < _grid.size() && y_pos < _grid[0].size());
 	return _grid[x_pos][y_pos];
 }
 /**Inserts Eucildian Adjacencies
@@ -44,69 +45,12 @@ void Map::removeUnit(Unit& unit) { //Expects(unit) to exist
 	_unit_to_cell.erase(&unit);
 }
 
-std::vector<GridCell*> Map::getAccesibleCells(Unit& unit) {
-	PathMap map = findShortestPaths(unit);
-	std::vector<GridCell*> cells = std::vector<GridCell*>();
-	for (auto& pair: map) {
-		cells.push_back(pair.first);
-	}
-	return cells;
-}
-/* Get Cells that a unit can attack without moving
-*/
-std::vector<GridCell*> Map::getAttackableCells(Unit& unit) {
-	return getAttackableCells(unit, *_unit_to_cell.at(&unit));
-}
-/*Get Cells a Unit could attack, if it were standing on cell
-*/
-std::vector<GridCell*> Map::getAttackableCells(Unit& unit, GridCell& cell) {
-	const std::array<bool, 32> ranges = { false, true }; //temporary range 1 weapon range
-	std::vector<GridCell*> cells = std::vector<GridCell*>();
-	for (int i = 0; i < ranges.size(); i++) {
-		if (ranges[i]) {
-			PathMap map = findShortestPaths(cell, i, MobilityList<bool>({ false, false, false, true }));
-			for (auto& pair : map) {
-				if (pair.second.first == i) {
-					cells.push_back(pair.first);
-				}
-			}
-		}
-	}
-	return cells;	
-}
-/*Get Cells a Unit can Attack including movement
-*/
-std::vector<GridCell*> Map::getAllAttackableCells(Unit& unit) {
-	std::vector<GridCell*> cells = std::vector<GridCell*>();;
-	std::vector<GridCell*> accesible_cells = getAccesibleCells(unit);
-	for (GridCell* acc_cell : accesible_cells) {
-		std::vector<GridCell*> attack_cells = getAttackableCells(unit, *acc_cell);
-		for (GridCell* atk_cell : attack_cells) {
-			if (std::count(cells.begin(), cells.end(), atk_cell) == 0) {
-				cells.push_back(atk_cell);
-			}
-		}
-	}
-	return cells;
-}
-/*
-CellPath& Map::getShortestPath(GridCell* start, GridCell* destination) {
-	findShortestPaths(start);
-	if (start == destination) {
-		CellPath path = CellPath(start);
-		return path;
-	}
-	CellPath path = getShortestPath(start, _shortest_path_map.at(destination).second);
-	path.insertTile(destination);
-	return path;
-}
-*/
-PathMap Map::findShortestPaths(GridCell& start) {
-	return findShortestPaths(start, INT_MAX, MobilityList<bool>({true, false, false}));//
+GridCell& Map::getGridCell(Unit & unit) {
+	return *_unit_to_cell[&unit];
 }
 
-PathMap Map::findShortestPaths(Unit& unit) {
-	return findShortestPaths(*_unit_to_cell.at(&unit), unit.getMobility().getMove(), unit.getMobility().getMobilityType());
+PathMap Map::findShortestPaths(GridCell& start) {
+	return findShortestPaths(start, INT_MAX, MobilityList<bool>({true, false, false}));//
 }
 
 PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) {
@@ -136,7 +80,3 @@ PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool>
 std::vector<GridCell*> Map::getAlliedCells(GridCell& unit_cell) {
 	return std::vector<GridCell*>();
 }
-
-/*std::vector<GridCell> cellsWithinWeaponRange(GridCell start) {
-	return 0;
-}*/
