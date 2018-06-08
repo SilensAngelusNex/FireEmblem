@@ -93,9 +93,6 @@
     <ClCompile Include="UnitTest.cpp">
       <Filter>src\tests</Filter>
     </ClCompile>
-    <ClCompile Include="Swords.cpp">
-      <Filter>src\item\items</Filter>
-    </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>src\item</Filter>
     </ClCompile>
@@ -147,14 +144,17 @@
     <ClCompile Include="WeaponList.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="MapTest.cpp">
-      <Filter>src\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Mobility.cpp">
-      <Filter>src\unit</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>src\map</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>src\map\cell</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>src\map\cell</Filter>
+    </ClCompile>
+    <ClCompile Include="CellPath.cpp">
+      <Filter>src\map\cell</Filter>
     </ClCompile>
     <ClCompile Include="CellEdge.cpp">
       <Filter>src\map\cell</Filter>
@@ -162,11 +162,16 @@
     <ClCompile Include="GridCell.cpp">
       <Filter>src\map\cell</Filter>
     </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>src\map\cell</Filter>
+    <ClCompile Include="MapTest.cpp">
+      <Filter>src\tests</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>src\map\cell</Filter>
+    <ClCompile Include="Mobility.cpp">
+      <Filter>src\unit</Filter>
+    <ClCompile Include="ItemInfo.cpp">
+      <Filter>src\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Swords.cpp">
+      <Filter>src\item\items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,14 +262,8 @@
     <ClInclude Include="EnumContainer.h">
       <Filter>inc\util</Filter>
     </ClInclude>
-    <ClInclude Include="MobilityList.h">
-      <Filter>inc\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="Mobility.h">
-      <Filter>inc\unit</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>inc\map\cell</Filter>
+      <Filter>inc\map</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
       <Filter>inc\map\cell</Filter>
@@ -272,11 +271,22 @@
     <ClInclude Include="Terrain.h">
       <Filter>inc\map\cell</Filter>
     </ClInclude>
-    <ClInclude Include="GridCell.h">
+    <ClInclude Include="CellPath.h">
       <Filter>inc\map\cell</Filter>
     </ClInclude>
     <ClInclude Include="CellEdge.h">
       <Filter>inc\map\cell</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCell.h">
+      <Filter>inc\map\cell</Filter>
+    </ClInclude>
+    <ClInclude Include="MobilityList.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Mobility.h">
+      <Filter>inc\unit</Filter>
+    <ClInclude Include="ItemInfo.h">
+      <Filter>inc\item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

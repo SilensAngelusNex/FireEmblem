@@ -140,6 +140,7 @@
     <ClCompile Include="InventoryCommandable.cpp" />
     <ClCompile Include="InventoryViewable.cpp" />
     <ClCompile Include="ItemEquip.cpp" />
+    <ClCompile Include="ItemInfo.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapTest.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mobility.h" />
     <ClInclude Include="MobilityList.h" />
+    <ClInclude Include="ItemInfo.h" />
     <ClInclude Include="ObservableExp.h" />
     <ClInclude Include="ObserverExp.h" />
     <ClInclude Include="Passkey.h" />

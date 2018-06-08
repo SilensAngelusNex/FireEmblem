@@ -11,7 +11,7 @@ private:
 	std::list<CellEdge> _adjacent_cells = std::list<CellEdge>(); 
 public:
 	GridCell() = default;
-	GridCell~() = default;
+	~GridCell() = default;
 	GridCell(Tile tile);
 
 	void addAdjacentCell(GridCell& new_cell);
