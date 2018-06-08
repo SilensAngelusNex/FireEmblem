@@ -30,21 +30,21 @@ void Map::insertAdjacencies() {
 void Map::moveUnit(GridCell& start, GridCell& destination) {
 	Expects(start.getTile().hasUnit() && !destination.getTile().hasUnit());
 	Unit* unit = start.getTile()._unit;
-	removeUnit(unit);
-	insertUnit(unit, destination);
+	removeUnit(*unit);
+	insertUnit(*unit, destination);
 }
-void Map::insertUnit(Unit* new_unit, GridCell& destination) {
+void Map::insertUnit(Unit& new_unit, GridCell& destination) {
 	Expects(!destination.getTile().hasUnit());
-	_unit_to_cell.emplace(new_unit, &destination);// Map the Unit to the destination.
-	destination.getTile().insertUnit(new_unit);
+	_unit_to_cell.emplace(&new_unit, &destination);// Map the Unit to the destination.
+	destination.getTile().insertUnit(&new_unit);
 }
-void Map::removeUnit(Unit* unit) { //Expects(unit) to exist
-	Expects(_unit_to_cell.count(unit) > 0);
-	_unit_to_cell[unit]->getTile().removeUnit();
-	_unit_to_cell.erase(unit);
+void Map::removeUnit(Unit& unit) { //Expects(unit) to exist
+	Expects(_unit_to_cell.count(&unit) > 0);
+	_unit_to_cell[&unit]->getTile().removeUnit();
+	_unit_to_cell.erase(&unit);
 }
 
-std::vector<GridCell*> Map::getAccesibleCells(Unit* unit) {
+std::vector<GridCell*> Map::getAccesibleCells(Unit& unit) {
 	PathMap map = findShortestPaths(unit);
 	std::vector<GridCell*> cells = std::vector<GridCell*>();
 	for (auto& pair: map) {
@@ -54,12 +54,12 @@ std::vector<GridCell*> Map::getAccesibleCells(Unit* unit) {
 }
 /* Get Cells that a unit can attack without moving
 */
-std::vector<GridCell*> Map::getAttackableCells(Unit* unit) {
-	return getAttackableCells(unit, _unit_to_cell.at(unit));
+std::vector<GridCell*> Map::getAttackableCells(Unit& unit) {
+	return getAttackableCells(unit, *_unit_to_cell.at(&unit));
 }
 /*Get Cells a Unit could attack, if it were standing on cell
 */
-std::vector<GridCell*> Map::getAttackableCells(Unit* unit, GridCell* cell) {
+std::vector<GridCell*> Map::getAttackableCells(Unit& unit, GridCell& cell) {
 	const std::array<bool, 32> ranges = { false, true }; //temporary range 1 weapon range
 	std::vector<GridCell*> cells = std::vector<GridCell*>();
 	for (int i = 0; i < ranges.size(); i++) {
@@ -76,11 +76,11 @@ std::vector<GridCell*> Map::getAttackableCells(Unit* unit, GridCell* cell) {
 }
 /*Get Cells a Unit can Attack including movement
 */
-std::vector<GridCell*> Map::getAllAttackableCells(Unit* unit) {
+std::vector<GridCell*> Map::getAllAttackableCells(Unit& unit) {
 	std::vector<GridCell*> cells = std::vector<GridCell*>();;
 	std::vector<GridCell*> accesible_cells = getAccesibleCells(unit);
 	for (GridCell* acc_cell : accesible_cells) {
-		std::vector<GridCell*> attack_cells = getAttackableCells(unit, acc_cell);
+		std::vector<GridCell*> attack_cells = getAttackableCells(unit, *acc_cell);
 		for (GridCell* atk_cell : attack_cells) {
 			if (std::count(cells.begin(), cells.end(), atk_cell) == 0) {
 				cells.push_back(atk_cell);
@@ -101,19 +101,19 @@ CellPath& Map::getShortestPath(GridCell* start, GridCell* destination) {
 	return path;
 }
 */
-PathMap Map::findShortestPaths(GridCell* start) {
+PathMap Map::findShortestPaths(GridCell& start) {
 	return findShortestPaths(start, INT_MAX, MobilityList<bool>({true, false, false}));//
 }
 
-PathMap Map::findShortestPaths(Unit* unit) {
-	return findShortestPaths(_unit_to_cell.at(unit), unit->getMobility().getMove(), unit->getMobility().getMobilityType());
+PathMap Map::findShortestPaths(Unit& unit) {
+	return findShortestPaths(*_unit_to_cell.at(&unit), unit.getMobility().getMove(), unit.getMobility().getMobilityType());
 }
 
-PathMap Map::findShortestPaths(GridCell* start, int max_move, MobilityList<bool> mobility) {
+PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) {
 	PathQueue queue = PathQueue();
 	PathMap path_map = PathMap();
-	path_map.try_emplace(start, std::pair<int, GridCell*>(0, start));
-	queue.emplace(0, start);
+	path_map.try_emplace(&start, CellCost(0, &start));
+	queue.emplace(0, &start);
 	bool intangible = mobility[MobilityType::values::PROJECTILE] || mobility[MobilityType::values::ETHEREAL];
 
 	while (!queue.empty()) {
@@ -133,7 +133,7 @@ PathMap Map::findShortestPaths(GridCell* start, int max_move, MobilityList<bool>
 	}
 	return path_map;
 }
-std::vector<GridCell*> Map::getAlliedCells(GridCell* unit_cell) {
+std::vector<GridCell*> Map::getAlliedCells(GridCell& unit_cell) {
 	return std::vector<GridCell*>();
 }
 
