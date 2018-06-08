@@ -93,9 +93,6 @@
     <ClCompile Include="UnitTest.cpp">
       <Filter>src\tests</Filter>
     </ClCompile>
-    <ClCompile Include="Swords.cpp">
-      <Filter>src\item\items</Filter>
-    </ClCompile>
     <ClCompile Include="Weapon.cpp">
       <Filter>src\item</Filter>
     </ClCompile>
@@ -170,6 +167,11 @@
     </ClCompile>
     <ClCompile Include="Mobility.cpp">
       <Filter>src\unit</Filter>
+    <ClCompile Include="ItemInfo.cpp">
+      <Filter>src\item</Filter>
+    </ClCompile>
+    <ClCompile Include="Swords.cpp">
+      <Filter>src\item\items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +285,8 @@
     </ClInclude>
     <ClInclude Include="Mobility.h">
       <Filter>inc\unit</Filter>
+    <ClInclude Include="ItemInfo.h">
+      <Filter>inc\item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
