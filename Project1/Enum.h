@@ -10,10 +10,17 @@ public:
 	using values = E;
 
 	constexpr static size_t positionOf(E value) {
+		Expects(value != E::ENUM_END);
+		return _positionOf(value);
+	}
+
+private:
+	constexpr static size_t _positionOf(E value) {
 		return static_cast<int>(value);
 	}
 
-	constexpr static size_t size = positionOf(E::ENUM_END);
+public:
+	constexpr static size_t size = _positionOf(E::ENUM_END);
 
 private:
 	using _array = std::array<E, size>;

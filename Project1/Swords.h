@@ -2,22 +2,24 @@
 
 #include "Weapon.h"
 
-class BronzeSword : public Weapon {
-private:
-	static const std::string _name;
-	
+class BasicWeapon : public Weapon {
 public:
-	BronzeSword() = default;
-	BronzeSword(const BronzeSword& a) = default;
-	BronzeSword(BronzeSword&& a) = default;
-	BronzeSword& operator=(const BronzeSword& rhs) = default;
-	BronzeSword& operator=(BronzeSword&& rhs) = default;
-	~BronzeSword() override = default;
+	BasicWeapon(std::shared_ptr<WeaponInfo> info);
+	BasicWeapon(const BasicWeapon& a) = default;
+	BasicWeapon(BasicWeapon&& a) = default;
+	BasicWeapon& operator=(const BasicWeapon& rhs) = default;
+	BasicWeapon& operator=(BasicWeapon&& rhs) = default;
+	~BasicWeapon() override = default;
 
-	const std::string& getName() const override;
 	bool can_equip(Unit& unit, EquipSlot slot) const override;
+};
 
-	int hit(const AttributeList& stats) const override;
-	int crit(const AttributeList& stats) const override;
-	int might(const AttributeList& stats) const override;
+class WeaponFactory {
+private:
+	inline static std::shared_ptr<WeaponInfo> _bronze_sword = std::make_shared<WeaponInfo>(
+		EquipInfo("Bronze Sword", { 5, 90, 0, 5, 0, 0 }),
+		WeaponType::values::SWD
+		);
+public:
+	static std::unique_ptr<Weapon> makeBronzeSword();
 };

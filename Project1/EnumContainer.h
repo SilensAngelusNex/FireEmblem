@@ -1,6 +1,5 @@
 #pragma once
 
-//TODO(Weston): Make this more generic so we can put strings and shit in it
 template<typename T, typename EnumType>
 class EnumContainer {
 public:

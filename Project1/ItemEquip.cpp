@@ -22,6 +22,10 @@ Damage ItemEquip::get_crit_damage(const Unit&  /*attacker*/, const Unit&  /*defe
 	throw GameException("Non-weapons have no associated damage.");
 }
 
+std::array<bool, 32> ItemEquip::getRange() const {
+	return std::array<bool, 32>();
+}
+
 bool ItemEquip::is_equippable() const {
 	return true;
 }
