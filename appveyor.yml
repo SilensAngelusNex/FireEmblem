@@ -5,7 +5,7 @@ image: Visual Studio 2017 Preview
 
 init:
 - ps: >-
-    cd "C:\Program Files (x86)\Microsoft Visual Studio\Preview\Community\VC\Tools\MSVC\14.14.26428\include
+    cd "C:\Program Files (x86)\Microsoft Visual Studio\Preview\Community\VC\Tools\MSVC\14.14.26428\include"
     svn checkout https://github.com/Microsoft/GSL/trunk/include/gsl
     cd C:\projects\fireemblem
 
