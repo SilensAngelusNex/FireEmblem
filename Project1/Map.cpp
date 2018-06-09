@@ -5,10 +5,7 @@ Map::Map(int width, int height) :
 {
 	insertAdjacencies();
 }
-GridCell& Map::getGridCell(int x_pos, int y_pos) {
-	Expects(x_pos > 0 && y_pos > 0 && x_pos < _grid.size() && y_pos < _grid[0].size());
-	return _grid[x_pos][y_pos];
-}
+
 /**Inserts Eucildian Adjacencies
 */
 void Map::insertAdjacencies() {
@@ -28,6 +25,7 @@ void Map::insertAdjacencies() {
 		}
 	}
 }
+////////////////////////////////////////////////////////////
 void Map::moveUnit(GridCell& start, GridCell& destination) {
 	Expects(start.getTile().hasUnit() && !destination.getTile().hasUnit());
 	Unit* unit = start.getTile()._unit;
@@ -44,11 +42,23 @@ void Map::removeUnit(Unit& unit) { //Expects(unit) to exist
 	_unit_to_cell[&unit]->getTile().removeUnit();
 	_unit_to_cell.erase(&unit);
 }
-
+/////////////////////////////////////////////////////////////
+GridCell& Map::getGridCell(int x_pos, int y_pos) {
+	Expects(x_pos > 0 && y_pos > 0 && x_pos < _grid.size() && y_pos < _grid[0].size());
+	return _grid[x_pos][y_pos];
+}
 GridCell& Map::getGridCell(Unit & unit) {
 	return *_unit_to_cell[&unit];
 }
 
+const GridCell& Map::getGridCell(int x_pos, int y_pos) const{
+	Expects(x_pos > 0 && y_pos > 0 && x_pos < _grid.size() && y_pos < _grid[0].size());
+	return _grid[x_pos][y_pos];
+}
+const GridCell& Map::getGridCell(Unit & unit) const{
+	return *_unit_to_cell.at(&unit);
+}
+///////////////////////////////////////////////////////////
 PathMap Map::findShortestPaths(GridCell& start) {
 	return findShortestPaths(start, INT_MAX, MobilityList<bool>({true, false, false}));//
 }
@@ -61,7 +71,7 @@ PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool>
 	bool intangible = mobility[MobilityType::values::PROJECTILE] || mobility[MobilityType::values::ETHEREAL];
 
 	while (!queue.empty()) {
-		std::pair<int, GridCell*> top = queue.top();
+		CellCost top = queue.top();
 		queue.pop();
 		std::list<CellEdge> adj_edges = top.second->getEdges();
 		for (auto& edge : adj_edges) {
@@ -69,7 +79,7 @@ PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool>
 			if (cost.has_value()) {
 				cost = top.first + cost.value();
 				if (cost.value() <= max_move && (path_map.count(&(edge._cell)) == 0 || cost.value() < path_map[&edge._cell].first)) {
-					path_map.insert_or_assign(&edge._cell, std::pair<int, GridCell*>(cost.value(), top.second));
+					path_map.insert_or_assign(&edge._cell, CellCost(cost.value(), top.second));
 					queue.emplace(cost.value(), &edge._cell);
 				}
 			}

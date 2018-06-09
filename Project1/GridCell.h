@@ -16,16 +16,16 @@ public:
 
 	void addAdjacentCell(GridCell& new_cell);
 	void addAdjacentCell(GridCell& new_cell, MobilityList<std::optional<int>> costs);
-	void removeAdjacentCell(GridCell& delete_cell);
+	void removeAdjacentCell(const GridCell& delete_cell);
 	Tile& getTile();
 	std::list<CellEdge> getEdges();
-	std::optional<CellEdge> getEdge(GridCell& other_cell);
+	std::optional<CellEdge> getEdge(const GridCell& other_cell);
 	std::vector<GridCell*> getAdjacentCells();
 
-	bool isAdjacent(GridCell& other_cell) const;
+	bool isAdjacent(const GridCell& other_cell) const;
 	std::list<CellEdge> getEdges() const;
 	const Tile& getTile() const;
-	const std::optional<CellEdge> getEdge(GridCell & other_cell) const;
+	const std::optional<CellEdge> getEdge(const GridCell & other_cell) const;
 
 	bool operator==(const GridCell& cell) const;
 

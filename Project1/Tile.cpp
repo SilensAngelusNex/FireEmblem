@@ -3,7 +3,7 @@ Tile::Tile() :
 	 
 	_terrain()
 {}
-Tile::Tile(Terrain terrain) :
+Tile::Tile(const Terrain terrain) :
 	_terrain(terrain)
 {}
 

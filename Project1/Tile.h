@@ -9,7 +9,7 @@ class Tile {
 private:
 public:
 	Tile();
-	Tile(Terrain terrain);
+	Tile(const Terrain terrain);
 	~Tile();
 	const Terrain _terrain;
 	Unit* _unit;

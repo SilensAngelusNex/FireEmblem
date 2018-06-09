@@ -20,6 +20,7 @@ private:
 
 public:
 	Map(const Map& map) = delete;
+
 	Map& operator=(const Map & map) = delete;
 	Map(Map&& map) = default;
 	Map& operator=(Map&& map) = default;
@@ -33,9 +34,15 @@ public:
 	GridCell& getGridCell(int x_pos, int y_pos);
 	GridCell& getGridCell(Unit& unit);
 
+	const GridCell& getGridCell(int x_pos, int y_pos) const;
+	const GridCell& getGridCell(Unit& unit) const;
+
 	PathMap findShortestPaths(GridCell& start);
 	PathMap findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility);
 	
+	//I can't get std::as_const to work
+	//const PathMap findShortestPaths(GridCell& start) const;
+	//const PathMap findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) const;
 	std::vector<GridCell*> getAlliedCells(GridCell& unit_cell);
 
 };

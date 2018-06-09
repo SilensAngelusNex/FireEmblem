@@ -2,7 +2,7 @@
 GridCell::GridCell(Tile tile) :
 	_tile(tile)
 {}
-std::optional<CellEdge> GridCell::getEdge(GridCell& other_cell) {
+std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) {
 	for (CellEdge edge: _adjacent_cells) {
 		if (&edge._cell == &other_cell) {
 			return edge;
@@ -10,7 +10,7 @@ std::optional<CellEdge> GridCell::getEdge(GridCell& other_cell) {
 	}
 	return {};
 }
-const std::optional<CellEdge> GridCell::getEdge(GridCell& other_cell) const {
+const std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) const {
 	for (CellEdge edge : _adjacent_cells) {
 		if (&edge._cell == &other_cell) {
 			return edge;
@@ -31,12 +31,12 @@ void GridCell::addAdjacentCell(GridCell& new_cell, MobilityList<std::optional<in
 	_adjacent_cells.emplace_back(new_cell, costs);
 }
 
-void GridCell::removeAdjacentCell(GridCell& delete_cell) {
+void GridCell::removeAdjacentCell(const GridCell& delete_cell) {
 	std::optional<CellEdge> edge = getEdge(delete_cell);
 	Expects(edge.has_value());
 	_adjacent_cells.remove(edge.value());
 }
-bool GridCell::isAdjacent(GridCell& other_cell) const{
+bool GridCell::isAdjacent(const GridCell& other_cell) const{
 	return getEdge(other_cell).has_value();
 }
 const Tile& GridCell::getTile() const{
