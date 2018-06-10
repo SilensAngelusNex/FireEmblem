@@ -3,6 +3,7 @@
 #include "Item.h"
 #include "AttributeList.h"
 #include "Damage.h"
+#include "ItemInfo.h"
 
 class ItemEquip : public Item {
 public:
@@ -22,7 +23,7 @@ public:
 	virtual Damage get_normal_damage(const Unit& attacker, const Unit& defender) const;
 	virtual Damage get_crit_damage(const Unit& attacker, const Unit& defender) const;
 
-	virtual std::array<bool, 32> getRange() const;
+	virtual EquipInfo::Range getRange() const;
 
 	virtual int avoid(const AttributeList& stats) const = 0;
 	virtual int dodge(const AttributeList& stats) const = 0;

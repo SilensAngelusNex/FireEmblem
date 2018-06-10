@@ -1,36 +1,29 @@
 #include <iostream>
 
 #include "Tests.h"
+#include "UtilTests.h"
 #include "AttributeList.h"
-#include "Enum.h"
 #include "WeaponList.h"
-
-
-void enumTest() {
-	enum class myenum { A, B, C, D, ENUM_END };
-	using MyEnum = Enum<myenum>;
-
-	for (MyEnum e : MyEnum::list) {
-		std::cout << MyEnum::positionOf(e) << std::endl;
-	}
-}
 
 int main(int  /*argc*/, char ** /*argv*/) {
 
 	if (runAttributeListTests()) {
-		std::cout << "All passed!" << std::endl;
+		std::cout << "AttributeList passed!" << std::endl;
 	}
-
 	if (runWeaponListTests()) {
-		std::cout << "Passed!" << std::endl;
+		std::cout << "WeaponList passed!" << std::endl;
 	}
-
 	if (test::runDiceTest()) {
-		std::cout << "All passed!" << std::endl;
+		std::cout << "Dice passed!" << std::endl;
 	}
 	if (test::runUnitTest()) {
-		std::cout << "All passed!" << std::endl;
+		std::cout << "Unit passed!" << std::endl;
 	}
-	enumTest();
+	if (enumTest()) {
+		std::cout << "Enum passed!" << std::endl;
+	}
+	if (bitsetTest()) {
+		std::cout << "Bitset passed!" << std::endl;
+	}
 	return 0;
 }

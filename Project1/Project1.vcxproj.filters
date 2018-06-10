@@ -135,20 +135,11 @@
     <ClCompile Include="ItemInfo.cpp">
       <Filter>src\item</Filter>
     </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="CellPath.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="CellEdge.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Swords.cpp">
       <Filter>src\item\items</Filter>
+    </ClCompile>
+    <ClCompile Include="UtilTests.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +232,12 @@
     </ClInclude>
     <ClInclude Include="ItemInfo.h">
       <Filter>inc\item</Filter>
+    </ClInclude>
+    <ClInclude Include="IterableBitset.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilTests.h">
+      <Filter>inc\tests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
