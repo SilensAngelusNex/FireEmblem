@@ -17,6 +17,17 @@ std::string boolArrayToString(std::array<bool, size> init) {
 }
 
 template<int size>
+std::string vectorToString(std::vector<int> init) {
+	Expects(std::find_if(init.begin(), init.end(), [](int i) {return i > size; }) == init.end());
+
+	std::string result = std::string(size, '0');
+	for (int i : init) {
+		result[size - (i + 1)] = '1';
+	}
+	return result;
+}
+
+template<int size>
 class IterableBitset {
 private:
 	std::bitset<size> _values;
@@ -27,6 +38,9 @@ public:
 	}
 	IterableBitset(std::array<bool, size> init) :
 		IterableBitset(boolArrayToString(init))
+	{}
+	IterableBitset(std::vector<int> init) :
+		IterableBitset(vectorToString<size>(init))
 	{}
 
 	const std::bitset<size> getBits() {

@@ -15,22 +15,31 @@ bool bitsetTest() {
 		}
 	}
 
-	IterableBitset<size> set(init_array);
+	IterableBitset<size> set1(init_array);
+	IterableBitset<size> set2(init_vec);
 
-	std::vector<int> result;
-	for (int i : set) {
-		result.push_back(i);
+	std::vector<int> result1;
+	for (int i : set1) {
+		result1.push_back(i);
 		std::cout << i << " ";
 	}
 	std::cout << std::endl;
-	return init_vec == result;
+
+	std::vector<int> result2;
+	for (int i : set2) {
+		result2.push_back(i);
+		std::cout << i << " ";
+	}
+	std::cout << std::endl;
+
+	return init_vec == result1 && init_vec == result2;
 }
 
 bool enumTest() {
 	enum class myenum { A, B, C, D, ENUM_END };
 	using MyEnum = Enum<myenum>;
 
-	std::vector<int> expected { 1, 2, 3, 4 };
+	std::vector<int> expected { 0, 1, 2, 3 };
 	std::vector<int> result;
 
 	for (MyEnum e : MyEnum::list) {
