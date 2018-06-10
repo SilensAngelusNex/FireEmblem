@@ -143,6 +143,7 @@
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitTest.cpp" />
+    <ClCompile Include="UtilTests.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="ItemEquip.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="ItemInfo.h" />
+    <ClInclude Include="IterableBitset.h" />
     <ClInclude Include="ObservableExp.h" />
     <ClInclude Include="ObserverExp.h" />
     <ClInclude Include="Passkey.h" />
@@ -175,6 +177,7 @@
     <ClInclude Include="ObserverDamage.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="ListDice.h" />
+    <ClInclude Include="UtilTests.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponList.h" />
   </ItemGroup>
