@@ -1,7 +1,7 @@
 #pragma once
 
 #include <gsl/gsl_assert>
-
+#include <array>
 #include <iostream>
 #include <array>
 

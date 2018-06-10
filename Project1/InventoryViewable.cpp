@@ -36,4 +36,3 @@ int InventoryViewable::might(Passkey<Stats> key) const {
 int InventoryViewable::atk_spd(Passkey<Stats> key) const {
 	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::atk_spd);
 }
-

@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 
 template<typename T, typename EnumType>
 class EnumContainer {
