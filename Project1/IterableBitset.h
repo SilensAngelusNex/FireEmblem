@@ -51,7 +51,7 @@ public:
 		return _values;
 	}
 
-	auto operator[](int i) {
+	auto operator[](size_t i) {
 		return _values[i];
 	}
 

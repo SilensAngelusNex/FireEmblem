@@ -239,5 +239,8 @@
     <ClInclude Include="UtilTests.h">
       <Filter>inc\tests</Filter>
     </ClInclude>
+    <ClInclude Include="optional_pair.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
