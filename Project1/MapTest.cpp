@@ -14,7 +14,7 @@ bool test::runMapTest() {
 	Unit ike("Ike", d, AttributeList({ 5, 1, 6, 7, 19, 5, 5, 0}));
 
 	Map map = Map(20, 20); // create a 20 x 20 map
-	MoveHelper move_helper = MoveHelper(map);
+	auto move_helper = MoveHelper(map);
 
 	map.insertUnit(mia, map.getGridCell(10, 10));
 	std::vector <GridCell*> cells = move_helper.getAccesibleCells(mia);

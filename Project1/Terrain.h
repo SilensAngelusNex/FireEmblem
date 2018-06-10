@@ -13,12 +13,20 @@ private:
 
 	Terrain(std::string name, MobilityList<std::optional<int>> costs);
 public:
+	Terrain(const Terrain& cell) = default;
+	Terrain& operator=(const Terrain & edge) = default;
+	Terrain(Terrain&& cell) = default;
+	Terrain& operator=(Terrain&& edge) = default;
+
 	Terrain();
 	Terrain(TerrainType type);
-	const std::string& getName() const;
+
 	std::string& getName();
-	const MobilityList<std::optional<int>> getCosts() const;
 	MobilityList<std::optional<int>> getCosts();
+
+	const std::string& getName() const;
+	const MobilityList<std::optional<int>> getCosts() const;
+	
 	bool operator==(const Terrain & terrain) const;
 };
 

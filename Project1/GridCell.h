@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <list>
 #include <optional>
+#include "CellEdge.h"
 /** GridCell that composes the Map. Holds a Tile.
 */
 class GridCell {
@@ -10,6 +11,9 @@ private:
 	Tile _tile = Tile();
 	std::list<CellEdge> _adjacent_cells = std::list<CellEdge>(); 
 public:
+	GridCell(const GridCell& cell) = default;
+	GridCell(GridCell&& cell) = default;
+
 	GridCell() = default;
 	~GridCell() = default;
 	GridCell(Tile tile);

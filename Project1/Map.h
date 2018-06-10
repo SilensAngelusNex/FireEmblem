@@ -20,7 +20,6 @@ private:
 
 public:
 	Map(const Map& map) = delete;
-
 	Map& operator=(const Map & map) = delete;
 	Map(Map&& map) = default;
 	Map& operator=(Map&& map) = default;
