@@ -12,6 +12,9 @@ enum _EQUIP_SLOTS { ON_HAND, OFF_HAND, CHEST, ENUM_END };
 using EquipSlot = Enum<_EQUIP_SLOTS>;
 
 
+/**
+	
+*/
 class Item {
 public:
 	Item() = default;

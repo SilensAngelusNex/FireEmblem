@@ -70,11 +70,20 @@
     <Filter Include="src\util\observer\observable">
       <UniqueIdentifier>{afbf591e-37c8-462e-ad7e-842d2438ec06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="inc\map">
+      <UniqueIdentifier>{bda7e362-11ac-4344-8748-51a79befb65b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\map\gridcell">
+      <UniqueIdentifier>{b82a16d9-a1a7-4cfc-b79d-3610d0ef0eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\map">
+      <UniqueIdentifier>{bf6048ed-ea9a-4b7a-a146-7d42583fa0df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\map\gridcell">
+      <UniqueIdentifier>{6d19271e-b61e-48aa-8f00-e018e34bc04e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="DiceTest.cpp">
       <Filter>src\tests</Filter>
     </ClCompile>
@@ -135,20 +144,38 @@
     <ClCompile Include="ItemInfo.cpp">
       <Filter>src\item</Filter>
     </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="CellPath.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="CellEdge.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Swords.cpp">
       <Filter>src\item\items</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>src\map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTest.cpp">
+      <Filter>src\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Mobility.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="CellEdge.cpp">
+      <Filter>src\map\gridcell</Filter>
+    </ClCompile>
+    <ClCompile Include="GridCell.cpp">
+      <Filter>src\map\gridcell</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>src\map\gridcell</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>src\map\gridcell</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveHelper.cpp">
+      <Filter>src\map</Filter>
+    </ClCompile>
+    <ClCompile Include="CellPath.cpp">
+      <Filter>src\map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +268,33 @@
     </ClInclude>
     <ClInclude Include="ItemInfo.h">
       <Filter>inc\item</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
+    <ClInclude Include="CellEdge.h">
+      <Filter>inc\map\gridcell</Filter>
+    </ClInclude>
+    <ClInclude Include="GridCell.h">
+      <Filter>inc\map\gridcell</Filter>
+    </ClInclude>
+    <ClInclude Include="MobilityList.h">
+      <Filter>inc\map\gridcell</Filter>
+    </ClInclude>
+    <ClInclude Include="Terrain.h">
+      <Filter>inc\map\gridcell</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>inc\map\gridcell</Filter>
+    </ClInclude>
+    <ClInclude Include="Mobility.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveHelper.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
+    <ClInclude Include="CellPath.h">
+      <Filter>inc\map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

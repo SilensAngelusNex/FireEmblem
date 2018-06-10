@@ -8,7 +8,8 @@ Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
 	_stats(*this, stats),
 	_exp(*this, context),
 	_inv(*this),
-	_combat(*this)
+	_combat(*this), 
+	_mobility(50, MobilityList<bool>({true}))
 {}
 
 const IDENTITY& Unit::getIdentity() const {
@@ -17,6 +18,10 @@ const IDENTITY& Unit::getIdentity() const {
 
 const Stats& Unit::getStats() const {
 	return _stats;
+}
+
+const Mobility& Unit::getMobility() const {
+	return _mobility;
 }
 
 const Experience& Unit::getExperience() const {
@@ -37,6 +42,10 @@ Combat& Unit::getCombat() {
 
 Stats& Unit::getStats() {
 	return _stats;
+}
+
+Mobility& Unit::getMobility() {
+	return _mobility;
 }
 
 Experience& Unit::getExperience() {
