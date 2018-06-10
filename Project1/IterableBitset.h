@@ -18,7 +18,7 @@ std::string boolArrayToString(std::array<bool, size> init) {
 
 template<int size>
 std::string vectorToString(std::vector<int> init) {
-	Expects(std::find_if(init.begin(), init.end(), [](int i) {return i > size; }) == init.end());
+	Expects(std::find_if(init.begin(), init.end(), [](int i) {return 0 > i || i > size ; }) == init.end());
 
 	std::string result = std::string(size, '0');
 	for (int i : init) {
