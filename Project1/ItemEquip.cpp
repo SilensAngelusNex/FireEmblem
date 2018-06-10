@@ -23,7 +23,7 @@ Damage ItemEquip::get_crit_damage(const Unit&  /*attacker*/, const Unit&  /*defe
 }
 
 EquipInfo::Range ItemEquip::getRange() const {
-	return std::array<bool, 32>();
+	return EquipInfo::Range();
 }
 
 bool ItemEquip::is_equippable() const {

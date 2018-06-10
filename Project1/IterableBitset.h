@@ -32,6 +32,10 @@ class IterableBitset {
 private:
 	std::bitset<size> _values;
 public:
+	IterableBitset() :
+		_values()
+	{}
+
 	IterableBitset(std::string init) {
 		Expects(init.size() == size);
 		_values = std::bitset<size>(init);
