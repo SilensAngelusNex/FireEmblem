@@ -43,9 +43,18 @@ public:
 		IterableBitset(vectorToString<size>(init))
 	{}
 
-	const std::bitset<size> getBits() {
+	const std::bitset<size> getBits() const {
 		return _values;
 	}
+
+	auto operator[](int i) {
+		return _values[i];
+	}
+
+	bool operator[](int i) const {
+		return _values[i];
+	}
+
 private:
 	class iterator {
 	private:
