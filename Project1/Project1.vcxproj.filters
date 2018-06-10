@@ -177,6 +177,9 @@
     <ClCompile Include="CellPath.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
+    <ClCompile Include="UtilTests.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -295,6 +298,11 @@
     </ClInclude>
     <ClInclude Include="CellPath.h">
       <Filter>inc\map</Filter>
+    <ClInclude Include="IterableBitset.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilTests.h">
+      <Filter>inc\tests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

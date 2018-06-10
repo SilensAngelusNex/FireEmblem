@@ -3,6 +3,7 @@
 #include <gsl/gsl_assert>
 #include <array>
 #include <iostream>
+#include <array>
 
 template<typename E>
 class Enum {
