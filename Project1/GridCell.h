@@ -27,6 +27,8 @@ public:
 	std::vector<GridCell*> getAdjacentCells();
 
 	bool isAdjacent(const GridCell& other_cell) const;
+	bool isAdjacent(const GridCell& other_cell, MobilityType mobility) const;
+	bool isAdjacent(const GridCell& other_cell, MobilityList<bool> mobility) const;
 	std::list<CellEdge> getEdges() const;
 	const Tile& getTile() const;
 	const std::optional<CellEdge> getEdge(const GridCell & other_cell) const;

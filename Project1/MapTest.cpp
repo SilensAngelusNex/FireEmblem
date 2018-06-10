@@ -26,7 +26,13 @@ bool test::runMapTest() {
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getAllAttackableCells(mia);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
-	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(10, 10).getAdjacentCells().size() << std::endl;
+	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(mia).getAdjacentCells().size() << std::endl;
+	CellPath path = move_helper.getShortestPath(mia, map.getGridCell(11, 11));
+	move_helper.canWalk(mia, path);
+	std::cout << "Can Mia move to (11, 11)?: " << move_helper.canWalk(mia, path) << std::endl;
+	move_helper.walkPath(mia, path);
+	std::cout << "Attempted to walk" << std::endl;
+	std::cout << "Is Mia at (11, 11)?" << (map.getGridCell(mia) == map.getGridCell(11, 11)) << std::endl;
 
 	return true;
 }

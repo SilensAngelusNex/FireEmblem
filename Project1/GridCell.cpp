@@ -41,6 +41,14 @@ void GridCell::removeAdjacentCell(const GridCell& delete_cell) {
 bool GridCell::isAdjacent(const GridCell& other_cell) const{
 	return getEdge(other_cell).has_value();
 }
+bool GridCell::isAdjacent(const GridCell & other_cell, MobilityType mobility) const
+{
+	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
+}
+bool GridCell::isAdjacent(const GridCell & other_cell, MobilityList<bool> mobility) const
+{
+	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
+}
 const Tile& GridCell::getTile() const{
 	return _tile;
 }
@@ -61,5 +69,5 @@ std::list<CellEdge> GridCell::getEdges() {
 	return _adjacent_cells;
 }
 bool GridCell::operator==(const GridCell & cell) const {
-	return this->_tile == cell._tile && this->_adjacent_cells == cell._adjacent_cells;
+	return this == &cell;
 }

@@ -129,6 +129,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AttributeList.cpp" />
+    <ClCompile Include="CellPath.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
     <ClCompile Include="DiceTest.cpp" />
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttributeList.h" />
+    <ClInclude Include="CellPath.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EnumContainer.h" />

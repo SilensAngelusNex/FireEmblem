@@ -1,5 +1,6 @@
 #pragma once
 #include "Map.h"
+#include "CellPath.h"
 class MoveHelper
 {
 private:
@@ -16,9 +17,18 @@ public:
 	MoveHelper(Map& map);
 	std::vector<GridCell*> getAccesibleCells(Unit& unit);
 	PathMap findShortestPaths(Unit & unit);
+
+	CellPath getShortestPath(Unit& unit, GridCell & destination);
+	CellPath getShortestPath(GridCell& start, GridCell& destination);
+	CellPath getShortestPath(GridCell& start, GridCell& destination, int max_move);
+
 	std::vector<GridCell*> getAttackableCells(Unit & unit);
 	std::vector<GridCell*> getAttackableCells(Unit & unit, GridCell & cell);
 	std::vector<GridCell*> getAllAttackableCells(Unit & unit);
 	std::vector<GridCell*> getAlliedCells(Unit & unit);
+
+	bool canWalk(Unit & unit, CellPath path);
+
+	void walkPath(Unit& unit, CellPath path);
 };
 

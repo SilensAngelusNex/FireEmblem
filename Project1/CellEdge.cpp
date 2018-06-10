@@ -11,12 +11,11 @@ std::optional<int> CellEdge::getCost(MobilityType mobility) const {
 	return _costs[mobility];
 }
 
-bool CellEdge::canTraverse(MobilityType mobility) const {
-	return bool(_costs[mobility].has_value());
+std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type) const {
+	return getCost(mobility_type, true);
 }
 
 std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type, bool intangible) const{
-
 	std::optional<int> cost;
 	for (MobilityType mobility : MobilityType::list) {
 		if (mobility_type[mobility]) {

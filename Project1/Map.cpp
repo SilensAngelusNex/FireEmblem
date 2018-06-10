@@ -87,6 +87,17 @@ PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool>
 	}
 	return path_map;
 }
+
+CellPath Map::getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilityList<bool> mobility) {
+	PathMap path_map = findShortestPaths(start, max_move, mobility);
+	std::list<GridCell*> path = std::list<GridCell*>();
+	path.push_front(&destination);
+	while (path.front() != &start) {
+		path.push_front(path_map.at(path.front()).second);
+	}
+	return CellPath(path, mobility);
+}
+
 std::vector<GridCell*> Map::getAlliedCells(GridCell& unit_cell) {
 	return std::vector<GridCell*>();
 }
