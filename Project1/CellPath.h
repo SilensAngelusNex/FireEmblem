@@ -1,7 +1,9 @@
 #pragma once
 #include "GridCell.h"
 //TODO(Torrey): Create Superclasses of this. EX: UnitPath has a unit to traverse the Map.
-using CellCost = std::pair<int, GridCell*>;
+using CellWrap = std::reference_wrapper<GridCell>;
+using CellCost = std::pair<int, CellWrap>;
+
 class CellPath
 {
 	std::list<CellCost>_path = std::list<CellCost>();
@@ -9,7 +11,7 @@ class CellPath
 public:
 	CellPath(GridCell& head);
 	CellPath(GridCell& head, MobilityList<bool> traversal_vector);
-	CellPath(std::list<GridCell*> path, MobilityList<bool> traversal_vector);
+	CellPath(std::list<CellWrap> path, MobilityList<bool> traversal_vector);
 
 	void addTail(GridCell& tail);
 

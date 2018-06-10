@@ -60,27 +60,30 @@ const GridCell& Map::getGridCell(Unit & unit) const{
 }
 ///////////////////////////////////////////////////////////
 PathMap Map::findShortestPaths(GridCell& start) {
-	return findShortestPaths(start, INT_MAX, MobilityList<bool>({true, false, false}));//
+	return findShortestPaths(start, INT_MAX, MobilityList<bool>({true, false, false}));
 }
+const PathMap Map::findShortestPaths(GridCell& start) const {
+	return findShortestPaths(start, INT_MAX, MobilityList<bool>({ true, false, false }));//
+};
 
-PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) {
-	PathQueue queue = PathQueue();
+const PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) const {
+	PathQueue queue = PathQueue(comp);
 	PathMap path_map = PathMap();
-	path_map.try_emplace(&start, CellCost(0, &start));
-	queue.emplace(0, &start);
+	path_map.emplace(&start, CellCost(0, start));
+	queue.emplace(0, start);
 	bool intangible = mobility[MobilityType::values::PROJECTILE] || mobility[MobilityType::values::ETHEREAL];
 
 	while (!queue.empty()) {
 		CellCost top = queue.top();
 		queue.pop();
-		std::list<CellEdge> adj_edges = top.second->getEdges();
+		std::list<CellEdge> adj_edges = top.second.get().getEdges();
 		for (auto& edge : adj_edges) {
 			std::optional<int> cost = edge.getCost(mobility, intangible);
 			if (cost.has_value()) {
 				cost = top.first + cost.value();
-				if (cost.value() <= max_move && (path_map.count(&(edge._cell)) == 0 || cost.value() < path_map[&edge._cell].first)) {
+				if (cost.value() <= max_move && (path_map.count(&(edge._cell)) == 0 || cost.value() < path_map.at(&edge._cell).first)) {
 					path_map.insert_or_assign(&edge._cell, CellCost(cost.value(), top.second));
-					queue.emplace(cost.value(), &edge._cell);
+					queue.emplace(cost.value(), edge._cell);
 				}
 			}
 		}
@@ -88,12 +91,16 @@ PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool>
 	return path_map;
 }
 
+PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) { 
+	return std::as_const(*this).findShortestPaths(start, max_move, mobility);
+}
+
 CellPath Map::getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilityList<bool> mobility) {
 	PathMap path_map = findShortestPaths(start, max_move, mobility);
-	std::list<GridCell*> path = std::list<GridCell*>();
-	path.push_front(&destination);
-	while (path.front() != &start) {
-		path.push_front(path_map.at(path.front()).second);
+	std::list<CellWrap> path = std::list<CellWrap>();
+	path.push_front(destination);
+	while (!(start == path.front().get())) {
+		path.push_front(path_map.at(&path.front().get()).second);
 	}
 	return CellPath(path, mobility);
 }

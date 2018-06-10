@@ -72,7 +72,7 @@ std::vector<GridCell*> MoveHelper::getAlliedCells(Unit& unit) {
 }
 
 bool MoveHelper::canWalk(Unit& unit, CellPath path) {
-	bool valid = path.begin()->second == &_map.getGridCell(unit);
+	bool valid = path.getHead() == _map.getGridCell(unit);
 	for (CellCost pair : path) {
 		valid = valid && pair.first <= unit.getMobility().getMove();
 	}
@@ -81,10 +81,10 @@ bool MoveHelper::canWalk(Unit& unit, CellPath path) {
 
 void MoveHelper::walkPath(Unit & unit, CellPath path) {
 	Expects(canWalk(unit, path));
-	GridCell* unit_cell = &path.getHead();
+	CellWrap unit_cell = path.getHead();
 	for (auto it = std::next(path.begin()); it != path.end(); it++) {
-		if (unit_cell->getEdge(*it->second).value().getCost(unit.getMobility().getMobilityType()).has_value()) {
-			_map.moveUnit(*unit_cell, *it->second);
+		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilityType()).has_value()) {
+			_map.moveUnit(unit_cell, it->second);
 		} else {// can't pass
 				return;
 		}
