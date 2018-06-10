@@ -16,8 +16,12 @@ public:
 	int getCost();
 	GridCell& getTail();
 
+	GridCell & getHead();
+
 	int getCost() const;
 	const GridCell & getTail() const;
+
+	const GridCell & getHead() const;
 
 	using iterator = std::list<CellCost>::iterator;
 	using const_iterator = std::list<CellCost>::iterator;

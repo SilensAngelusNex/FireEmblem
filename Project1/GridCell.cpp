@@ -62,7 +62,14 @@ std::vector<GridCell*> GridCell::getAdjacentCells() {
 	}
 	return adj_cells;
 }
-std::list<CellEdge> GridCell::getEdges() const{
+const std::vector<GridCell*> GridCell::getAdjacentCells() const {
+	std::vector<GridCell*> adj_cells = std::vector<GridCell*>();
+	for (CellEdge edge : _adjacent_cells) {
+		adj_cells.push_back(&edge._cell);
+	}
+	return adj_cells;
+}
+const std::list<CellEdge> GridCell::getEdges() const{
 	return _adjacent_cells;
 }
 std::list<CellEdge> GridCell::getEdges() {

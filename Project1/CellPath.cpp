@@ -27,6 +27,9 @@ int CellPath::getCost() {
 GridCell & CellPath::getTail() {
 	return *_path.back().second;
 }
+GridCell & CellPath::getHead() {
+	return *_path.front().second;
+}
 
 int CellPath::getCost() const {
 	return _path.back().first;
@@ -34,4 +37,8 @@ int CellPath::getCost() const {
 
 const GridCell & CellPath::getTail() const {
 	return *_path.back().second;
+}
+
+const GridCell & CellPath::getHead() const {
+	return *_path.front().second;
 }

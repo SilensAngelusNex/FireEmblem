@@ -25,6 +25,6 @@ bool Tile::hasUnit() const{
 
 bool Tile::operator==(const Tile & tile) const
 {
-	return this->_terrain == tile._terrain && this->_unit == tile._unit;
+	return this == &tile;
 }
 

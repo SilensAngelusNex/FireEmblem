@@ -81,7 +81,7 @@ bool MoveHelper::canWalk(Unit& unit, CellPath path) {
 
 void MoveHelper::walkPath(Unit & unit, CellPath path) {
 	Expects(canWalk(unit, path));
-	GridCell* unit_cell = path.begin()->second;
+	GridCell* unit_cell = &path.getHead();
 	for (auto it = std::next(path.begin()); it != path.end(); it++) {
 		if (unit_cell->getEdge(*it->second).value().getCost(unit.getMobility().getMobilityType()).has_value()) {
 			_map.moveUnit(*unit_cell, *it->second);
