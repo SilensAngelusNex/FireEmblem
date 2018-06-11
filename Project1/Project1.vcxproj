@@ -136,6 +136,7 @@
     <ClCompile Include="DiceTest.cpp" />
     <ClCompile Include="Experience.cpp" />
     <ClCompile Include="GridCell.cpp" />
+    <ClCompile Include="Healing.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBase.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="EnumContainer.h" />
     <ClInclude Include="GridCell.h" />
+    <ClInclude Include="Healing.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="InventoryBase.h" />
     <ClInclude Include="InventoryCommandable.h" />

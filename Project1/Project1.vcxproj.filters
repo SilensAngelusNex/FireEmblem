@@ -180,6 +180,9 @@
     <ClCompile Include="UtilTests.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Healing.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -295,7 +298,7 @@
     </ClInclude>
     <ClInclude Include="MoveHelper.h">
       <Filter>inc\map</Filter>
-    </ClInclude>   
+    </ClInclude>
     <ClInclude Include="CellPath.h">
       <Filter>inc\map</Filter>
     </ClInclude>
@@ -307,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="optional_pair.h">
       <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Healing.h">
+      <Filter>inc\unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
