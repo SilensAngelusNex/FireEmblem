@@ -13,6 +13,7 @@
 #include "Dice.h"
 #include "Experience.h"
 #include "Mobility.h"
+#include "Health.h"
 
 using IDENTITY = std::string;
 using CONTEXT = Dice<100>;
