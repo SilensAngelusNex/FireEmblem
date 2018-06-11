@@ -1,11 +1,9 @@
 #pragma once
-
 #include "Tile.h"
-#include <algorithm>
-#include <list>
-#include <optional>
 #include "CellEdge.h"
-class CellEdge;
+#include <list>
+#include <vector>
+
 /** GridCell that composes the Map. Holds a Tile.
 */
 class GridCell {

@@ -1,4 +1,9 @@
 #include "MoveHelper.h"
+#include "CellEdge.h"
+#include "Unit.h"
+#include "Party.h"
+#include "CellPath.h"
+#include "GridCell.h"
 
 MoveHelper::MoveHelper(Map& map) :
 	_map(map)
@@ -68,7 +73,11 @@ std::vector<GridCell*> MoveHelper::getAllAttackableCells(Unit& unit) {
 	return cells;
 }
 std::vector<GridCell*> MoveHelper::getAlliedCells(Unit& unit) {
-	return std::vector < GridCell*>({&_map.getGridCell(unit)});
+	auto vec = std::vector<GridCell*>();
+	for (Unit& ally : _map.getParty(unit).getUnits()) {
+		vec.push_back(&_map.getGridCell(ally));
+	}
+	return vec;
 }
 
 bool MoveHelper::canWalk(Unit& unit, CellPath path) {

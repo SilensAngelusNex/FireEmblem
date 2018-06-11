@@ -2,12 +2,11 @@
 #include <string>
 #include <optional>
 #include "MobilityList.h"
-//TODO(Torrey): FACTORY
-enum class _TERRAIN_TYPES { PLAINS, WATER, FOREST, MOUNTAIN, WALL, ENUM_END }; //Temporary Solution
+
+enum class _TERRAIN_TYPES { PLAINS, WATER, FOREST, MOUNTAIN, WALL, ENUM_END }; 
 using TerrainType = Enum<_TERRAIN_TYPES>;
 class Terrain {
 private:
-	using empty = std::optional<int>; //static const std::optional<int> empty = std::optional<int>();??
 	std::string _name;
 	MobilityList<std::optional<int>> _costs;
 

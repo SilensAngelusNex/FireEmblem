@@ -1,6 +1,11 @@
 #pragma once
+#include <vector>
 #include "Map.h"
-#include "CellPath.h"
+
+class Map;
+class CellPath;
+class GridCell;
+class Unit;
 class MoveHelper
 {
 private:

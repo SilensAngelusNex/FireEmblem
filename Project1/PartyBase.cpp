@@ -42,7 +42,11 @@ bool PartyBase::isDone() {
 	return isDone;
 }
 
-bool PartyBase::hasUnit(Unit& unit) const {
+Party& PartyBase::getParty(Passkey<Map> key) {
+	return *(Party*)this;
+}
+
+bool PartyBase::hasUnit(const Unit& unit) const {
 	return (getPosition(unit) != _units.end());
 }
 

@@ -1,4 +1,9 @@
 #include "Map.h"
+#include "Party.h"
+#include "Unit.h"
+#include "GridCell.h"
+#include "CellPath.h"
+#include "CellEdge.h"
 //TODO(Torrey): Make more useful constructors, USE GRIDCELL&, Refactor into multiple classes, define move/copy constructors
 Map::Map(int width, int height) : 
 	_grid(width, std::vector<GridCell>(height, GridCell()))
@@ -51,13 +56,18 @@ GridCell& Map::getGridCell(int x_pos, int y_pos) {
 GridCell& Map::getGridCell(Unit & unit) {
 	return *_unit_to_cell[&unit];
 }
-
+Party& Map::getParty(Unit & unit) {
+	return *(Party*)unit._party; //This is probably bad
+}
 const GridCell& Map::getGridCell(int x_pos, int y_pos) const{
 	Expects(x_pos > 0 && y_pos > 0 && x_pos < _grid.size() && y_pos < _grid[0].size());
 	return _grid[x_pos][y_pos];
 }
 const GridCell& Map::getGridCell(Unit & unit) const{
 	return *_unit_to_cell.at(&unit);
+}
+const Party& Map::getParty(Unit & unit) const {
+	return *(Party*)unit._party; //This is probably bad
 }
 ///////////////////////////////////////////////////////////
 PathMap Map::findShortestPaths(GridCell& start) {
@@ -104,8 +114,4 @@ CellPath Map::getShortestPath(GridCell & start, GridCell & destination, int max_
 		path.push_front(path_map.at(&path.front().get()).second);
 	}
 	return CellPath(path, mobility);
-}
-
-std::vector<GridCell*> Map::getAlliedCells(GridCell& unit_cell) {
-	return std::vector<GridCell*>();
 }

@@ -1,15 +1,17 @@
 #pragma once
-#include <vector>
-#include "Unit.h"
-#include "GridCell.h"
-#include "CellPath.h"
-#include <map>
-#include <queue>
 #include <functional>
-#include "Party.h"
+#include <map>
+#include <vector>
+#include <queue>
+#include "CellPath.h"
 /**
 Map class. Holds a Matrix of GridCells and all of the units. Should be initialized at the start of each chapter.
 */
+class Party;
+class GridCell;
+class Unit;
+class CellPath;
+
 using PathMap = std::map<GridCell*, CellCost>;
 inline auto comp = [](const CellCost& lhs, const CellCost& rhs) { return lhs.first < rhs.first; };
 using PathQueue = std::priority_queue<CellCost, std::vector<CellCost>, decltype (comp)>;
@@ -35,9 +37,11 @@ public:
 	
 	GridCell& getGridCell(int x_pos, int y_pos);
 	GridCell& getGridCell(Unit& unit);
+	Party& getParty(Unit& unit);
 
 	const GridCell& getGridCell(int x_pos, int y_pos) const;
 	const GridCell& getGridCell(Unit& unit) const;
+	const Party& getParty(Unit& unit) const;
 
 	PathMap findShortestPaths(GridCell& start);
 	PathMap findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility);
@@ -47,7 +51,6 @@ public:
 	//I can't get std::as_const to work
 	const PathMap findShortestPaths(GridCell& start) const;
 	const PathMap findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) const;
-	std::vector<GridCell*> getAlliedCells(GridCell& unit_cell);
 
 };
 

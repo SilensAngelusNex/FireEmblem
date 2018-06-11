@@ -1,7 +1,8 @@
 #pragma once
 #include "Unit.h"
 
-class Unit;
+class Map;
+class Party;
 using UnitPtr = std::unique_ptr<Unit>;
 struct UnitData;
 struct PartyData
@@ -24,10 +25,10 @@ protected:
 	PartyBase(PartyData data);
 	void startTurn();
 	bool isDone();
-	bool hasUnit(Unit& unit) const;
 	void insertUnit(UnitData unit);
 	void changeParty(Unit& unit, PartyBase& new_party);
 public:
+	Party& getParty(Passkey<Map> key);
 	bool hasUnit(const Unit& unit) const;
 };
 

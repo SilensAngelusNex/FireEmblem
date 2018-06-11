@@ -2,6 +2,8 @@
 #include "MobilityList.h"
 #include "Component.h"
 
+class Unit;
+
 class Mobility : Component<Unit> {
 	int _movement{50};
 	MobilityList<bool> _mobility;
@@ -14,6 +16,10 @@ public:
 
 	MobilityList<bool>& getMobilityType();
 	int& getMove();
+
+	bool canPass(MobilityType mobility_type, const Unit * unit) const;
+
+
 
 };
 

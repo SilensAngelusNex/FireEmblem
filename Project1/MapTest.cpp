@@ -4,6 +4,10 @@
 #include "Unit.h"
 #include "FairDice.h"
 #include "MoveHelper.h"
+#include "CellPath.h"
+#include "Party.h"
+#include "GridCell.h"
+#include "CellPath.h"
 
 bool test::runMapTest() {
 	std::cout << "Map test start:" << std::endl;
@@ -21,7 +25,6 @@ bool test::runMapTest() {
 	Unit& mia = party.getUnit(0);
 	Unit& ike = party.getUnit(1);
 	
-	party.changeParty(mia, party2);
 	map.insertUnit(mia, map.getGridCell(10, 10));
 	
 	std::vector <GridCell*> cells = move_helper.getAccesibleCells(mia);

@@ -1,4 +1,6 @@
 #include "CellPath.h"
+#include "CellEdge.h"
+#include "GridCell.h"
 
 CellPath::CellPath(GridCell & head) : CellPath(head, MobilityList<bool>({ true })) {};
 

@@ -1,4 +1,5 @@
 #include "Mobility.h"
+#include "Unit.h"
 
 
 Mobility::Mobility(Unit& owner) : 
@@ -29,4 +30,8 @@ MobilityList<bool>& Mobility::getMobilityType()
 int& Mobility::getMove()
 {
 	return _movement;
+}
+
+bool Mobility::canPass(MobilityType mobility_type, const Unit* unit) const {
+	return _mobility[mobility_type] && _owner._party->hasUnit(*unit);
 }

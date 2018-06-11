@@ -1,5 +1,4 @@
 #pragma once
-#include "Unit.h"
 #include "PartyBase.h"
 
 class Party: public PartyBase

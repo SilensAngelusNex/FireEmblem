@@ -1,7 +1,7 @@
 #pragma once
-#include "GridCell.h"
+#include "MobilityList.h"
+#include "Mobility.h"
 #include <optional>
-#include <array>
 
 class GridCell;
 class CellEdge {
@@ -14,9 +14,10 @@ public:
 
 	GridCell& _cell;
 	CellEdge(GridCell& cell, MobilityList<std::optional<int>> costs);
-	std::optional<int> getCost(MobilityType mobility) const;
-	std::optional<int> getCost(MobilityList<bool> mobility_type) const;
-	std::optional<int> getCost(MobilityList<bool> mobility_type, bool intangible) const;
+	std::optional<int> getCost(MobilityType mobility_type) const;
+	std::optional<int> getCost(MobilityList<bool> mobility_list) const;
+	std::optional<int> getCost(MobilityList<bool> mobility_list, bool intangible) const;
+	std::optional<int> getCost(Mobility mobility) const;
 
 	bool operator==(const CellEdge & c) const;
 };
