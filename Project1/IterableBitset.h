@@ -55,7 +55,7 @@ public:
 		return _values[i];
 	}
 
-	bool operator[](int i) const {
+	bool operator[](size_t i) const {
 		return _values[i];
 	}
 
