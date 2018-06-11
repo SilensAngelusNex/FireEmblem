@@ -12,13 +12,14 @@ class Stats : Component<Unit> {
 	AttributeList _attribs;
 	AttributeList _growths;
 	WeaponList _proficiencies;
-	Health _health;
 
 public:
 	explicit Stats(Unit& owner);
 	explicit Stats(Unit& owner, AttributeList attribs);
 	explicit Stats(Unit& owner, AttributeList attribs, AttributeList growths);
 	explicit Stats(Unit& owner, AttributeList attribs, AttributeList growths, WeaponList proficiencies);
+
+	int operator[](AttribType stat) const;
 
 	AttributeList& getAttribs();
 	AttributeList& getGrowths();

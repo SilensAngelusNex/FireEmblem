@@ -1,29 +1,24 @@
 #pragma once
+#include "Component.h"
+#include "Damage.h"
+#include "Healing.h"
 
-class HealthValues {
-public:
-	explicit HealthValues(int con);
-	explicit HealthValues(int con, int missing_hp);
-	explicit HealthValues(int con, int missing_hp, int shield_hp);
-	explicit HealthValues(int con, int missing_hp, int shield_hp, bool has_divine_shield);
+class Unit;
 
-	int _total_hp;
-	int _current_hp;
-	int _shield_hp;
-	bool _has_divine_shield;
-
-	int percentRemaining();
-};
-
-class Health {
+class Health : Component<Unit> {
 private:
-	HealthValues _values;
+	int _missing_hp;
 
 	// Skills
 public:
-	explicit Health(int con);
-	explicit Health(HealthValues values);
+	explicit Health(Unit& owner);
+	explicit Health(Unit& owner, int missing_hp);
+	explicit Health(Unit& owner, int missing_hp);
 
-	int percentRemaining();
-	int isDead();
+	int takeDamage(Damage to_take);
+	int heal(Healing to_heal);
+	int percentRemaining() const;
+	bool isDead() const;
+	int getMaxHp() const;
+	int getCurrentHp() const;
 };

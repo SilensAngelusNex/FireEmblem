@@ -15,10 +15,13 @@ Stats::Stats(Unit& owner, AttributeList attribs, AttributeList growths, WeaponLi
 	Component<Unit>(owner),
 	_attribs(std::move(attribs)),
 	_growths(std::move(growths)),
-	_proficiencies(std::move(proficiencies)),
-	_health(_growths[AttribType::values::CON])
+	_proficiencies(std::move(proficiencies))
 {}
 
+
+int Stats::operator[](AttribType stat) const {
+	return _attribs[stat];
+}
 
 AttributeList& Stats::getAttribs() {
 	return _attribs;

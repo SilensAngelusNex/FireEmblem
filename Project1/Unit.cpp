@@ -8,7 +8,8 @@ Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
 	_stats(*this, stats),
 	_exp(*this, context),
 	_inv(*this),
-	_combat(*this), 
+	_combat(*this),
+	_health(*this),
 	_mobility(50, MobilityList<bool>({true}))
 {}
 
@@ -32,12 +33,20 @@ const InventoryViewable& Unit::getInventory() const {
 	return _inv;
 }
 
+const Health & Unit::getHealth() const {
+	return _health;
+}
+
 InventoryCommandable& Unit::getInventory() {
 	return _inv;
 }
 
 Combat& Unit::getCombat() {
 	return _combat;
+}
+
+Health & Unit::getHealth() {
+	return _health;
 }
 
 Stats& Unit::getStats() {

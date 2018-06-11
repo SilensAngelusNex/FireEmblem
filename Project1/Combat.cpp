@@ -55,11 +55,8 @@ std::optional<int> Combat::strike(Unit& defender) {
 }
 
 int Combat::takeDamage(Damage dealt) {
-	// Pass Damage to combat skills
-	//On taking damage, on dealing damage
-
-	int result = dealt.getDamageTo(_owner);
-	// TODO(Weston): Reduce HP
+	int result = _owner.getHealth().takeDamage(dealt);
+	// TODO(Weston): Move these into Health so we can remove this function
 	if (dealt.isCrit()) {
 		notifyAllCrit(_owner.getIdentity(), result);
 	}
@@ -70,18 +67,20 @@ int Combat::takeDamage(Damage dealt) {
 }
 
 optional_pair<int, int> Combat::do_combat(Unit& defender) {
-	auto combat = [](Unit& attacker, Unit& defender) {
-		optional_pair<int, int> result = std::pair<int, int>(-1, -1);
+	auto combat = [this](Unit& attacker, Unit& defender) {
 
+		optional_pair<int, int> result = std::pair<int, int>(-1, -1);
 		int spd_adv = attacker.getStats().atk_spd() - defender.getStats().atk_spd();
 
 		result.first = std::max(result.first, attacker.getCombat().strike(defender));
-		result.second = std::max(result.second, defender.getCombat().strike(attacker));
 
-		if (spd_adv > 3) {
+		if (!defender.getHealth().isDead()) {
+			result.second = std::max(result.second, defender.getCombat().strike(attacker));
+		}
+		if (spd_adv > 3 && !attacker.getHealth().isDead()) {
 			result.first = std::max(result.first, attacker.getCombat().strike(defender));
 		}
-		if (spd_adv < -3) {
+		if (spd_adv < -3 && !defender.getHealth().isDead()) {
 			result.second = std::max(result.second, defender.getCombat().strike(attacker));
 		}
 		return result;
