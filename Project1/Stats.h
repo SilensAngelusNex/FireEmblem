@@ -8,7 +8,6 @@
 class Unit;
 class InventoryViewable;
 
-
 class Stats : Component<Unit> {
 	AttributeList _attribs;
 	AttributeList _growths;

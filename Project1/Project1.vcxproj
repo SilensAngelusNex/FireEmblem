@@ -90,8 +90,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\GSL\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,6 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Program Files\CppLibs;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -121,6 +121,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -129,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AttributeList.cpp" />
+    <ClCompile Include="CellPath.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
     <ClCompile Include="DiceTest.cpp" />
@@ -140,8 +142,10 @@
     <ClCompile Include="InventoryCommandable.cpp" />
     <ClCompile Include="InventoryViewable.cpp" />
     <ClCompile Include="ItemEquip.cpp" />
+    <ClCompile Include="ItemInfo.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MoveHelper.cpp" />
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="Mobility.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
@@ -152,15 +156,16 @@
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Swords.cpp" />
     <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="CellPath.cpp" />
     <ClCompile Include="CellEdge.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitTest.cpp" />
+    <ClCompile Include="UtilTests.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttributeList.h" />
+    <ClInclude Include="CellPath.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EnumContainer.h" />
@@ -172,8 +177,11 @@
     <ClInclude Include="ItemEquip.h" />
     <ClInclude Include="Enum.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="MoveHelper.h" />
     <ClInclude Include="Mobility.h" />
     <ClInclude Include="MobilityList.h" />
+    <ClInclude Include="ItemInfo.h" />
+    <ClInclude Include="IterableBitset.h" />
     <ClInclude Include="ObservableExp.h" />
     <ClInclude Include="ObserverExp.h" />
     <ClInclude Include="Party.h" />
@@ -192,10 +200,10 @@
     <ClInclude Include="TestObservers.h" />
     <ClInclude Include="ObserverDamage.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="CellPath.h" />
     <ClInclude Include="CellEdge.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="ListDice.h" />
+    <ClInclude Include="UtilTests.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponList.h" />
   </ItemGroup>

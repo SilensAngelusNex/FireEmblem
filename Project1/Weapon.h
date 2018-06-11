@@ -1,11 +1,16 @@
 #pragma once
 
-#include "ItemEquip.h"
+#include <memory>
+
 #include "AttributeList.h"
+#include "ItemEquip.h"
+#include "ItemInfo.h"
 
 class Weapon : public ItemEquip {
+protected:
+	std::shared_ptr<WeaponInfo> _info;
 public:
-	Weapon() = default;
+	Weapon(std::shared_ptr<WeaponInfo> info);
 	Weapon(const Weapon& a) = default;
 	Weapon(Weapon&& a) = default;
 	Weapon& operator=(const Weapon& rhs) = default;
@@ -13,8 +18,12 @@ public:
 	~Weapon() override = default;
 
 	bool is_weapon() const override;
+	const std::string& getName() const override;
+
 	Damage get_normal_damage(const Unit& attacker, const Unit& defender) const override;
 	Damage get_crit_damage(const Unit& attacker, const Unit& defender) const override;
+
+	EquipInfo::Range getRange() const override;
 
 	int avoid(const AttributeList& stats) const override;
 	int dodge(const AttributeList& stats) const override;

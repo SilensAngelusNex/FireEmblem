@@ -3,6 +3,7 @@
 #include "Item.h"
 #include "AttributeList.h"
 #include "Damage.h"
+#include "ItemInfo.h"
 
 class ItemEquip : public Item {
 public:
@@ -22,6 +23,8 @@ public:
 	virtual Damage get_normal_damage(const Unit& attacker, const Unit& defender) const;
 	virtual Damage get_crit_damage(const Unit& attacker, const Unit& defender) const;
 
+	virtual EquipInfo::Range getRange() const;
+
 	virtual int avoid(const AttributeList& stats) const = 0;
 	virtual int dodge(const AttributeList& stats) const = 0;
 	virtual int hit(const AttributeList& stats) const = 0;
@@ -29,5 +32,4 @@ public:
 	virtual int might(const AttributeList& stats) const = 0;
 	virtual int atk_spd(const AttributeList& stats) const = 0;
 	virtual AttribType dmg_type() const = 0;
-
 };

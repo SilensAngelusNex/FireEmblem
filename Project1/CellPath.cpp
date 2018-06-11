@@ -1,39 +1,44 @@
 #include "CellPath.h"
 
+CellPath::CellPath(GridCell & head) : CellPath(head, MobilityList<bool>({ true })) {};
 
-
-CellPath::CellPath(GridCell* start_tile) :
-	_tiles({ start_tile }) {
+CellPath::CellPath(GridCell & head, const MobilityList<bool> traversal_vector) :
+	_traversal_vector(traversal_vector)
+{
+	_path.emplace_back(0, head);
 }
 
-CellPath CellPath::copy() {
-	CellPath copy = CellPath(this->getHead());
-	copy._cost = this->_cost;
-	copy._tiles = this->_tiles;
-	return copy;
-}
-bool CellPath::insertTile(GridCell* new_tile) {
-	if (this->getTail()->isAdjacent(new_tile)) {
-		_cost += _tiles.back()->getEdge(new_tile).value().getCost(MobilityType::values::GROUNDED).value();//assume grounded for now
-		_tiles.push_back(new_tile);
-		return true;
+CellPath::CellPath(std::list<CellWrap> path, const MobilityList<bool> traversal_vector) : CellPath(path.front(), traversal_vector) {
+	path.pop_front();
+	for (GridCell& cell : path) {
+		addTail(cell);
 	}
-	return false;
 }
-GridCell* CellPath::getTail() {
-	return this->_tiles.back();
+
+void CellPath::addTail(GridCell & tail) {
+	Expects(getTail().isAdjacent(tail, _traversal_vector));
+	_path.emplace_back(getCost() + getTail().getEdge(tail).value().getCost(_traversal_vector).value(), tail);
 }
-GridCell* CellPath::getHead() {
-	return this->_tiles.front();
-}
+
 int CellPath::getCost() {
-	return _cost;
-}
-bool CellPath::operator<(const CellPath & c) const {
-	return this->_cost < c._cost;
+	return _path.back().first;
 }
 
-bool CellPath::operator>(const CellPath & c) const {
-	return this->_cost > c._cost;
+GridCell & CellPath::getTail() {
+	return _path.back().second;
+}
+GridCell & CellPath::getHead() {
+	return _path.front().second;
 }
 
+int CellPath::getCost() const {
+	return _path.back().first;
+}
+
+const GridCell & CellPath::getTail() const {
+	return _path.back().second;
+}
+
+const GridCell & CellPath::getHead() const {
+	return _path.front().second;
+}

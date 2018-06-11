@@ -1,58 +1,80 @@
 #include "GridCell.h"
 
-
-std::optional<CellEdge> GridCell::getEdge(GridCell* other_cell) {
+#include <utility>
+GridCell::GridCell(Tile tile) :
+	_tile(std::move(tile))
+{}
+std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) {
 	for (CellEdge edge: _adjacent_cells) {
-		if (edge._cell == other_cell) {
+		if (&edge._cell == &other_cell) {
+			return edge;
+		}
+	}
+	return {};
+}
+const std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) const {
+	for (CellEdge edge : _adjacent_cells) {
+		if (&edge._cell == &other_cell) {
 			return edge;
 		}
 	}
 	return {};
 }
 
-bool GridCell::addAdjacentCell(GridCell * new_cell)
+void GridCell::addAdjacentCell(GridCell & new_cell)
 {
-	return addAdjacentCell(new_cell, new_cell->getTile()._terrain.getCosts());
+	addAdjacentCell(new_cell, new_cell.getTile()._terrain.getCosts());
 }
 
 /** Adds _new_cell to the adjacency vector
-	Returns true if succesful, false if _new_cell is already in the adjacency vector
 */
-bool GridCell::addAdjacentCell(GridCell* new_cell, MobilityList<std::optional<int>> costs) {
-	if (new_cell != nullptr) {
-		if (getEdge(new_cell).has_value()) {
-			return false;
-		}			
-		_adjacent_cells.emplace_back(new_cell, costs);
-		return true;
-	}  {	return false;
-}
+void GridCell::addAdjacentCell(GridCell& new_cell, MobilityList<std::optional<int>> costs) {
+	Expects(!getEdge(new_cell).has_value());
+	_adjacent_cells.emplace_back(new_cell, costs);
 }
 
-bool GridCell::removeAdjacentCell(GridCell* delete_cell) {
-	if (delete_cell == nullptr) {
-		return false;
-	}
+void GridCell::removeAdjacentCell(const GridCell& delete_cell) {
 	std::optional<CellEdge> edge = getEdge(delete_cell);
-	if (edge.has_value()) {
-		_adjacent_cells.remove(edge.value());
-		return true;
-	}	
-		return false;
+	Expects(edge.has_value());
+	_adjacent_cells.remove(edge.value());
 }
-bool GridCell::isAdjacent(GridCell* other_cell) {
+bool GridCell::isAdjacent(const GridCell& other_cell) const{
 	return getEdge(other_cell).has_value();
 }
+bool GridCell::isAdjacent(const GridCell & other_cell, MobilityType mobility) const
+{
+	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
+}
+bool GridCell::isAdjacent(const GridCell & other_cell, MobilityList<bool> mobility) const
+{
+	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
+}
+const Tile& GridCell::getTile() const{
+	return _tile;
+}
 Tile& GridCell::getTile() {
-	return this->_tile;
+	return _tile;
 }
 std::vector<GridCell*> GridCell::getAdjacentCells() {
 	std::vector<GridCell*> adj_cells = std::vector<GridCell*>();
 	for (CellEdge edge : _adjacent_cells) {
-		adj_cells.push_back(edge._cell);
+		adj_cells.push_back(&edge._cell);
 	}
 	return adj_cells;
 }
+const std::vector<GridCell*> GridCell::getAdjacentCells() const {
+	std::vector<GridCell*> adj_cells = std::vector<GridCell*>();
+	for (CellEdge edge : _adjacent_cells) {
+		adj_cells.push_back(&edge._cell);
+	}
+	return adj_cells;
+}
+const std::list<CellEdge> GridCell::getEdges() const{
+	return _adjacent_cells;
+}
 std::list<CellEdge> GridCell::getEdges() {
 	return _adjacent_cells;
+}
+bool GridCell::operator==(const GridCell & cell) const {
+	return this == &cell;
 }

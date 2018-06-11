@@ -1,19 +1,34 @@
 #pragma once
-#include <list>
 #include "GridCell.h"
-//TODO(Torrey): ADD MULTIPLE PATH TYPES, currently only accepts adjacent, grounded paths. Is also just an awful class and needs to be remade from scratch
-class CellPath {
-private:
-	std::list<GridCell*> _tiles;
-	int _cost = 0;
+//TODO(Torrey): Create Superclasses of this. EX: UnitPath has a unit to traverse the Map.
+using CellWrap = std::reference_wrapper<GridCell>;
+using CellCost = std::pair<int, CellWrap>;
+
+class CellPath
+{
+	std::list<CellCost>_path = std::list<CellCost>();
+	const MobilityList<bool> _traversal_vector;
 public:
-	CellPath(GridCell* start_tile);
-	CellPath copy();
-	bool insertTile(GridCell* new_tile);
-	GridCell* getTail();
-	GridCell* getHead();
+	CellPath(GridCell& head);
+	CellPath(GridCell& head, MobilityList<bool> traversal_vector);
+	CellPath(std::list<CellWrap> path, MobilityList<bool> traversal_vector);
+
+	void addTail(GridCell& tail);
+
 	int getCost();
-	bool operator<(const CellPath & c) const;
-	bool operator>(const CellPath & c) const;
+	GridCell& getTail();
+
+	GridCell & getHead();
+
+	int getCost() const;
+	const GridCell & getTail() const;
+
+	const GridCell & getHead() const;
+
+	using iterator = std::list<CellCost>::iterator;
+	using const_iterator = std::list<CellCost>::iterator;
+	iterator begin() { return _path.begin(); }
+	iterator end() { return _path.end(); }
+
 };
 

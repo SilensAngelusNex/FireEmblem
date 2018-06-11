@@ -19,8 +19,8 @@ bool test::runUnitTest() {
 	mia.attach(o2);
 	ike.attach(o2);
 
-	std::unique_ptr<Weapon> mias_sword = std::make_unique<BronzeSword>();
-	std::unique_ptr<Weapon> ikes_sword = std::make_unique<BronzeSword>();
+	std::unique_ptr<Weapon> mias_sword = WeaponFactory::makeBronzeSword();
+	std::unique_ptr<Weapon> ikes_sword = WeaponFactory::makeBronzeSword();
 
 	mia.getInventory().equip(ON_HAND, std::move(mias_sword));
 	ike.getInventory().add(std::move(ikes_sword));
