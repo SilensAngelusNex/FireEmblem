@@ -82,6 +82,12 @@
     <Filter Include="src\map\gridcell">
       <UniqueIdentifier>{6d19271e-b61e-48aa-8f00-e018e34bc04e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\party">
+      <UniqueIdentifier>{e58c6a68-6081-4344-b432-5a2a43354c3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\party">
+      <UniqueIdentifier>{b79d346a-bc23-489b-bcd6-99fb3a6a0608}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DiceTest.cpp">
@@ -179,6 +185,12 @@
     </ClCompile>
     <ClCompile Include="UtilTests.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Party.cpp">
+      <Filter>src\party</Filter>
+    </ClCompile>
+    <ClCompile Include="PartyBase.cpp">
+      <Filter>src\party</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,12 +302,9 @@
     <ClInclude Include="Tile.h">
       <Filter>inc\map\gridcell</Filter>
     </ClInclude>
-    <ClInclude Include="Mobility.h">
-      <Filter>inc\unit</Filter>
-    </ClInclude>
     <ClInclude Include="MoveHelper.h">
       <Filter>inc\map</Filter>
-    </ClInclude>   
+    </ClInclude>
     <ClInclude Include="CellPath.h">
       <Filter>inc\map</Filter>
     </ClInclude>
@@ -304,6 +313,15 @@
     </ClInclude>
     <ClInclude Include="UtilTests.h">
       <Filter>inc\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Party.h">
+      <Filter>inc\party</Filter>
+    </ClInclude>
+    <ClInclude Include="PartyBase.h">
+      <Filter>inc\party</Filter>
+    </ClInclude>
+    <ClInclude Include="Mobility.h">
+      <Filter>inc\unit\component</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

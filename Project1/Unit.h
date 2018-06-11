@@ -13,10 +13,11 @@
 #include "Dice.h"
 #include "Experience.h"
 #include "Mobility.h"
+#include "PartyBase.h"
 
+class PartyBase;
 using IDENTITY = std::string;
 using CONTEXT = Dice<100>;
-
 struct UnitData {
 	IDENTITY name;
 	CONTEXT& context;
@@ -57,6 +58,8 @@ public:
 	Experience& getExperience();
 	Inventory& getInventoryInternal();
 	CONTEXT& getContext();
+	PartyBase* _party;
+
 
 	// Movement
 	//Point position() const = 0;
@@ -90,4 +93,5 @@ public:
 	void detach(ObserverExp& observer) {
 		_exp.detach(observer);
 	}
+	bool operator==(const Unit & unit) const;
 };

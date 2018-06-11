@@ -37,6 +37,7 @@ void Map::insertUnit(Unit& new_unit, GridCell& destination) {
 	_unit_to_cell.emplace(&new_unit, &destination);// Map the Unit to the destination.
 	destination.getTile().insertUnit(&new_unit);
 }
+
 void Map::removeUnit(Unit& unit) { //Expects(unit) to exist
 	Expects(_unit_to_cell.count(&unit) > 0);
 	_unit_to_cell[&unit]->getTile().removeUnit();

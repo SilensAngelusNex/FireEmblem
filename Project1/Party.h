@@ -1,22 +1,20 @@
 #pragma once
 #include "Unit.h"
-struct PartyData
+#include "PartyBase.h"
+
+class Party: public PartyBase
 {
-	std::string name;
-	std::vector<UnitData> unit_data;
-};
-class Party
-{
-	std::string _party_name;
-	std::vector<Unit> _units;
 public:
 	Party();
 	Party(std::string name);
 	Party(std::string name, std::vector<UnitData> unit_data);
 	Party(PartyData data);
+	Unit& getUnit(int index);
+	std::vector<std::reference_wrapper<Unit>> getUnits();
 	void startTurn();
 	bool isDone();
-	bool hasUnit(Unit* unit);
-	void insertUnit(Unit & unit);
+	bool hasUnit(Unit& unit);
+	void insertUnit(UnitData unit);
+	void changeParty(Unit& unit, Party& party);
 };
 

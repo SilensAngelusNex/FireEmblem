@@ -2,11 +2,11 @@
 #include <vector>
 #include "Unit.h"
 #include "GridCell.h"
-#include "GridCell.h"
 #include "CellPath.h"
 #include <map>
 #include <queue>
 #include <functional>
+#include "Party.h"
 /**
 Map class. Holds a Matrix of GridCells and all of the units. Should be initialized at the start of each chapter.
 */
@@ -18,7 +18,7 @@ private:
 
 	std::map<Unit*, GridCell*> _unit_to_cell;
 	std::vector<std::vector<GridCell>> _grid;
-	std::vector<Unit> _units;
+	std::vector<Party> _parties;
 	void insertAdjacencies();
 
 public:

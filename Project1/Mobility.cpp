@@ -1,11 +1,12 @@
 #include "Mobility.h"
 
 
-Mobility::Mobility() :
-	
+Mobility::Mobility(Unit& owner) : 
+	Component<Unit>(owner),
 	_mobility(MobilityList<bool>({true}))
 {}
-Mobility::Mobility(int move, MobilityList<bool> mobility_type) :
+Mobility::Mobility(Unit& owner, int move, MobilityList<bool> mobility_type) :
+	Component<Unit>(owner),
 	_movement(move), 
 	_mobility(mobility_type)
 {}

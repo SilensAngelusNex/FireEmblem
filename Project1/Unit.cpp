@@ -9,7 +9,7 @@ Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
 	_exp(*this, context),
 	_inv(*this),
 	_combat(*this), 
-	_mobility(50, MobilityList<bool>({true}))
+	_mobility(*this, 50, MobilityList<bool>({true}))
 {}
 
 const IDENTITY& Unit::getIdentity() const {
@@ -58,4 +58,8 @@ Inventory& Unit::getInventoryInternal() {
 
 CONTEXT& Unit::getContext() {
 	return _context;
+}
+
+bool Unit::operator==(const Unit& unit) const {
+	return this == &unit;
 }

@@ -1,9 +1,11 @@
 #pragma once
+
 #include "Tile.h"
 #include <algorithm>
 #include <list>
 #include <optional>
 #include "CellEdge.h"
+class CellEdge;
 /** GridCell that composes the Map. Holds a Tile.
 */
 class GridCell {
@@ -38,7 +40,4 @@ public:
 
 	bool operator==(const GridCell& cell) const;
 
-	
-
 };
-

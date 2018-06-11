@@ -1,11 +1,9 @@
 #pragma once
-class GridCell;
-#include <array>
-#include "MobilityList.h"
+#include "GridCell.h"
 #include <optional>
-/**
-Represents an Edge to a GridCell, basically a struct
-*/
+#include <array>
+
+class GridCell;
 class CellEdge {
 private:
 	const MobilityList<std::optional<int>> _costs = MobilityList<std::optional<int>>();

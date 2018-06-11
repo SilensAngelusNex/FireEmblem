@@ -1,0 +1,61 @@
+#include "PartyBase.h"
+
+std::vector<UnitPtr>::const_iterator PartyBase::getPosition(const Unit & unit) const {
+	return std::find_if(_units.begin(), _units.end(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
+}
+
+std::vector<UnitPtr>::iterator PartyBase::getPosition(const Unit & unit) {
+	return std::find_if(_units.begin(), _units.end(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
+}
+
+PartyBase::PartyBase() :
+	PartyBase("~NULL PARTY~", std::vector<UnitData>())
+{}
+
+PartyBase::PartyBase(std::string name) :
+	PartyBase(name, std::vector<UnitData>())
+{}
+
+PartyBase::PartyBase(std::string name, std::vector<UnitData> unit_data) :
+	_party_name(std::move(name))
+{
+	for (UnitData& data : unit_data) {
+		insertUnit(data);
+	}
+}
+PartyBase::PartyBase(PartyData data) :
+	PartyBase(data.name, data.unit_data)
+{}
+
+void PartyBase::startTurn() {
+	for (UnitPtr& unit : _units) {
+		//unit.refresh(); Maybe this should be accomplished with listeners
+	}
+}
+/*Use this function to determine when to change turns
+*/
+bool PartyBase::isDone() {
+	bool isDone = false;
+	for (UnitPtr& unit : _units) {
+		//	isDone = isDone || unit.isDone() || unit.isDead();
+	}
+	return isDone;
+}
+
+bool PartyBase::hasUnit(Unit& unit) const {
+	return (getPosition(unit) != _units.end());
+}
+
+void PartyBase::insertUnit(UnitData unit) {
+
+	_units.emplace_back(std::move( new Unit(unit)));
+	_units.back()->_party = this;
+}
+
+void PartyBase::changeParty(Unit & unit, PartyBase& new_party) {
+	Expects(hasUnit(unit));
+	auto it  = getPosition(unit);
+	unit._party = &new_party;
+	new_party._units.push_back(std::move(*it));
+	_units.erase(it);
+}

@@ -1,5 +1,4 @@
-#include "CellEdge.h"
-#include "GridCell.h"
+#include "CellEdge.h" 
 
 
 CellEdge::CellEdge(GridCell& cell, MobilityList<std::optional<int>> costs) :
@@ -15,7 +14,7 @@ std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type) const {
 	return getCost(mobility_type, true);
 }
 
-std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type, bool intangible) const{
+std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type, bool intangible) const {
 	std::optional<int> cost;
 	for (MobilityType mobility : MobilityType::list) {
 		if (mobility_type[mobility]) {
@@ -30,7 +29,7 @@ std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type, bool inta
 	return cost;
 }
 
-bool CellEdge::canPass(bool intangible) const{
+bool CellEdge::canPass(bool intangible) const {
 	return intangible || !(_cell.getTile().hasUnit());
 }
 

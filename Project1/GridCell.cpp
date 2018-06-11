@@ -1,5 +1,5 @@
 #include "GridCell.h"
-
+#include "CellEdge.h"
 #include <utility>
 GridCell::GridCell(Tile tile) :
 	_tile(std::move(tile))
