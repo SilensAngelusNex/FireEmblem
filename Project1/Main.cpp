@@ -25,5 +25,9 @@ int main(int  /*argc*/, char ** /*argv*/) {
 	if (bitsetTest()) {
 		std::cout << "Bitset passed!" << std::endl;
 	}
+	if (test::runMapTest()) {
+		std::cout << "All passed!" << std::endl;
+	}
+	enumTest();
 	return 0;
 }

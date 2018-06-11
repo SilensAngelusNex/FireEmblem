@@ -92,6 +92,9 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -127,10 +130,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AttributeList.cpp" />
+    <ClCompile Include="CellPath.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
     <ClCompile Include="DiceTest.cpp" />
     <ClCompile Include="Experience.cpp" />
+    <ClCompile Include="GridCell.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBase.cpp" />
@@ -139,11 +144,18 @@
     <ClCompile Include="ItemEquip.cpp" />
     <ClCompile Include="ItemInfo.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MoveHelper.cpp" />
+    <ClCompile Include="MapTest.cpp" />
+    <ClCompile Include="Mobility.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
     <ClCompile Include="ObservableDamage.cpp" />
-    <ClCompile Include="Swords.cpp" />
+    <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestObservers.cpp" />
     <ClCompile Include="Stats.cpp" />
+    <ClCompile Include="Swords.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="CellEdge.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitTest.cpp" />
     <ClCompile Include="UtilTests.cpp" />
@@ -152,15 +164,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttributeList.h" />
+    <ClInclude Include="CellPath.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EnumContainer.h" />
+    <ClInclude Include="GridCell.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="InventoryBase.h" />
     <ClInclude Include="InventoryCommandable.h" />
     <ClInclude Include="InventoryViewable.h" />
     <ClInclude Include="ItemEquip.h" />
     <ClInclude Include="Enum.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="MoveHelper.h" />
+    <ClInclude Include="Mobility.h" />
+    <ClInclude Include="MobilityList.h" />
     <ClInclude Include="ItemInfo.h" />
     <ClInclude Include="IterableBitset.h" />
     <ClInclude Include="ObservableExp.h" />
@@ -177,8 +195,11 @@
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="ObservableDamage.h" />
+    <ClInclude Include="Terrain.h" />
     <ClInclude Include="TestObservers.h" />
     <ClInclude Include="ObserverDamage.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="CellEdge.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="ListDice.h" />
     <ClInclude Include="UtilTests.h" />
