@@ -295,9 +295,10 @@
     </ClInclude>
     <ClInclude Include="MoveHelper.h">
       <Filter>inc\map</Filter>
-    </ClInclude>
+    </ClInclude>   
     <ClInclude Include="CellPath.h">
       <Filter>inc\map</Filter>
+    </ClInclude>
     <ClInclude Include="IterableBitset.h">
       <Filter>inc\util</Filter>
     </ClInclude>
