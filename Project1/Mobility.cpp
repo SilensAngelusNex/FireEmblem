@@ -3,7 +3,7 @@
 
 Mobility::Mobility() :
 	
-	_mobility(MobilityList<bool>({true}))
+	_mobility(MobilityList<bool>(std::array<bool, MobilityType::size>{true}))
 {}
 Mobility::Mobility(int move, MobilityList<bool> mobility_type) :
 	_movement(move), 

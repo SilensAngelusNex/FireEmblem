@@ -23,11 +23,11 @@ CellPath MoveHelper::getShortestPath(Unit& unit, GridCell & destination) {
 }
 
 CellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination) {
-	return _map.getShortestPath(start, destination, INT_MAX, MobilityList<bool>({ true }));
+	return _map.getShortestPath(start, destination, INT_MAX, MobilityList<bool>(std::array<bool, MobilityType::size>{true}));
 }
 
 CellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination, int max_move) {
-	return _map.getShortestPath(start, destination, max_move, MobilityList<bool>({ true }));
+	return _map.getShortestPath(start, destination, max_move, MobilityList<bool>(std::array<bool, MobilityType::size>{true}));
 }
 ////////////////////////////////////////////////////////////////////////
 /* Get Cells that a unit can attack without moving
