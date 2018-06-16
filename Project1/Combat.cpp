@@ -67,7 +67,7 @@ int Combat::takeDamage(Damage dealt) {
 }
 
 optional_pair<int, int> Combat::do_combat(Unit& defender) {
-	auto combat = [this](Unit& attacker, Unit& defender) {
+	auto combat = [](Unit& attacker, Unit& defender) {
 
 		optional_pair<int, int> result = std::pair<int, int>(-1, -1);
 		int spd_adv = attacker.getStats().atk_spd() - defender.getStats().atk_spd();
