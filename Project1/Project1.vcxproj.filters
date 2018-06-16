@@ -183,6 +183,9 @@
     <ClCompile Include="Healing.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Range.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -313,6 +316,12 @@
     </ClInclude>
     <ClInclude Include="Healing.h">
       <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Range.h">
+      <Filter>inc\item</Filter>
+    </ClInclude>
+    <ClInclude Include="BitsetIterator.h">
+      <Filter>inc\util</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

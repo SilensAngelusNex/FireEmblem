@@ -151,6 +151,7 @@
     <ClCompile Include="Mobility.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
     <ClCompile Include="ObservableDamage.cpp" />
+    <ClCompile Include="Range.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestObservers.cpp" />
     <ClCompile Include="Stats.cpp" />
@@ -164,6 +165,8 @@
     <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BitsetIterator.h" />
+    <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="CellPath.h" />
     <ClInclude Include="Combat.h" />
