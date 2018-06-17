@@ -135,12 +135,6 @@
     <ClCompile Include="InventoryCommandable.cpp">
       <Filter>src\unit\component\inventory</Filter>
     </ClCompile>
-    <ClCompile Include="AttributeList.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponList.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="ItemInfo.cpp">
       <Filter>src\item</Filter>
     </ClCompile>
@@ -177,14 +171,20 @@
     <ClCompile Include="CellPath.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
-    <ClCompile Include="UtilTests.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Healing.cpp">
-      <Filter>src</Filter>
+      <Filter>src\unit</Filter>
     </ClCompile>
     <ClCompile Include="Range.cpp">
-      <Filter>src</Filter>
+      <Filter>src\item</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponList.cpp">
+      <Filter>src\item</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeList.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="UtilTests.cpp">
+      <Filter>src\tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,9 +232,6 @@
     </ClInclude>
     <ClInclude Include="TestObservers.h">
       <Filter>inc\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponList.h">
-      <Filter>inc\unit</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>inc\unit\component</Filter>
@@ -322,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="BitsetIterator.h">
       <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponList.h">
+      <Filter>inc\item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
