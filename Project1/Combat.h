@@ -22,5 +22,5 @@ public:
 	std::optional<int> strike(Unit& defender);
 	int takeDamage(Damage dealt);
 protected:
-	optional_pair<int, int> do_combat(Unit& defender);
+	optional_pair<int> do_combat(Unit& defender);
 };

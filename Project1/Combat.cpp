@@ -7,7 +7,7 @@ Combat::Combat(Unit& owner) : Component<Unit>(owner) {}
 
 void Combat::combat(Unit& defender) {
 	Expects(&_owner != &defender);
-	optional_pair<int, int> largest_strikes = do_combat(defender);
+	optional_pair<int> largest_strikes = do_combat(defender);
 
 	_owner.getExperience().gainCombatExp(defender, largest_strikes.first);
 	defender.getExperience().gainCombatExp(_owner, largest_strikes.second);
@@ -69,7 +69,7 @@ int Combat::takeDamage(Damage dealt) {
 optional_pair<int, int> Combat::do_combat(Unit& defender) {
 	auto combat = [](Unit& attacker, Unit& defender) {
 
-		optional_pair<int, int> result = std::pair<int, int>(-1, -1);
+		optional_pair<int> result;
 		int spd_adv = attacker.getStats().atk_spd() - defender.getStats().atk_spd();
 
 		result.first = std::max(result.first, attacker.getCombat().strike(defender));
