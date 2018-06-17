@@ -142,6 +142,7 @@
     <ClCompile Include="InventoryBase.cpp" />
     <ClCompile Include="InventoryCommandable.cpp" />
     <ClCompile Include="InventoryViewable.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemEquip.cpp" />
     <ClCompile Include="ItemInfo.cpp" />
     <ClCompile Include="Main.cpp" />

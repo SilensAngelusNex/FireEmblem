@@ -186,6 +186,9 @@
     <ClCompile Include="UtilTests.cpp">
       <Filter>src\tests</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>src\item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">

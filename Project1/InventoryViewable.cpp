@@ -1,6 +1,7 @@
+#include "InventoryViewable.h"
+
 #include <gsl/gsl_assert>
 
-#include "InventoryViewable.h"
 #include "Stats.h"
 #include "Unit.h"
 
@@ -10,13 +11,26 @@ InventoryViewable::InventoryViewable(Unit & owner) :
 {}
 
 
-const Item& InventoryViewable::getItem(int item_index) const {
+const Item & InventoryViewable::operator[](int item_index) const {
 	Expects(item_index < _number_items_held);
 	return *_items[item_index];
 }
-const ItemEquip& InventoryViewable::getEquip(EquipSlot slot) const {
+const ItemEquip& InventoryViewable::operator[](EquipSlot slot) const {
+	Expects(_equipment[slot] != nullptr);
 	return *_equipment[slot];
 }
+
+
+struct AttackRanges { static SingleRange getRange(const ItemEquip& item) { return item.getAttackRange(); } };
+struct AssistRanges { static SingleRange getRange(const ItemEquip& item) { return item.getAssistRange(); } };
+
+std::map<RangeUtil::Movement, RangeUtil::Distances> InventoryViewable::getAttackRanges() const {
+	return getRanges<AttackRanges>();
+}
+std::map<RangeUtil::Movement, RangeUtil::Distances> InventoryViewable::getAssistRanges() const {
+	return getRanges<AssistRanges>();
+}
+
 
 int InventoryViewable::avoid(Passkey<Stats> key) const {
 	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::avoid);
