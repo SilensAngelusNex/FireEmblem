@@ -42,8 +42,8 @@ WeaponInfo::WeaponInfo(std::string name, WeaponType type, AttribType offensive_s
 	WeaponInfo(name, type, offensive_stat, defensive_stat, {}, std::vector<int>{ 1 })
 {}
 
-WeaponInfo::WeaponInfo(std::string name, WeaponType type, AttribType offensive_stat, AttribType defensive_stat, std::array<int, CombatStats::size> base_stats, SingleRange ranges) :
-	EquipInfo(name, base_stats, ranges),
+WeaponInfo::WeaponInfo(std::string name, WeaponType type, AttribType offensive_stat, AttribType defensive_stat, std::array<int, CombatStats::size> base_stats, SingleRange range) :
+	EquipInfo(name, base_stats, range),
 	_type(type),
 	_offensive(offensive_stat),
 	_defensive(defensive_stat)
