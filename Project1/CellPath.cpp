@@ -1,6 +1,6 @@
 #include "CellPath.h"
 
-CellPath::CellPath(GridCell & head) : CellPath(head, MobilityList<bool>(std::array<bool, MobilityType::size>{true})) {};
+CellPath::CellPath(GridCell & head) : CellPath(head, MobilityList<bool>({true})) {};
 
 CellPath::CellPath(GridCell & head, const MobilityList<bool> traversal_vector) :
 	_traversal_vector(traversal_vector)

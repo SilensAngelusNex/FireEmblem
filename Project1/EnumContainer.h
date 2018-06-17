@@ -149,7 +149,6 @@ public:
 private:
 	using container = IterableBitset<EnumType::size>;
 	container _values;
-	explicit EnumContainer(container init_values);
 public:
 	EnumContainer() = default;
 	explicit EnumContainer(array init_values);
@@ -209,10 +208,6 @@ public:
 
 
 template<typename EnumType>
-EnumContainer<bool, EnumType>::EnumContainer(container init_values) :
-	_values(init_values)
-{}
-template<typename EnumType>
 EnumContainer<bool, EnumType>::EnumContainer(array init_values) :
 	_values(init_values)
 {}
@@ -270,7 +265,9 @@ constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator^
 }
 template<typename EnumType>
 constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator~() const {
-	return EnumContainer<bool, EnumType>(~(this->_values));
+	EnumContainer<bool, EnumType> result;
+	result._values = ~this->_values;
+	return result;
 }
 
 template<typename EnumType>

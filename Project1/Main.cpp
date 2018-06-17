@@ -4,6 +4,7 @@
 #include "UtilTests.h"
 #include "AttributeList.h"
 #include "WeaponList.h"
+#include "Range.h"
 
 int main(int  /*argc*/, char ** /*argv*/) {
 

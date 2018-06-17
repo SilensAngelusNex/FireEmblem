@@ -27,13 +27,3 @@ public:
 	bool operator!=(const SingleRange& rhs);
 	bool operator<(const SingleRange& rhs);
 };
-
-class Range : protected RangeUtil {
-private:
-	MobilityList<Distances> _matrix;
-public:
-	Range(std::vector<SingleRange> ranges);
-	
-	operator std::vector<SingleRange>();
-	operator std::map<Movement, Distances>();
-};
