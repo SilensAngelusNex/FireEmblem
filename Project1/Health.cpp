@@ -31,7 +31,8 @@ int Health::heal(Healing to_heal) {
 }
 
 int Health::percentRemaining() const {
-	return 1005 * getCurrentHp() / (10 * getMaxHp());
+	int max = getMaxHp();
+	return (200 * getCurrentHp() + max) / (2 * max);
 }
 
 bool Health::isDead() const {
