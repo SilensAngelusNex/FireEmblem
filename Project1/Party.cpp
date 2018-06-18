@@ -14,6 +14,30 @@ Party::Party(std::string name, std::vector<UnitData> unit_data) : PartyBase(name
 Party::Party(PartyData data) : PartyBase(data)
 {}
 
+void Party::startTurn(PartyBase& turn_party) {
+	if (this == &turn_party) {
+		for (UnitPtr& unit : _units) {
+			unit->refresh();
+		}
+	}
+	else {
+		for (UnitPtr& unit : _units) {
+			unit->newTurn();
+		}
+	}
+}
+void Party::insertUnit(Unit& unit) {
+	PartyBase::insertUnit(unit);
+}
+/*Use this function to determine when to change turns
+*/
+bool Party::isDone() {
+	bool isDone = false;
+	for (UnitPtr& unit : _units) {
+		isDone = isDone || unit->isTired(); // || unit->isDead();
+	}
+	return isDone;
+}
 Unit & Party::getUnit(int index) {
 	Expects(index >= 0 && index < _units.size());
 	return *_units[index];
@@ -36,25 +60,4 @@ std::vector<std::reference_wrapper<Unit>> Party::getOtherUnits(Unit& unit)
 		}
 	}
 	return vec;
-}
-
-void Party::startTurn(PartyBase party_turn) {
-	return PartyBase::startTurn(party_turn);
-}
-
-bool Party::isDone() {
-	return PartyBase::isDone();
-}
-
-bool Party::hasUnit(Unit & unit)
-{
-	return PartyBase::hasUnit(unit);
-}
-
-void Party::insertUnit(UnitData unit) {
-	PartyBase::insertUnit(unit);
-}
-
-void Party::changeParty(Unit& unit, Party& party) {
-	PartyBase::changeParty(unit, party);
 }

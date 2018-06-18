@@ -11,8 +11,6 @@ struct PartyData {
 };
 class PartyBase {
 private:
-	std::vector<UnitPtr>::const_iterator getPosition(const Unit& unit) const;
-	std::vector<UnitPtr>::iterator getPosition(const Unit& unit);
 	PartyBase(const PartyBase& party) = delete;
 	PartyBase& operator=(const PartyBase & party) = delete;
 protected:
@@ -22,10 +20,10 @@ protected:
 	PartyBase(std::string name);
 	PartyBase(std::string name, std::vector<UnitData> unit_data);
 	PartyBase(PartyData data);
-	void startTurn(PartyBase & turn_party);
-	bool isDone();
+	std::vector<UnitPtr>::const_iterator getPosition(const Unit& unit) const;
+	std::vector<UnitPtr>::iterator getPosition(const Unit& unit);
 	void insertUnit(UnitData unit);
-	void changeParty(Unit& unit, PartyBase& new_party);
+	void insertUnit(Unit& unit);
 public:
 	Party& getParty(Passkey<Map> key);
 	bool hasUnit(const Unit& unit) const;

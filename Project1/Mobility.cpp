@@ -17,8 +17,7 @@ const MobilityList<bool>& Mobility::getMobilityType() const
 	return _mobility;
 }
 
-const int& Mobility::getMove() const
-{
+const int& Mobility::getMove() const {
 	return _movement;
 }
 
