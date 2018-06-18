@@ -8,21 +8,19 @@ public:
 	Party(std::string name, std::vector<UnitData> unit_data);
 	Party(PartyData data);
 
-	Unit& getUnit(int index);
-	std::vector<std::reference_wrapper<Unit>> getUnits();
-	std::vector<std::reference_wrapper<Unit>> getOtherUnits(const Unit& unit);
+	std::vector<UnitRef> getUnits();
+	std::vector<UnitRef> getOtherUnits(const Unit& unit);
 
-	const Unit& getUnit(int index) const;
-	const std::vector<std::reference_wrapper<Unit>> getUnits() const;
-	const std::vector<std::reference_wrapper<Unit>> getOtherUnits(const Unit& unit) const;
+	std::vector<constUnitRef> getUnits() const;
+	std::vector<constUnitRef> getOtherUnits(const Unit& unit) const;
 
 	void startTurn(PartyBase& turn_party);
 	void insertUnit(Unit& unit);
 	bool isDone() const;
 
-	iterator begin() { return iterator(*this, 0); }
-	iterator end() { return iterator(*this); }
-	const_iterator cbegin() const { return const_iterator(*this, 0); }
-	const_iterator cend() const { return const_iterator(*this); }
+	iterator begin() { return _units.begin(); }
+	iterator end() { return _units.end(); }
+	const_iterator cbegin() const { return _units.cbegin(); }
+	const_iterator cend() const { return _units.cend(); }
 };
 

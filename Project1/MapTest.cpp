@@ -29,8 +29,9 @@ bool test::runMapTest() {
 	Party& party = map._parties.front();
 	Party& party2 = map._parties.back();
 	
-	Unit& mia = party.getUnit(0);
-	Unit& ike = party.getUnit(1);
+	auto it = party.begin();
+	Unit& mia = *it++;
+	Unit& ike = *it++;;
 	map.insertUnit(mia, map.getGridCell(10, 10));
 	std::vector <GridCell*> cells = move_helper.getAccesibleCells(mia);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;

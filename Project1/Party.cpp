@@ -16,13 +16,13 @@ Party::Party(PartyData data) : PartyBase(data)
 
 void Party::startTurn(PartyBase& turn_party) {
 	if (this == &turn_party) {
-		for (UnitPtr& unit : _units) {
-			unit->refresh();
+		for (Unit& unit : _units) {
+			unit.refresh();
 		}
 	}
 	else {
-		for (UnitPtr& unit : _units) {
-			unit->newTurn();
+		for (Unit& unit : _units) {
+			unit.newTurn();
 		}
 	}
 }
@@ -33,43 +33,43 @@ void Party::insertUnit(Unit& unit) {
 */
 bool Party::isDone() const{
 	bool isDone = false;
-	for (const UnitPtr& unit : _units) {
-		isDone = isDone || unit->isTired(); // || unit->isDead();
+	for (const Unit& unit : _units) {
+		isDone = isDone || unit.isTired(); // || unit->isDead();
 	}
 	return isDone;
 }
-Unit& Party::getUnit(int index) {
-	Expects(index >= 0 && index < _units.size());
-	return *_units[index];
-}
 
-std::vector<std::reference_wrapper<Unit>> Party::getUnits() {
-	return std::as_const(*this).getUnits();
-}
-
-std::vector<std::reference_wrapper<Unit>> Party::getOtherUnits(const Unit& unit) {
-	return std::as_const(*this).getOtherUnits(unit);
-}
-
-const Unit&  Party::getUnit(int index) const{
-	Expects(index >= 0 && index < _units.size());
-	return *_units[index];
-}
-
-const std::vector<std::reference_wrapper<Unit>> Party::getUnits() const{
-	auto vec = std::vector<std::reference_wrapper<Unit>>();
+std::vector<UnitRef> Party::getUnits() {
+	auto vec = std::vector<UnitRef>();
 	for (auto& unit : _units) {
-		vec.emplace_back(*unit);
+		vec.emplace_back(unit);
 	}
 	return vec;
 }
 
-const std::vector<std::reference_wrapper<Unit>> Party::getOtherUnits(const Unit& unit) const
-{
-	auto vec = std::vector<std::reference_wrapper<Unit>>();
-	for (auto& a : _units) {
-		if (unit != *a) {
-			vec.emplace_back(*a);
+std::vector<UnitRef> Party::getOtherUnits(const Unit& unit) {
+	auto vec = std::vector<UnitRef>();
+	for (Unit& other : _units) {
+		if (unit != other) {
+			vec.emplace_back(other);
+		}
+	}
+	return vec;
+}
+
+std::vector<constUnitRef> Party::getUnits() const {
+	auto vec = std::vector<constUnitRef>();
+	for (auto& unit : _units) {
+		vec.emplace_back(unit);
+	}
+	return vec;
+}
+
+std::vector<constUnitRef> Party::getOtherUnits(const Unit& unit) const{
+	auto vec = std::vector<constUnitRef>();
+	for (auto& other : _units) {
+		if (unit != other) {
+			vec.emplace_back(other);
 		}
 	}
 	return vec;
