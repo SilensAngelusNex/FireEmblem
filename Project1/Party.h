@@ -19,5 +19,10 @@ public:
 	void startTurn(PartyBase& turn_party);
 	void insertUnit(Unit& unit);
 	bool isDone() const;
+
+	iterator begin() { return _units.begin(); }
+	iterator end() { return _units.end(); }
+	const_iterator cbegin() const { return _units.cbegin(); }
+	const_iterator cend() const { return _units.cend(); }
 };
 

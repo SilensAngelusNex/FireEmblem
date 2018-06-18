@@ -19,11 +19,11 @@ PartyBase::PartyBase(PartyData data) :
 {}
 
 std::vector<UnitPtr>::const_iterator PartyBase::getPosition(const Unit & unit) const {
-	return std::find_if(_units.begin(), _units.end(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
+	return std::find_if(cbegin(), cend(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
 }
 
 std::vector<UnitPtr>::iterator PartyBase::getPosition(const Unit & unit) {
-	return std::find_if(_units.begin(), _units.end(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
+	return std::find_if(begin(), end(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
 }
 
 Party& PartyBase::getParty(Passkey<Map> key) {

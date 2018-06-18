@@ -28,9 +28,10 @@ public:
 	const GridCell & getHead() const;
 
 	using iterator = std::list<CellCost>::iterator;
-	using const_iterator = std::list<CellCost>::iterator;
+	using const_iterator = std::list<CellCost>::const_iterator;
 	iterator begin() { return _path.begin(); }
 	iterator end() { return _path.end(); }
-
+	const_iterator cbegin() const { return _path.cbegin(); }
+	const_iterator cend() const { return _path.cend(); }
 };
 

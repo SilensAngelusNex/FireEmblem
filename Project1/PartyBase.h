@@ -27,6 +27,12 @@ protected:
 
 	void insertUnit(UnitData unit);
 	void insertUnit(Unit& unit);
+	using iterator = std::vector<UnitPtr>::iterator;
+	using const_iterator = std::vector<UnitPtr>::const_iterator;
+	iterator begin() { return _units.begin(); }
+	iterator end() { return _units.end(); }
+	const_iterator cbegin() const { return _units.cbegin(); }
+	const_iterator cend() const { return _units.cend(); }
 public:
 	Party& getParty(Passkey<Map> key);
 	bool hasUnit(const Unit& unit) const;

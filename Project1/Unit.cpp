@@ -41,13 +41,13 @@ Combat& Unit::getCombat() {
 }
 
 void Unit::refresh() {
-	//TODO(Torrey): Code start of turn stuff.
+	//TODO(T or W): Code start of turn stuff.
 }
 void Unit::newTurn() {
-	//TODO(Torrey): code start of turn stuff.
+	//TODO(T or W): code start of turn stuff.
 }
 bool Unit::isTired() const {
-	return true; //TODO(Torrey): add tired logic
+	return true; //TODO(Weston): Should this be in a component like isDead() ? 
 }
 Stats& Unit::getStats() {
 	return _stats;
