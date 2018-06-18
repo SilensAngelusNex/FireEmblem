@@ -11,10 +11,10 @@ public:
 	Mobility(Unit& owner);
 	Mobility(Unit& owner, int move, MobilityList<bool> mobility_type);
 
-	const MobilityList<bool>& getMobilityType() const;
+	const MobilityList<bool>& getMobilityList() const;
 	const int& getMove() const;
 
-	MobilityList<bool>& getMobilityType();
+	MobilityList<bool>& getMobilityList();
 	int& getMove();
 
 	bool canPass(MobilityType mobility_type, const Unit * unit) const;

@@ -16,12 +16,15 @@ private:
 protected:
 	std::string _party_name;
 	std::vector<UnitPtr> _units;
+
 	PartyBase();
 	PartyBase(std::string name);
 	PartyBase(std::string name, std::vector<UnitData> unit_data);
 	PartyBase(PartyData data);
+
 	std::vector<UnitPtr>::const_iterator getPosition(const Unit& unit) const;
 	std::vector<UnitPtr>::iterator getPosition(const Unit& unit);
+
 	void insertUnit(UnitData unit);
 	void insertUnit(Unit& unit);
 public:

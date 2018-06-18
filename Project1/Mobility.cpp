@@ -12,8 +12,7 @@ Mobility::Mobility(Unit& owner, int move, MobilityList<bool> mobility_type) :
 	_mobility(mobility_type)
 {}
 
-const MobilityList<bool>& Mobility::getMobilityType() const
-{
+const MobilityList<bool>& Mobility::getMobilityList() const {
 	return _mobility;
 }
 
@@ -21,13 +20,11 @@ const int& Mobility::getMove() const {
 	return _movement;
 }
 
-MobilityList<bool>& Mobility::getMobilityType()
-{
+MobilityList<bool>& Mobility::getMobilityList() {
 	return _mobility;
 }
 
-int& Mobility::getMove()
-{
+int& Mobility::getMove() {
 	return _movement;
 }
 

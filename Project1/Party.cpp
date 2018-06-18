@@ -31,19 +31,32 @@ void Party::insertUnit(Unit& unit) {
 }
 /*Use this function to determine when to change turns
 */
-bool Party::isDone() {
+bool Party::isDone() const{
 	bool isDone = false;
-	for (UnitPtr& unit : _units) {
+	for (const UnitPtr& unit : _units) {
 		isDone = isDone || unit->isTired(); // || unit->isDead();
 	}
 	return isDone;
 }
-Unit & Party::getUnit(int index) {
+Unit& Party::getUnit(int index) {
 	Expects(index >= 0 && index < _units.size());
 	return *_units[index];
 }
 
 std::vector<std::reference_wrapper<Unit>> Party::getUnits() {
+	return std::as_const(*this).getUnits();
+}
+
+std::vector<std::reference_wrapper<Unit>> Party::getOtherUnits(const Unit& unit) {
+	return std::as_const(*this).getOtherUnits(unit);
+}
+
+const Unit&  Party::getUnit(int index) const{
+	Expects(index >= 0 && index < _units.size());
+	return *_units[index];
+}
+
+const std::vector<std::reference_wrapper<Unit>> Party::getUnits() const{
 	auto vec = std::vector<std::reference_wrapper<Unit>>();
 	for (auto& unit : _units) {
 		vec.push_back(*unit.get());
@@ -51,7 +64,7 @@ std::vector<std::reference_wrapper<Unit>> Party::getUnits() {
 	return vec;
 }
 
-std::vector<std::reference_wrapper<Unit>> Party::getOtherUnits(Unit& unit)
+const std::vector<std::reference_wrapper<Unit>> Party::getOtherUnits(const Unit& unit) const
 {
 	auto vec = std::vector<std::reference_wrapper<Unit>>();
 	for (auto& a : _units) {
