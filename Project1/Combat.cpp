@@ -77,10 +77,10 @@ optional_pair<int, int> Combat::do_combat(Unit& defender) {
 		if (!defender.getHealth().isDead()) {
 			result.second = std::max(result.second, defender.getCombat().strike(attacker));
 		}
-		if (spd_adv > 3 && !attacker.getHealth().isDead()) {
+		if (spd_adv > SPEED_DIFFERENCE_TO_DOUBLE && !attacker.getHealth().isDead()) {
 			result.first = std::max(result.first, attacker.getCombat().strike(defender));
 		}
-		if (spd_adv < -3 && !defender.getHealth().isDead()) {
+		if (spd_adv < -SPEED_DIFFERENCE_TO_DOUBLE && !defender.getHealth().isDead()) {
 			result.second = std::max(result.second, defender.getCombat().strike(attacker));
 		}
 		return result;
