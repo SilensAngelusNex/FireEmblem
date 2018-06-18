@@ -17,8 +17,7 @@ PartyBase::PartyBase(std::string name) :
 {}
 
 PartyBase::PartyBase(std::string name, std::vector<UnitData> unit_data) :
-	_party_name(std::move(name))
-{
+	_party_name(std::move(name)) {
 	for (UnitData& data : unit_data) {
 		insertUnit(data);
 	}
@@ -27,9 +26,16 @@ PartyBase::PartyBase(PartyData data) :
 	PartyBase(data.name, data.unit_data)
 {}
 
-void PartyBase::startTurn() {
-	for (UnitPtr& unit : _units) {
-		//unit.refresh(); Maybe this should be accomplished with listeners
+void PartyBase::startTurn(PartyBase& turn_party) {
+	if (this == &turn_party) {
+		for (UnitPtr& unit : _units) {
+			unit->refresh();
+		}
+	}
+	else {
+		for (UnitPtr& unit : _units) {
+			unit->newTurn();
+		}
 	}
 }
 /*Use this function to determine when to change turns
@@ -37,7 +43,7 @@ void PartyBase::startTurn() {
 bool PartyBase::isDone() {
 	bool isDone = false;
 	for (UnitPtr& unit : _units) {
-		//	isDone = isDone || unit.isDone() || unit.isDead();
+		isDone = isDone || unit->isTired(); // || unit->isDead();
 	}
 	return isDone;
 }
@@ -48,6 +54,10 @@ Party& PartyBase::getParty(Passkey<Map> key) {
 
 bool PartyBase::hasUnit(const Unit& unit) const {
 	return (getPosition(unit) != _units.end());
+}
+
+bool PartyBase::operator==(const PartyBase & other) const {
+	return this == &other;
 }
 
 void PartyBase::insertUnit(UnitData unit) {

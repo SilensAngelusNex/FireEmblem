@@ -14,13 +14,12 @@ std::vector<GridCell*> MoveHelper::getAccesibleCells(Unit& unit) {
 	for (auto& pair : path_map) {
 		cells.push_back(pair.first);
 	}
-	std::vector<GridCell*> allied_cells = getAlliedCells(unit);
+	std::vector<GridCell*> allied_cells = getOtherAlliedCells(unit);
 	vectorSubtract(cells,allied_cells);
-	cells.push_back(&_map.getGridCell(unit));
 	return cells;
 }
 PathMap MoveHelper::findShortestPaths(Unit& unit) {
-	return _map.findShortestPaths(_map.getGridCell(unit), unit.getMobility().getMove(), unit.getMobility().getMobilityType());
+	return _map.findShortestPaths(_map.getGridCell(unit), unit.getMobility());
 }
 ///////////////////////////////////////////////////////////////////////////////
 CellPath MoveHelper::getShortestPath(Unit& unit, GridCell & destination) {
@@ -79,6 +78,15 @@ std::vector<GridCell*> MoveHelper::getAlliedCells(Unit& unit) {
 	}
 	return vec;
 }
+std::vector<GridCell*> MoveHelper::getOtherAlliedCells(Unit& unit) {
+	auto vec = std::vector<GridCell*>();
+	for (Unit& ally : _map.getParty(unit).getOtherUnits(unit)) {
+		if (_map.hasUnit(ally)) {
+			vec.push_back(&_map.getGridCell(ally));
+		}
+	}
+	return vec;
+}
 
 bool MoveHelper::canWalk(Unit& unit, CellPath path) {
 	bool valid = path.getHead() == _map.getGridCell(unit);
@@ -92,7 +100,7 @@ void MoveHelper::walkPath(Unit & unit, CellPath path) {
 	Expects(canWalk(unit, path));
 	CellWrap unit_cell = path.getHead();
 	for (auto it = std::next(path.begin()); it != path.end(); it++) {
-		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilityType()).has_value()) {
+		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilityType())) {
 			_map.moveUnit(unit_cell, it->second);
 		} else {// can't pass
 				return;

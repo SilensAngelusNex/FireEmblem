@@ -27,8 +27,19 @@ std::vector<std::reference_wrapper<Unit>> Party::getUnits() {
 	return vec;
 }
 
-void Party::startTurn() {
-	return PartyBase::startTurn();
+std::vector<std::reference_wrapper<Unit>> Party::getOtherUnits(Unit& unit)
+{
+	auto vec = std::vector<std::reference_wrapper<Unit>>();
+	for (auto& a : _units) {
+		if (unit != *a) {
+			vec.push_back(*a.get());
+		}
+	}
+	return vec;
+}
+
+void Party::startTurn(PartyBase party_turn) {
+	return PartyBase::startTurn(party_turn);
 }
 
 bool Party::isDone() {

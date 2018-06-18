@@ -51,6 +51,9 @@ public:
 	InventoryCommandable& getInventory();
 	//virtual Location& getLocation();
 	Combat& getCombat();
+	void refresh();
+	void newTurn();
+	bool isTired() const;
 
 	// Unit Internals
 	Stats& getStats();
@@ -94,4 +97,5 @@ public:
 		_exp.detach(observer);
 	}
 	bool operator==(const Unit & unit) const;
+	bool operator!=(const Unit & unit) const;
 };

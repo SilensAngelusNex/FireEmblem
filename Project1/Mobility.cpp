@@ -33,5 +33,5 @@ int& Mobility::getMove()
 }
 
 bool Mobility::canPass(MobilityType mobility_type, const Unit* unit) const {
-	return _mobility[mobility_type] && _owner._party->hasUnit(*unit);
+	return _mobility[mobility_type] && (unit == nullptr ||_owner._party->hasUnit(*unit));
 }

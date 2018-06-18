@@ -40,6 +40,15 @@ Combat& Unit::getCombat() {
 	return _combat;
 }
 
+void Unit::refresh() {
+	//TODO(Torrey): Code start of turn stuff.
+}
+void Unit::newTurn() {
+	//TODO(Torrey): code start of turn stuff.
+}
+bool Unit::isTired() const {
+	return true; //TODO(Torrey): add tired logic
+}
 Stats& Unit::getStats() {
 	return _stats;
 }
@@ -62,4 +71,9 @@ CONTEXT& Unit::getContext() {
 
 bool Unit::operator==(const Unit& unit) const {
 	return this == &unit;
+}
+
+bool Unit::operator!=(const Unit & unit) const
+{
+	return this != &unit;
 }

@@ -4,6 +4,7 @@
 #include <optional>
 
 class GridCell;
+//typedef bool(*boolFunc)(Unit* param);
 class CellEdge {
 private:
 	const MobilityList<std::optional<int>> _costs = MobilityList<std::optional<int>>();
@@ -15,9 +16,12 @@ public:
 	GridCell& _cell;
 	CellEdge(GridCell& cell, MobilityList<std::optional<int>> costs);
 	std::optional<int> getCost(MobilityType mobility_type) const;
+	std::optional<int> getCost(Mobility mobility);
 	std::optional<int> getCost(MobilityList<bool> mobility_list) const;
 	std::optional<int> getCost(MobilityList<bool> mobility_list, bool intangible) const;
-	std::optional<int> getCost(Mobility mobility) const;
+	//std::optional<int> getCost(MobilityList<bool> mobility_list, bool(*canPass)(Unit *)) const;
+	//static boolFunc canPass(bool intangible);
+
 
 	bool operator==(const CellEdge & c) const;
 };
