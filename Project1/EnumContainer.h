@@ -152,6 +152,7 @@ private:
 public:
 	EnumContainer() = default;
 	explicit EnumContainer(array init_values);
+	explicit EnumContainer(EnumType set_type);
 
 	constexpr EnumContainer& operator+=(const EnumContainer& rhs);
 	constexpr EnumContainer& operator-=(const EnumContainer& rhs);
@@ -211,6 +212,13 @@ template<typename EnumType>
 EnumContainer<bool, EnumType>::EnumContainer(array init_values) :
 	_values(init_values)
 {}
+
+template<typename EnumType>
+inline EnumContainer<bool, EnumType>::EnumContainer(EnumType set_type) :
+	_values()
+{
+	(*this)[set_type] = true;
+}
 
 template<typename EnumType>
 constexpr EnumContainer<bool, EnumType>& EnumContainer<bool, EnumType>::operator+=(const EnumContainer<bool, EnumType>& rhs) {

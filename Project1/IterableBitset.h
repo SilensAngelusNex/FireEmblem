@@ -85,7 +85,7 @@ public:
 		return rhs;
 	}
 	constexpr IterableBitset operator|(IterableBitset rhs) const {
-		rhs &= _values;
+		rhs |= _values;
 		return rhs;
 	}
 	constexpr IterableBitset operator^(IterableBitset rhs) const {

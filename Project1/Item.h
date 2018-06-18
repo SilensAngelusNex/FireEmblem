@@ -12,9 +12,7 @@ enum _EQUIP_SLOTS { ON_HAND, OFF_HAND, CHEST, ENUM_END };
 using EquipSlot = Enum<_EQUIP_SLOTS>;
 
 
-/**
-	
-*/
+class ItemEquip;
 class Item {
 public:
 	Item() = default;
@@ -26,11 +24,9 @@ public:
 
 	virtual const std::string& getName() const = 0;
 
-	virtual bool is_equippable() const {
-		return false;
-	}
+	virtual bool is_equippable() const;
+	virtual void equip(Unit& /*unit*/, EquipSlot /*slot*/);
 
-	virtual void equip(Unit&  /*unit*/, EquipSlot  /*slot*/) {
-		throw GameException("Item cannot be equipped.");
-	}
+	ItemEquip& getItemEquip();
+	const ItemEquip& getItemEquip() const;
 };

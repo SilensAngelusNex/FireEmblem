@@ -23,7 +23,7 @@ public:
 	Damage get_normal_damage(const Unit& attacker, const Unit& defender) const override;
 	Damage get_crit_damage(const Unit& attacker, const Unit& defender) const override;
 
-	EquipInfo::Range getRange() const override;
+	Range getAttackRange() const override;
 
 	int avoid(const AttributeList& stats) const override;
 	int dodge(const AttributeList& stats) const override;

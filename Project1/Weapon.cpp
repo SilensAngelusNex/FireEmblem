@@ -21,7 +21,7 @@ Damage Weapon::get_crit_damage(const Unit& attacker, const Unit&  /*defender*/) 
 	return Damage(attacker.getStats().might(), dmg_type(), true);
 }
 
-EquipInfo::Range Weapon::getRange() const {
+Range Weapon::getAttackRange() const {
 	return _info->_range;
 }
 
