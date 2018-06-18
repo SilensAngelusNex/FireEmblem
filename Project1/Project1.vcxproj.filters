@@ -192,6 +192,9 @@
     <ClCompile Include="PartyBase.cpp">
       <Filter>src\party</Filter>
     </ClCompile>
+    <ClCompile Include="PartyIterator.cpp">
+      <Filter>src\party</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -322,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="Mobility.h">
       <Filter>inc\unit\component</Filter>
+    </ClInclude>
+    <ClInclude Include="PartyIterator.h">
+      <Filter>inc\party</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

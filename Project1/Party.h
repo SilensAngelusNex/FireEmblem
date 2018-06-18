@@ -20,9 +20,9 @@ public:
 	void insertUnit(Unit& unit);
 	bool isDone() const;
 
-	iterator begin() { return _units.begin(); }
-	iterator end() { return _units.end(); }
-	const_iterator cbegin() const { return _units.cbegin(); }
-	const_iterator cend() const { return _units.cend(); }
+	iterator begin() { return iterator(*this, 0); }
+	iterator end() { return iterator(*this); }
+	const_iterator cbegin() const { return const_iterator(*this, 0); }
+	const_iterator cend() const { return const_iterator(*this); }
 };
 
