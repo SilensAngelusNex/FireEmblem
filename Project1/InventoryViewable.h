@@ -33,7 +33,7 @@ inline std::map<RangeUtil::Movement, RangeUtil::Distances> InventoryViewable::ge
 
 	for (ItemEquip* e : _equipment) {
 		if (e != nullptr) {
-			SingleRange range = RangeGetter::getRange(*e);
+			Range range = RangeGetter::getRange(*e);
 			result[range._type] |= range._range;
 		}
 	}
@@ -43,7 +43,7 @@ inline std::map<RangeUtil::Movement, RangeUtil::Distances> InventoryViewable::ge
 		if (item.is_equippable()) {
 			const ItemEquip& itemEquip = item.getItemEquip();
 			if (itemEquip.can_equip(_owner)) {
-				SingleRange range = RangeGetter::getRange(itemEquip);
+				Range range = RangeGetter::getRange(itemEquip);
 				result[range._type] |= range._range;
 			}
 		}

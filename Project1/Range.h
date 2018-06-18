@@ -14,22 +14,22 @@ public:
 	using Movement = MobilityList<bool>;
 };
 
-class SingleRange : protected RangeUtil {
+class Range : protected RangeUtil {
 public:
 	Movement _type;
 	Distances _range;
 
-	SingleRange();
-	SingleRange(std::vector<int> distances);
-	SingleRange(MobilityType type, std::vector<int> distances);
-	SingleRange(Movement move, Distances dist);
+	Range();
+	Range(std::vector<int> distances);
+	Range(MobilityType type, std::vector<int> distances);
+	Range(Movement move, Distances dist);
 
-	bool operator==(const SingleRange& rhs) const;
-	bool operator!=(const SingleRange& rhs) const;
-	bool operator<=(const SingleRange& rhs) const;
-	bool operator>=(const SingleRange& rhs) const;
-	bool operator<(const SingleRange& rhs) const;
-	bool operator>(const SingleRange& rhs) const;
+	bool operator==(const Range& rhs) const;
+	bool operator!=(const Range& rhs) const;
+	bool operator<=(const Range& rhs) const;
+	bool operator>=(const Range& rhs) const;
+	bool operator<(const Range& rhs) const;
+	bool operator>(const Range& rhs) const;
 
 	auto operator[](MobilityType t);
 	bool operator[](MobilityType t) const;

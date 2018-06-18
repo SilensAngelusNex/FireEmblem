@@ -24,8 +24,8 @@ public:
 	virtual Damage get_normal_damage(const Unit& attacker, const Unit& defender) const;
 	virtual Damage get_crit_damage(const Unit& attacker, const Unit& defender) const;
 
-	virtual SingleRange getAttackRange() const;
-	virtual SingleRange getAssistRange() const;
+	virtual Range getAttackRange() const;
+	virtual Range getAssistRange() const;
 
 	virtual int avoid(const AttributeList& stats) const = 0;
 	virtual int dodge(const AttributeList& stats) const = 0;

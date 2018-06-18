@@ -21,8 +21,8 @@ const ItemEquip& InventoryViewable::operator[](EquipSlot slot) const {
 }
 
 
-struct AttackRanges { static SingleRange getRange(const ItemEquip& item) { return item.getAttackRange(); } };
-struct AssistRanges { static SingleRange getRange(const ItemEquip& item) { return item.getAssistRange(); } };
+struct AttackRanges { static Range getRange(const ItemEquip& item) { return item.getAttackRange(); } };
+struct AssistRanges { static Range getRange(const ItemEquip& item) { return item.getAssistRange(); } };
 
 std::map<RangeUtil::Movement, RangeUtil::Distances> InventoryViewable::getAttackRanges() const {
 	return getRanges<AttackRanges>();

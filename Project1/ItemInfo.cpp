@@ -1,18 +1,18 @@
 #include "ItemInfo.h"
 
 EquipInfo::EquipInfo() :
-	EquipInfo("~NULL ITEM~", {}, SingleRange())
+	EquipInfo("~NULL ITEM~", {}, Range())
 {}
 
 EquipInfo::EquipInfo(std::string name) :
-	EquipInfo(name, {}, SingleRange())
+	EquipInfo(name, {}, Range())
 {}
 
 EquipInfo::EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats) :
 	EquipInfo(name, base_stats, std::vector<int>{})
 {}
 
-EquipInfo::EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats, SingleRange range) :
+EquipInfo::EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats, Range range) :
 	_name(std::move(name)),
 	_stats(std::move(base_stats)),
 	_range(range)
@@ -42,7 +42,7 @@ WeaponInfo::WeaponInfo(std::string name, WeaponType type, AttribType offensive_s
 	WeaponInfo(name, type, offensive_stat, defensive_stat, {}, std::vector<int>{ 1 })
 {}
 
-WeaponInfo::WeaponInfo(std::string name, WeaponType type, AttribType offensive_stat, AttribType defensive_stat, std::array<int, CombatStats::size> base_stats, SingleRange range) :
+WeaponInfo::WeaponInfo(std::string name, WeaponType type, AttribType offensive_stat, AttribType defensive_stat, std::array<int, CombatStats::size> base_stats, Range range) :
 	EquipInfo(name, base_stats, range),
 	_type(type),
 	_offensive(offensive_stat),
