@@ -10,9 +10,6 @@ struct PartyData {
 	std::vector<UnitData> unit_data;
 };
 class PartyBase {
-private:
-	PartyBase(const PartyBase& party) = delete;
-	PartyBase& operator=(const PartyBase & party) = delete;
 protected:
 	std::string _party_name;
 	std::vector<UnitPtr> _units;
@@ -37,5 +34,8 @@ public:
 	Party& getParty(Passkey<Map> key);
 	bool hasUnit(const Unit& unit) const;
 	bool operator==(const PartyBase& other) const;
+
+	PartyBase(const PartyBase& party) = delete;
+	PartyBase& operator=(const PartyBase & party) = delete;
 };
 

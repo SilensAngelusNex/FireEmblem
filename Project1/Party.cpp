@@ -3,7 +3,7 @@
 #include <utility>
 
 Party::Party() 
-{}
+= default;
 
 Party::Party(std::string name) : PartyBase(name)
 {}

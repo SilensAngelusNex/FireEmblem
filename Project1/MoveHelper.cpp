@@ -100,7 +100,7 @@ void MoveHelper::walkPath(Unit & unit, CellPath path) {
 	Expects(canWalk(unit, path));
 	CellWrap unit_cell = path.getHead();
 	for (auto it = std::next(path.begin()); it != path.end(); it++) {
-		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilityList())) {
+		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilityList()).has_value()) {
 			_map.moveUnit(unit_cell, it->second);
 		} else {// can't pass
 				return;
