@@ -27,7 +27,7 @@ std::vector<UnitPtr>::iterator PartyBase::getPosition(const Unit & unit) {
 }
 
 Party& PartyBase::getParty(Passkey<Map> key) {
-	return *(Party*)this;
+	return *reinterpret_cast<Party*>(this);
 }
 
 void PartyBase::insertUnit(UnitData unit) {

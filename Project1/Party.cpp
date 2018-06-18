@@ -2,7 +2,7 @@
 
 #include <utility>
 
-Party::Party(): PartyBase()
+Party::Party() 
 {}
 
 Party::Party(std::string name) : PartyBase(name)
@@ -59,7 +59,7 @@ const Unit&  Party::getUnit(int index) const{
 const std::vector<std::reference_wrapper<Unit>> Party::getUnits() const{
 	auto vec = std::vector<std::reference_wrapper<Unit>>();
 	for (auto& unit : _units) {
-		vec.push_back(*unit.get());
+		vec.emplace_back(*unit);
 	}
 	return vec;
 }
@@ -69,7 +69,7 @@ const std::vector<std::reference_wrapper<Unit>> Party::getOtherUnits(const Unit&
 	auto vec = std::vector<std::reference_wrapper<Unit>>();
 	for (auto& a : _units) {
 		if (unit != *a) {
-			vec.push_back(*a.get());
+			vec.emplace_back(*a);
 		}
 	}
 	return vec;
