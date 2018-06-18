@@ -12,8 +12,8 @@ public:
 	const Item& operator[](int item_index) const;
 	const ItemEquip& operator[](EquipSlot slot) const;
 
-	std::map<RangeUtil::Movement, RangeUtil::Distances> getAttackRanges() const;
-	std::map<RangeUtil::Movement, RangeUtil::Distances> getAssistRanges() const;
+	std::map<MobilitySet, Range::DistanceSet> getAttackRanges() const;
+	std::map<MobilitySet, Range::DistanceSet> getAssistRanges() const;
 
 	int avoid(Passkey<Stats> key) const;
 	int dodge(Passkey<Stats> key) const;
@@ -24,12 +24,12 @@ public:
 protected:
 	explicit InventoryViewable(Unit& owner);
 	template<typename RangeGetter>
-	std::map<RangeUtil::Movement, RangeUtil::Distances> getRanges() const;
+	std::map<MobilitySet, Range::DistanceSet> getRanges() const;
 };
 
 template<typename RangeGetter>
-inline std::map<RangeUtil::Movement, RangeUtil::Distances> InventoryViewable::getRanges() const {
-	std::map<RangeUtil::Movement, RangeUtil::Distances> result;
+inline std::map<MobilitySet, Range::DistanceSet> InventoryViewable::getRanges() const {
+	std::map<MobilitySet, Range::DistanceSet> result;
 
 	for (ItemEquip* e : _equipment) {
 		if (e != nullptr) {

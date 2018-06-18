@@ -3,19 +3,19 @@
 #include <map>
 
 Range::Range() :
-	Range(Movement(), Distances())
+	Range(MobilitySet(), DistanceSet())
 {}
 
 Range::Range(std::vector<int> distances) :
-	Range(Movement(MobilityType::values::PROJECTILE), Distances(distances))
+	Range(MobilitySet(MobilityType::values::PROJECTILE), DistanceSet(distances))
 {}
 
 Range::Range(MobilityType type, std::vector<int> distances) :
-	Range(Movement(type), Distances(distances))
+	Range(MobilitySet(type), DistanceSet(distances))
 {}
 
 
-Range::Range(Movement move, Distances dist) :
+Range::Range(MobilitySet move, DistanceSet dist) :
 	_type(move),
 	_range(dist)
 {}

@@ -13,7 +13,7 @@ enum class _COMBAT_STATS { MIGHT, HIT, AVOID, CRIT, DODGE, ATK_SPD, ENUM_END };
 using CombatStats = Enum<_COMBAT_STATS>;
 
 
-class EquipInfo : protected RangeUtil {
+class EquipInfo {
 public:
 	const std::string _name;
 	const EnumContainer<int, CombatStats> _stats;

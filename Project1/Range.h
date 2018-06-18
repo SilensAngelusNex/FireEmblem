@@ -6,23 +6,18 @@
 #include "IterableBitset.h"
 #include "MobilityList.h"
 
-class RangeUtil {
+class Range {
 public:
 	constexpr static int MAX_RANGE = 32;
+	using DistanceSet = IterableBitset<MAX_RANGE>;
 
-	using Distances = IterableBitset<MAX_RANGE>;
-	using Movement = MobilityList<bool>;
-};
-
-class Range : protected RangeUtil {
-public:
-	Movement _type;
-	Distances _range;
+	MobilitySet _type;
+	DistanceSet _range;
 
 	Range();
 	Range(std::vector<int> distances);
 	Range(MobilityType type, std::vector<int> distances);
-	Range(Movement move, Distances dist);
+	Range(MobilitySet move, DistanceSet dist);
 
 	bool operator==(const Range& rhs) const;
 	bool operator!=(const Range& rhs) const;
