@@ -1,6 +1,5 @@
 #pragma once
 #include "Unit.h"
-#include "PartyIterator.h"
 #include <list>
 
 class Map;
