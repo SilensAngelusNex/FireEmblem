@@ -13,6 +13,7 @@
 #include "Dice.h"
 #include "Experience.h"
 #include "Mobility.h"
+#include "Health.h"
 
 using IDENTITY = std::string;
 using CONTEXT = Dice<100>;
@@ -26,6 +27,7 @@ private:
 	Experience _exp;
 	Inventory _inv;
 	Combat _combat;
+	Health _health;
 	Mobility _mobility;
 
 	//Location& _loc;
@@ -38,12 +40,14 @@ public:
 	const Mobility& getMobility() const;
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
+	const Health& getHealth() const;
 	//virtual const Location& getLocation() const;
 
 	// Commandable Unit
 	InventoryCommandable& getInventory();
 	//virtual Location& getLocation();
 	Combat& getCombat();
+	Health& getHealth();
 
 	// Unit Internals
 	Stats& getStats();

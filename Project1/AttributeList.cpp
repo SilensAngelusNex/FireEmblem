@@ -14,7 +14,7 @@ bool runAttributeListTests() {
 	AttributeList b(a);
 
 	for (AttribType j : AttribType::list) {
-		int i = j.pos();
+		size_t i = j.pos();
 		if ((a[j] != i) || (b[j] != i) || (f[j] != 0)) {
 			last_passed = false;
 			if (a[j] != i) {
@@ -41,7 +41,7 @@ bool runAttributeListTests() {
 	AttributeList e = c - a;
 
 	for (AttribType j : AttribType::list) {
-		int i = j.pos();
+		size_t i = j.pos();
 		if ((c[j] != 2 * i) || (d[j] != 0 * i) || (e[j] != i)) {
 			last_passed = false;
 			if (c[j] != 2 * i) {

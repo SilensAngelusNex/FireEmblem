@@ -25,7 +25,7 @@ public:
 	EquipInfo();
 	EquipInfo(std::string name);
 	EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats);
-	EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats, std::array<bool, MAX_RANGE> ranges);
+	EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats, std::array<bool, MAX_RANGE> range);
 	EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats, std::vector<int> ranges);
 
 	int operator[] (CombatStats stat) const;

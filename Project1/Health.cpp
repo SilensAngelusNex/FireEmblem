@@ -1,33 +1,49 @@
 #include "Health.h"
 
-HealthValues::HealthValues(int con) : HealthValues(con, 0, 0, false) {}
-HealthValues::HealthValues(int con, int missing_hp) : HealthValues(con, missing_hp, 0, false) {}
-HealthValues::HealthValues(int con, int missing_hp, int shield_hp) : HealthValues(con, missing_hp, shield_hp, false) {}
+#include <algorithm>
 
-HealthValues::HealthValues(int con, int missing_hp, int shield_hp, bool has_divine_shield) :
-	_total_hp(10 * con),
-	_current_hp(_total_hp - missing_hp),
-	_shield_hp(shield_hp),
-	_has_divine_shield(has_divine_shield)
+#include "Unit.h"
+
+Health::Health(Unit& owner) :
+	Health(owner, 0)
 {}
 
-int HealthValues::percentRemaining() {
-	return 100 * _current_hp / _total_hp;
-}
-
-
-Health::Health(int con) :
-	_values(con)
+Health::Health(Unit& owner, int missing_hp) :
+	Component(owner),
+	_missing_hp(missing_hp)
 {}
 
-Health::Health(HealthValues values) :
-	_values(values)
-{}
 
-int Health::percentRemaining() {
-	return _values.percentRemaining();
+int Health::takeDamage(Damage to_take) {
+	// Pass Damage and/or difference by ref to skills
+	//On taking damage, on dealing damage
+	int difference = std::min(to_take.getDamageTo(_owner), getMaxHp() - _missing_hp);
+	_missing_hp += difference;
+	return difference;
 }
 
-int Health::isDead() {
-	return _values._current_hp <= 0;
+int Health::heal(Healing to_heal) {
+	// Pass Healing and/or difference by ref to skills
+	// On heal, on healed
+	int difference = std::min(to_heal.getHealingFor(_owner), _missing_hp);
+	_missing_hp -= difference;
+	return difference;
 }
+
+int Health::percentRemaining() const {
+	int max = getMaxHp();
+	return (200 * getCurrentHp() + max) / (2 * max);
+}
+
+bool Health::isDead() const {
+	return getCurrentHp() <= 0;
+}
+
+int Health::getMaxHp() const {
+	return 10 * _owner.getStats()[AttribType::values::CON];
+}
+
+int Health::getCurrentHp() const {
+	return getMaxHp() - _missing_hp;
+}
+
