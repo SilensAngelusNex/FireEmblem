@@ -15,6 +15,8 @@ class Combat : Component<Unit>, public ObservableDamage {
 private:
 	// Combat and Strike Skills
 public:
+	constexpr static int SPEED_DIFFERENCE_TO_DOUBLE = 3;
+
 	explicit Combat(Unit& owner);
 
 	void combat(Unit& defender);
