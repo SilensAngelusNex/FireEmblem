@@ -16,5 +16,5 @@ ItemEquip& Item::getItemEquip() {
 
 const ItemEquip& Item::getItemEquip() const {
 	Expects(is_equippable());
-	return dynamic_cast<const ItemEquip&>(*this);
+	return static_cast<const ItemEquip&>(*this);
 }
