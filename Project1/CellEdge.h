@@ -19,8 +19,6 @@ public:
 	std::optional<int> getCost(Mobility mobility);
 	std::optional<int> getCost(MobilityList<bool> mobility_list) const;
 	std::optional<int> getCost(MobilityList<bool> mobility_list, bool intangible) const;
-	//std::optional<int> getCost(MobilityList<bool> mobility_list, bool(*canPass)(Unit *)) const;
-	//static boolFunc canPass(bool intangible);
 
 
 	bool operator==(const CellEdge & c) const;

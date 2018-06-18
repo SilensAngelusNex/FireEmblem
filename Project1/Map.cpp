@@ -87,10 +87,19 @@ const Party& Map::getParty(Unit & unit) const {
 }
 ///////////////////////////////////////////////////////////
 PathMap Map::findShortestPaths(GridCell& start) {
-	return std::as_const(*this).findShortestPaths(start, INT_MAX, MobilityList<bool>({true,}), false);
+	return std::as_const(*this).findShortestPaths(start);
 }
+
 PathMap Map::findShortestPaths(GridCell & start, Mobility & mobility) {
 	return std::as_const(*this).findShortestPaths(start, mobility);
+}
+
+PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) {
+	return std::as_const(*this).findShortestPaths(start, max_move, mobility);
+}
+
+PathMap Map::findShortestPaths(GridCell & start, int max_move, MobilityList<bool> mobility, bool intangible) {
+	return std::as_const(*this).findShortestPaths(start, max_move, mobility, intangible);
 }
 const PathMap Map::findShortestPaths(GridCell& start) const {
 	return findShortestPaths(start, INT_MAX, MobilityList<bool>({ true, }), false);
@@ -144,14 +153,6 @@ const PathMap Map::findShortestPaths(GridCell& start,  Mobility& mobility) const
 const PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) const {
 	bool intangible = mobility[MobilityType::values::PROJECTILE] || mobility[MobilityType::values::ETHEREAL];
 	return findShortestPaths(start, max_move, mobility, intangible);
-}
-
-PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) { 
-	return std::as_const(*this).findShortestPaths(start, max_move, mobility);
-}
-
-PathMap Map::findShortestPaths(GridCell & start, int max_move, MobilityList<bool> mobility, bool intangible) {
-	return std::as_const(*this).findShortestPaths(start, max_move, mobility, intangible);
 }
 
 CellPath Map::getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilityList<bool> mobility) {

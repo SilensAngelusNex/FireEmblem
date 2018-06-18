@@ -44,33 +44,10 @@ std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_list, bool inta
 	}
 	return cost;
 }
-/*
-std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_list, bool(*canPass) (Unit*)) const {
-	std::optional<int> cost;
-	for (MobilityType mobility : MobilityType::list) {
-		if (mobility_list[mobility]) {
-			std::optional<int> edge_cost = getCost(mobility);
-			if (edge_cost.has_value() && canPass(_cell.getTile()._unit)) { // if we can step on the tile
-				if (cost < edge_cost) { // if the cost is best found yet
-					cost = edge_cost.value();
-				}
-			}
-		}
-	}
-	return cost;
-}
-*/
+ 
 bool CellEdge::canPass(bool intangible) const{
 	return  intangible || !_cell.getTile().hasUnit();
 }
-/*
-boolFunc CellEdge::canPass(bool intangible){
-	if (intangible) {
-		return[](Unit* unit)->bool{return true; };
-	} else 	return[](Unit* unit)->bool { return unit == nullptr; };
-
-}
-*/
 
 /**
 This function allows me to use list.remove() on CellEdge. Probably a bad idea
