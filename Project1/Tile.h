@@ -3,7 +3,6 @@
 class Unit;
 /** Tile held within a GridCell. Has no position information to keep the implementation OO
 */
-class Unit;
 class Tile {
 private:
 public:
