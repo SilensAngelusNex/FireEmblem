@@ -1,7 +1,6 @@
 #pragma once
 #include "Terrain.h"
-#include <vector>
-#include "Unit.h"
+class Unit;
 /** Tile held within a GridCell. Has no position information to keep the implementation OO
 */
 class Tile {

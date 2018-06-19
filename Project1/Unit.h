@@ -14,10 +14,16 @@
 #include "Experience.h"
 #include "Mobility.h"
 #include "Health.h"
+#include "PartyBase.h"
 
+class PartyBase;
 using IDENTITY = std::string;
 using CONTEXT = Dice<100>;
-
+struct UnitData {
+	IDENTITY name;
+	CONTEXT& context;
+	AttributeList stats;
+};
 class Unit : public Observable<ObserverDamage>, public Observable<ObserverExp> {
 private:
 	IDENTITY _id;
@@ -33,6 +39,7 @@ private:
 	//Location& _loc;
 public:
 	Unit(IDENTITY name, CONTEXT& context, AttributeList stats);
+	Unit(UnitData data) : Unit(data.name, data.context, data.stats) {};
 
 	// Viewable Unit
 	const IDENTITY& getIdentity() const;
@@ -47,6 +54,9 @@ public:
 	InventoryCommandable& getInventory();
 	//virtual Location& getLocation();
 	Combat& getCombat();
+	void refresh();
+	void newTurn();
+	bool isTired() const;
 	Health& getHealth();
 
 	// Unit Internals
@@ -55,6 +65,8 @@ public:
 	Experience& getExperience();
 	Inventory& getInventoryInternal();
 	CONTEXT& getContext();
+	PartyBase* _party;
+
 
 	// Movement
 	//Point position() const = 0;
@@ -88,4 +100,6 @@ public:
 	void detach(ObserverExp& observer) {
 		_exp.detach(observer);
 	}
+	bool operator==(const Unit & unit) const;
+	bool operator!=(const Unit & unit) const;
 };

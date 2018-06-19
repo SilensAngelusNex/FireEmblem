@@ -124,7 +124,7 @@ public:
 		return result;
 	}
 
-	int operator*() const {
+	bool operator*() const {
 		return _bits[_index];
 	}
 

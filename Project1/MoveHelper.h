@@ -1,8 +1,12 @@
 #pragma once
+#include <vector>
 #include "Map.h"
-#include "CellPath.h"
-class MoveHelper
-{
+
+class Map;
+class CellPath;
+class GridCell;
+class Unit;
+class MoveHelper {
 private:
 	Map& _map;
 	template<typename T>
@@ -26,6 +30,8 @@ public:
 	std::vector<GridCell*> getAttackableCells(Unit & unit, GridCell & cell);
 	std::vector<GridCell*> getAllAttackableCells(Unit & unit);
 	std::vector<GridCell*> getAlliedCells(Unit & unit);
+
+	std::vector<GridCell*> getOtherAlliedCells(Unit & unit);
 
 	bool canWalk(Unit & unit, CellPath path);
 

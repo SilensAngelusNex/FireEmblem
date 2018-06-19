@@ -1,5 +1,5 @@
 #include "GridCell.h"
-
+#include "CellEdge.h"
 #include <utility>
 GridCell::GridCell(Tile tile) :
 	_tile(std::move(tile))
@@ -28,7 +28,7 @@ void GridCell::addAdjacentCell(GridCell & new_cell)
 
 /** Adds _new_cell to the adjacency vector
 */
-void GridCell::addAdjacentCell(GridCell& new_cell, MobilityList<std::optional<int>> costs) {
+void GridCell::addAdjacentCell(GridCell& new_cell, MobilityCostSet costs) {
 	Expects(!getEdge(new_cell).has_value());
 	_adjacent_cells.emplace_back(new_cell, costs);
 }
@@ -45,7 +45,7 @@ bool GridCell::isAdjacent(const GridCell & other_cell, MobilityType mobility) co
 {
 	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
 }
-bool GridCell::isAdjacent(const GridCell & other_cell, MobilityList<bool> mobility) const
+bool GridCell::isAdjacent(const GridCell & other_cell, MobilitySet mobility) const
 {
 	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
 }
@@ -77,4 +77,8 @@ std::list<CellEdge> GridCell::getEdges() {
 }
 bool GridCell::operator==(const GridCell & cell) const {
 	return this == &cell;
+}
+
+bool GridCell::operator!=(const GridCell & cell) const {
+	return this != &cell;
 }

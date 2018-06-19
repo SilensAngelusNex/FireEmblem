@@ -3,20 +3,20 @@
 #include <utility>
 
 namespace Terrain_Costs {
-	MobilityList<std::optional<int>> plains({ 10, 10, 10, 1, 1 });
-	MobilityList<std::optional<int>> water({ std::nullopt, std::nullopt, 10, 1, 1 });
-	MobilityList<std::optional<int>> forest({ 20, 10, 20, 1, 1 });
-	MobilityList<std::optional<int>> mountain({ 30, 30, 10, 1, 1 });
-	MobilityList<std::optional<int>> wall({ std::nullopt, std::nullopt, std::nullopt, std::nullopt, 1 });
-	MobilityList<std::optional<int>> null({ std::nullopt });
+	MobilityCostSet plains({ 10, 10, 10, 1, 1 });
+	MobilityCostSet water({ std::nullopt, std::nullopt, 10, 1, 1 });
+	MobilityCostSet forest({ 20, 10, 20, 1, 1 });
+	MobilityCostSet mountain({ 30, 30, 10, 1, 1 });
+	MobilityCostSet wall({ std::nullopt, std::nullopt, std::nullopt, std::nullopt, 1 });
+	MobilityCostSet null({ std::nullopt });
 }
 
-Terrain::Terrain(std::string name, MobilityList<std::optional<int>> costs) :
+Terrain::Terrain(std::string name, MobilityCostSet costs) :
 	_name(std::move(name)),
 	_costs(costs)
 {}
 
-Terrain::Terrain() : Terrain("~NULL TERRAIN~", MobilityList<std::optional<int>>({ 10, 10, 10, 1, 1 })) {}
+Terrain::Terrain() : Terrain("~NULL TERRAIN~", MobilityCostSet({ 10, 10, 10, 1, 1 })) {}
 
 Terrain::Terrain(TerrainType type) {
 	switch(type) {
@@ -45,7 +45,7 @@ std::string& Terrain::getName() {
 	return _name;
 }
 
-MobilityList<std::optional<int>> Terrain::getCosts() {
+MobilityCostSet Terrain::getCosts() {
 	return _costs;
 }
 
@@ -55,7 +55,7 @@ const std::string& Terrain::getName() const {
 	return _name;
 }
 
-const MobilityList<std::optional<int>> Terrain::getCosts() const
+const MobilityCostSet Terrain::getCosts() const
 {
 	return _costs;
 }

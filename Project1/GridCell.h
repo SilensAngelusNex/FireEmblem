@@ -1,9 +1,9 @@
 #pragma once
 #include "Tile.h"
-#include <algorithm>
-#include <list>
-#include <optional>
 #include "CellEdge.h"
+#include <list>
+#include <vector>
+
 /** GridCell that composes the Map. Holds a Tile.
 */
 class GridCell {
@@ -19,7 +19,7 @@ public:
 	GridCell(Tile tile);
 
 	void addAdjacentCell(GridCell& new_cell);
-	void addAdjacentCell(GridCell& new_cell, MobilityList<std::optional<int>> costs);
+	void addAdjacentCell(GridCell& new_cell, MobilityCostSet costs);
 	void removeAdjacentCell(const GridCell& delete_cell);
 
 	Tile& getTile();
@@ -29,7 +29,7 @@ public:
 
 	bool isAdjacent(const GridCell& other_cell) const;
 	bool isAdjacent(const GridCell& other_cell, MobilityType mobility) const;
-	bool isAdjacent(const GridCell& other_cell, MobilityList<bool> mobility) const;
+	bool isAdjacent(const GridCell& other_cell, MobilitySet mobility) const;
 
 	const Tile& getTile() const;
 	const std::list<CellEdge> getEdges() const;
@@ -37,8 +37,5 @@ public:
 	const std::vector<GridCell*> getAdjacentCells() const;
 
 	bool operator==(const GridCell& cell) const;
-
-	
-
+	bool operator!=(const GridCell& cell) const;
 };
-

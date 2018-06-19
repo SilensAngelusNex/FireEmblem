@@ -152,6 +152,8 @@
     <ClCompile Include="Mobility.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
     <ClCompile Include="ObservableDamage.cpp" />
+    <ClCompile Include="Party.cpp" />
+    <ClCompile Include="PartyBase.cpp" />
     <ClCompile Include="Range.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestObservers.cpp" />
@@ -189,6 +191,8 @@
     <ClInclude Include="IterableBitset.h" />
     <ClInclude Include="ObservableExp.h" />
     <ClInclude Include="ObserverExp.h" />
+    <ClInclude Include="Party.h" />
+    <ClInclude Include="PartyBase.h" />
     <ClInclude Include="optional_pair.h" />
     <ClInclude Include="Passkey.h" />
     <ClInclude Include="Stats.h" />

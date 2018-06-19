@@ -1,8 +1,9 @@
 #include "CellEdge.h"
 #include "GridCell.h"
+#include "Mobility.h"
 
 
-CellEdge::CellEdge(GridCell& cell, MobilityList<std::optional<int>> costs) :
+CellEdge::CellEdge(GridCell& cell, MobilityCostSet costs) :
 	_cell(cell),
 	_costs(costs)
 {}
@@ -11,11 +12,11 @@ std::optional<int> CellEdge::getCost(MobilityType mobility) const {
 	return _costs[mobility];
 }
 
-std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type) const {
+std::optional<int> CellEdge::getCost(MobilitySet mobility_type) const {
 	return getCost(mobility_type, true);
 }
 
-std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_type, bool intangible) const{
+std::optional<int> CellEdge::getCost(MobilitySet mobility_type, bool intangible) const{
 	std::optional<int> cost;
 	for (MobilityType mobility : MobilityType::list) {
 		if (mobility_type[mobility]) {
@@ -34,10 +35,10 @@ bool CellEdge::canPass(bool intangible) const{
 	return intangible || !(_cell.getTile().hasUnit());
 }
 
-
-/**
-This function allows me to use list.remove() on CellEdge. Probably a bad idea
-*/
 bool CellEdge::operator== (const CellEdge& c) const {
 	return this->_cell == c._cell && this->_costs == c._costs;
 }
+bool CellEdge::operator!= (const CellEdge& c) const {
+	return this->_cell != c._cell && this->_costs != c._costs;
+}
+

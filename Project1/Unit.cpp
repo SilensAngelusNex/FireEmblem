@@ -10,7 +10,7 @@ Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
 	_inv(*this),
 	_combat(*this),
 	_health(*this),
-	_mobility(50, MobilityList<bool>(std::array<bool, MobilityType::size>{true}))
+	_mobility(*this, 50, MobilitySet(std::array<bool, MobilityType::size>{true}))
 {}
 
 const IDENTITY& Unit::getIdentity() const {
@@ -45,6 +45,15 @@ Combat& Unit::getCombat() {
 	return _combat;
 }
 
+void Unit::refresh() {
+	//TODO(T or W): Code start of turn stuff.
+}
+void Unit::newTurn() {
+	//TODO(T or W): code start of turn stuff.
+}
+bool Unit::isTired() const {
+	return true; //TODO(Weston): Should this be in a component like isDead() ? 
+}
 Health & Unit::getHealth() {
 	return _health;
 }
@@ -67,4 +76,13 @@ Inventory& Unit::getInventoryInternal() {
 
 CONTEXT& Unit::getContext() {
 	return _context;
+}
+
+bool Unit::operator==(const Unit& unit) const {
+	return this == &unit;
+}
+
+bool Unit::operator!=(const Unit & unit) const
+{
+	return this != &unit;
 }

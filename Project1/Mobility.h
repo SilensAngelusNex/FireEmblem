@@ -1,18 +1,27 @@
 #pragma once
 #include "MobilityList.h"
-class Mobility
-{
+#include "Component.h"
+#include <optional>
+
+class Unit;
+class CellEdge;
+
+class Mobility : Component<Unit> {
 	int _movement{50};
-	MobilityList<bool> _mobility;
+	MobilitySet _mobility;
 public:
-	Mobility();
-	Mobility(int move, MobilityList<bool> mobility_type);
+	Mobility(Unit& owner);
+	Mobility(Unit& owner, int move, MobilitySet mobility_type);
 
-	const MobilityList<bool>& getMobilityType() const;
-	const int& getMove() const;
-
-	MobilityList<bool>& getMobilityType();
 	int& getMove();
+	MobilitySet& getMobilitySet();
+
+	int getMove() const;
+	MobilitySet getMobilitySet() const;
+
+	bool canPass(const Unit * unit) const;
+	std::optional<int> getCost(const CellEdge& edge) const;
+
 
 };
 
