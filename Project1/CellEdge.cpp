@@ -8,11 +8,10 @@ CellEdge::CellEdge(GridCell& cell, MobilityList<std::optional<int>> costs) :
 	_costs(costs)
 {}
 
-std::optional<int> CellEdge::getCost(MobilityType mobility) const {
+std::optional<int> CellEdge::getCost(const MobilityType mobility) const {
 	return _costs[mobility];
 }
-std::optional<int> CellEdge::getCost(Mobility mobility)
- {
+std::optional<int> CellEdge::getCost(const Mobility mobility) const {
 	std::optional<int> cost;
 	for (MobilityType mobility_type : MobilityType::list) {
 		if (mobility.canPass(mobility_type, _cell.getTile()._unit)) {
@@ -24,11 +23,11 @@ std::optional<int> CellEdge::getCost(Mobility mobility)
 	}
 	return cost;
 }
-std::optional<int> CellEdge::getCost(MobilitySet mobility_type) const {
+std::optional<int> CellEdge::getCost(const MobilitySet mobility_type) const {
 	return getCost(mobility_type, true);
 }
 
-std::optional<int> CellEdge::getCost(MobilitySet mobility_type, bool intangible) const{
+std::optional<int> CellEdge::getCost(const MobilitySet mobility_type, bool intangible) const{
 	std::optional<int> cost;
 	for (MobilityType mobility : MobilityType::list) {
 		if (mobility_type[mobility]) {
