@@ -16,25 +16,34 @@ Party::Party(PartyData data) : PartyBase(data)
 
 void Party::startTurn(PartyBase& turn_party) {
 	if (this == &turn_party) {
-		for (Unit& unit : _units) {
-			unit.refresh();
+		for (auto& unit : _units) {
+			unit->refresh();
 		}
 	}
 	else {
-		for (Unit& unit : _units) {
-			unit.newTurn();
+		for (auto& unit : _units) {
+			unit->newTurn();
 		}
 	}
 }
-void Party::insertUnit(Unit& unit) {
+void Party::insertUnit(UnitPtr& unit) {
 	PartyBase::insertUnit(unit);
+}
+void Party::insertUnit(UnitData data) {
+	PartyBase::insertUnit(data);
+}
+UnitPtr Party::dropUnit(Unit& unit) {
+	return PartyBase::dropUnit(unit);
+}
+UnitPtr Party::dropUnit(const iterator& pos) {
+	return PartyBase::dropUnit(pos);
 }
 /*Use this function to determine when to change turns
 */
 bool Party::isDone() const{
 	bool isDone = true;
-	for (const Unit& unit : _units) {
-		isDone = isDone && (unit.isTired() || unit.getHealth().isDead());
+	for (auto& unit : _units) {
+		isDone = isDone && (unit->isTired() || unit->getHealth().isDead());
 	}
 	return isDone;
 }
@@ -42,16 +51,16 @@ bool Party::isDone() const{
 std::vector<UnitRef> Party::getUnits() {
 	auto vec = std::vector<UnitRef>();
 	for (auto& unit : _units) {
-		vec.emplace_back(unit);
+		vec.emplace_back(*unit);
 	}
 	return vec;
 }
 
 std::vector<UnitRef> Party::getOtherUnits(const Unit& unit) {
 	auto vec = std::vector<UnitRef>();
-	for (Unit& other : _units) {
-		if (unit != other) {
-			vec.emplace_back(other);
+	for (auto& other : _units) {
+		if (unit != *other) {
+			vec.emplace_back(*other);
 		}
 	}
 	return vec;
@@ -60,7 +69,7 @@ std::vector<UnitRef> Party::getOtherUnits(const Unit& unit) {
 std::vector<constUnitRef> Party::getUnits() const {
 	auto vec = std::vector<constUnitRef>();
 	for (auto& unit : _units) {
-		vec.emplace_back(unit);
+		vec.emplace_back(*unit);
 	}
 	return vec;
 }
@@ -68,8 +77,8 @@ std::vector<constUnitRef> Party::getUnits() const {
 std::vector<constUnitRef> Party::getOtherUnits(const Unit& unit) const{
 	auto vec = std::vector<constUnitRef>();
 	for (auto& other : _units) {
-		if (unit != other) {
-			vec.emplace_back(other);
+		if (unit != *other) {
+			vec.emplace_back(*other);
 		}
 	}
 	return vec;

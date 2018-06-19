@@ -19,7 +19,7 @@ public:
 	GridCell(Tile tile);
 
 	void addAdjacentCell(GridCell& new_cell);
-	void addAdjacentCell(GridCell& new_cell, MobilityList<std::optional<int>> costs);
+	void addAdjacentCell(GridCell& new_cell, MobilityCostSet costs);
 	void removeAdjacentCell(const GridCell& delete_cell);
 
 	Tile& getTile();
@@ -37,5 +37,5 @@ public:
 	const std::vector<GridCell*> getAdjacentCells() const;
 
 	bool operator==(const GridCell& cell) const;
-
+	bool operator!=(const GridCell& cell) const;
 };

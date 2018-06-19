@@ -15,7 +15,13 @@ public:
 	std::vector<constUnitRef> getOtherUnits(const Unit& unit) const;
 
 	void startTurn(PartyBase& turn_party);
-	void insertUnit(Unit& unit);
+	void insertUnit(UnitPtr& unit);
+	void insertUnit(UnitData data);
+
+	UnitPtr dropUnit(Unit& unit);
+	UnitPtr dropUnit(const iterator& pos);
+
+
 	bool isDone() const;
 
 	iterator begin() { return _units.begin(); }

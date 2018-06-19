@@ -1,8 +1,10 @@
 #pragma once
 #include "MobilityList.h"
 #include "Component.h"
+#include <optional>
 
 class Unit;
+class CellEdge;
 
 class Mobility : Component<Unit> {
 	int _movement{50};
@@ -17,8 +19,8 @@ public:
 	MobilitySet& getMobilityList();
 	int& getMove();
 
-	bool canPass(MobilityType mobility_type, const Unit * unit) const;
-
+	bool canPass(const Unit * unit) const;
+	std::optional<int> getCost(const CellEdge& edge) const;
 
 
 };

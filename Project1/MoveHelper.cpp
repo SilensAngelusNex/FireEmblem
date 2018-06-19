@@ -74,7 +74,9 @@ std::vector<GridCell*> MoveHelper::getAllAttackableCells(Unit& unit) {
 std::vector<GridCell*> MoveHelper::getAlliedCells(Unit& unit) {
 	auto vec = std::vector<GridCell*>();
 	for (Unit& ally : _map.getParty(unit).getUnits()) {
-		vec.push_back(&_map.getGridCell(ally));
+		if (_map.hasUnit(ally)) {
+			vec.push_back(&_map.getGridCell(ally));
+		}
 	}
 	return vec;
 }
@@ -98,7 +100,7 @@ bool MoveHelper::canWalk(Unit& unit, CellPath path) {
 
 void MoveHelper::walkPath(Unit & unit, CellPath path) {
 	Expects(canWalk(unit, path));
-	CellWrap unit_cell = path.getHead();
+	CellRef unit_cell = path.getHead();
 	for (auto it = std::next(path.begin()); it != path.end(); it++) {
 		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilityList()).has_value()) {
 			_map.moveUnit(unit_cell, it->second);

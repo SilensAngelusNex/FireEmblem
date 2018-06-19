@@ -7,6 +7,7 @@ class Party;
 class party_iterator;
 using UnitRef = std::reference_wrapper<Unit>;
 using constUnitRef = std::reference_wrapper<const Unit>;
+using UnitPtr = std::unique_ptr<Unit>;
 struct UnitData;
 struct PartyData {
 	std::string name;
@@ -14,11 +15,11 @@ struct PartyData {
 };
 class PartyBase {
 protected:
-	using iterator = std::list<Unit>::iterator;
-	using const_iterator = std::list<Unit>::const_iterator;
+	using iterator = std::list<UnitPtr>::iterator;
+	using const_iterator = std::list<UnitPtr>::const_iterator;
 
 	std::string _party_name;
-	std::list<Unit> _units;
+	std::list<UnitPtr> _units;
 
 	PartyBase();
 	PartyBase(std::string name);
@@ -29,7 +30,10 @@ protected:
 	iterator getPosition(const Unit& unit);
 
 	void insertUnit(UnitData unit);
-	void insertUnit(Unit& unit);
+	void insertUnit(UnitPtr& unit);
+
+	UnitPtr dropUnit(Unit& unit);
+	UnitPtr dropUnit(const iterator& pos);
 
 	iterator begin() { return _units.begin(); }
 	iterator end() { return _units.end(); }

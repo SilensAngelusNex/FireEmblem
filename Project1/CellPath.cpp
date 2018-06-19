@@ -10,7 +10,7 @@ CellPath::CellPath(GridCell & head, const MobilitySet traversal_vector) :
 	_path.emplace_back(0, head);
 }
 
-CellPath::CellPath(std::list<CellWrap> path, const MobilitySet traversal_vector) : CellPath(path.front(), traversal_vector) {
+CellPath::CellPath(std::list<CellRef> path, const MobilitySet traversal_vector) : CellPath(path.front(), traversal_vector) {
 	path.pop_front();
 	for (GridCell& cell : path) {
 		addTail(cell);

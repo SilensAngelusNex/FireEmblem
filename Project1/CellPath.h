@@ -3,8 +3,8 @@
 #include "MobilityList.h"
 class GridCell;
 //TODO(Torrey): Create Superclasses of this. EX: UnitPath has a unit to traverse the Map.
-using CellWrap = std::reference_wrapper<GridCell>;
-using CellCost = std::pair<int, CellWrap>;
+using CellRef = std::reference_wrapper<GridCell>;
+using CellCost = std::pair<int, CellRef>;
 
 class CellPath
 {
@@ -13,7 +13,7 @@ class CellPath
 public:
 	CellPath(GridCell& head);
 	CellPath(GridCell& head, MobilitySet traversal_vector);
-	CellPath(std::list<CellWrap> path, MobilitySet traversal_vector);
+	CellPath(std::list<CellRef> path, MobilitySet traversal_vector);
 
 	void addTail(GridCell& tail);
 

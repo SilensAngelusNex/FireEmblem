@@ -70,7 +70,7 @@ GridCell& Map::getGridCell(Unit & unit) {
 	return *_unit_to_cell[&unit];
 }
 bool Map::hasUnit(Unit& unit) const{
-	return _unit_to_cell.count(&unit) == 1;
+	return _unit_to_cell.count(&unit) > 0;
 }
 Party& Map::getParty(Unit & unit) {
 	return unit._party->getParty(Passkey<Map>()); //This is probably bad
@@ -138,7 +138,7 @@ const PathMap Map::findShortestPaths(GridCell& start,  Mobility& mobility) const
 		queue.pop();
 		std::list<CellEdge> adj_edges = top.second.get().getEdges();
 		for (auto& edge : adj_edges) {
-			std::optional<int> cost = edge.getCost(mobility);
+			std::optional<int> cost = mobility.getCost(edge);
 			if (cost.has_value()) {
 				cost = top.first + cost.value();
 				if (cost.value() <= mobility.getMove() && (path_map.count(&(edge._cell)) == 0 || cost.value() < path_map.at(&edge._cell).first)) {
@@ -157,7 +157,7 @@ const PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilitySet 
 
 CellPath Map::getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilitySet mobility) {
 	PathMap path_map = findShortestPaths(start, max_move, mobility);
-	std::list<CellWrap> path = std::list<CellWrap>();
+	std::list<CellRef> path = std::list<CellRef>();
 	path.push_front(destination);
 	while (!(start == path.front().get())) {
 		path.push_front(path_map.at(&path.front().get()).second);
