@@ -30,8 +30,8 @@ bool test::runMapTest() {
 	auto move_helper = MoveHelper(map);
 	Party& party = map._parties.front();
 	Party& party2 = map._parties.back();
-	party.insertUnit(mia);
-	party.insertUnit(ike);
+	party.insertUnit(std::move(mia));
+	party.insertUnit(std::move(ike));
 	
 	auto it = party.begin();
 	Unit& mia2 = **it++;
@@ -48,7 +48,7 @@ bool test::runMapTest() {
 	cells = move_helper.getAllAttackableCells(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(mia2).getAdjacentCells().size() << std::endl;
-	party2.insertUnit(ike2);
+	party2.insertUnit(party.dropUnit(*ike2));
 	cells = move_helper.getAccesibleCells(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getAllAttackableCells(mia2);

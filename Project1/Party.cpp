@@ -26,24 +26,33 @@ void Party::startTurn(PartyBase& turn_party) {
 		}
 	}
 }
-void Party::insertUnit(UnitPtr& unit) {
-	PartyBase::insertUnit(unit);
+
+void Party::insertUnit(UnitData unit) {
+	_units.emplace_back(std::make_unique<Unit>(unit));
+	_units.back()->_party = this;
 }
-void Party::insertUnit(UnitData data) {
-	PartyBase::insertUnit(data);
+
+void Party::insertUnit(UnitPtr unit) {
+	Expects(unit != nullptr && unit->_party == nullptr);
+	_units.emplace_back(std::move(unit));
+	_units.back()->_party = this;
 }
+
 UnitPtr Party::dropUnit(Unit& unit) {
-	return PartyBase::dropUnit(unit);
+	Expects(hasUnit(unit));
+	auto it = getPosition(unit);
+	UnitPtr temp = std::move(*it);
+	_units.erase(it);
+	temp->_party = nullptr;
+	return temp;
 }
-UnitPtr Party::dropUnit(const iterator& pos) {
-	return PartyBase::dropUnit(pos);
-}
+
 /*Use this function to determine when to change turns
 */
 bool Party::isDone() const{
 	bool isDone = true;
 	for (auto& unit : _units) {
-		isDone = isDone && (unit->isTired() || unit->getHealth().isDead());
+		isDone &= unit->isTired() || unit->getHealth().isDead();
 	}
 	return isDone;
 }

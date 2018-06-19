@@ -17,7 +17,7 @@ public:
 
 	GridCell& _cell;
 	CellEdge(GridCell& cell, MobilityCostSet costs);
-	std::optional<int> getCost(MobilityType mobility_type) const;
+	std::optional<int> getCost(MobilityType mobility) const;
 	std::optional<int> getCost(MobilitySet mobility_type) const;
 	std::optional<int> getCost(MobilitySet mobility_type, bool intangible) const;
 

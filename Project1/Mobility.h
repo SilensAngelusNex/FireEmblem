@@ -13,11 +13,8 @@ public:
 	Mobility(Unit& owner);
 	Mobility(Unit& owner, int move, MobilitySet mobility_type);
 
-	const MobilitySet& getMobilityList() const;
-	const int& getMove() const;
-
-	MobilitySet& getMobilityList();
-	int& getMove();
+	MobilitySet getMobilityList() const;
+	int getMove() const;
 
 	bool canPass(const Unit * unit) const;
 	std::optional<int> getCost(const CellEdge& edge) const;

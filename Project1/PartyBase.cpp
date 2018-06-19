@@ -19,15 +19,11 @@ PartyBase::PartyBase(PartyData data) :
 {}
 
 PartyBase::const_iterator PartyBase::getPosition(const Unit & unit) const {
-	return std::find_if(cbegin(), cend(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
+	return std::find_if(_units.cbegin(), _units.cend(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
 }
 
 PartyBase::iterator PartyBase::getPosition(const Unit & unit) {
-	return std::find_if(begin(), end(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
-}
-
-Party& PartyBase::getParty(Passkey<Map> key) {
-	return *reinterpret_cast<Party*>(this);
+	return std::find_if(_units.begin(), _units.end(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
 }
 
 void PartyBase::insertUnit(UnitData unit) {
@@ -35,34 +31,13 @@ void PartyBase::insertUnit(UnitData unit) {
 	_units.back()->_party = this;
 }
 
+Party& PartyBase::getParty(Passkey<Map> key) {
+	return *reinterpret_cast<Party*>(this);
+}
+
 bool PartyBase::hasUnit(const Unit& unit) const {
-	return (getPosition(unit) != cend());
+	return (getPosition(unit) != _units.cend());
 }
-
-void PartyBase::insertUnit(UnitPtr& unit) {
-	Expects(!hasUnit(*unit) && unit != nullptr);
-	if (unit->_party != nullptr) {		
-		_units.emplace_back(std::move(unit->_party->dropUnit(*unit)));
-		_units.back()->_party = this;
-	}
-	else {
-		_units.emplace_back(std::move(unit));
-		_units.back()->_party = this;
-	}
-}
-
-UnitPtr PartyBase::dropUnit(Unit& unit) {
-	Expects(hasUnit(unit));
-	return dropUnit(getPosition(unit));
-}
-
-UnitPtr PartyBase::dropUnit(const iterator& pos) {
-	UnitPtr temp = std::move(*pos);
-	_units.erase(pos);
-	temp->_party = nullptr;
-	return temp;
-}
-
 
 bool PartyBase::operator==(const PartyBase & other) const {
 	return this == &other;

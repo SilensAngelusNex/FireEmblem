@@ -1,6 +1,7 @@
 #pragma once
 #include "PartyBase.h"
 
+
 class Party: public PartyBase {
 public:
 	Party();
@@ -9,17 +10,17 @@ public:
 	Party(PartyData data);
 
 	std::vector<UnitRef> getUnits();
-	std::vector<UnitRef> getOtherUnits(const Unit& unit);
+	std::vector<UnitRef> getOtherUnits(const Unit & unit);
 
 	std::vector<constUnitRef> getUnits() const;
 	std::vector<constUnitRef> getOtherUnits(const Unit& unit) const;
 
 	void startTurn(PartyBase& turn_party);
-	void insertUnit(UnitPtr& unit);
-	void insertUnit(UnitData data);
+	void insertUnit(UnitPtr unit);
+	void insertUnit(UnitData unit);
 
 	UnitPtr dropUnit(Unit& unit);
-	UnitPtr dropUnit(const iterator& pos);
+	//UnitPtr dropUnit(const iterator& pos);
 
 
 	bool isDone() const;
