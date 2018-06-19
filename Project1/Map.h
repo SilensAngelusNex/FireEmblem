@@ -53,15 +53,15 @@ public:
 
 	PathMap findShortestPaths(GridCell& start);
 	PathMap findShortestPaths(GridCell& start, Mobility& mobility);
-	PathMap findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility);
-	PathMap findShortestPaths(GridCell & start, int max_move, MobilityList<bool> mobility, bool intangible);
+	PathMap findShortestPaths(GridCell& start, int max_move, MobilitySet mobility);
+	PathMap findShortestPaths(GridCell & start, int max_move, MobilitySet mobility, bool intangible);
 
-	CellPath getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilityList<bool> mobility);
+	CellPath getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilitySet mobility);
 	
 	const PathMap findShortestPaths(GridCell& start) const;
-	const PathMap findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) const;
+	const PathMap findShortestPaths(GridCell& start, int max_move, MobilitySet mobility) const;
 	const PathMap findShortestPaths(GridCell& start, Mobility& mobility) const;
-	const PathMap findShortestPaths(GridCell & start, int max_move, MobilityList<bool> mobility, bool intangible) const;
+	const PathMap findShortestPaths(GridCell & start, int max_move, MobilitySet mobility, bool intangible) const;
 
 };
 

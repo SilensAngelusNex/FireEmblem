@@ -1,6 +1,6 @@
-#include "CellEdge.h" 
+#include "CellEdge.h"
 #include "GridCell.h"
-#include "Unit.h"
+#include "Mobility.h"
 
 
 CellEdge::CellEdge(GridCell& cell, MobilityList<std::optional<int>> costs) :
@@ -8,32 +8,30 @@ CellEdge::CellEdge(GridCell& cell, MobilityList<std::optional<int>> costs) :
 	_costs(costs)
 {}
 
-std::optional<int> CellEdge::getCost(MobilityType mobility_type) const {
-	return _costs[mobility_type];
+std::optional<int> CellEdge::getCost(MobilityType mobility) const {
+	return _costs[mobility];
 }
-
 std::optional<int> CellEdge::getCost(Mobility mobility)
-{
+ {
 	std::optional<int> cost;
 	for (MobilityType mobility_type : MobilityType::list) {
 		if (mobility.canPass(mobility_type, _cell.getTile()._unit)) {
 			std::optional<int> edge_cost = getCost(mobility_type);
 			if (edge_cost.has_value() && cost < edge_cost) { // if we can step on the tile
-				cost = edge_cost.value();
-			}
-		}
+				cost = edge_cost.value();				
+			}			
+		}		
 	}
 	return cost;
 }
-
-std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_list) const {
-	return getCost(mobility_list, true);
+std::optional<int> CellEdge::getCost(MobilitySet mobility_type) const {
+	return getCost(mobility_type, true);
 }
 
-std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_list, bool intangible) const {
+std::optional<int> CellEdge::getCost(MobilitySet mobility_type, bool intangible) const{
 	std::optional<int> cost;
 	for (MobilityType mobility : MobilityType::list) {
-		if (mobility_list[mobility]) {
+		if (mobility_type[mobility]) {
 			std::optional<int> edge_cost = getCost(mobility);
 			if (edge_cost.has_value() && canPass(intangible)) { // if we can step on the tile
 				if (cost < edge_cost) { // if the cost is best found yet
@@ -44,10 +42,11 @@ std::optional<int> CellEdge::getCost(MobilityList<bool> mobility_list, bool inta
 	}
 	return cost;
 }
- 
+
 bool CellEdge::canPass(bool intangible) const{
-	return  intangible || !_cell.getTile().hasUnit();
+	return intangible || !(_cell.getTile().hasUnit());
 }
+
 
 /**
 This function allows me to use list.remove() on CellEdge. Probably a bad idea

@@ -10,7 +10,7 @@ Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
 	_inv(*this),
 	_combat(*this),
 	_health(*this),
-	_mobility(*this, 50, MobilityList<bool>(std::array<bool, MobilityType::size>{true}))
+	_mobility(*this, 50, MobilitySet(std::array<bool, MobilityType::size>{true}))
 {}
 
 const IDENTITY& Unit::getIdentity() const {

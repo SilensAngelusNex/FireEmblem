@@ -9,11 +9,11 @@ using CellCost = std::pair<int, CellWrap>;
 class CellPath
 {
 	std::list<CellCost>_path = std::list<CellCost>();
-	const MobilityList<bool> _traversal_vector;
+	const MobilitySet _traversal_vector;
 public:
 	CellPath(GridCell& head);
-	CellPath(GridCell& head, MobilityList<bool> traversal_vector);
-	CellPath(std::list<CellWrap> path, MobilityList<bool> traversal_vector);
+	CellPath(GridCell& head, MobilitySet traversal_vector);
+	CellPath(std::list<CellWrap> path, MobilitySet traversal_vector);
 
 	void addTail(GridCell& tail);
 

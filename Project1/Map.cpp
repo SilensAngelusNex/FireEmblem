@@ -94,17 +94,17 @@ PathMap Map::findShortestPaths(GridCell & start, Mobility & mobility) {
 	return std::as_const(*this).findShortestPaths(start, mobility);
 }
 
-PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) {
+PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilitySet mobility) {
 	return std::as_const(*this).findShortestPaths(start, max_move, mobility);
 }
 
-PathMap Map::findShortestPaths(GridCell & start, int max_move, MobilityList<bool> mobility, bool intangible) {
+PathMap Map::findShortestPaths(GridCell & start, int max_move, MobilitySet mobility, bool intangible) {
 	return std::as_const(*this).findShortestPaths(start, max_move, mobility, intangible);
 }
 const PathMap Map::findShortestPaths(GridCell& start) const {
-	return findShortestPaths(start, INT_MAX, MobilityList<bool>({ true, }), false);
+	return findShortestPaths(start, INT_MAX, MobilitySet({ true, }), false);
 };
-const PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility, bool intangible) const {
+const PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilitySet mobility, bool intangible) const {
 	PathQueue queue = PathQueue(comp);
 	PathMap path_map = PathMap();
 	path_map.emplace(&start, CellCost(0, start));
@@ -150,12 +150,12 @@ const PathMap Map::findShortestPaths(GridCell& start,  Mobility& mobility) const
 	}
 	return path_map;
 }
-const PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilityList<bool> mobility) const {
+const PathMap Map::findShortestPaths(GridCell& start, int max_move, MobilitySet mobility) const {
 	bool intangible = mobility[MobilityType::values::PROJECTILE] || mobility[MobilityType::values::ETHEREAL];
 	return findShortestPaths(start, max_move, mobility, intangible);
 }
 
-CellPath Map::getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilityList<bool> mobility) {
+CellPath Map::getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilitySet mobility) {
 	PathMap path_map = findShortestPaths(start, max_move, mobility);
 	std::list<CellWrap> path = std::list<CellWrap>();
 	path.push_front(destination);

@@ -45,7 +45,7 @@ bool GridCell::isAdjacent(const GridCell & other_cell, MobilityType mobility) co
 {
 	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
 }
-bool GridCell::isAdjacent(const GridCell & other_cell, MobilityList<bool> mobility) const
+bool GridCell::isAdjacent(const GridCell & other_cell, MobilitySet mobility) const
 {
 	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
 }

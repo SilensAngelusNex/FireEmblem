@@ -29,7 +29,7 @@ public:
 
 	bool isAdjacent(const GridCell& other_cell) const;
 	bool isAdjacent(const GridCell& other_cell, MobilityType mobility) const;
-	bool isAdjacent(const GridCell& other_cell, MobilityList<bool> mobility) const;
+	bool isAdjacent(const GridCell& other_cell, MobilitySet mobility) const;
 
 	const Tile& getTile() const;
 	const std::list<CellEdge> getEdges() const;

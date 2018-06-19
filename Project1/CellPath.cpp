@@ -2,15 +2,15 @@
 #include "CellEdge.h"
 #include "GridCell.h"
 
-CellPath::CellPath(GridCell & head) : CellPath(head, MobilityList<bool>({ true })) {};
+CellPath::CellPath(GridCell & head) : CellPath(head, MobilitySet({ true })) {};
 
-CellPath::CellPath(GridCell & head, const MobilityList<bool> traversal_vector) :
+CellPath::CellPath(GridCell & head, const MobilitySet traversal_vector) :
 	_traversal_vector(traversal_vector)
 {
 	_path.emplace_back(0, head);
 }
 
-CellPath::CellPath(std::list<CellWrap> path, const MobilityList<bool> traversal_vector) : CellPath(path.front(), traversal_vector) {
+CellPath::CellPath(std::list<CellWrap> path, const MobilitySet traversal_vector) : CellPath(path.front(), traversal_vector) {
 	path.pop_front();
 	for (GridCell& cell : path) {
 		addTail(cell);

@@ -6,15 +6,15 @@ class Unit;
 
 class Mobility : Component<Unit> {
 	int _movement{50};
-	MobilityList<bool> _mobility;
+	MobilitySet _mobility;
 public:
 	Mobility(Unit& owner);
-	Mobility(Unit& owner, int move, MobilityList<bool> mobility_type);
+	Mobility(Unit& owner, int move, MobilitySet mobility_type);
 
-	const MobilityList<bool>& getMobilityList() const;
+	const MobilitySet& getMobilityList() const;
 	const int& getMove() const;
 
-	MobilityList<bool>& getMobilityList();
+	MobilitySet& getMobilityList();
 	int& getMove();
 
 	bool canPass(MobilityType mobility_type, const Unit * unit) const;

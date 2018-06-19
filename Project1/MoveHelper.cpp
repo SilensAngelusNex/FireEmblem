@@ -27,11 +27,11 @@ CellPath MoveHelper::getShortestPath(Unit& unit, GridCell & destination) {
 }
 
 CellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination) {
-	return _map.getShortestPath(start, destination, INT_MAX, MobilityList<bool>({ true }));
+	return _map.getShortestPath(start, destination, INT_MAX, MobilitySet({ true }));
 }
 
 CellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination, int max_move) {
-	return _map.getShortestPath(start, destination, max_move, MobilityList<bool>({ true }));
+	return _map.getShortestPath(start, destination, max_move, MobilitySet({ true }));
 }
 ////////////////////////////////////////////////////////////////////////
 /* Get Cells that a unit can attack without moving
@@ -46,7 +46,7 @@ std::vector<GridCell*> MoveHelper::getAttackableCells(Unit& unit, GridCell& cell
 	std::vector<GridCell*> cells = std::vector<GridCell*>();
 	for (int i = 0; i < ranges.size(); i++) {
 		if (ranges[i]) {
-			PathMap map = _map.findShortestPaths(cell, i, MobilityList<bool>({ false, false, false, true }));
+			PathMap map = _map.findShortestPaths(cell, i, MobilitySet({ false, false, false, true }));
 			for (auto& pair : map) {
 				if (pair.second.first == i) {
 					cells.push_back(pair.first);
