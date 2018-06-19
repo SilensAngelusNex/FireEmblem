@@ -32,9 +32,9 @@ void Party::insertUnit(Unit& unit) {
 /*Use this function to determine when to change turns
 */
 bool Party::isDone() const{
-	bool isDone = false;
+	bool isDone = true;
 	for (const Unit& unit : _units) {
-		isDone = isDone || unit.isTired(); // || unit->isDead();
+		isDone = isDone && (unit.isTired() || unit.getHealth().isDead());
 	}
 	return isDone;
 }
