@@ -23,7 +23,7 @@ PathMap MoveHelper::findShortestPaths(Unit& unit) {
 }
 ///////////////////////////////////////////////////////////////////////////////
 CellPath MoveHelper::getShortestPath(Unit& unit, GridCell & destination) {
-	return _map.getShortestPath(_map.getGridCell(unit), destination, unit.getMobility().getMove(), unit.getMobility().getMobilityList());
+	return _map.getShortestPath(_map.getGridCell(unit), destination, unit.getMobility().getMove(), unit.getMobility().getMobilitySet());
 }
 
 CellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination) {
@@ -102,7 +102,7 @@ void MoveHelper::walkPath(Unit & unit, CellPath path) {
 	Expects(canWalk(unit, path));
 	CellRef unit_cell = path.getHead();
 	for (auto it = std::next(path.begin()); it != path.end(); it++) {
-		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilityList()).has_value()) {
+		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilitySet()).has_value()) {
 			_map.moveUnit(unit_cell, it->second);
 		} else {// can't pass
 				return;

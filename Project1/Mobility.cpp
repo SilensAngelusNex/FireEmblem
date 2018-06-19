@@ -14,12 +14,20 @@ Mobility::Mobility(Unit& owner, int move, MobilitySet mobility_type) :
 	_mobility(mobility_type)
 {}
 
-MobilitySet Mobility::getMobilityList() const {
+int & Mobility::getMove() {
+	return _movement;
+}
+
+MobilitySet& Mobility::getMobilitySet() {
 	return _mobility;
 }
 
 int Mobility::getMove() const {
 	return _movement;
+}
+
+MobilitySet Mobility::getMobilitySet() const {
+	return _mobility;
 }
 
 bool Mobility::canPass(const Unit* unit) const {
