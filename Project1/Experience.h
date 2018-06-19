@@ -1,5 +1,7 @@
 #pragma once
 
+#include <optional>
+
 #include "AttributeList.h"
 #include "Dice.h"
 #include "Component.h"
@@ -24,7 +26,7 @@ public:
 	Experience(Unit& owner, Dice<100>& dice, int level);
 
 	void gainExp(int gains);
-	void gainCombatExp(Unit& enemy, int largest_strike);
+	void gainCombatExp(Unit& enemy, std::optional<int> largest_strike);
 
 	int getExp() const;
 	int getLevel() const;

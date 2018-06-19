@@ -8,8 +8,9 @@ Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
 	_stats(*this, stats),
 	_exp(*this, context),
 	_inv(*this),
-	_combat(*this), 
-	_mobility(*this, 50, MobilityList<bool>({true}))
+	_combat(*this),
+	_health(*this),
+	_mobility(*this, 50, MobilityList<bool>(std::array<bool, MobilityType::size>{true}))
 {}
 
 const IDENTITY& Unit::getIdentity() const {
@@ -32,6 +33,10 @@ const InventoryViewable& Unit::getInventory() const {
 	return _inv;
 }
 
+const Health & Unit::getHealth() const {
+	return _health;
+}
+
 InventoryCommandable& Unit::getInventory() {
 	return _inv;
 }
@@ -49,6 +54,10 @@ void Unit::newTurn() {
 bool Unit::isTired() const {
 	return true; //TODO(Weston): Should this be in a component like isDead() ? 
 }
+Health & Unit::getHealth() {
+	return _health;
+}
+
 Stats& Unit::getStats() {
 	return _stats;
 }

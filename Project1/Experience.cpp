@@ -29,9 +29,9 @@ void Experience::gainExp(int gains) {
 	}
 }
 
-void Experience::gainCombatExp(Unit& enemy, int largest_strike) {
+void Experience::gainCombatExp(Unit& enemy, std::optional<int> largest_strike) {
 	int to_gain = 1;
-	if (largest_strike >= 0) {
+	if (largest_strike && largest_strike >= 0) {
 		int level_difference = enemy.getExperience().getLevel() - getLevel();
 		int raw_exp = 10 + (level_difference * std::abs(level_difference)) / 3;
 

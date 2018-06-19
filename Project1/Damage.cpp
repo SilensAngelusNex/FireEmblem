@@ -48,8 +48,8 @@ int Damage::getFlatReduction(int armor) {
 }
 
 int Damage::getPercentReduction(int armor) {
-	// The 1005 and / 10 makes the result be rounded instead of truncating.
-	auto base_redux = static_cast<int>(1005 / (std::sqrt(armor / _PERCENT_REDUX_CONSTANT + 1) * 10));
+	// 201 / (2 * x) rounds the result to the nearest int instead of truncating 
+	auto base_redux = static_cast<int>(201 / (2 * std::sqrt(armor / _PERCENT_REDUX_CONSTANT + 1)));
 	return base_redux * (100 - _percent_pen) / 100;
 }
 

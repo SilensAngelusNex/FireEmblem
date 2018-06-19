@@ -15,6 +15,7 @@ public:
 	~ItemEquip() override = default;
 
 	void equip(Unit& unit, EquipSlot slot) override;
+	virtual bool can_equip(Unit& unit) const = 0;
 	virtual bool can_equip(Unit& unit, EquipSlot slot) const = 0;
 
 	bool is_equippable() const override;
@@ -23,7 +24,8 @@ public:
 	virtual Damage get_normal_damage(const Unit& attacker, const Unit& defender) const;
 	virtual Damage get_crit_damage(const Unit& attacker, const Unit& defender) const;
 
-	virtual EquipInfo::Range getRange() const;
+	virtual Range getAttackRange() const;
+	virtual Range getAssistRange() const;
 
 	virtual int avoid(const AttributeList& stats) const = 0;
 	virtual int dodge(const AttributeList& stats) const = 0;

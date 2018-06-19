@@ -136,11 +136,13 @@
     <ClCompile Include="DiceTest.cpp" />
     <ClCompile Include="Experience.cpp" />
     <ClCompile Include="GridCell.cpp" />
+    <ClCompile Include="Healing.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBase.cpp" />
     <ClCompile Include="InventoryCommandable.cpp" />
     <ClCompile Include="InventoryViewable.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemEquip.cpp" />
     <ClCompile Include="ItemInfo.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -152,6 +154,7 @@
     <ClCompile Include="ObservableDamage.cpp" />
     <ClCompile Include="Party.cpp" />
     <ClCompile Include="PartyBase.cpp" />
+    <ClCompile Include="Range.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestObservers.cpp" />
     <ClCompile Include="Stats.cpp" />
@@ -165,12 +168,15 @@
     <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BitsetIterator.h" />
+    <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="CellPath.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EnumContainer.h" />
     <ClInclude Include="GridCell.h" />
+    <ClInclude Include="Healing.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="InventoryBase.h" />
     <ClInclude Include="InventoryCommandable.h" />
@@ -187,6 +193,7 @@
     <ClInclude Include="ObserverExp.h" />
     <ClInclude Include="Party.h" />
     <ClInclude Include="PartyBase.h" />
+    <ClInclude Include="optional_pair.h" />
     <ClInclude Include="Passkey.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="Swords.h" />

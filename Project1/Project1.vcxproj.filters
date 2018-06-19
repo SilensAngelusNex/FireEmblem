@@ -183,8 +183,23 @@
     <ClCompile Include="CellPath.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
+    <ClCompile Include="Healing.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Range.cpp">
+      <Filter>src\item</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponList.cpp">
+      <Filter>src\item</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeList.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
     <ClCompile Include="UtilTests.cpp">
-      <Filter>src</Filter>
+      <Filter>src\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>src\item</Filter>
     </ClCompile>
     <ClCompile Include="Party.cpp">
       <Filter>src\party</Filter>
@@ -238,9 +253,6 @@
     </ClInclude>
     <ClInclude Include="TestObservers.h">
       <Filter>inc\tests</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponList.h">
-      <Filter>inc\unit</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>inc\unit\component</Filter>
@@ -313,6 +325,21 @@
     </ClInclude>
     <ClInclude Include="UtilTests.h">
       <Filter>inc\tests</Filter>
+    </ClInclude>
+    <ClInclude Include="optional_pair.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Healing.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Range.h">
+      <Filter>inc\item</Filter>
+    </ClInclude>
+    <ClInclude Include="BitsetIterator.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponList.h">
+      <Filter>inc\item</Filter>
     </ClInclude>
     <ClInclude Include="Party.h">
       <Filter>inc\party</Filter>

@@ -13,6 +13,7 @@
 #include "Dice.h"
 #include "Experience.h"
 #include "Mobility.h"
+#include "Health.h"
 #include "PartyBase.h"
 
 class PartyBase;
@@ -32,6 +33,7 @@ private:
 	Experience _exp;
 	Inventory _inv;
 	Combat _combat;
+	Health _health;
 	Mobility _mobility;
 
 	//Location& _loc;
@@ -45,6 +47,7 @@ public:
 	const Mobility& getMobility() const;
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
+	const Health& getHealth() const;
 	//virtual const Location& getLocation() const;
 
 	// Commandable Unit
@@ -54,6 +57,7 @@ public:
 	void refresh();
 	void newTurn();
 	bool isTired() const;
+	Health& getHealth();
 
 	// Unit Internals
 	Stats& getStats();

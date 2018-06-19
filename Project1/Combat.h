@@ -1,10 +1,13 @@
 #pragma once
 
+#include <optional>
+
 #include "ObservableDamage.h"
 #include "Component.h"
 #include "Stats.h"
 #include "Inventory.h"
 #include "Experience.h"
+#include "optional_pair.h"
 
 class Unit;
 
@@ -12,12 +15,14 @@ class Combat : Component<Unit>, public ObservableDamage {
 private:
 	// Combat and Strike Skills
 public:
+	constexpr static int SPEED_DIFFERENCE_TO_DOUBLE = 3;
+
 	explicit Combat(Unit& owner);
 
 	void combat(Unit& defender);
-	bool doesDodge(Unit& attacker);
-	int strike(Unit& defender);
+	bool doesAvoid(Unit& attacker);
+	std::optional<int> strike(Unit& defender);
 	int takeDamage(Damage dealt);
 protected:
-	std::pair<int, int> do_combat(Unit& defender);
+	optional_pair<int> do_combat(Unit& defender);
 };

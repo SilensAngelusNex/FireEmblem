@@ -6,13 +6,14 @@ Combat::Combat(Unit& owner) : Component<Unit>(owner) {}
 
 
 void Combat::combat(Unit& defender) {
-	std::pair<int, int> largest_strikes = do_combat(defender);
+	Expects(&_owner != &defender);
+	optional_pair<int> largest_strikes = do_combat(defender);
 
 	_owner.getExperience().gainCombatExp(defender, largest_strikes.first);
 	defender.getExperience().gainCombatExp(_owner, largest_strikes.second);
 }
 
-bool Combat::doesDodge(Unit& attacker) {
+bool Combat::doesAvoid(Unit& attacker) {
 	CONTEXT& dice = _owner.getContext();
 
 	int hit_chance = attacker.getStats().hit();
@@ -33,26 +34,29 @@ bool Combat::doesDodge(Unit& attacker) {
 	return false;
 }
 
-int Combat::strike(Unit& defender) {
+std::optional<int> Combat::strike(Unit& defender) {
 	CONTEXT& dice = _owner.getContext();
 
-	if (defender.getCombat().doesDodge(_owner)) {
-		return -1;
+	if (defender.getCombat().doesAvoid(_owner)) {
+		return {};
 	}
 
-	// trigger this strike skills
-	// trigger defender struck skills
+	auto strike = [&dice](Unit& attacker, Unit& defender) {
+		int crit_chance = attacker.getStats().crit() - defender.getStats().dodge();
+		if (dice.roll() < 2 * crit_chance) {
+			return attacker.getInventoryInternal().getCritDamage(defender);
+		}
+		return attacker.getInventoryInternal().getNormalDamage(defender);
+	};
 
-	int crit_chance = _owner.getStats().crit() - defender.getStats().dodge();
-	if (dice.roll() < 2 * crit_chance) {
-		return defender.getCombat().takeDamage(_owner.getInventoryInternal().getCritDamage(defender));
-	}
-	return defender.getCombat().takeDamage(_owner.getInventoryInternal().getNormalDamage(defender));
+	// Pass lambda to combat skills
+	// On strike, on struck
+	return defender.getCombat().takeDamage(strike(_owner, defender));
 }
 
 int Combat::takeDamage(Damage dealt) {
-	int result = dealt.getDamageTo(_owner);
-	// TODO(Weston): Reduce HP
+	int result = _owner.getHealth().takeDamage(dealt);
+	// TODO(Weston): Move these into Health so we can remove this function
 	if (dealt.isCrit()) {
 		notifyAllCrit(_owner.getIdentity(), result);
 	}
@@ -62,23 +66,27 @@ int Combat::takeDamage(Damage dealt) {
 	return result;
 }
 
-std::pair<int, int> Combat::do_combat(Unit& defender) {
-	// trigger this combat init skills
-	// trigger defender defend combat skills
+optional_pair<int, int> Combat::do_combat(Unit& defender) {
+	auto combat = [](Unit& attacker, Unit& defender) {
 
-	std::pair<int, int> result = std::pair<int, int>(-1, -1);
+		optional_pair<int> result;
+		int spd_adv = attacker.getStats().atk_spd() - defender.getStats().atk_spd();
 
-	int spd_adv = _owner.getStats().atk_spd() - defender.getStats().atk_spd();
+		result.first = std::max(result.first, attacker.getCombat().strike(defender));
 
-	result.first = std::max(result.first, strike(defender));
-	result.second = std::max(result.second, defender.getCombat().strike(_owner));
+		if (!defender.getHealth().isDead()) {
+			result.second = std::max(result.second, defender.getCombat().strike(attacker));
+		}
+		if (spd_adv > SPEED_DIFFERENCE_TO_DOUBLE && !attacker.getHealth().isDead()) {
+			result.first = std::max(result.first, attacker.getCombat().strike(defender));
+		}
+		if (spd_adv < -SPEED_DIFFERENCE_TO_DOUBLE && !defender.getHealth().isDead()) {
+			result.second = std::max(result.second, defender.getCombat().strike(attacker));
+		}
+		return result;
+	};
 
-	if (spd_adv > 3) {
-		result.first = std::max(result.first, strike(defender));
-	}
-	if (spd_adv < -3) {
-		result.second = std::max(result.second, defender.getCombat().strike(_owner));
-	}
-
-	return result;
+	// Pass lambda to combat skills
+	// On attack, on attacked, during combat
+	return combat(_owner, defender);
 }

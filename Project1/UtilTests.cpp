@@ -43,7 +43,7 @@ bool enumTest() {
 	std::vector<int> result;
 
 	for (MyEnum e : MyEnum::list) {
-		int e_pos = MyEnum::positionOf(e);
+		size_t e_pos = MyEnum::positionOf(e);
 		result.push_back(e_pos);
 		std::cout << e_pos << " ";
 	}
