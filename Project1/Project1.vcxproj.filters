@@ -208,7 +208,7 @@
       <Filter>src\map</Filter>
     </ClCompile>
     <ClCompile Include="GridMap.cpp">
-      <Filter>src</Filter>
+      <Filter>src\map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -357,7 +357,7 @@
       <Filter>inc</Filter>
     </ClInclude>
     <ClInclude Include="GridMap.h">
-      <Filter>inc</Filter>
+      <Filter>inc\map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

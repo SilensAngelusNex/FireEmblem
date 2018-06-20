@@ -1,6 +1,7 @@
 #include "Grid.h"
 #include "Party.h"
 #include "Unit.h"
+#include "Mobility.h"
 #include "GridCell.h"
 #include "CellPath.h"
 #include "CellEdge.h"
@@ -19,7 +20,12 @@ Grid::Grid(int width, int height, std::vector<PartyData> data) :
 		insertParty(party);
 	}
 }
-
+Grid::grid_row::grid_row(std::vector<GridCell>& row) 
+	: _row(row)
+{}
+Grid::const_grid_row::const_grid_row(const std::vector<GridCell>& row)
+	: _row(row)
+{}
 Unit* Grid::getUnit(const GridCell & index) {
 	return  hasUnit(index) ? _cell_to_unit[&index] : nullptr;
 }
@@ -71,10 +77,7 @@ void Grid::removeUnit(Unit& unit) {
 	_unit_to_cell.erase(&unit);
 }
 /////////////////////////////////////////////////////////////
-GridCell& Grid::getGridCell(int x_pos, int y_pos) {
-	Expects(x_pos > 0 && y_pos > 0 && x_pos < _grid.size() && y_pos < _grid[0].size());
-	return _grid[x_pos][y_pos];
-}
+
 bool Grid::hasUnit(const GridCell& index) const{
 	return _cell_to_unit.count(&index) > 0;
 }
@@ -82,14 +85,7 @@ bool Grid::hasUnit(const Unit& index) const{
 	return _unit_to_cell.count(&index) > 0;
 }
 
-const GridCell& Grid::getGridCell(int x_pos, int y_pos) const{
-	Expects(x_pos > 0 && y_pos > 0 && x_pos < _grid.size() && y_pos < _grid[0].size());
-	return _grid[x_pos][y_pos];
-}
-
 ///////////////////////////////////////////////////////////
-
-
 Unit& Grid::operator[](const GridCell& index) {
 	Expects(hasUnit(index));
 	return *_cell_to_unit[&index];
@@ -98,11 +94,28 @@ GridCell& Grid::operator[](const Unit& index) {
 	Expects(hasUnit(index));
 	return *_unit_to_cell[&index];
 }
+Grid::grid_row Grid::operator[](size_t index) {
+	return grid_row(_grid[index]);
+}
 const GridCell& Grid::operator[](const Unit& index) const {
 	Expects(hasUnit(index));
 	return *_unit_to_cell.at(&index);
 }
+Grid::const_grid_row Grid::operator[](size_t index) const {
+	return const_grid_row(_grid.at(index));
+}
 const Unit& Grid::operator[](const GridCell & index) const {
 	Expects(hasUnit(index));
 	return *_cell_to_unit.at(&index);
+}
+
+GridCell& Grid::grid_row::operator[](size_t index) {
+	return _row[index];
+}
+
+const GridCell & Grid::grid_row::operator[](size_t index) const {
+	return _row.at(index);
+}
+const GridCell& Grid::const_grid_row::operator[](size_t index) const {
+	return _row.at(index);
 }
