@@ -16,9 +16,6 @@ public:
 	const Terrain _terrain;
 	Unit* _unit;
 
-	void insertUnit(Unit* unit);
-	Unit* removeUnit();
-	bool hasUnit() const;
 
 	bool operator==(const Tile& tile) const;
 };

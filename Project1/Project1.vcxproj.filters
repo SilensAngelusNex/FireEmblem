@@ -153,9 +153,6 @@
     <ClCompile Include="Swords.cpp">
       <Filter>src\item\items</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>src\map</Filter>
-    </ClCompile>
     <ClCompile Include="MapTest.cpp">
       <Filter>src\tests</Filter>
     </ClCompile>
@@ -206,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="PartyBase.cpp">
       <Filter>src\party</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>src\map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -296,9 +296,6 @@
     <ClInclude Include="ItemInfo.h">
       <Filter>inc\item</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>inc\map</Filter>
-    </ClInclude>
     <ClInclude Include="CellEdge.h">
       <Filter>inc\map\gridcell</Filter>
     </ClInclude>
@@ -349,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="Mobility.h">
       <Filter>inc\unit\component</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>inc\map</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

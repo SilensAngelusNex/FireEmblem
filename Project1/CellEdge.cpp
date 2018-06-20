@@ -21,7 +21,7 @@ std::optional<int> CellEdge::getCost(MobilitySet mobility_type, bool intangible)
 	for (MobilityType mobility : MobilityType::list) {
 		if (mobility_type[mobility]) {
 			std::optional<int> edge_cost = getCost(mobility);
-			if (edge_cost.has_value() && canPass(intangible)) { // if we can step on the tile
+			if (edge_cost.has_value()) { // if we can step on the tile
 				if (cost < edge_cost) { // if the cost is best found yet
 					cost = edge_cost.value();
 				}
@@ -32,7 +32,7 @@ std::optional<int> CellEdge::getCost(MobilitySet mobility_type, bool intangible)
 }
 
 bool CellEdge::canPass(bool intangible) const{
-	return intangible || !(_cell.getTile().hasUnit());
+	return intangible ;
 }
 
 bool CellEdge::operator== (const CellEdge& c) const {

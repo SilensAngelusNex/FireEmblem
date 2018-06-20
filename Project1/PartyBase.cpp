@@ -31,7 +31,7 @@ void PartyBase::insertUnit(UnitData unit) {
 	_units.back()->_party = this;
 }
 
-Party& PartyBase::getParty(Passkey<Map> key) {
+Party& PartyBase::getParty(Passkey<Grid> key) {
 	return *reinterpret_cast<Party*>(this);
 }
 

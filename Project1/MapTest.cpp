@@ -10,7 +10,7 @@
 #include "CellPath.h"
 
 bool test::runMapTest() {
-	std::cout << "Map test start:" << std::endl;
+	std::cout << "Grid test start:" << std::endl;
 
 	FairDice<100> d;
 	UnitData mia_data = { "Mia", d, AttributeList({ 5, 0, 8, 10, 19, 4, 6, 1 }) };
@@ -26,7 +26,7 @@ bool test::runMapTest() {
 	party_vec.push_back(data1);
 	party_vec.push_back(data2);
 
-	Map map = Map(20, 20, party_vec); // create a 20 x 20 map
+	Grid map = Grid(20, 20, party_vec); // create a 20 x 20 map
 	auto move_helper = MoveHelper(map);
 	Party& party = map._parties.front();
 	Party& party2 = map._parties.back();
@@ -47,19 +47,19 @@ bool test::runMapTest() {
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getAllAttackableCells(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
-	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(mia2).getAdjacentCells().size() << std::endl;
+	std::cout << "How many cells are adjacent to Mia: " << map[mia2].getAdjacentCells().size() << std::endl;
 	party2.insertUnit(party.dropUnit(*ike2));
 	cells = move_helper.getAccesibleCells(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getAllAttackableCells(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
-	std::cout << "How many cells are adjacent to Mia: " << map.getGridCell(mia2).getAdjacentCells().size() << std::endl;
+	std::cout << "How many cells are adjacent to Mia: " << map[mia2].getAdjacentCells().size() << std::endl;
 	CellPath path = move_helper.getShortestPath(mia2, map.getGridCell(11, 11));
 	move_helper.canWalk(mia2, path);
 	std::cout << "Can Mia move to (11, 11)?: " << move_helper.canWalk(mia2, path) << std::endl;
 	move_helper.walkPath(mia2, path);
 	std::cout << "Attempted to walk" << std::endl;
-	std::cout << "Is Mia at (11, 11)?" << (map.getGridCell(mia2) == map.getGridCell(11, 11)) << std::endl;
+	std::cout << "Is Mia at (11, 11)?" << (map[mia2] == map.getGridCell(11, 11)) << std::endl;
 	
 	return true;
 }

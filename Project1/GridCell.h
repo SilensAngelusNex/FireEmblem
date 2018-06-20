@@ -4,7 +4,7 @@
 #include <list>
 #include <vector>
 
-/** GridCell that composes the Map. Holds a Tile.
+/** GridCell that composes the Grid. Holds a Tile.
 */
 class GridCell {
 private:

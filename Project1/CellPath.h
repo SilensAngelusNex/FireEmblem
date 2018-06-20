@@ -2,7 +2,7 @@
 #include <list>
 #include "MobilityList.h"
 class GridCell;
-//TODO(Torrey): Create Superclasses of this. EX: UnitPath has a unit to traverse the Map.
+//TODO(Torrey): Create Superclasses of this. EX: UnitPath has a unit to traverse the Grid.
 using CellRef = std::reference_wrapper<GridCell>;
 using CellCost = std::pair<int, CellRef>;
 

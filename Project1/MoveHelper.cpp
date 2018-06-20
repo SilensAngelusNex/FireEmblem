@@ -5,7 +5,7 @@
 #include "CellPath.h"
 #include "GridCell.h"
 
-MoveHelper::MoveHelper(Map& map) :
+MoveHelper::MoveHelper(Grid& map) :
 	_map(map)
 {}
 std::vector<GridCell*> MoveHelper::getAccesibleCells(Unit& unit) {
@@ -19,11 +19,11 @@ std::vector<GridCell*> MoveHelper::getAccesibleCells(Unit& unit) {
 	return cells;
 }
 PathMap MoveHelper::findShortestPaths(Unit& unit) {
-	return _map.findShortestPaths(_map.getGridCell(unit), unit.getMobility());
+	return _map.findShortestPaths(_map[unit], unit.getMobility());
 }
 ///////////////////////////////////////////////////////////////////////////////
 CellPath MoveHelper::getShortestPath(Unit& unit, GridCell & destination) {
-	return _map.getShortestPath(_map.getGridCell(unit), destination, unit.getMobility().getMove(), unit.getMobility().getMobilitySet());
+	return _map.getShortestPath(_map[unit], destination, unit.getMobility().getMove(), unit.getMobility().getMobilitySet());
 }
 
 CellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination) {
@@ -37,7 +37,7 @@ CellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination, i
 /* Get Cells that a unit can attack without moving
 */
 std::vector<GridCell*> MoveHelper::getAttackableCells(Unit& unit) {
-	return getAttackableCells(unit, _map.getGridCell(unit));
+	return getAttackableCells(unit, _map[unit]);
 }
 /*Get Cells a Unit could attack, if it were standing on cell
 */
@@ -75,7 +75,7 @@ std::vector<GridCell*> MoveHelper::getAlliedCells(Unit& unit) {
 	auto vec = std::vector<GridCell*>();
 	for (Unit& ally : _map.getParty(unit).getUnits()) {
 		if (_map.hasUnit(ally)) {
-			vec.push_back(&_map.getGridCell(ally));
+			vec.push_back(&_map[ally]);
 		}
 	}
 	return vec;
@@ -84,14 +84,14 @@ std::vector<GridCell*> MoveHelper::getOtherAlliedCells(Unit& unit) {
 	auto vec = std::vector<GridCell*>();
 	for (Unit& ally : _map.getParty(unit).getOtherUnits(unit)) {
 		if (_map.hasUnit(ally)) {
-			vec.push_back(&_map.getGridCell(ally));
+			vec.push_back(&_map[ally]);
 		}
 	}
 	return vec;
 }
 
 bool MoveHelper::canWalk(Unit& unit, CellPath path) {
-	bool valid = path.getHead() == _map.getGridCell(unit);
+	bool valid = path.getHead() == _map[unit];
 	for (CellCost pair : path) {
 		valid = valid && pair.first <= unit.getMobility().getMove();
 	}
