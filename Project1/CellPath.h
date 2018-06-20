@@ -4,7 +4,9 @@
 class GridCell;
 //TODO(Torrey): Create Superclasses of this. EX: UnitPath has a unit to traverse the Grid.
 using CellRef = std::reference_wrapper<GridCell>;
+using constCellRef = std::reference_wrapper<const GridCell>;
 using CellCost = std::pair<int, CellRef>;
+using constCellCost = std::pair<int, constCellRef>;
 
 class CellPath
 {

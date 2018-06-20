@@ -21,7 +21,7 @@ bool test::runMapTest() {
 	auto unit_vec = std::vector<UnitData>();
 	unit_vec.push_back(mia_data);
 	unit_vec.push_back(ike_data);
-	PartyData data1 = { "Greil Mercenaries"};
+	PartyData data1 = { "Greil Mercenaries" };
 	PartyData data2 = { "Daein" };
 	std::vector<PartyData> party_vec = std::vector<PartyData>();
 	party_vec.push_back(data1);
@@ -33,11 +33,34 @@ bool test::runMapTest() {
 	Party& party2 = map._parties.back();
 	party.insertUnit(std::move(mia));
 	party.insertUnit(std::move(ike));
-	
+
 	auto it = party.begin();
 	Unit& mia2 = **it++;
 	UnitPtr& ike2 = *it;
 
+	map.insertUnit(mia2, map[10][10]);
+	std::vector <GridCell*> cells = move_helper.getAccesibleCells(mia2);
+	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
+	cells = move_helper.getAllAttackableCells(mia2);
+	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
+	map.insertUnit(*ike2, map[10][11]);
+	cells = move_helper.getAccesibleCells(mia2);
+	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
+	cells = move_helper.getAllAttackableCells(mia2);
+	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
+	std::cout << "How many cells are adjacent to Mia: " << map[mia2].getAdjacentCells().size() << std::endl;
+	party2.insertUnit(party.dropUnit(*ike2));
+	cells = move_helper.getAccesibleCells(mia2);
+	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
+	cells = move_helper.getAllAttackableCells(mia2);
+	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
+	std::cout << "How many cells are adjacent to Mia: " << map[mia2].getAdjacentCells().size() << std::endl;
+	CellPath path = move_helper.getShortestPath(mia2, map[11][11]);
+	move_helper.canWalk(mia2, path);
+	std::cout << "Can Mia move to (11, 11)?: " << move_helper.canWalk(mia2, path) << std::endl;
+	move_helper.walkPath(mia2, path);
+	std::cout << "Attempted to walk" << std::endl;
+	std::cout << "Is Mia at (11, 11)?" << (map[mia2] == map[11][11]) << std::endl;;
 
 	
 	return true;
