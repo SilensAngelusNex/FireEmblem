@@ -31,10 +31,6 @@ std::optional<int> CellEdge::getCost(MobilitySet mobility_type, bool intangible)
 	return cost;
 }
 
-bool CellEdge::canPass(bool intangible) const{
-	return intangible ;
-}
-
 bool CellEdge::operator== (const CellEdge& c) const {
 	return this->_cell == c._cell && this->_costs == c._costs;
 }

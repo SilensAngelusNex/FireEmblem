@@ -2,7 +2,7 @@
 #include "Unit.h"
 #include <list>
 
-class Grid;
+class GridMap;
 class Party;
 class party_iterator;
 using UnitRef = std::reference_wrapper<Unit>;
@@ -33,7 +33,7 @@ protected:
 	iterator getPosition(const Unit& unit);
 
 public:
-	Party& getParty(Passkey<Grid> key);
+	Party& getParty(Passkey<GridMap> key);
 
 	bool hasUnit(const Unit& unit) const;
 	bool operator==(const PartyBase& other) const;

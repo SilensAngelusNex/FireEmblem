@@ -136,6 +136,7 @@
     <ClCompile Include="DiceTest.cpp" />
     <ClCompile Include="Experience.cpp" />
     <ClCompile Include="GridCell.cpp" />
+    <ClCompile Include="GridMap.cpp" />
     <ClCompile Include="Healing.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -169,6 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitsetIterator.h" />
+    <ClInclude Include="GridMap.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="CellPath.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="PartyBase.h" />
     <ClInclude Include="optional_pair.h" />
     <ClInclude Include="Passkey.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="Swords.h" />
     <ClInclude Include="Damage.h" />
@@ -215,6 +218,9 @@
     <ClInclude Include="UtilTests.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponList.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

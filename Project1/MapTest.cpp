@@ -8,6 +8,7 @@
 #include "Party.h"
 #include "GridCell.h"
 #include "CellPath.h"
+#include "GridMap.h"
 
 bool test::runMapTest() {
 	std::cout << "Grid test start:" << std::endl;
@@ -26,7 +27,7 @@ bool test::runMapTest() {
 	party_vec.push_back(data1);
 	party_vec.push_back(data2);
 
-	Grid map = Grid(20, 20, party_vec); // create a 20 x 20 map
+	GridMap map = GridMap(20, 20, party_vec); // create a 20 x 20 map
 	auto move_helper = MoveHelper(map);
 	Party& party = map._parties.front();
 	Party& party2 = map._parties.back();

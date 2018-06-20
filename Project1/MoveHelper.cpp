@@ -5,7 +5,7 @@
 #include "CellPath.h"
 #include "GridCell.h"
 
-MoveHelper::MoveHelper(Grid& map) :
+MoveHelper::MoveHelper(GridMap& map) :
 	_map(map)
 {}
 std::vector<GridCell*> MoveHelper::getAccesibleCells(Unit& unit) {

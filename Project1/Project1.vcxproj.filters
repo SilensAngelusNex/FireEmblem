@@ -207,6 +207,9 @@
     <ClCompile Include="Grid.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
+    <ClCompile Include="GridMap.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -350,5 +353,16 @@
     <ClInclude Include="Grid.h">
       <Filter>inc\map</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="GridMap.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

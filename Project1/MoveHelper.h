@@ -1,14 +1,13 @@
 #pragma once
 #include <vector>
-#include "Grid.h"
+#include "GridMap.h"
 
-class Grid;
 class CellPath;
 class GridCell;
 class Unit;
 class MoveHelper {
 private:
-	Grid& _map;
+	GridMap& _map;
 	template<typename T>
 	void vectorSubtract(std::vector<T>& a, std::vector<T>& b) {
 		std::sort(a.begin(), a.end());
@@ -18,7 +17,7 @@ private:
 		a = c;
 	};
 public:
-	MoveHelper(Grid& map);
+	MoveHelper(GridMap& map);
 	std::vector<GridCell*> getAccesibleCells(Unit& unit);
 	PathMap findShortestPaths(Unit & unit);
 
