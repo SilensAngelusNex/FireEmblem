@@ -28,7 +28,7 @@ PartyBase::iterator PartyBase::getPosition(const Unit & unit) {
 
 void PartyBase::insertUnit(UnitData unit) {
 	_units.emplace_back(std::make_unique<Unit>(unit));
-	_units.back()->_party = this;
+	_units.back()->setParty(this);
 }
 
 Party& PartyBase::getParty(Passkey<Map> /*unused*/) {

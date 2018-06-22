@@ -29,13 +29,13 @@ void Party::startTurn(PartyBase& turn_party) {
 
 void Party::insertUnit(UnitData unit) {
 	_units.emplace_back(std::make_unique<Unit>(unit));
-	_units.back()->_party = this;
+	_units.back()->setParty(this);
 }
 
 void Party::insertUnit(UnitPtr unit) {
-	Expects(unit != nullptr && unit->_party == nullptr);
+	Expects(unit != nullptr && unit->getParty() == nullptr);
 	_units.emplace_back(std::move(unit));
-	_units.back()->_party = this;
+	_units.back()->setParty(this);
 }
 
 UnitPtr Party::dropUnit(Unit& unit) {
@@ -43,7 +43,7 @@ UnitPtr Party::dropUnit(Unit& unit) {
 	auto it = getPosition(unit);
 	UnitPtr temp = std::move(*it);
 	_units.erase(it);
-	temp->_party = nullptr;
+	temp->setParty(nullptr);
 	return temp;
 }
 

@@ -37,6 +37,10 @@ const Health & Unit::getHealth() const {
 	return _health;
 }
 
+const PartyBase* const Unit::getParty() const{
+	return _party;
+}
+
 InventoryCommandable& Unit::getInventory() {
 	return _inv;
 }
@@ -56,6 +60,15 @@ bool Unit::isTired() const {
 }
 Health & Unit::getHealth() {
 	return _health;
+}
+
+PartyBase* Unit::getParty() {
+	return _party;
+}
+
+PartyBase* Unit::setParty(PartyBase* other_party) {
+	std::swap(_party, other_party);
+	return other_party;
 }
 
 Stats& Unit::getStats() {

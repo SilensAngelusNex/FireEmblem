@@ -49,16 +49,23 @@ public:
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
 	const Health& getHealth() const;
+	const PartyBase* const getParty() const;
 	//virtual const Location& getLocation() const;
 
 	// Commandable Unit
 	InventoryCommandable& getInventory();
 	//virtual Location& getLocation();
 	Combat& getCombat();
+	Health& getHealth();
+	// Move into identity component
+	PartyBase* getParty();
+	PartyBase* setParty(PartyBase* other_party);
+	// Move into into battle info component
 	void refresh();
 	void newTurn();
 	bool isTired() const;
-	Health& getHealth();
+	
+	
 
 	// Unit Internals
 	Stats& getStats();
