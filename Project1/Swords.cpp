@@ -1,7 +1,7 @@
 #include "Swords.h"
 
 BasicWeapon::BasicWeapon(std::shared_ptr<WeaponInfo> info) :
-	Weapon(info)
+	Weapon(std::move(info))
 {}
 
 bool BasicWeapon::can_equip(Unit & /*unit*/) const {

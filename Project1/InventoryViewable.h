@@ -15,12 +15,12 @@ public:
 	std::map<MobilitySet, Range::DistanceSet> getAttackRanges() const;
 	std::map<MobilitySet, Range::DistanceSet> getAssistRanges() const;
 
-	int avoid(Passkey<Stats> key) const;
-	int dodge(Passkey<Stats> key) const;
-	int hit(Passkey<Stats> key) const;
-	int crit(Passkey<Stats> key) const;
-	int might(Passkey<Stats> key) const;
-	int atk_spd(Passkey<Stats> key) const;
+	int avoid(Passkey<Stats> /*unused*/) const;
+	int dodge(Passkey<Stats> /*unused*/) const;
+	int hit(Passkey<Stats> /*unused*/) const;
+	int crit(Passkey<Stats> /*unused*/) const;
+	int might(Passkey<Stats> /*unused*/) const;
+	int atk_spd(Passkey<Stats> /*unused*/) const;
 protected:
 	explicit InventoryViewable(Unit& owner);
 	template<typename RangeGetter>
