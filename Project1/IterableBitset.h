@@ -34,6 +34,10 @@ template<int size>
 class IterableBitset {
 private:
 	std::bitset<size> _values;
+
+	constexpr IterableBitset(std::bitset<size> init) :
+		_values(init)
+	{}
 public:
 	constexpr IterableBitset() :
 		_values()

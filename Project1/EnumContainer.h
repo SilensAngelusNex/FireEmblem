@@ -1,6 +1,8 @@
 #pragma once
 #include <array>
+#include <set>
 #include "IterableBitset.h"
+#include "EnumSetIterator.h"
 
 template<typename T, typename EnumType>
 class EnumContainer {
@@ -153,6 +155,7 @@ public:
 	EnumContainer() = default;
 	explicit EnumContainer(array init_values);
 	explicit EnumContainer(EnumType set_type);
+	EnumContainer(std::set<EnumType> set_types);
 
 	constexpr EnumContainer& operator+=(const EnumContainer& rhs);
 	constexpr EnumContainer& operator-=(const EnumContainer& rhs);
@@ -166,9 +169,11 @@ public:
 	constexpr EnumContainer operator|(EnumContainer rhs) const;
 	constexpr EnumContainer operator^(EnumContainer rhs) const;
 	constexpr EnumContainer operator~() const;
-	
+
 	using const_iterator = const_bits_iterator<EnumType::size>;
 	using iterator = bits_iterator<EnumType::size>;
+
+	const bits_iterator_helper<EnumType> get_set_bits() const;
 
 	iterator begin() {
 		return iterator(*this, 0);
@@ -221,6 +226,15 @@ inline EnumContainer<bool, EnumType>::EnumContainer(EnumType set_type) :
 }
 
 template<typename EnumType>
+inline EnumContainer<bool, EnumType>::EnumContainer(std::set<EnumType> set_types) :
+	_values()
+{
+	for (EnumType t : set_types) {
+		(*this)[t] = true;
+	}
+}
+
+template<typename EnumType>
 constexpr EnumContainer<bool, EnumType>& EnumContainer<bool, EnumType>::operator+=(const EnumContainer<bool, EnumType>& rhs) {
 	this->_values |= rhs._values;
 	return *this;
@@ -237,7 +251,7 @@ constexpr EnumContainer<bool, EnumType>& EnumContainer<bool, EnumType>::operator
 }
 template<typename EnumType>
 constexpr EnumContainer<bool, EnumType>& EnumContainer<bool, EnumType>::operator|=(const EnumContainer<bool, EnumType>& rhs) {
-	this->_values |= ~rhs._values;
+	this->_values |= rhs._values;
 	return *this;
 }
 template<typename EnumType>
@@ -276,6 +290,11 @@ constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator~
 	EnumContainer<bool, EnumType> result;
 	result._values = ~this->_values;
 	return result;
+}
+
+template<typename EnumType>
+inline const bits_iterator_helper<EnumType> EnumContainer<bool, EnumType>::get_set_bits() const {
+	return bits_iterator_helper<EnumType>(_values);
 }
 
 template<typename EnumType>

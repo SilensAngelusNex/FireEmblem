@@ -1,4 +1,5 @@
 #include <vector>
+#include <set>
 #include "IterableBitset.h"
 #include "UtilTests.h"
 #include "Enum.h"
@@ -35,7 +36,7 @@ bool bitsetTest() {
 	return init_vec == result1 && init_vec == result2;
 }
 
-bool enumTest() {
+bool enumTest1() {
 	enum class myenum { A, B, C, D, ENUM_END };
 	using MyEnum = Enum<myenum>;
 
@@ -49,4 +50,51 @@ bool enumTest() {
 	}
 	std::cout << std::endl;
 	return expected == result;
+}
+
+bool enumTest2() {
+	enum class myenum { A, B, C, D, ENUM_END };
+	using MyEnum = Enum<myenum>;
+	using EnumSet = EnumContainer<bool, MyEnum>;
+
+	EnumSet none;
+
+	std::set<MyEnum> a_s = { MyEnum::values::A };
+	std::set<MyEnum> c_s = { MyEnum::values::C };
+	std::set<MyEnum> d_s = { MyEnum::values::D };
+
+	EnumSet a = a_s;
+	EnumSet c = c_s;
+	EnumSet d = d_s;
+
+	std::set<MyEnum> ab_s = { MyEnum::values::A, MyEnum::values::B };
+	std::set<MyEnum> cd_s = { MyEnum::values::C, MyEnum::values::D };
+	std::set<MyEnum> da_s = { MyEnum::values::A, MyEnum::values::D };
+
+	EnumSet ab = ab_s;
+	EnumSet cd = cd_s;
+	EnumSet da = da_s;
+
+	std::set<MyEnum> bd_s = { MyEnum::values::B, MyEnum::values::D };
+	EnumSet bd = bd_s;
+
+	std::set<MyEnum> abc_s = { MyEnum::values::A, MyEnum::values::B, MyEnum::values::C };
+	std::set<MyEnum> dab_s = { MyEnum::values::A, MyEnum::values::B, MyEnum::values::D };
+
+	EnumSet abc = abc_s;
+	EnumSet dab = dab_s;
+
+	std::set<MyEnum> all_s = { MyEnum::values::A, MyEnum::values::B, MyEnum::values::C, MyEnum::values::D };
+
+	EnumSet all = all_s;
+
+	bool and_works = (((abc & d) == none) && ((da & ab) == a) && ((cd & c) == c));
+	bool or_works = (((abc | d) == all) && ((da | ab) == dab) && ((cd | c) == cd));
+	bool xor_works = (((abc ^ d) == all) && ((da ^ ab) == bd) && ((cd & c) == d));
+
+	return and_works && or_works && xor_works;
+}
+
+bool enumTest() {
+	return enumTest1() && enumTest2();
 }
