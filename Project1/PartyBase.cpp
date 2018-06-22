@@ -5,7 +5,7 @@ PartyBase::PartyBase() :
 {}
 
 PartyBase::PartyBase(std::string name) :
-	PartyBase(name, std::vector<UnitData>())
+	PartyBase(std::move(name), std::vector<UnitData>())
 {}
 
 PartyBase::PartyBase(std::string name, std::vector<UnitData> unit_data) :
@@ -31,7 +31,7 @@ void PartyBase::insertUnit(UnitData unit) {
 	_units.back()->_party = this;
 }
 
-Party& PartyBase::getParty(Passkey<Map> key) {
+Party& PartyBase::getParty(Passkey<Map> /*unused*/) {
 	return *reinterpret_cast<Party*>(this);
 }
 

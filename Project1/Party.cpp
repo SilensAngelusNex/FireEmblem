@@ -5,13 +5,13 @@
 Party::Party() 
 = default;
 
-Party::Party(std::string name) : PartyBase(name)
+Party::Party(std::string name) : PartyBase(std::move(name))
 {}
 
-Party::Party(std::string name, std::vector<UnitData> unit_data) : PartyBase(name, unit_data)
+Party::Party(std::string name, std::vector<UnitData> unit_data) : PartyBase(std::move(name), std::move(unit_data))
 {}
 
-Party::Party(PartyData data) : PartyBase(data)
+Party::Party(PartyData data) : PartyBase(std::move(data))
 {}
 
 void Party::startTurn(PartyBase& turn_party) {

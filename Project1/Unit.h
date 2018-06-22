@@ -27,6 +27,8 @@ struct UnitData {
 class Unit : public Observable<ObserverDamage>, public Observable<ObserverExp> {
 private:
 	IDENTITY _id;
+	PartyBase* _party = nullptr;
+
 	CONTEXT& _context;
 
 	Stats _stats;
@@ -36,7 +38,6 @@ private:
 	Health _health;
 	Mobility _mobility;
 
-	//Location& _loc;
 public:
 	Unit(IDENTITY name, CONTEXT& context, AttributeList stats);
 	Unit(UnitData data) : Unit(data.name, data.context, data.stats) {};
@@ -65,8 +66,6 @@ public:
 	Experience& getExperience();
 	Inventory& getInventoryInternal();
 	CONTEXT& getContext();
-	PartyBase* _party;
-
 
 	// Movement
 	//Point position() const = 0;

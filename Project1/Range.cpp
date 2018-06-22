@@ -7,11 +7,11 @@ Range::Range() :
 {}
 
 Range::Range(std::vector<int> distances) :
-	Range(MobilitySet(MobilityType::values::PROJECTILE), DistanceSet(distances))
+	Range(MobilitySet(MobilityType::values::PROJECTILE), DistanceSet(std::move(distances)))
 {}
 
 Range::Range(MobilityType type, std::vector<int> distances) :
-	Range(MobilitySet(type), DistanceSet(distances))
+	Range(MobilitySet(type), DistanceSet(std::move(distances)))
 {}
 
 
