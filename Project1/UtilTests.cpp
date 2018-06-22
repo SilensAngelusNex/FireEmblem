@@ -1,9 +1,11 @@
 #include <vector>
 #include <set>
+#include <memory>
 #include "IterableBitset.h"
 #include "UtilTests.h"
 #include "Enum.h"
 #include "EnumContainer.h"
+#include "UniquePtrIterator.h"
 
 bool bitsetTest() {
 	constexpr int size = 10;
@@ -97,4 +99,26 @@ bool enumTest2() {
 
 bool enumTest() {
 	return enumTest1() && enumTest2();
+}
+
+bool iterTest() {
+
+	std::vector<int> result;
+	std::vector<int> expected = { 1, 2, 3, 4 };
+
+	std::vector<std::unique_ptr<int>> ints;
+	
+	ints.push_back(std::make_unique<int>(1));
+	ints.push_back(std::make_unique<int>(2));
+	ints.push_back(std::make_unique<int>(3));
+	ints.push_back(std::make_unique<int>(4));
+
+	std::cout << "Iterators: ";
+	for (unique_ptr_iter<std::vector<std::unique_ptr<int>>::iterator, int> it = ints.begin(); it != ints.end(); ++it) {
+		result.push_back(*it);
+		std::cout << *it << " ";
+	}
+	std::cout << std::endl;
+	
+	return result == expected;
 }

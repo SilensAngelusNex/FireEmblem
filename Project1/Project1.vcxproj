@@ -211,6 +211,7 @@
     <ClInclude Include="ObserverDamage.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="CellEdge.h" />
+    <ClInclude Include="UniquePtrIterator.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="ListDice.h" />
     <ClInclude Include="UtilTests.h" />
