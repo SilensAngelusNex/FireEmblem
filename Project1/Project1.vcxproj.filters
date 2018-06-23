@@ -210,6 +210,12 @@
     <ClCompile Include="GridMap.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
+    <ClCompile Include="MapHelper.cpp">
+      <Filter>src\map</Filter>
+    </ClCompile>
+    <ClCompile Include="PathMap.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -358,6 +364,15 @@
     </ClInclude>
     <ClInclude Include="GridMap.h">
       <Filter>inc\map</Filter>
+    </ClInclude>
+    <ClInclude Include="MapHelper.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
+    <ClInclude Include="ID.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="PathMap.h">
+      <Filter>inc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

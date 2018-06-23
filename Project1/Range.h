@@ -19,6 +19,19 @@ public:
 	Range(MobilityType type, std::vector<int> distances);
 	Range(MobilitySet move, DistanceSet dist);
 
+	constexpr bool hasDistance(int dist) const { //TODO(Torrey): remove magic numbers, rename this
+		Expects(dist >= 0 && MAX_RANGE > dist);
+		return _range[(dist + 9) / 10]; 
+	}
+	int maxRange() const {
+		for (int i = 1; i <= MAX_RANGE; i++) {
+			if (_range[MAX_RANGE - i]) {
+				return (MAX_RANGE - i) * 10;
+			}
+		}
+		return 0;
+	}
+
 	bool operator==(const Range& rhs) const;
 	bool operator!=(const Range& rhs) const;
 	bool operator<=(const Range& rhs) const;

@@ -6,6 +6,7 @@
 #include <queue>
 #include "CellPath.h"
 #include "Party.h"
+#include "ID.h"
 /**
 Grid class. Holds a Matrix of GridCells. Should be initialized at the start of each chapter.
 */
@@ -20,7 +21,6 @@ public:
 	private:
 		std::vector<GridCell>& _row;
 		grid_row(std::vector<GridCell>& row);
-		~grid_row() = default;
 	public:
 		GridCell& operator[](size_t index);
 		const GridCell& operator[](size_t index) const;
@@ -31,7 +31,6 @@ public:
 	private:
 		const std::vector<GridCell>& _row;
 		const_grid_row(const std::vector<GridCell>& row);
-		~const_grid_row() = default;
 	public:
 		const GridCell& operator[](size_t index) const;
 		friend class Grid;
@@ -72,10 +71,12 @@ public:
 
 	Unit& operator[](const GridCell& index);
 	GridCell& operator[](const Unit& index);
+	GridCell& operator[](const ID& index);
 	grid_row operator[](size_t index);
 
 	const Unit& operator[](const GridCell& index) const;
 	const GridCell& operator[](const Unit& index) const;
+	const GridCell& operator[](const ID& index) const;
 	const_grid_row operator[](size_t index) const;
 
 };

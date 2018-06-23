@@ -10,7 +10,7 @@ public:
 	Tile(Tile&& cell) = default;
 
 	Tile();
-	Tile(Terrain terrain);
+	Tile(TerrainType terrain);
 	~Tile();
 
 	const Terrain _terrain;

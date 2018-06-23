@@ -6,15 +6,23 @@
 #include "CellPath.h"
 #include "CellEdge.h"
 //TODO(Torrey): Make more useful constructors, USE GRIDCELL&, Refactor into multiple classes, define move/copy constructors
-Grid::Grid(int width, int height) : 
-	_grid(width, std::vector<GridCell>(height, GridCell()))
-{
+Grid::Grid(int width, int height) {
+	for (int i = 0; i < width; i++) {
+		_grid.emplace_back();
+		for (int j = 0; j < height; j++) {
+			_grid[i].emplace_back(Tile(TerrainType::values::PLAINS), ID(i, j));
+		}
+	}
 	insertAdjacencies();
 }
 
-Grid::Grid(int width, int height, std::vector<PartyData> data) : 
-	_grid(width, std::vector<GridCell>(height, GridCell()))
-{
+Grid::Grid(int width, int height, std::vector<PartyData> data) {
+	for (int i = 0; i < width; i++) {
+		_grid.emplace_back();
+		for (int j = 0; j < height; j++) {
+			_grid[i].emplace_back(Tile(TerrainType::values::PLAINS), ID(i, j));
+		}
+	}
 	insertAdjacencies();
 	for (auto& party : data) {
 		insertParty(party);
@@ -94,6 +102,9 @@ GridCell& Grid::operator[](const Unit& index) {
 	Expects(hasUnit(index));
 	return *_unit_to_cell[&index];
 }
+GridCell & Grid::operator[](const ID & index) {
+	return _grid[index.first][index.second];
+}
 Grid::grid_row Grid::operator[](size_t index) {
 	return grid_row(_grid[index]);
 }
@@ -118,4 +129,8 @@ const GridCell & Grid::grid_row::operator[](size_t index) const {
 }
 const GridCell& Grid::const_grid_row::operator[](size_t index) const {
 	return _row.at(index);
+}
+
+const GridCell& Grid::operator[](const ID& index) const{
+	return _grid[index.first][index.second];
 }

@@ -1,7 +1,7 @@
 #include "CellPath.h"
 #include "CellEdge.h"
 #include "GridCell.h"
-
+/*
 CellPath::CellPath(GridCell & head) : CellPath(head, MobilitySet({ true })) {};
 
 CellPath::CellPath(GridCell & head, const MobilitySet traversal_vector) :
@@ -10,14 +10,14 @@ CellPath::CellPath(GridCell & head, const MobilitySet traversal_vector) :
 	_path.emplace_back(0, head);
 }
 
-CellPath::CellPath(std::list<CellRef> path, const MobilitySet traversal_vector) : CellPath(path.front(), traversal_vector) {
+CellPath::CellPath(std::list<ID> path, const MobilitySet traversal_vector) : CellPath(path.front(), traversal_vector) {
 	path.pop_front();
-	for (GridCell& cell : path) {
+	for (ID cell : path) {
 		addTail(cell);
 	}
 }
 
-void CellPath::addTail(GridCell & tail) {
+void CellPath::addTail(ID tail) {
 	Expects(getTail().isAdjacent(tail, _traversal_vector));
 	_path.emplace_back(getCost() + getTail().getEdge(tail).value().getCost(_traversal_vector).value(), tail);
 }
@@ -44,3 +44,4 @@ const GridCell & CellPath::getTail() const {
 const GridCell & CellPath::getHead() const {
 	return _path.front().second;
 }
+*/

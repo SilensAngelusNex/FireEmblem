@@ -11,14 +11,17 @@ private:
 	MobilityCostSet _costs;
 
 	Terrain(std::string name, MobilityCostSet costs);
+	Terrain();
 public:
 	Terrain(const Terrain& cell) = default;
 	Terrain& operator=(const Terrain & edge) = default;
 	Terrain(Terrain&& cell) = default;
 	Terrain& operator=(Terrain&& edge) = default;
 
-	Terrain();
-	Terrain(TerrainType type);
+	static Terrain TerrainFactory(TerrainType type);
+
+
+
 
 	std::string& getName();
 	MobilityCostSet getCosts();

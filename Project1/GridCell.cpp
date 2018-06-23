@@ -1,9 +1,8 @@
 #include "GridCell.h"
 #include "CellEdge.h"
+#include "Grid.h"
 #include <utility>
-GridCell::GridCell(Tile tile) :
-	_tile(std::move(tile))
-{}
+
 std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) {
 	for (CellEdge edge: _adjacent_cells) {
 		if (&edge._cell == &other_cell) {
@@ -20,6 +19,11 @@ const std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) cons
 	}
 	return {};
 }
+
+GridCell::GridCell(Tile tile, ID id) :
+	_tile(std::move(tile)),
+		_id(id)
+{}
 
 void GridCell::addAdjacentCell(GridCell & new_cell)
 {

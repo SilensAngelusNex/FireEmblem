@@ -1,11 +1,12 @@
 #pragma once
 #include <list>
 #include "MobilityList.h"
-class GridCell;
+#include "GridCell.h"
+#include "ID.h"
+
 //TODO(Torrey): Create Superclasses of this. EX: UnitPath has a unit to traverse the Grid.
-using CellRef = std::reference_wrapper<GridCell>;
-using constCellRef = std::reference_wrapper<const GridCell>;
-using CellCost = std::pair<int, CellRef>;
+
+using CellCost = std::pair<int, ID>;
 using constCellCost = std::pair<int, constCellRef>;
 
 class CellPath
@@ -13,9 +14,7 @@ class CellPath
 	std::list<CellCost>_path = std::list<CellCost>();
 	const MobilitySet _traversal_vector;
 public:
-	CellPath(GridCell& head);
-	CellPath(GridCell& head, MobilitySet traversal_vector);
-	CellPath(std::list<CellRef> path, MobilitySet traversal_vector);
+	CellPath(std::list<ID> path, MobilitySet traversal_vector);
 
 	void addTail(GridCell& tail);
 

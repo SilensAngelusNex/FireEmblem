@@ -1,22 +1,25 @@
 #pragma once
 #include "Tile.h"
 #include "CellEdge.h"
+#include "ID.h"
 #include <list>
 #include <vector>
 
+
 /** GridCell that composes the Grid. Holds a Tile.
 */
+using CellRef = std::reference_wrapper<GridCell>;
+using constCellRef = std::reference_wrapper<const GridCell>;
 class GridCell {
-private:
 	Tile _tile = Tile();
 	std::list<CellEdge> _adjacent_cells = std::list<CellEdge>(); 
 public:
+	const ID _id;
 	GridCell(const GridCell& cell) = default;
 	GridCell(GridCell&& cell) = default;
 
-	GridCell() = default;
 	~GridCell() = default;
-	GridCell(Tile tile);
+	GridCell(Tile tile, ID id);
 
 	void addAdjacentCell(GridCell& new_cell);
 	void addAdjacentCell(GridCell& new_cell, MobilityCostSet costs);
