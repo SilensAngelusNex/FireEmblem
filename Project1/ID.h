@@ -11,9 +11,23 @@ private:
 	using std::pair<size_t, size_t>::second;
 public:
 	friend class Grid;
+	bool operator==(const ID& other) const {
+		return first == other.first && second == other.second;
+	}
+
+	bool operator!=(const ID& other) const {
+		return first != other.first || second != other.second;
+	}
+
 	bool operator<(const ID& other) const {
 		bool a = first < other.first;
 		bool b = second < other.second;
+		bool c = first == other.first;
+		return a | (c && b);
+	}
+	bool operator>(const ID& other) const {
+		bool a = first > other.first;
+		bool b = second > other.second;
 		bool c = first == other.first;
 		return a | (c && b);
 	}
