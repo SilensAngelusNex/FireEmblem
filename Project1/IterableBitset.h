@@ -1,9 +1,9 @@
 #pragma once
 #include <array>
+#include <bitset>
 #include <gsl/gsl_assert>
 #include <string>
 #include <vector>
-#include <bitset>
 
 #include "BitsetIterator.h"
 
