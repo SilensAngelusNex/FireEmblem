@@ -176,8 +176,8 @@ public:
 	constexpr EnumContainer operator^(EnumContainer rhs) const;
 	constexpr EnumContainer operator~() const;
 
-	using const_iterator = static_size_index_iterator<const container>;
-	using iterator = static_size_index_iterator<container>;
+	using const_iterator = index_iterator<const container>;
+	using iterator = index_iterator<container>;
 
 	const bits_iterator_helper<EnumType> get_set_bits() const;
 

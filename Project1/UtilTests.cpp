@@ -120,7 +120,7 @@ bool iterTest1() {
 }
 
 bool iterTest2() {
-	using iter = static_size_index_iterator<IterableBitset<32>>;
+	using iter = index_iterator<IterableBitset<32>>;
 	std::array<bool, 32> expected = { true, false, true, true, false, false , true };
 	std::vector<bool> result;
 
