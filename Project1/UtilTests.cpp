@@ -90,9 +90,9 @@ bool enumTest2() {
 
 	EnumSet all = all_s;
 
-	bool and_works = (((abc & d) == none) && ((da & ab) == a) && ((cd & c) == c));
-	bool or_works = (((abc | d) == all) && ((da | ab) == dab) && ((cd | c) == cd));
-	bool xor_works = (((abc ^ d) == all) && ((da ^ ab) == bd) && ((cd & c) == d));
+	bool and_works = (abc & d) == none && (da & ab) == a && (cd & c) == c;
+	bool or_works = (abc | d) == all && (da | ab) == dab && (cd | c) == cd;
+	bool xor_works = (abc ^ d) == all && (da ^ ab) == bd && (cd ^ c) == d;
 
 	return and_works && or_works && xor_works;
 }
@@ -101,24 +101,66 @@ bool enumTest() {
 	return enumTest1() && enumTest2();
 }
 
-bool iterTest() {
-
+bool iterTest1() {
 	std::vector<int> result;
 	std::vector<int> expected = { 1, 2, 3, 4 };
 
 	std::vector<std::unique_ptr<int>> ints;
-	
+
 	ints.push_back(std::make_unique<int>(1));
 	ints.push_back(std::make_unique<int>(2));
 	ints.push_back(std::make_unique<int>(3));
 	ints.push_back(std::make_unique<int>(4));
 
-	std::cout << "Iterators: ";
 	for (unique_ptr_iter<std::vector<std::unique_ptr<int>>::iterator, int> it = ints.begin(); it != ints.end(); ++it) {
 		result.push_back(*it);
-		std::cout << *it << " ";
 	}
-	std::cout << std::endl;
-	
+
 	return result == expected;
 }
+
+bool iterTest2() {
+	using iter = static_size_index_iterator<IterableBitset<32>>;
+	std::array<bool, 32> expected = { true, false, true, true, false, false , true };
+	std::vector<bool> result;
+
+	IterableBitset<32> set = expected;
+	iter it(set, 0);
+	iter jt(set);
+
+	for (; it != jt; ++it) {
+		result.push_back(*it);
+	}
+
+	bool passed = true;
+	for (int i = 0; i < 32; ++i) {
+		passed &= expected[i] == result[i];
+	}
+
+	return passed;
+}
+
+bool iterTest3() {
+	enum class myenum { A, B, C, D, ENUM_END };
+	using MyEnum = Enum<myenum>;
+	using EnumSet = EnumContainer<bool, MyEnum>;
+
+	EnumSet a = std::set<MyEnum>{ MyEnum::values::A, MyEnum::values::C };
+	const EnumSet b = std::set<MyEnum>{ MyEnum::values::B, MyEnum::values::D };
+	EnumSet expected = std::set<MyEnum>{ MyEnum::values::B, MyEnum::values::D };
+
+	for (auto t : a) {
+		t = !t;
+	}
+
+	for (auto t : b) {
+		t = !t;
+	}
+
+	return a == expected && expected == b;
+}
+
+bool iterTest() {
+	return iterTest1() && iterTest2() && iterTest3();
+}
+

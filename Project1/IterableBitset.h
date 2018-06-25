@@ -1,41 +1,41 @@
 #pragma once
 #include <array>
-#include <bitset>
 #include <gsl/gsl_assert>
 #include <string>
 #include <vector>
+#include <bitset>
 
 #include "BitsetIterator.h"
 
-template<int size>
-inline std::string boolArrayToString(std::array<bool, size> init) {
-	std::string result = std::string(size, '0');
+template<int n>
+inline std::string boolArrayToString(std::array<bool, n> init) {
+	std::string result = std::string(n, '0');
 
-	for (int i = 0; i < size; ++i) {
+	for (int i = 0; i < n; ++i) {
 		if (init[i]) {
-			result[size - (i + 1)] = '1';
+			result[n - (i + 1)] = '1';
 		}
 	}
 	return result;
 }
 
-template<int size>
+template<int n>
 inline std::string vectorToString(std::vector<int> init) {
-	Expects(std::find_if(init.begin(), init.end(), [](int i) {return 0 > i || i > size ; }) == init.end());
+	Expects(std::find_if(init.begin(), init.end(), [](int i) {return 0 > i || i > n ; }) == init.end());
 
-	std::string result = std::string(size, '0');
+	std::string result = std::string(n, '0');
 	for (int i : init) {
-		result[size - (i + 1)] = '1';
+		result[n - (i + 1)] = '1';
 	}
 	return result;
 }
 
-template<int size>
+template<int n>
 class IterableBitset {
 private:
-	std::bitset<size> _values;
+	std::bitset<n> _values;
 
-	constexpr IterableBitset(std::bitset<size> init) :
+	constexpr IterableBitset(std::bitset<n> init) :
 		_values(init)
 	{}
 public:
@@ -43,25 +43,25 @@ public:
 		_values()
 	{}
 	constexpr IterableBitset(size_t set_bit) : IterableBitset() {
-		Expects(set_bit < size);
+		Expects(set_bit < n);
 		_values[set_bit] = true;
 	}
 	IterableBitset(std::string init) {
-		Expects(init.size() == size);
-		_values = std::bitset<size>(init);
+		Expects(init.size() == n);
+		_values = std::bitset<n>(init);
 	}
-	IterableBitset(std::array<bool, size> init) :
-		IterableBitset(boolArrayToString<size>(init))
+	IterableBitset(std::array<bool, n> init) :
+		IterableBitset(boolArrayToString<n>(init))
 	{}
 	IterableBitset(std::vector<int> init) :
-		IterableBitset(vectorToString<size>(init))
+		IterableBitset(vectorToString<n>(init))
 	{}
 
-	constexpr const std::bitset<size> getBits() const {
+	constexpr const std::bitset<n> getBits() const {
 		return _values;
 	}
 
-	using reference = typename std::bitset<size>::reference;
+	using reference = typename std::bitset<n>::reference;
 	
 	constexpr reference operator[](size_t i) {
 		return _values[i];
@@ -103,7 +103,7 @@ public:
 private:
 	template<bool less, bool equal, bool greater>
 	constexpr bool bitCompareHelp(const IterableBitset& rhs) const {
-		for (int i = size - 1; i >= 0; --i) {
+		for (int i = n - 1; i >= 0; --i) {
 			bool l_bit = _values[i];
 			bool r_bit = rhs._values[i];
 			bool different = l_bit ^ r_bit;
@@ -137,7 +137,11 @@ public:
 		return this->bitCompareHelp<false, true, true>(rhs);
 	}
 
-	using const_iterator = set_bits_iterator<size>;
+	constexpr int size() const {
+		return _values.size();
+	}
+
+	using const_iterator = set_bits_iterator<n>;
 
 	const_iterator begin() const {
 		return const_iterator(this->_values, 0);

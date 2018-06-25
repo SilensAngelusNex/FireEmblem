@@ -55,6 +55,7 @@ public:
 	constexpr bool operator>(const EnumContainer& rhs) const;
 
 	constexpr bool contains(T t) const;
+	constexpr int size() const;
 };
 
 template<typename T, typename EnumType>
@@ -142,6 +143,11 @@ constexpr bool EnumContainer<T, EnumType>::contains(T t) const {
 	return std::find(begin(), end(), t) != end();
 }
 
+template<typename T, typename EnumType>
+constexpr int EnumContainer<T, EnumType>::size() const {
+	return EnumType::size;
+}
+
 
 
 template<typename EnumType>
@@ -170,29 +176,29 @@ public:
 	constexpr EnumContainer operator^(EnumContainer rhs) const;
 	constexpr EnumContainer operator~() const;
 
-	using const_iterator = const_bits_iterator<EnumType::size>;
-	using iterator = bits_iterator<EnumType::size>;
+	using const_iterator = static_size_index_iterator<const container>;
+	using iterator = static_size_index_iterator<container>;
 
 	const bits_iterator_helper<EnumType> get_set_bits() const;
 
 	iterator begin() {
-		return iterator(*this, 0);
+		return iterator(_values, 0);
 	}
 	const_iterator begin() const {
-		return const_iterator(*this, 0);
+		return const_iterator(_values, 0);
 	}
 	const_iterator cbegin() const {
-		return const_iterator(*this, 0);
+		return const_iterator(_values, 0);
 	}
 
 	iterator end() {
-		return iterator(*this);
+		return iterator(_values);
 	}
 	const_iterator end() const {
-		return const_iterator(*this);
+		return const_iterator(_values);
 	}
 	const_iterator cend() const {
-		return const_iterator(*this);
+		return const_iterator(_values);
 	}
 
 	constexpr bool operator[](EnumType i) const;
@@ -210,6 +216,7 @@ public:
 	constexpr bool operator>(const EnumContainer& rhs) const;
 
 	constexpr bool contains(bool t) const;
+	constexpr int size() const;
 };
 
 
@@ -267,22 +274,22 @@ constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator+
 }
 template<typename EnumType>
 constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator-(EnumContainer<bool, EnumType> rhs) const {
-	rhs += *this;
+	rhs -= *this;
 	return rhs;
 }
 template<typename EnumType>
 constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator&(EnumContainer<bool, EnumType> rhs) const {
-	rhs += *this;
+	rhs &= *this;
 	return rhs;
 }
 template<typename EnumType>
 constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator|(EnumContainer<bool, EnumType> rhs) const {
-	rhs += *this;
+	rhs |= *this;
 	return rhs;
 }
 template<typename EnumType>
 constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator^(EnumContainer<bool, EnumType> rhs) const {
-	rhs += *this;
+	rhs ^= *this;
 	return rhs;
 }
 template<typename EnumType>
@@ -354,4 +361,9 @@ constexpr bool EnumContainer<bool, EnumType>::operator>(const EnumContainer<bool
 template<typename EnumType>
 constexpr bool EnumContainer<bool, EnumType>::contains(bool t) const {
 	return std::find(begin(), end(), t) != end();
+}
+
+template<typename EnumType>
+constexpr int EnumContainer<bool, EnumType>::size() const {
+	return EnumType::size;
 }
