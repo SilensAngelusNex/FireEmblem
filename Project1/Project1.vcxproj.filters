@@ -350,5 +350,11 @@
     <ClInclude Include="Mobility.h">
       <Filter>inc\unit\component</Filter>
     </ClInclude>
+    <ClInclude Include="EnumSetIterator.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="UniquePtrIterator.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

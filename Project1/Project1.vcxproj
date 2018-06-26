@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitsetIterator.h" />
+    <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="CellPath.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="ObserverDamage.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="CellEdge.h" />
+    <ClInclude Include="UniquePtrIterator.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="ListDice.h" />
     <ClInclude Include="UtilTests.h" />
