@@ -35,7 +35,7 @@ inline std::string vectorToString(std::vector<size_t> init) {
 	Expects(std::find_if(init.begin(), init.end(), [](size_t i) {return i > n; }) == init.end());
 
 	std::string result = std::string(n, '0');
-	for (int i : init) {
+	for (size_t i : init) {
 		result[n - (i + 1)] = '1';
 	}
 	return result;

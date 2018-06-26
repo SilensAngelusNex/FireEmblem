@@ -101,6 +101,7 @@ bool enumTest() {
 	return enumTest1() && enumTest2();
 }
 
+
 bool iterTest1() {
 	std::vector<int> result;
 	std::vector<int> expected = { 1, 2, 3, 4 };
@@ -112,7 +113,7 @@ bool iterTest1() {
 	ints.push_back(std::make_unique<int>(3));
 	ints.push_back(std::make_unique<int>(4));
 
-	for (unique_ptr_iter<std::vector<std::unique_ptr<int>>::iterator, int> it = ints.begin(); it != ints.end(); ++it) {
+	for (unique_ptr_iter<std::vector<std::unique_ptr<int>>::iterator> it = ints.begin(); it != ints.end(); ++it) {
 		result.push_back(*it);
 	}
 
