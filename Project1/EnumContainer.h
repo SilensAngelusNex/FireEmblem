@@ -55,7 +55,7 @@ public:
 	constexpr bool operator>(const EnumContainer& rhs) const;
 
 	constexpr bool contains(T t) const;
-	constexpr int size() const;
+	constexpr size_t size() const;
 };
 
 template<typename T, typename EnumType>
@@ -144,7 +144,7 @@ constexpr bool EnumContainer<T, EnumType>::contains(T t) const {
 }
 
 template<typename T, typename EnumType>
-constexpr int EnumContainer<T, EnumType>::size() const {
+constexpr size_t EnumContainer<T, EnumType>::size() const {
 	return EnumType::size;
 }
 
@@ -216,7 +216,7 @@ public:
 	constexpr bool operator>(const EnumContainer& rhs) const;
 
 	constexpr bool contains(bool t) const;
-	constexpr int size() const;
+	constexpr size_t size() const;
 };
 
 
@@ -364,6 +364,6 @@ constexpr bool EnumContainer<bool, EnumType>::contains(bool t) const {
 }
 
 template<typename EnumType>
-constexpr int EnumContainer<bool, EnumType>::size() const {
+constexpr size_t EnumContainer<bool, EnumType>::size() const {
 	return EnumType::size;
 }

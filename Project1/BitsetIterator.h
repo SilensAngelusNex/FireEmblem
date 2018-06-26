@@ -2,16 +2,16 @@
 #include <bitset>
 #include <gsl/gsl_assert>
 
-template<int size>
+template<size_t size>
 class set_bits_iterator {
 private:
 	const std::bitset<size>& _bits;
-	int _index;
+	size_t _index;
 public:
 	set_bits_iterator(const std::bitset<size>& b) : _bits(b), _index(size)
 	{}
 
-	set_bits_iterator(const std::bitset<size>& b, int i) : _bits(b), _index(i) {
+	set_bits_iterator(const std::bitset<size>& b, size_t i) : _bits(b), _index(i) {
 		while (_index < size && !_bits[_index]) {
 			++_index;
 		}
@@ -80,14 +80,14 @@ template<typename T>
 class index_iterator {
 private:
 	T& _container;
-	int _index;
+	size_t _index;
 public:
 	index_iterator(T& container) :
 		_container(container),
 		_index(_container.size())
 	{}
 
-	index_iterator(T& container, int i) :
+	index_iterator(T& container, size_t i) :
 		_container(container),
 		_index(i)
 	{

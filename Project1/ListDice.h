@@ -12,7 +12,7 @@
 #include "FairDice.h"
 
 
-template<int sides>
+template<size_t sides>
 class ListDice : public Dice<sides> {
 private:
 	std::deque<int> _rolls;

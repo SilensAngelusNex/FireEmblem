@@ -7,11 +7,11 @@
 
 #include "BitsetIterator.h"
 
-template<int n>
+template<size_t n>
 inline std::string boolArrayToString(std::array<bool, n> init) {
 	std::string result = std::string(n, '0');
 
-	for (int i = 0; i < n; ++i) {
+	for (size_t i = 0; i < n; ++i) {
 		if (init[i]) {
 			result[n - (i + 1)] = '1';
 		}
@@ -19,9 +19,20 @@ inline std::string boolArrayToString(std::array<bool, n> init) {
 	return result;
 }
 
-template<int n>
+template<size_t n>
 inline std::string vectorToString(std::vector<int> init) {
-	Expects(std::find_if(init.begin(), init.end(), [](int i) {return 0 > i || i > n ; }) == init.end());
+	Expects(std::find_if(init.begin(), init.end(), [](int i) {return 0 > i || i > static_cast<int>(n); }) == init.end());
+
+	std::string result = std::string(n, '0');
+	for (int i : init) {
+		result[n - static_cast<size_t>(i + 1)] = '1';
+	}
+	return result;
+}
+
+template<size_t n>
+inline std::string vectorToString(std::vector<size_t> init) {
+	Expects(std::find_if(init.begin(), init.end(), [](size_t i) {return i > n; }) == init.end());
 
 	std::string result = std::string(n, '0');
 	for (int i : init) {
@@ -30,7 +41,7 @@ inline std::string vectorToString(std::vector<int> init) {
 	return result;
 }
 
-template<int n>
+template<size_t n>
 class IterableBitset {
 private:
 	std::bitset<n> _values;
@@ -54,6 +65,9 @@ public:
 		IterableBitset(boolArrayToString<n>(init))
 	{}
 	IterableBitset(std::vector<int> init) :
+		IterableBitset(vectorToString<n>(init))
+	{}
+	IterableBitset(std::vector<size_t> init) :
 		IterableBitset(vectorToString<n>(init))
 	{}
 
@@ -137,8 +151,8 @@ public:
 		return this->bitCompareHelp<false, true, true>(rhs);
 	}
 
-	constexpr int size() const {
-		return _values.size();
+	constexpr size_t size() const {
+		return n;
 	}
 
 	using const_iterator = set_bits_iterator<n>;
