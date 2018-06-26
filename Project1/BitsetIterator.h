@@ -125,11 +125,7 @@ public:
 		return result;
 	}
 
-	auto operator*() {
-		return _container[_index];
-	}
-
-	auto operator*() const {
+	decltype(auto) operator*() const {
 		return _container[_index];
 	}
 
