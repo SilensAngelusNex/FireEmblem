@@ -32,7 +32,7 @@ MobilitySet Mobility::getMobilitySet() const {
 
 bool Mobility::canPass(const Unit* unit) const {
 	//TODO(Torrey): add skill Logic stuff
-	return unit == nullptr || _owner._party->hasUnit(*unit);
+	return unit == nullptr || _owner.getParty()->hasUnit(*unit);
 }
 
 std::optional<int> Mobility::getCost(const CellEdge & edge) const {

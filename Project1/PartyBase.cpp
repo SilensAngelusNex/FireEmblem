@@ -5,7 +5,7 @@ PartyBase::PartyBase() :
 {}
 
 PartyBase::PartyBase(std::string name) :
-	PartyBase(name, std::vector<UnitData>())
+	PartyBase(std::move(name), std::vector<UnitData>())
 {}
 
 PartyBase::PartyBase(std::string name, std::vector<UnitData> unit_data) :
@@ -28,10 +28,10 @@ PartyBase::iterator PartyBase::getPosition(const Unit & unit) {
 
 void PartyBase::insertUnit(UnitData unit) {
 	_units.emplace_back(std::make_unique<Unit>(unit));
-	_units.back()->_party = this;
+	_units.back()->setParty(this);
 }
 
-Party& PartyBase::getParty(Passkey<GridMap> key) {
+Party& PartyBase::getParty(Passkey<Map> /*unused*/) {
 	return *reinterpret_cast<Party*>(this);
 }
 

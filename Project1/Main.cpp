@@ -27,8 +27,13 @@ int main(int  /*argc*/, char ** /*argv*/) {
 		std::cout << "Bitset passed!" << std::endl;
 	}
 	if (test::runMapTest()) {
-		std::cout << "All passed!" << std::endl;
+		std::cout << "Map passed!" << std::endl;
 	}
-	enumTest();
+	if (enumTest()) {
+		std::cout << "Enum passed!" << std::endl;
+	}
+	if (iterTest()) {
+		std::cout << "Iterators passed!" << std::endl;
+	}
 	return 0;
 }

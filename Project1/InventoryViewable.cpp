@@ -32,21 +32,21 @@ std::map<MobilitySet, Range::DistanceSet> InventoryViewable::getAssistRanges() c
 }
 
 
-int InventoryViewable::avoid(Passkey<Stats> key) const {
+int InventoryViewable::avoid(Passkey<Stats> /*unused*/) const {
 	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::avoid);
 }
-int InventoryViewable::dodge(Passkey<Stats> key) const {
+int InventoryViewable::dodge(Passkey<Stats> /*unused*/) const {
 	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::dodge);
 }
-int InventoryViewable::hit(Passkey<Stats> key) const {
+int InventoryViewable::hit(Passkey<Stats> /*unused*/) const {
 	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::hit);
 }
-int InventoryViewable::crit(Passkey<Stats> key) const {
+int InventoryViewable::crit(Passkey<Stats> /*unused*/) const {
 	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::crit);
 }
-int InventoryViewable::might(Passkey<Stats> key) const {
+int InventoryViewable::might(Passkey<Stats> /*unused*/) const {
 	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::might);
 }
-int InventoryViewable::atk_spd(Passkey<Stats> key) const {
+int InventoryViewable::atk_spd(Passkey<Stats> /*unused*/) const {
 	return stats_help(_owner.getStats().getAttribs(), &ItemEquip::atk_spd);
 }

@@ -172,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BitsetIterator.h" />
+    <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ID.h" />
     <ClInclude Include="MapHelper.h" />
@@ -218,6 +219,7 @@
     <ClInclude Include="ObserverDamage.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="CellEdge.h" />
+    <ClInclude Include="UniquePtrIterator.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="ListDice.h" />
     <ClInclude Include="UtilTests.h" />
