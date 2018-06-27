@@ -213,9 +213,6 @@
     <ClCompile Include="MapHelper.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
-    <ClCompile Include="PathMap.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -368,11 +365,14 @@
     <ClInclude Include="MapHelper.h">
       <Filter>inc\map</Filter>
     </ClInclude>
-    <ClInclude Include="ID.h">
+    <ClInclude Include="PathMap.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
+    <ClInclude Include="path_map_iter.h">
       <Filter>inc</Filter>
     </ClInclude>
-    <ClInclude Include="PathMap.h">
-      <Filter>inc</Filter>
+    <ClInclude Include="ID.h">
+      <Filter>inc\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

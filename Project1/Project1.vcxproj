@@ -156,7 +156,6 @@
     <ClCompile Include="ObservableDamage.cpp" />
     <ClCompile Include="Party.cpp" />
     <ClCompile Include="PartyBase.cpp" />
-    <ClCompile Include="PathMap.cpp" />
     <ClCompile Include="Range.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestObservers.cpp" />
@@ -177,6 +176,7 @@
     <ClInclude Include="ID.h" />
     <ClInclude Include="MapHelper.h" />
     <ClInclude Include="PathMap.h" />
+    <ClInclude Include="path_map_iter.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="CellPath.h" />

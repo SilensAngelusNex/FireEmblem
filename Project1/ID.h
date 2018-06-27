@@ -1,5 +1,8 @@
 #pragma once
 #include <utility>
+#include <map>
+#include <queue>
+
 
 class ID :
 	private std::pair<size_t, size_t>{
@@ -32,3 +35,10 @@ public:
 		return a | (c && b);
 	}
 };
+
+using CostID = std::pair<int, ID>;
+using id_cost_map = std::map<ID, CostID>;
+
+//TODO(Torrey): Place these somewhere private in GridMap
+inline auto comp = [](const CostID& lhs, const CostID& rhs) { return lhs.first < rhs.first; };
+using PathQueue = std::priority_queue<CostID, std::vector<CostID>, decltype (comp)>;

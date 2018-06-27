@@ -1,6 +1,7 @@
 #include "Mobility.h"
 #include "CellEdge.h"
 #include "GridCell.h"
+#include "PartyBase.h"
 #include "Unit.h"
 
 

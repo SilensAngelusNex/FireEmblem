@@ -6,12 +6,11 @@
 
 //TODO(Torrey): Create Superclasses of this. EX: UnitPath has a unit to traverse the Grid.
 
-using CellCost = std::pair<int, ID>;
-using constCellCost = std::pair<int, constCellRef>;
+
 /*
 class CellPath
 {
-	std::list<CellCost>_path = std::list<CellCost>();
+	std::list<CostID>_path = std::list<CostID>();
 	const MobilitySet _traversal_vector;
 public:
 	CellPath(std::list<ID> path, MobilitySet traversal_vector);
@@ -28,8 +27,8 @@ public:
 
 	const GridCell & getHead() const;
 
-	using iterator = std::list<CellCost>::iterator;
-	using const_iterator = std::list<CellCost>::const_iterator;
+	using iterator = std::list<CostID>::iterator;
+	using const_iterator = std::list<CostID>::const_iterator;
 	iterator begin() { return _path.begin(); }
 	iterator end() { return _path.end(); }
 	const_iterator cbegin() const { return _path.cbegin(); }

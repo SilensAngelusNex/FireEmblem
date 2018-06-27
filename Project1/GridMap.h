@@ -9,17 +9,20 @@
 #include "CellPath.h"
 #include "Party.h"
 #include "ID.h"
-//#include "PathMap.h"
+#include "PathMap.h"
 
 
 
-using PathMap = std::map<const ID, CellCost>;
-inline auto comp = [](const CellCost& lhs, const CellCost& rhs) { return lhs.first < rhs.first; };
-using PathQueue = std::priority_queue<CellCost, std::vector<CellCost>, decltype (comp)>;
 class GridMap :
 	public Grid
 {
+
+private: 
+	id_cost_map getShortestPaths(const Unit & unit) const;
+	id_cost_map getShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible) const;
 public:
+
+
 	GridMap(int width, int height);
 	GridMap(int width, int height, std::vector<PartyData> data);
 
@@ -34,11 +37,11 @@ public:
 	PathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible);
 
 
-	const PathMap findShortestPaths(const Unit& unit) const;
-	const PathMap findShortestPaths(size_t x, size_t y) const;
-	const PathMap findShortestPaths(ID start) const;
-	const PathMap findShortestPaths(ID start, int max_move, MobilitySet mobility) const;
-	const PathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible) const;
+	constPathMap findShortestPaths(const Unit& unit) const;
+	constPathMap findShortestPaths(size_t x, size_t y) const;
+	constPathMap findShortestPaths(ID start) const;
+	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility) const;
+	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible) const;
 
 	//CellPath getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilitySet mobility);
 };

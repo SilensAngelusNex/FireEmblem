@@ -1,5 +1,6 @@
 #include "MapHelper.h"
 #include "GridMap.h"
+#include "PathMap.h"
 #include "Unit.h"
 #include "GridCell.h"
 #include "PartyBase.h"
@@ -67,7 +68,7 @@ std::vector<UnitRef> MapHelper::getEnemiesWithin(Range range, GridCell& pos, con
 
 /*
 Bool Range::hasDistance(int dist) const{
-	return _range[(dist + 9)/10];
+return _range[(dist + 9)/10];
 }
 
 */
@@ -77,7 +78,7 @@ std::vector<CellRef> MapHelper::getCellsWithin(Range range, GridCell& pos) {
 	auto vec = std::vector<CellRef>();
 	for (auto pair : path_map) {
 		if (range.hasDistance(pair.second.first)) {
-			vec.emplace_back(_map[pair.first]);
+			vec.emplace_back(pair.first);
 		}
 	}
 	return vec;
@@ -88,8 +89,8 @@ std::vector<CellRef> MapHelper::getAlliedCellsWithin(Range range, GridCell & pos
 	auto vec = std::vector<CellRef>();
 	for (auto pair : path_map) {
 		if (range.hasDistance(pair.second.first)) {
-			if (_map.hasUnit(_map[pair.first]) && party.hasUnit(_map[_map[pair.first]]))
-			vec.emplace_back(_map[pair.first]);
+			if (_map.hasUnit(pair.first) && party.hasUnit(_map[pair.first]))
+				vec.emplace_back(pair.first);
 		}
 	}
 	return vec;
@@ -100,8 +101,8 @@ std::vector<CellRef> MapHelper::getEnemyCellsWithin(Range range, GridCell & pos,
 	auto vec = std::vector<CellRef>();
 	for (auto pair : path_map) {
 		if (range.hasDistance(pair.second.first)) {
-			if (_map.hasUnit(_map[pair.first]) && !party.hasUnit(_map[_map[pair.first]]))
-				vec.emplace_back(_map[pair.first]);
+			if (_map.hasUnit(pair.first) && !party.hasUnit(_map[pair.first]))
+				vec.emplace_back(pair.first);
 		}
 	}
 	return vec;

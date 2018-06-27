@@ -14,7 +14,7 @@ std::vector<CellRef> MoveHelper::getAccesibleCells(const Unit& unit) {
 	PathMap path_map = findShortestPaths(unit);
 	std::vector<CellRef> cells = std::vector< CellRef>();
 	for (auto pair : path_map) {
-		cells.push_back(_map[pair.first]);
+		cells.push_back(pair.first);
 	}
 	std::vector<CellRef> allied_cells = getOtherAlliedCells(unit);
 	vectorSubtract(cells,allied_cells);
@@ -86,7 +86,7 @@ std::vector<CellRef> MoveHelper::getOtherAlliedCells(const Unit& unit) {
 /*
 bool MoveHelper::canWalk(Unit& unit, CellPath path) {
 	bool valid = path.getHead() == _map[unit];
-	for (CellCost pair : path) {
+	for (CostID pair : path) {
 		valid = valid && pair.first <= unit.getMobility().getMove();
 	}
 	return valid;

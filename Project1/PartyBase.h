@@ -5,9 +5,7 @@
 class GridMap;
 class Party;
 class party_iterator;
-using UnitRef = std::reference_wrapper<Unit>;
-using constUnitRef = std::reference_wrapper<const Unit>;
-using UnitPtr = std::unique_ptr<Unit>;
+
 struct UnitData;
 struct PartyData {
 	std::string name;

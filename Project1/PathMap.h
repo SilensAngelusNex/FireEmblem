@@ -1,62 +1,89 @@
 #pragma once
 #include "ID.h"
 #include "CellPath.h"
+#include "path_map_iter.h"
 #include <map>
 
-class Grid;
 
-
-class PathMap :
-	private std::map<const ID, CellCost>
+//TODO(Torrey): rename this class
+template <typename grid>
+class Path_Map :
+	private id_cost_map
 {
 private:
-	//Grid& _map;
+	grid& _grid;
+	
 public:
-	PathMap(Grid& map);
-	PathMap(const Grid& map);
-	//using std::map<const ID, CellCost>::~map;
-	using std::map<const ID, CellCost>::operator=;
-	using std::map<const ID, CellCost>::get_allocator;
+	Path_Map(grid& g) :
+		id_cost_map(),
+		_grid(g)
+	{}
+	Path_Map(grid& g, id_cost_map&& move) :
+		id_cost_map(move),
+		_grid(g)
+	{}
+
+
+	//using id_cost_map::~map;
+	using id_cost_map::operator=;
+	using id_cost_map::get_allocator;
 
 	//Iterator
-	using std::map<const ID, CellCost>::iterator;
-	using std::map<const ID, CellCost>::const_iterator;
-	using std::map<const ID, CellCost>::begin;
-	using std::map<const ID, CellCost>::cbegin;
-	using std::map<const ID, CellCost>::end;
-	using std::map<const ID, CellCost>::cend;
+	using iterator = path_map_iter<id_cost_map::iterator, grid>;
+	using const_iterator = path_map_iter<id_cost_map::const_iterator, grid>;
+
+	iterator begin() { return iterator(id_cost_map::begin(), _grid); }
+	const iterator begin() const { return iterator(id_cost_map::begin(), _grid); }
+	const_iterator cbegin() const noexcept { return const_iterator(id_cost_map::cbegin(), _grid); }
+	iterator   end() { return iterator(  id_cost_map::end(), _grid); }
+	const iterator end() const { return iterator(id_cost_map::end(), *this); }
+	const_iterator cend() const noexcept { return const_iterator(id_cost_map::cend(), _grid); }
 
 	//Element access;
-	using std::map<const ID, CellCost>::at;
-	using std::map<const ID, CellCost>::operator[];
 
+	auto& operator[](const ID&  key) {
+		return _grid[(*this)[key]];
+	}
+	auto& operator[](const ID&& key) {
+		return _grid[(*this)[key]];
+	}
+
+	auto& at(const ID& key) {
+		return _grid[this->at(key)];
+	}
+	const auto& at(const ID& key) const {
+		return _grid[this->at(key)];
+	}
 	//Capacity
-	using std::map<const ID, CellCost>::empty;
-	using std::map<const ID, CellCost>::size;
-	using std::map<const ID, CellCost>::max_size;
+	using id_cost_map::empty;
+	using id_cost_map::size;
+	using id_cost_map::max_size;
 
 
 	//modifiers
-	using std::map<const ID, CellCost>::clear;
-	using std::map<const ID, CellCost>::insert;
-	using std::map<const ID, CellCost>::insert_or_assign;
-	using std::map<const ID, CellCost>::emplace;
-	using std::map<const ID, CellCost>::emplace_hint;
-	using std::map<const ID, CellCost>::try_emplace;
-	using std::map<const ID, CellCost>::erase;
-	using std::map<const ID, CellCost>::swap;
-	using std::map<const ID, CellCost>::extract;
-	using std::map<const ID, CellCost>::merge;
+	using id_cost_map::clear;
+	using id_cost_map::insert;
+	using id_cost_map::insert_or_assign;
+	using id_cost_map::emplace;
+	using id_cost_map::emplace_hint;
+	using id_cost_map::try_emplace;
+	using id_cost_map::erase;
+	using id_cost_map::swap;
+	using id_cost_map::extract;
+	using id_cost_map::merge;
 
 	//Lookup
-	using std::map<const ID, CellCost>::count;
-	using std::map<const ID, CellCost>::find;
-	using std::map<const ID, CellCost>::equal_range;
-	using std::map<const ID, CellCost>::lower_bound;
-	using std::map<const ID, CellCost>::upper_bound;
+	using id_cost_map::count;
+	using id_cost_map::find;
+	using id_cost_map::equal_range;
+	using id_cost_map::lower_bound;
+	using id_cost_map::upper_bound;
 
 	//Observers
-	using std::map<const ID, CellCost>::key_comp;
-	using std::map<const ID, CellCost>::value_comp;
+	using id_cost_map::key_comp;
+	using id_cost_map::value_comp;
 };
 
+class GridMap;
+using PathMap = Path_Map<GridMap>;
+using constPathMap = Path_Map<const GridMap>;

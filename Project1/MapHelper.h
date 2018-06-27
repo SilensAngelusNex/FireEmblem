@@ -7,7 +7,6 @@
 class GridMap;
 class Range;
 
-//TODO(Torrey): const correctness
 class MapHelper
 {
 protected:

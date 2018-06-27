@@ -4,11 +4,14 @@
 #include "GridMap.h"
 #include "MapHelper.h"
 
+
+//TODO(Torrey): find a good place to put these operations
 template<typename T>
 inline bool operator== (const std::reference_wrapper<T>& lhs, const std::reference_wrapper<T>& rhs) {
 	return lhs.get() == rhs.get();
 }
-inline bool operator< (const CellRef& lhs, const CellRef& rhs) {
+template<typename T>
+inline bool operator< (const std::reference_wrapper<T>& lhs, const std::reference_wrapper<T>& rhs) {
 	return &lhs.get() < &rhs.get();
 }
 
