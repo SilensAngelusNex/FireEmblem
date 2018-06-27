@@ -8,7 +8,7 @@
 
 using CellCost = std::pair<int, ID>;
 using constCellCost = std::pair<int, constCellRef>;
-
+/*
 class CellPath
 {
 	std::list<CellCost>_path = std::list<CellCost>();
@@ -36,3 +36,4 @@ public:
 	const_iterator cend() const { return _path.cend(); }
 };
 
+*/
