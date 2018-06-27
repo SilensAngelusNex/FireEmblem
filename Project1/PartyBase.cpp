@@ -31,8 +31,12 @@ void PartyBase::insertUnit(UnitData unit) {
 	_units.back()->setParty(this);
 }
 
-Party& PartyBase::getParty(Passkey<Map> /*unused*/) {
+Party& PartyBase::getParty(Passkey<GridMap> /*unused*/) {
 	return *reinterpret_cast<Party*>(this);
+}
+
+const Party& PartyBase::getParty(Passkey<GridMap> /*unused*/) const {
+	return *reinterpret_cast<const Party*>(this);
 }
 
 bool PartyBase::hasUnit(const Unit& unit) const {

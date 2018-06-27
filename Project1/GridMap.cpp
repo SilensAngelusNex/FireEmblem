@@ -6,6 +6,7 @@
 #include "CellPath.h"
 #include "CellEdge.h"
 #include "Mobility.h"
+#include "Passkey.h"
 
 
 
@@ -18,11 +19,16 @@ GridMap::GridMap(int width, int height, std::vector<PartyData> data) :
 {}
 
 Party& GridMap::getParty(const Unit & unit) {
-	return unit._party->getParty(Passkey<GridMap>());
+	for (auto & party : _parties) {
+		if (*unit.getParty() == party) {
+			return party;
+		}
+	}
+	Expects(false);
 }
 
 const Party& GridMap::getParty(const Unit & unit) const {
-	return unit._party->getParty(Passkey<GridMap>());
+	return unit.getParty()->getParty(Passkey<GridMap>());
 }
 
 

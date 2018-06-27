@@ -33,7 +33,8 @@ protected:
 	iterator getPosition(const Unit& unit);
 
 public:
-	Party& getParty(Passkey<Map> /*unused*/);
+	Party& getParty(Passkey<GridMap> /*unused*/);
+	const Party& getParty(Passkey<GridMap>) const;
 
 	bool hasUnit(const Unit& unit) const;
 	bool operator==(const PartyBase& other) const;
