@@ -171,9 +171,6 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>src\map\gridcell</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>src\map\gridcell</Filter>
-    </ClCompile>
     <ClCompile Include="MoveHelper.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
@@ -312,9 +309,6 @@
       <Filter>inc\map\gridcell</Filter>
     </ClInclude>
     <ClInclude Include="Terrain.h">
-      <Filter>inc\map\gridcell</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
       <Filter>inc\map\gridcell</Filter>
     </ClInclude>
     <ClInclude Include="MoveHelper.h">

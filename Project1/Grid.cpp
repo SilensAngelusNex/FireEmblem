@@ -10,7 +10,7 @@ Grid::Grid(int width, int height) {
 	for (int i = 0; i < width; i++) {
 		_grid.emplace_back();
 		for (int j = 0; j < height; j++) {
-			_grid[i].emplace_back(Tile(TerrainType::values::PLAINS), ID(i, j));
+			_grid[i].emplace_back(TerrainType::values::PLAINS, ID(i, j));
 		}
 	}
 	insertAdjacencies();
@@ -20,7 +20,7 @@ Grid::Grid(int width, int height, std::vector<PartyData> data) {
 	for (int i = 0; i < width; i++) {
 		_grid.emplace_back();
 		for (int j = 0; j < height; j++) {
-			_grid[i].emplace_back(Tile(TerrainType::values::PLAINS), ID(i, j));
+			_grid[i].emplace_back(TerrainType::values::PLAINS, ID(i, j));
 		}
 	}
 	insertAdjacencies();

@@ -161,7 +161,6 @@
     <ClCompile Include="TestObservers.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Swords.cpp" />
-    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="CellEdge.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitTest.cpp" />
@@ -217,7 +216,6 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TestObservers.h" />
     <ClInclude Include="ObserverDamage.h" />
-    <ClInclude Include="Tile.h" />
     <ClInclude Include="CellEdge.h" />
     <ClInclude Include="UniquePtrIterator.h" />
     <ClInclude Include="Unit.h" />

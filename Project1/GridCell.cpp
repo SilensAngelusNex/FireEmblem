@@ -20,14 +20,14 @@ const std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) cons
 	return {};
 }
 
-GridCell::GridCell(Tile tile, ID id) :
-	_tile(std::move(tile)),
+GridCell::GridCell(TerrainType terrain, ID id) :
+	_terrain(Terrain::TerrainFactory(terrain)),
 		_id(id)
 {}
 
 void GridCell::addAdjacentCell(GridCell & new_cell)
 {
-	addAdjacentCell(new_cell, new_cell.getTile()._terrain.getCosts());
+	addAdjacentCell(new_cell, new_cell._terrain.getCosts());
 }
 
 /** Adds _new_cell to the adjacency vector
@@ -53,11 +53,11 @@ bool GridCell::isAdjacent(const GridCell & other_cell, MobilitySet mobility) con
 {
 	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
 }
-const Tile& GridCell::getTile() const{
-	return _tile;
+const Terrain& GridCell::getTerrain() const{
+	return _terrain;
 }
-Tile& GridCell::getTile() {
-	return _tile;
+Terrain& GridCell::getTerrain() {
+	return _terrain;
 }
 std::vector<GridCell*> GridCell::getAdjacentCells() {
 	std::vector<GridCell*> adj_cells = std::vector<GridCell*>();

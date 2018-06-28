@@ -66,13 +66,6 @@ std::vector<UnitRef> MapHelper::getEnemiesWithin(Range range, GridCell& pos, con
 	return vec;
 }
 
-/*
-Bool Range::hasDistance(int dist) const{
-return _range[(dist + 9)/10];
-}
-
-*/
-
 std::vector<CellRef> MapHelper::getCellsWithin(Range range, GridCell& pos) {
 	PathMap path_map = _map.findShortestPaths(pos._id, range.maxRange(), range._type);
 	auto vec = std::vector<CellRef>();

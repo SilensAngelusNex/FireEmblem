@@ -3,12 +3,12 @@
 #include <utility>
 
 namespace Terrain_Costs {
-	MobilityCostSet plains({ 10, 10, 10, 10, 10 });
-	MobilityCostSet water({ std::nullopt, std::nullopt, 10, 10, 10 });
-	MobilityCostSet forest({ 20, 10, 20, 10, 10 });
-	MobilityCostSet mountain({ 30, 30, 10, 10, 10 });
-	MobilityCostSet wall({ std::nullopt, std::nullopt, std::nullopt, std::nullopt, 10 });
-	MobilityCostSet null({ std::nullopt });
+	MobilityCostSet PLAINS({ Terrain::BASE_COST, Terrain::BASE_COST, Terrain::BASE_COST, Terrain::BASE_COST, Terrain::BASE_COST });
+	MobilityCostSet WATER({ std::nullopt, std::nullopt, Terrain::BASE_COST, Terrain::BASE_COST, Terrain::BASE_COST });
+	MobilityCostSet FOREST({ 2 * Terrain::BASE_COST, Terrain::BASE_COST, 2 * Terrain::BASE_COST, Terrain::BASE_COST, Terrain::BASE_COST });
+	MobilityCostSet MOUNTAIN({ 3* Terrain::BASE_COST, 3 * Terrain::BASE_COST, Terrain::BASE_COST, Terrain::BASE_COST, Terrain::BASE_COST });
+	MobilityCostSet WALL({ std::nullopt, std::nullopt, std::nullopt, std::nullopt, Terrain::BASE_COST });
+	MobilityCostSet NULL_TERRAIN({ std::nullopt });
 }
 
 Terrain::Terrain(std::string name, MobilityCostSet costs) :
@@ -16,7 +16,7 @@ Terrain::Terrain(std::string name, MobilityCostSet costs) :
 	_costs(costs)
 {}
 
-Terrain::Terrain() : Terrain("~NULL TERRAIN~", MobilityCostSet({ 10, 10, 10, 10, 10 })) {}
+Terrain::Terrain() : Terrain("~NULL TERRAIN~", Terrain_Costs::NULL_TERRAIN) {}
 
 /////////////////////////////////////////////////////////////////
 
@@ -24,22 +24,22 @@ Terrain Terrain::TerrainFactory(TerrainType type)
 {
 	switch (type) {
 	case (TerrainType::values::PLAINS):
-		return Terrain("Plains", Terrain_Costs::plains);
+		return Terrain("Plains", Terrain_Costs::PLAINS);
 		break;
 	case (TerrainType::values::WATER):
-		return Terrain("Water", Terrain_Costs::water);
+		return Terrain("Water", Terrain_Costs::WATER);
 		break;
 	case (TerrainType::values::FOREST):
-		return Terrain("Forest", Terrain_Costs::forest);
+		return Terrain("Forest", Terrain_Costs::FOREST);
 		break;
 	case (TerrainType::values::MOUNTAIN):
-		return Terrain("Mountain", Terrain_Costs::mountain);
+		return Terrain("Mountain", Terrain_Costs::MOUNTAIN);
 		break;
 	case (TerrainType::values::WALL):
-		return Terrain("Wall", Terrain_Costs::wall);
+		return Terrain("Wall", Terrain_Costs::WALL);
 		break;
 	default:
-		return Terrain("~NULL TERRAIN~", Terrain_Costs::null);
+		return Terrain("~NULL TERRAIN~", Terrain_Costs::NULL_TERRAIN);
 	}
 }
 
