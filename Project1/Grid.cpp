@@ -28,12 +28,7 @@ Grid::Grid(int width, int height, std::vector<PartyData> data) {
 		insertParty(party);
 	}
 }
-Grid::grid_row::grid_row(std::vector<GridCell>& row) 
-	: _row(row)
-{}
-Grid::const_grid_row::const_grid_row(const std::vector<GridCell>& row)
-	: _row(row)
-{}
+
 Unit* Grid::getUnit(const GridCell & index) {
 	return  hasUnit(index) ? _cell_to_unit[&index] : nullptr;
 }
@@ -105,32 +100,26 @@ GridCell& Grid::operator[](const Unit& index) {
 GridCell & Grid::operator[](const ID & index) {
 	return _grid[index.first][index.second];
 }
-Grid::grid_row Grid::operator[](size_t index) {
-	return grid_row(_grid[index]);
+Grid::GridRow Grid::operator[](size_t index) {
+	return GridRow(_grid[index]);
 }
 const GridCell& Grid::operator[](const Unit& index) const {
 	Expects(hasUnit(index));
 	return *_unit_to_cell.at(&index);
 }
-Grid::const_grid_row Grid::operator[](size_t index) const {
-	return const_grid_row(_grid.at(index));
+Grid::constGridRow Grid::operator[](size_t index) const {
+	return constGridRow(_grid.at(index));
 }
 const Unit& Grid::operator[](const GridCell & index) const {
 	Expects(hasUnit(index));
 	return *_cell_to_unit.at(&index);
 }
 
-GridCell& Grid::grid_row::operator[](size_t index) {
-	return _row[index];
-}
 
-const GridCell & Grid::grid_row::operator[](size_t index) const {
-	return _row.at(index);
-}
-const GridCell& Grid::const_grid_row::operator[](size_t index) const {
-	return _row.at(index);
-}
+
 
 const GridCell& Grid::operator[](const ID& index) const{
 	return _grid[index.first][index.second];
 }
+
+

@@ -17,24 +17,18 @@ class Mobility;
 class Grid {
 public:
 	//vector wrapper that only allows [] op
+	template<typename VecCell>
 	class grid_row {
 	private:
-		std::vector<GridCell>& _row;
-		grid_row(std::vector<GridCell>& row);
+		VecCell& _row;
+		grid_row(VecCell& row) : _row(row) {}
 	public:
-		GridCell& operator[](size_t index);
-		const GridCell& operator[](size_t index) const;
+		auto& operator[](size_t index) { return _row[index];}
+		const auto& operator[](size_t index) const { return _row[index];}
 		friend class Grid;
 	};
-	//const vector wrapper that only allows [] op
-	class const_grid_row {
-	private:
-		const std::vector<GridCell>& _row;
-		const_grid_row(const std::vector<GridCell>& row);
-	public:
-		const GridCell& operator[](size_t index) const;
-		friend class Grid;
-	};
+	using GridRow = grid_row < std::vector<GridCell>>;
+	using constGridRow = grid_row<const std::vector<GridCell>>;
 private:
 
 	std::map<const Unit*, GridCell*> _unit_to_cell;
@@ -72,11 +66,11 @@ public:
 	Unit& operator[](const GridCell& index);
 	GridCell& operator[](const Unit& index);
 	GridCell& operator[](const ID& index);
-	grid_row operator[](size_t index);
+	GridRow operator[](size_t index);
 
 	const Unit& operator[](const GridCell& index) const;
 	const GridCell& operator[](const Unit& index) const;
 	const GridCell& operator[](const ID& index) const;
-	const_grid_row operator[](size_t index) const;
+	constGridRow operator[](size_t index) const;
 
 };
