@@ -3,15 +3,16 @@
 #include "CellPath.h"
 #include <map>
 
-using CostCell = logic_pair<int, CellRef>;
+
 //TODO(Torrey): rename this class
-template <typename grid>
+template <typename grid, typename cell>
 class Path_Map :
 	private id_cost_map
 {
-	//private iterator class that replaces ID with CellRef
 private:
-	template <typename iterator, typename grid>
+	using CostCell = logic_pair<int, std::reference_wrapper<cell>>;
+	//private iterator class that replaces ID with CellRef
+	template <typename iterator>
 	class path_map_iter : public iterator {
 	private:
 		grid & _map;
@@ -28,8 +29,12 @@ private:
 
 private:
 	grid& _grid;
+	CostCell convert(CostID pair) {
+		return CostCell(pair.first, _grid[pair.second]);
+	}
 	
 public:
+	//Constructors
 	Path_Map(grid& g) :
 		id_cost_map(),
 		_grid(g)
@@ -43,8 +48,8 @@ public:
 	using id_cost_map::get_allocator;
 
 	//Iterator
-	using iterator = path_map_iter<id_cost_map::iterator, grid>;
-	using const_iterator = path_map_iter<id_cost_map::const_iterator, grid>;
+	using iterator = path_map_iter<id_cost_map::iterator>;
+	using const_iterator = path_map_iter<id_cost_map::const_iterator>;
 
 	iterator begin() { return iterator(id_cost_map::begin(), _grid); }
 	const iterator begin() const { return iterator(id_cost_map::begin(), _grid); }
@@ -55,19 +60,22 @@ public:
 
 	//Element access;
 
-	auto& operator[](const ID&  key) {
-		return _grid[(*this)[key]];
+	CostCell operator[](const GridCell& key) {
+		return convert((*this)[key._id]);
 	}
-	auto& operator[](const ID&& key) {
-		return _grid[(*this)[key]];
+	CostCell operator[](const GridCell&& key) {
+		return convert((*this)[key._id]);
 	}
 
-	auto& at(const ID& key) {
-		return _grid[this->at(key)];
+	CostCell at(const GridCell& key) {
+		return convert(this->at(key._id));
 	}
-	const auto& at(const ID& key) const {
-		return _grid[this->at(key)];
+	const CostCell at(const ID& key) const {
+		return convert(this->at(key._id));
 	}
+	using id_cost_map::operator[];
+	using id_cost_map::at;
+
 	//Capacity
 	using id_cost_map::empty;
 	using id_cost_map::size;
@@ -100,5 +108,6 @@ public:
 };
 
 class GridMap;
-using PathMap = Path_Map<GridMap>;
-using constPathMap = Path_Map<const GridMap>;
+class GridCell;
+using PathMap = Path_Map<GridMap, GridCell>;
+using constPathMap = Path_Map<const GridMap, const GridCell>;
