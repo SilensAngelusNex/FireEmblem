@@ -3,8 +3,8 @@
 #include "Mobility.h"
 
 
-CellEdge::CellEdge(GridCell& cell, MobilityCostSet costs) :
-	_cell(cell),
+CellEdge::CellEdge(ID id, MobilityCostSet costs) :
+	_id(id),
 	_costs(costs)
 {}
 
@@ -32,9 +32,9 @@ std::optional<int> CellEdge::getCost(MobilitySet mobility_type, bool intangible)
 }
 
 bool CellEdge::operator== (const CellEdge& c) const {
-	return this->_cell == c._cell && this->_costs == c._costs;
+	return this->_id == c._id && this->_costs == c._costs;
 }
 bool CellEdge::operator!= (const CellEdge& c) const {
-	return this->_cell != c._cell && this->_costs != c._costs;
+	return this->_id != c._id && this->_costs != c._costs;
 }
 

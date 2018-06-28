@@ -5,7 +5,7 @@
 
 std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) {
 	for (CellEdge edge: _adjacent_cells) {
-		if (&edge._cell == &other_cell) {
+		if (edge._id == other_cell._id) {
 			return edge;
 		}
 	}
@@ -13,7 +13,24 @@ std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) {
 }
 const std::optional<CellEdge> GridCell::getEdge(const GridCell& other_cell) const {
 	for (CellEdge edge : _adjacent_cells) {
-		if (&edge._cell == &other_cell) {
+		if (edge._id == other_cell._id) {
+			return edge;
+		}
+	}
+	return {};
+}
+
+std::optional<CellEdge> GridCell::getEdge(ID other_cell_id) {
+	for (CellEdge edge : _adjacent_cells) {
+		if (edge._id == other_cell_id) {
+			return edge;
+		}
+	}
+	return {};
+}
+const std::optional<CellEdge> GridCell::getEdge(ID other_cell_id) const {
+	for (CellEdge edge : _adjacent_cells) {
+		if (edge._id == other_cell_id) {
 			return edge;
 		}
 	}
@@ -27,12 +44,12 @@ GridCell::GridCell(TerrainType terrain, ID id) :
 
 void GridCell::addAdjacentCell(GridCell & new_cell)
 {
-	addAdjacentCell(new_cell, new_cell._terrain.getCosts());
+	addAdjacentCell(new_cell._id, new_cell._terrain.getCosts());
 }
 
 /** Adds _new_cell to the adjacency vector
 */
-void GridCell::addAdjacentCell(GridCell& new_cell, MobilityCostSet costs) {
+void GridCell::addAdjacentCell(ID new_cell, MobilityCostSet costs) {
 	Expects(!getEdge(new_cell).has_value());
 	_adjacent_cells.emplace_back(new_cell, costs);
 }
@@ -59,17 +76,17 @@ const Terrain& GridCell::getTerrain() const{
 Terrain& GridCell::getTerrain() {
 	return _terrain;
 }
-std::vector<GridCell*> GridCell::getAdjacentCells() {
-	std::vector<GridCell*> adj_cells = std::vector<GridCell*>();
+std::vector<ID> GridCell::getAdjacentCellIDs() {
+	auto adj_cells = std::vector<ID>();
 	for (CellEdge edge : _adjacent_cells) {
-		adj_cells.push_back(&edge._cell);
+		adj_cells.push_back(edge._id);
 	}
 	return adj_cells;
 }
-const std::vector<GridCell*> GridCell::getAdjacentCells() const {
-	std::vector<GridCell*> adj_cells = std::vector<GridCell*>();
+const std::vector<ID> GridCell::getAdjacentCellIDs() const {
+	auto adj_cells = std::vector<ID>();
 	for (CellEdge edge : _adjacent_cells) {
-		adj_cells.push_back(&edge._cell);
+		adj_cells.push_back(edge._id);
 	}
 	return adj_cells;
 }

@@ -1,19 +1,19 @@
 #pragma once
-class GridCell;
 class Mobility;
 #include <array>
 #include "MobilityList.h"
 #include <optional>
+#include "ID.h"
 /**
 Represents an Edge to a GridCell, basically a struct
 */
 class CellEdge {
 public:
-	GridCell & _cell;
+	const ID _id;
 private:
 	const MobilityCostSet _costs = MobilityCostSet();
 public:
-	CellEdge(GridCell& cell, MobilityCostSet costs);
+	CellEdge(ID id, MobilityCostSet costs);
 	CellEdge(const CellEdge& cell) = default;
 	CellEdge(CellEdge&& cell) = default;
 

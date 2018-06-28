@@ -96,12 +96,12 @@ id_cost_map GridMap::getShortestPaths(const Unit& unit) const {
 		std::list<CellEdge> adj_edges = (*this)[top.second].getEdges();
 		for (auto& edge : adj_edges) {
 			std::optional<int> cost = unit.getMobility().getCost(edge);
-			if (unit.getMobility().canPass(getUnit(edge._cell)) && cost.has_value()) {
+			if (unit.getMobility().canPass(getUnit((*this)[edge._id])) && cost.has_value()) {
 				cost = top.first + cost.value();
 
-				if (cost.value() <= unit.getMobility().getMove() && (path_map.count(edge._cell._id) == 0 || cost.value() < path_map.at(edge._cell._id).first)) {
-					path_map.insert_or_assign(edge._cell._id, CostID(cost.value(), top.second));
-					queue.emplace(cost.value(), edge._cell._id);
+				if (cost.value() <= unit.getMobility().getMove() && (path_map.count(edge._id) == 0 || cost.value() < path_map.at(edge._id).first)) {
+					path_map.insert_or_assign(edge._id, CostID(cost.value(), top.second));
+					queue.emplace(cost.value(), edge._id);
 				}
 			}
 		}
@@ -122,11 +122,11 @@ id_cost_map GridMap::getShortestPaths(ID start, int max_move, MobilitySet mobili
 		std::list<CellEdge> adj_edges = (*this)[top.second].getEdges();
 		for (auto& edge : adj_edges) {
 			std::optional<int> cost = edge.getCost(mobility, intangible);
-			if ((!hasUnit(edge._cell) || intangible) && cost.has_value()) {
+			if ((!hasUnit((*this)[edge._id]) || intangible) && cost.has_value()) {
 				cost = top.first + cost.value();
-				if (cost.value() <= max_move && (path_map.count(edge._cell._id) == 0 || cost.value() < path_map.at(edge._cell._id).first)) {
-					path_map.insert_or_assign(edge._cell._id, CostID(cost.value(), top.second));
-					queue.emplace(cost.value(), edge._cell._id);
+				if (cost.value() <= max_move && (path_map.count(edge._id) == 0 || cost.value() < path_map.at(edge._id).first)) {
+					path_map.insert_or_assign(edge._id, CostID(cost.value(), top.second));
+					queue.emplace(cost.value(), edge._id);
 				}
 			}
 		}
