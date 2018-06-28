@@ -85,7 +85,7 @@ constPathMap GridMap::findShortestPaths(const Unit& unit) const {
 
 id_cost_map GridMap::getShortestPaths(const Unit& unit) const {
 	const GridCell& start = (*this)[unit];
-	auto queue = PathQueue(comp);
+	PathQueue queue = PathQueue();
 	id_cost_map path_map = id_cost_map();
 	path_map.emplace(start._id, CostID(0, start._id));
 	queue.emplace(0, start._id);
@@ -110,7 +110,7 @@ id_cost_map GridMap::getShortestPaths(const Unit& unit) const {
 }
 
 id_cost_map GridMap::getShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible) const {
-	PathQueue queue = PathQueue(comp);
+	PathQueue queue = PathQueue();
 	id_cost_map path_map = id_cost_map();
 	path_map.emplace(start, CostID(0, start));
 	queue.emplace(0, start);

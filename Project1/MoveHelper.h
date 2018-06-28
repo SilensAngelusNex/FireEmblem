@@ -3,17 +3,7 @@
 #include <vector>
 #include "GridMap.h"
 #include "MapHelper.h"
-
-
-//TODO(Torrey): find a good place to put these operations
-template<typename T>
-inline bool operator== (const std::reference_wrapper<T>& lhs, const std::reference_wrapper<T>& rhs) {
-	return lhs.get() == rhs.get();
-}
-template<typename T>
-inline bool operator< (const std::reference_wrapper<T>& lhs, const std::reference_wrapper<T>& rhs) {
-	return &lhs.get() < &rhs.get();
-}
+#include "reference_logic.h"
 
 class Unit;
 class CellPath;
@@ -22,11 +12,6 @@ class MoveHelper :
 	public MapHelper 
 {
 private:
-
-
-
-	//static auto comp = [](const std::reference_wrapper<T>& lhs, const std::reference_wrapper<T>& rhs) { return 0 == 1); };
-
 	template<typename T>
 	void vectorSubtract(std::vector<std::reference_wrapper<T>>& a, std::vector<std::reference_wrapper<T>>& b) {
 		std::sort(a.begin(), a.end());

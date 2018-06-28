@@ -176,7 +176,6 @@
     <ClInclude Include="ID.h" />
     <ClInclude Include="MapHelper.h" />
     <ClInclude Include="PathMap.h" />
-    <ClInclude Include="path_map_iter.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="CellPath.h" />
@@ -203,6 +202,7 @@
     <ClInclude Include="PartyBase.h" />
     <ClInclude Include="optional_pair.h" />
     <ClInclude Include="Passkey.h" />
+    <ClInclude Include="reference_logic.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="Swords.h" />

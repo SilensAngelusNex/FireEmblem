@@ -20,6 +20,7 @@ class GridMap :
 private: 
 	id_cost_map getShortestPaths(const Unit & unit) const;
 	id_cost_map getShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible) const;
+	using PathQueue = std::priority_queue<CostID>;
 public:
 
 

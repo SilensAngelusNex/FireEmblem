@@ -5,7 +5,7 @@
 #include "GridCell.h"
 #include "CellPath.h"
 #include "CellEdge.h"
-//TODO(Torrey): Make more useful constructors, USE GRIDCELL&, Refactor into multiple classes, define move/copy constructors
+//TODO(Torrey): Make more useful constructors
 Grid::Grid(int width, int height) {
 	for (int i = 0; i < width; i++) {
 		_grid.emplace_back();
