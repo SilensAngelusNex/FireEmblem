@@ -55,7 +55,7 @@ public:
 	const iterator begin() const { return iterator(id_cost_map::begin(), _grid); }
 	const_iterator cbegin() const noexcept { return const_iterator(id_cost_map::cbegin(), _grid); }
 	iterator   end() { return iterator(  id_cost_map::end(), _grid); }
-	const iterator end() const { return iterator(id_cost_map::end(), *this); }
+	const iterator end() const { return iterator(id_cost_map::end(), _grid); }
 	const_iterator cend() const noexcept { return const_iterator(id_cost_map::cend(), _grid); }
 
 	//Element access;
