@@ -19,7 +19,6 @@ public:
 
 	std::optional<int> getCost(MobilityType mobility) const;
 	std::optional<int> getCost(MobilitySet mobility_type) const;
-	std::optional<int> getCost(MobilitySet mobility_type, bool intangible) const;
 
 	bool operator==(const CellEdge & c) const;
 	bool operator!=(const CellEdge & c) const;
