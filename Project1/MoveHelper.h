@@ -21,7 +21,7 @@ public:
 	//AdjCellPath getShortestPath(GridCell& start, GridCell& destination, int max_move);
 
 	std::vector<GridCell::Ref> getAttackableCells(const Unit & unit);
-	std::vector<GridCell::Ref> getAttackableCells(const Unit & unit, GridCell & cell);
+	std::vector<GridCell::Ref> getAttackableCells(const Unit & unit, ID cell);
 	std::vector<GridCell::Ref> getAllAttackableCells(const Unit & unit);
 	std::vector<GridCell::Ref> getAlliedCells(const Unit & unit);
 

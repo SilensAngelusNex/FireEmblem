@@ -37,7 +37,7 @@ std::vector<Unit::Ref> MapHelper::getEnemiesWithin(const Unit& unit, Range range
 	return std::vector<Unit::Ref>();
 }
 
-std::vector<Unit::Ref> MapHelper::getUnitsWithin(Range range, GridCell& pos) {
+std::vector<Unit::Ref> MapHelper::getUnitsWithin(Range range,ID pos) {
 	std::vector<GridCell::Ref> cells = getCellsWithin(range, pos);
 	auto vec = std::vector<Unit::Ref>();
 	for (auto cell: cells) {
@@ -49,7 +49,7 @@ std::vector<Unit::Ref> MapHelper::getUnitsWithin(Range range, GridCell& pos) {
 }
 
 
-std::vector<Unit::Ref> MapHelper::getAlliesWithin(Range range, GridCell& pos, const PartyBase& party) {
+std::vector<Unit::Ref> MapHelper::getAlliesWithin(Range range, ID pos, const PartyBase& party) {
 	std::vector<GridCell::Ref> cells = getAlliedCellsWithin(range, pos, party);
 	auto vec = std::vector<Unit::Ref>();
 	for (auto cell : cells) {
@@ -57,7 +57,7 @@ std::vector<Unit::Ref> MapHelper::getAlliesWithin(Range range, GridCell& pos, co
 	}
 	return vec;
 }
-std::vector<Unit::Ref> MapHelper::getEnemiesWithin(Range range, GridCell& pos, const PartyBase& party) {
+std::vector<Unit::Ref> MapHelper::getEnemiesWithin(Range range, ID pos, const PartyBase& party) {
 	std::vector<GridCell::Ref> cells = getEnemyCellsWithin(range, pos, party);
 	auto vec = std::vector<Unit::Ref>();
 	for (auto cell : cells) {
@@ -66,8 +66,8 @@ std::vector<Unit::Ref> MapHelper::getEnemiesWithin(Range range, GridCell& pos, c
 	return vec;
 }
 
-std::vector<GridCell::Ref> MapHelper::getCellsWithin(Range range, GridCell& pos) {
-	PathMap path_map = _map.findShortestPaths(pos._id, range.maxRange(), range._type);
+std::vector<GridCell::Ref> MapHelper::getCellsWithin(Range range, ID pos) {
+	PathMap path_map = _map.findShortestPaths(pos, range.maxRange(), range._type);
 	auto vec = std::vector<GridCell::Ref>();
 	for (auto pair : path_map) {
 		if (range.hasDistance(pair.second.first)) {
@@ -77,8 +77,8 @@ std::vector<GridCell::Ref> MapHelper::getCellsWithin(Range range, GridCell& pos)
 	return vec;
 }
 
-std::vector<GridCell::Ref> MapHelper::getAlliedCellsWithin(Range range, GridCell & pos, const PartyBase& party) {
-	PathMap path_map = _map.findShortestPaths(pos._id, range.maxRange(), range._type);
+std::vector<GridCell::Ref> MapHelper::getAlliedCellsWithin(Range range, ID pos, const PartyBase& party) {
+	PathMap path_map = _map.findShortestPaths(pos, range.maxRange(), range._type);
 	auto vec = std::vector<GridCell::Ref>();
 	for (auto pair : path_map) {
 		if (range.hasDistance(pair.second.first)) {
@@ -89,8 +89,8 @@ std::vector<GridCell::Ref> MapHelper::getAlliedCellsWithin(Range range, GridCell
 	return vec;
 }
 
-std::vector<GridCell::Ref> MapHelper::getEnemyCellsWithin(Range range, GridCell & pos, const PartyBase & party) {
-	PathMap path_map = _map.findShortestPaths(pos._id, range.maxRange(), range._type);
+std::vector<GridCell::Ref> MapHelper::getEnemyCellsWithin(Range range, ID pos, const PartyBase & party) {
+	PathMap path_map = _map.findShortestPaths(pos, range.maxRange(), range._type);
 	auto vec = std::vector<GridCell::Ref>();
 	for (auto pair : path_map) {
 		if (range.hasDistance(pair.second.first)) {

@@ -21,7 +21,7 @@ std::vector<GridCell::Ref> MoveHelper::getAccesibleCells(const Unit& unit) {
 	return cells;
 }
 PathMap MoveHelper::findShortestPaths(const Unit& unit) const{ 
-	return _map.findShortestPaths(_map[unit]._id, unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); });
+	return _map.findShortestPaths(_map[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); });
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@ std::vector<GridCell::Ref> MoveHelper::getAttackableCells(const Unit& unit) {
 }
 //Get Cells a Unit could attack, if it were standing on cell
 
-std::vector<GridCell::Ref> MoveHelper::getAttackableCells(const Unit& unit, GridCell& cell) {
+std::vector<GridCell::Ref> MoveHelper::getAttackableCells(const Unit& unit, ID cell) {
 	Range range = Range({1}); //sword //TODO(Torrey):get actual ranges from Unit
 	return getCellsWithin(range, cell);
 }
@@ -56,7 +56,7 @@ std::vector<GridCell::Ref> MoveHelper::getAllAttackableCells(const Unit& unit) {
 	auto cells = std::set<GridCell::Ref>();
 	auto accesible_cells = getAccesibleCells(unit);
 	for (auto acc_cell : accesible_cells) {
-		auto attack_cells = getAttackableCells(unit, acc_cell);
+		auto attack_cells = getAttackableCells(unit, acc_cell.get()._id);
 		//std::cout << attack_cells.size() << std::endl;
 		for (auto atk_cell : attack_cells) {
 				cells.insert(atk_cell);
@@ -69,7 +69,7 @@ std::vector<GridCell::Ref> MoveHelper::getAlliedCells(const Unit& unit) {
 	auto vec = std::vector<GridCell::Ref>();
 	for (Unit& ally : _map.getParty(unit).getUnits()) {
 		if (_map.hasUnit(ally)) {
-			vec.push_back(_map[ally]);
+			vec.push_back(*_map.getCell(ally));
 		}
 	}
 	return vec;
@@ -78,7 +78,7 @@ std::vector<GridCell::Ref> MoveHelper::getOtherAlliedCells(const Unit& unit) {
 	auto vec = std::vector<GridCell::Ref>();
 	for (Unit& ally : _map.getParty(unit).getOtherUnits(unit)) {
 		if (_map.hasUnit(ally)) {
-			vec.push_back(_map[ally]);
+			vec.push_back(*_map.getCell(ally));
 		}
 	}
 	return vec;

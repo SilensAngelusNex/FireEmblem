@@ -39,6 +39,15 @@ const Unit* Grid::getUnit(const GridCell& index) const{
 Unit* Grid::getUnit(const ID & index) {
 	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
 }
+GridCell * Grid::getCell(const Unit & index)
+{
+	return  hasUnit(index) ? _unit_to_cell[&index] : nullptr;
+}
+
+const GridCell * Grid::getCell(const Unit & index) const
+{
+	return  hasUnit(index) ? _unit_to_cell.at(&index) : nullptr;
+}
 const Unit* Grid::getUnit(const ID & index) const {
 	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
 }
@@ -116,9 +125,9 @@ Unit& Grid::operator[](const GridCell& index) {
 	Expects(hasUnit(index));
 	return *_cell_to_unit[&index];
 }
-GridCell& Grid::operator[](const Unit& index) {
+ID Grid::operator[](const Unit& index) {
 	Expects(hasUnit(index));
-	return *_unit_to_cell[&index];
+	return _unit_to_cell[&index]->_id;
 }
 GridCell & Grid::operator[](const ID & index) {
 	return _grid[index.first][index.second];
@@ -126,9 +135,9 @@ GridCell & Grid::operator[](const ID & index) {
 Grid::GridRow Grid::operator[](size_t index) {
 	return GridRow(_grid[index]);
 }
-const GridCell& Grid::operator[](const Unit& index) const {
+const ID Grid::operator[](const Unit& index) const {
 	Expects(hasUnit(index));
-	return *_unit_to_cell.at(&index);
+	return _unit_to_cell.at(&index)->_id;
 }
 Grid::constGridRow Grid::operator[](size_t index) const {
 	return constGridRow(_grid.at(index));

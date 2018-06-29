@@ -66,17 +66,19 @@ public:
 
 	Unit* getUnit(const GridCell& index);
 	Unit* getUnit(const ID& id);
+	GridCell* getCell(const Unit& index);
 
 	const Unit* getUnit(const GridCell& index) const;
 	const Unit* getUnit(const ID& id) const;
+	const GridCell* getCell(const Unit& index) const;
 
 	Unit& operator[](const GridCell& index);
-	GridCell& operator[](const Unit& index);
+	ID operator[](const Unit& index);
 	GridCell& operator[](const ID& index);
 	GridRow operator[](size_t index);
 
 	const Unit& operator[](const GridCell& index) const;
-	const GridCell& operator[](const Unit& index) const;
+	const ID operator[](const Unit& index) const;
 	const GridCell& operator[](const ID& index) const;
 	constGridRow operator[](size_t index) const;
 
