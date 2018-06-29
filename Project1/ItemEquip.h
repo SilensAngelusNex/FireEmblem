@@ -15,8 +15,8 @@ public:
 	~ItemEquip() override = default;
 
 	void equip(Unit& unit, EquipSlot slot) override;
-	virtual bool can_equip(Unit& unit) const = 0;
-	virtual bool can_equip(Unit& unit, EquipSlot slot) const = 0;
+	virtual bool can_equip(const Unit& unit) const = 0;
+	virtual bool can_equip(const Unit& unit, EquipSlot slot) const = 0;
 
 	bool is_equippable() const override;
 	virtual bool is_weapon() const;

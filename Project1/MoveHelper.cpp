@@ -39,19 +39,22 @@ AdjCellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination
 }
 */
 ////////////////////////////////////////////////////////////////////////
-// Get Cells that a unit can attack without moving
 
+// Get Cells that a unit can attack without moving with Equipped Weapon
 std::vector<GridCell::Ref> MoveHelper::getAttackableCells(const Unit& unit) {
 	return getAttackableCells(unit, _map[unit]);
 }
-//Get Cells a Unit could attack, if it were standing on cell
 
+//Get Cells a Unit could attack with Equipped Weapon, if it were standing on cell
 std::vector<GridCell::Ref> MoveHelper::getAttackableCells(const Unit& unit, ID cell) {
-	Range range = Range({1}); //sword //TODO(Torrey):get actual ranges from Unit
+	Range range = Range(); //sword //TODO(Torrey):get actual ranges from Unit
+	if (unit.getInventory().hasEquip(EquipSlot::values::ON_HAND)) {
+		range = unit.getInventory()[EquipSlot(EquipSlot::values::ON_HAND)].getAttackRange();
+	}
 	return getCellsWithin(range, cell);
 }
-//Get Cells a Unit can Attack including movement
 
+//Get Cells a Unit can Attack with Equipped Weapon including movement
 std::vector<GridCell::Ref> MoveHelper::getAllAttackableCells(const Unit& unit) {
 	auto cells = std::set<GridCell::Ref>();
 	auto accesible_cells = getAccesibleCells(unit);

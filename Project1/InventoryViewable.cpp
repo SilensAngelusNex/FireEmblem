@@ -16,8 +16,12 @@ const Item & InventoryViewable::operator[](int item_index) const {
 	return *_items[item_index];
 }
 const ItemEquip& InventoryViewable::operator[](EquipSlot slot) const {
-	Expects(_equipment[slot] != nullptr);
+	Expects(hasEquip(slot));
 	return *_equipment[slot];
+}
+
+bool InventoryViewable::hasEquip(EquipSlot slot) const {
+	return _equipment[slot] != nullptr;
 }
 
 

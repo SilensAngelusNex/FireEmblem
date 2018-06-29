@@ -8,6 +8,8 @@
 #include "Party.h"
 #include "GridCell.h"
 #include "GridMap.h"
+#include "Weapon.h"
+#include "Swords.h"
 
 bool test::runMapTest() {
 	std::cout << "Grid test start:" << std::endl;
@@ -36,6 +38,10 @@ bool test::runMapTest() {
 	auto it = party.begin();
 	Unit& mia2 = **it++;
 	Unit::UniquePtr& ike2 = *it;
+
+	std::unique_ptr<Weapon> mias_sword = WeaponFactory::makeBronzeSword();
+
+	mia2.getInventory().equip(ON_HAND, std::move(mias_sword));
 
 	map.insertUnit(mia2, map[10][10]);
 	std::vector <GridCell::Ref> cells = move_helper.getAccesibleCells(mia2);
