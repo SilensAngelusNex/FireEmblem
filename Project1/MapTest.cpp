@@ -15,8 +15,8 @@ bool test::runMapTest() {
 	FairDice<100> d;
 	UnitData mia_data = { "Mia", d, AttributeList({ 5, 0, 8, 10, 19, 4, 6, 1 }) };
 	UnitData ike_data = { "Ike", d, AttributeList({ 5, 0, 8, 10, 19, 4, 6, 1 }) };
-	UnitPtr mia = std::make_unique<Unit>(mia_data);
-	UnitPtr ike = std::make_unique<Unit>(ike_data);
+	Unit::Ptr mia = std::make_unique<Unit>(mia_data);
+	Unit::Ptr ike = std::make_unique<Unit>(ike_data);
 	auto unit_vec = std::vector<UnitData>();
 	unit_vec.push_back(mia_data);
 	unit_vec.push_back(ike_data);
@@ -35,10 +35,10 @@ bool test::runMapTest() {
 
 	auto it = party.begin();
 	Unit& mia2 = **it++;
-	UnitPtr& ike2 = *it;
+	Unit::Ptr& ike2 = *it;
 
 	map.insertUnit(mia2, map[10][10]);
-	std::vector <CellRef> cells = move_helper.getAccesibleCells(mia2);
+	std::vector <GridCell::Ref> cells = move_helper.getAccesibleCells(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getAllAttackableCells(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;

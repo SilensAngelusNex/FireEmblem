@@ -138,7 +138,7 @@ id_cost_map GridMap::getShortestPaths(ID start, int max_move, MobilitySet mobili
 /*
 CellPath<GridCell> GridMap::getShortestPath(ID start, ID destination, int max_move, MobilitySet mobility) {
 	PathMap path_map = findShortestPaths(start, max_move, mobility);
-	auto path = std::list<CellRef>();
+	auto path = std::list<GridCell::Ref>();
 	path.emplace_front((*this)[destination]);
 	while (start != path.front().get()._id) {
 		path.emplace_front(path_map[path.front()].second);

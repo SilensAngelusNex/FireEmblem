@@ -10,13 +10,13 @@
 MoveHelper::MoveHelper(GridMap& map) :
 	MapHelper(map)
 {}
-std::vector<CellRef> MoveHelper::getAccesibleCells(const Unit& unit) {
+std::vector<GridCell::Ref> MoveHelper::getAccesibleCells(const Unit& unit) {
 	PathMap path_map = findShortestPaths(unit);
-	std::vector<CellRef> cells = std::vector< CellRef>();
+	std::vector<GridCell::Ref> cells = std::vector< GridCell::Ref>();
 	for (auto pair : path_map) {
 		cells.push_back(pair.first);
 	}
-	std::vector<CellRef> allied_cells = getOtherAlliedCells(unit);
+	std::vector<GridCell::Ref> allied_cells = getOtherAlliedCells(unit);
 	vectorSubtract(cells,allied_cells);
 	return cells;
 }
@@ -41,19 +41,19 @@ AdjCellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination
 ////////////////////////////////////////////////////////////////////////
 // Get Cells that a unit can attack without moving
 
-std::vector<CellRef> MoveHelper::getAttackableCells(const Unit& unit) {
+std::vector<GridCell::Ref> MoveHelper::getAttackableCells(const Unit& unit) {
 	return getAttackableCells(unit, _map[unit]);
 }
 //Get Cells a Unit could attack, if it were standing on cell
 
-std::vector<CellRef> MoveHelper::getAttackableCells(const Unit& unit, GridCell& cell) {
+std::vector<GridCell::Ref> MoveHelper::getAttackableCells(const Unit& unit, GridCell& cell) {
 	Range range = Range({1}); //sword //TODO(Torrey):get actual ranges from Unit
 	return getCellsWithin(range, cell);
 }
 //Get Cells a Unit can Attack including movement
 
-std::vector<CellRef> MoveHelper::getAllAttackableCells(const Unit& unit) {
-	auto cells = std::set<CellRef>();
+std::vector<GridCell::Ref> MoveHelper::getAllAttackableCells(const Unit& unit) {
+	auto cells = std::set<GridCell::Ref>();
 	auto accesible_cells = getAccesibleCells(unit);
 	for (auto acc_cell : accesible_cells) {
 		auto attack_cells = getAttackableCells(unit, acc_cell);
@@ -62,11 +62,11 @@ std::vector<CellRef> MoveHelper::getAllAttackableCells(const Unit& unit) {
 				cells.insert(atk_cell);
 		}
 	}
-	std::vector<CellRef> vec = std::vector<CellRef>(cells.begin(), cells.end());
+	std::vector<GridCell::Ref> vec = std::vector<GridCell::Ref>(cells.begin(), cells.end());
 	return vec;
 }
-std::vector<CellRef> MoveHelper::getAlliedCells(const Unit& unit) {
-	auto vec = std::vector<CellRef>();
+std::vector<GridCell::Ref> MoveHelper::getAlliedCells(const Unit& unit) {
+	auto vec = std::vector<GridCell::Ref>();
 	for (Unit& ally : _map.getParty(unit).getUnits()) {
 		if (_map.hasUnit(ally)) {
 			vec.push_back(_map[ally]);
@@ -74,8 +74,8 @@ std::vector<CellRef> MoveHelper::getAlliedCells(const Unit& unit) {
 	}
 	return vec;
 }
-std::vector<CellRef> MoveHelper::getOtherAlliedCells(const Unit& unit) {
-	auto vec = std::vector<CellRef>();
+std::vector<GridCell::Ref> MoveHelper::getOtherAlliedCells(const Unit& unit) {
+	auto vec = std::vector<GridCell::Ref>();
 	for (Unit& ally : _map.getParty(unit).getOtherUnits(unit)) {
 		if (_map.hasUnit(ally)) {
 			vec.push_back(_map[ally]);
@@ -94,7 +94,7 @@ bool MoveHelper::canWalk(Unit& unit, AdjCellPath path) {
 
 void MoveHelper::walkPath(Unit & unit, AdjCellPath path) {
 	Expects(canWalk(unit, path));
-	CellRef unit_cell = path.getHead();
+	GridCell::Ref unit_cell = path.getHead();
 	for (auto it = std::next(path.begin()); it != path.end(); it++) {
 		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilitySet()).has_value()) {
 			_map.moveUnit(unit_cell, it->second);

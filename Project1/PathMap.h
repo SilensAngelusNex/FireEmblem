@@ -9,7 +9,7 @@ class Path_Map : private id_cost_map
 private:
 	using cell_ref = decltype(std::declval<grid>()[std::declval<ID>()]);
 	using CostCell = logic_pair<int, cell_ref>;
-	//private iterator class that replaces ID with CellRef
+	//private iterator class that replaces ID with GridCell::Ref
 	template <typename iterator>
 	class path_map_iter : public iterator {
 	private:

@@ -14,11 +14,11 @@ struct PartyData {
 class PartyBase {
 protected:
 
-	using iterator = std::list<UnitPtr>::iterator;
-	using const_iterator = std::list<UnitPtr>::const_iterator;
+	using iterator = std::list<Unit::Ptr>::iterator;
+	using const_iterator = std::list<Unit::Ptr>::const_iterator;
 
 	std::string _party_name;
-	std::list<UnitPtr> _units;
+	std::list<Unit::Ptr> _units;
 
 	PartyBase();
 	PartyBase(std::string name);

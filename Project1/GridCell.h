@@ -47,7 +47,7 @@ public:
 	bool operator>(const GridCell& cell) const;
 	bool operator>=(const GridCell& cell) const;
 	bool operator<=(const GridCell& cell) const;
-};
 
-using CellRef = std::reference_wrapper<GridCell>;
-using constCellRef = std::reference_wrapper<const GridCell>;
+	using Ref = std::reference_wrapper<GridCell>;
+	using constRef = std::reference_wrapper<const GridCell>;
+};

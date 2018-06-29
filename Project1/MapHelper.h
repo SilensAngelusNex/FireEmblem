@@ -15,21 +15,21 @@ protected:
 	~MapHelper() = default;
 public:
 	
-	std::vector<UnitRef> getUnits();
-	std::vector<UnitRef> getAllies(const Unit& unit);
-	std::vector<UnitRef> getEnemies(const Unit& unit);
+	std::vector<Unit::Ref> getUnits();
+	std::vector<Unit::Ref> getAllies(const Unit& unit);
+	std::vector<Unit::Ref> getEnemies(const Unit& unit);
 
-	std::vector<UnitRef> getUnitsWithin(const Unit& unit, Range range);
-	std::vector<UnitRef> getAlliesWithin(const Unit& unit, Range range);
-	std::vector<UnitRef> getEnemiesWithin(const Unit& unit, Range range);
+	std::vector<Unit::Ref> getUnitsWithin(const Unit& unit, Range range);
+	std::vector<Unit::Ref> getAlliesWithin(const Unit& unit, Range range);
+	std::vector<Unit::Ref> getEnemiesWithin(const Unit& unit, Range range);
 
-	std::vector<UnitRef> getUnitsWithin(Range range, GridCell& pos);
-	std::vector<UnitRef> getAlliesWithin(Range range, GridCell& pos, const PartyBase& party);
-	std::vector<UnitRef> getEnemiesWithin(Range range, GridCell& pos, const PartyBase& party);
+	std::vector<Unit::Ref> getUnitsWithin(Range range, GridCell& pos);
+	std::vector<Unit::Ref> getAlliesWithin(Range range, GridCell& pos, const PartyBase& party);
+	std::vector<Unit::Ref> getEnemiesWithin(Range range, GridCell& pos, const PartyBase& party);
 
-	std::vector<CellRef> getCellsWithin(Range range, GridCell & pos);
-	std::vector<CellRef> getAlliedCellsWithin(Range range, GridCell & pos, const PartyBase& party);
-	std::vector<CellRef> getEnemyCellsWithin(Range range, GridCell & pos, const PartyBase& party);
-	//std::vector<CellRef> getCellsWithin(Range range, GridCell& pos);
+	std::vector<GridCell::Ref> getCellsWithin(Range range, GridCell & pos);
+	std::vector<GridCell::Ref> getAlliedCellsWithin(Range range, GridCell & pos, const PartyBase& party);
+	std::vector<GridCell::Ref> getEnemyCellsWithin(Range range, GridCell & pos, const PartyBase& party);
+	//std::vector<GridCell::Ref> getCellsWithin(Range range, GridCell& pos);
 };
 

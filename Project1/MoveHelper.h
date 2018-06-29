@@ -14,18 +14,18 @@ class MoveHelper :
 {
 public:
 	MoveHelper(GridMap& map);
-	std::vector<CellRef> getAccesibleCells(const Unit& unit);
+	std::vector<GridCell::Ref> getAccesibleCells(const Unit& unit);
 	PathMap findShortestPaths(const Unit & unit) const;
 	//AdjCellPath getShortestPath(const Unit& unit,GridCell & destination);
 	//AdjCellPath getShortestPath(GridCell& start, GridCell& destination);
 	//AdjCellPath getShortestPath(GridCell& start, GridCell& destination, int max_move);
 
-	std::vector<CellRef> getAttackableCells(const Unit & unit);
-	std::vector<CellRef> getAttackableCells(const Unit & unit, GridCell & cell);
-	std::vector<CellRef> getAllAttackableCells(const Unit & unit);
-	std::vector<CellRef> getAlliedCells(const Unit & unit);
+	std::vector<GridCell::Ref> getAttackableCells(const Unit & unit);
+	std::vector<GridCell::Ref> getAttackableCells(const Unit & unit, GridCell & cell);
+	std::vector<GridCell::Ref> getAllAttackableCells(const Unit & unit);
+	std::vector<GridCell::Ref> getAlliedCells(const Unit & unit);
 
-	std::vector<CellRef> getOtherAlliedCells(const Unit & unit);
+	std::vector<GridCell::Ref> getOtherAlliedCells(const Unit & unit);
 
 	//bool canWalk(Unit & unit, AdjCellPath path);
 

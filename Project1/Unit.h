@@ -107,8 +107,9 @@ public:
 	}
 	bool operator==(const Unit & unit) const;
 	bool operator!=(const Unit & unit) const;
+
+	using Ref = std::reference_wrapper<Unit>;
+	using constRef = std::reference_wrapper<const Unit>;
+	using Ptr = std::unique_ptr<Unit>;
 };
 //TODO (Weston): Is this an ok place for this?
-using UnitRef = std::reference_wrapper<Unit>;
-using constUnitRef = std::reference_wrapper<const Unit>;
-using UnitPtr = std::unique_ptr<Unit>;
