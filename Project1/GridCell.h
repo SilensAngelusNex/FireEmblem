@@ -54,5 +54,5 @@ public:
 	bool operator<=(const GridCell& cell) const;
 
 	using Ref = std::reference_wrapper<GridCell>;
-	using constRef = std::reference_wrapper<const GridCell>;
+	using ConstRef = std::reference_wrapper<const GridCell>;
 };

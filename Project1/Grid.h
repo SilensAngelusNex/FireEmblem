@@ -48,15 +48,15 @@ public:
 	void insertUnit(Unit& new_unit, ID& destination);
 
 	bool hasUnit(const GridCell& index) const;
-	bool hasUnit(const Unit & unit) const;
-	bool hasUnit(const ID& id) const;
+	bool hasUnit(const Unit & index) const;
+	bool hasUnit(const ID& index) const;
 
 	Unit* getUnit(const GridCell& index);
-	Unit* getUnit(const ID& id);
+	Unit* getUnit(const ID& index);
 	GridCell* getCell(const Unit& index);
 
 	const Unit* getUnit(const GridCell& index) const;
-	const Unit* getUnit(const ID& id) const;
+	const Unit* getUnit(const ID& index) const;
 	const GridCell* getCell(const Unit& index) const;
 
 

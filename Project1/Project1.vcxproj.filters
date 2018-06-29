@@ -372,7 +372,7 @@
       <Filter>inc\util</Filter>
     </ClInclude>
     <ClInclude Include="read_vector.h">
-      <Filter>inc</Filter>
+      <Filter>inc\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

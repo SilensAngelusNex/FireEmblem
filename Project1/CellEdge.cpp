@@ -1,10 +1,12 @@
 #include "CellEdge.h"
+
+#include <utility>
 #include "GridCell.h"
 #include "Mobility.h"
 
 
 CellEdge::CellEdge(ID id, MobilityCostSet costs) :
-	_id(id),
+	_id(std::move(id)),
 	_costs(costs)
 {}
 

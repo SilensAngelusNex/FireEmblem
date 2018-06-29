@@ -15,7 +15,7 @@ class MoveHelper :
 public:
 	MoveHelper(GridMap& map);
 	std::vector<GridCell::Ref> getAccesibleCells(const Unit& unit);
-	PathMap findShortestPaths(const Unit & unit) const;
+	PathMap getShortestPathsMap(const Unit & unit) const;
 	//AdjCellPath getShortestPath(const Unit& unit,GridCell & destination);
 	//AdjCellPath getShortestPath(GridCell& start, GridCell& destination);
 	//AdjCellPath getShortestPath(GridCell& start, GridCell& destination, int max_move);

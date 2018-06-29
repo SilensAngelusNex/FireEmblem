@@ -11,17 +11,17 @@ MoveHelper::MoveHelper(GridMap& map) :
 	MapHelper(map)
 {}
 std::vector<GridCell::Ref> MoveHelper::getAccesibleCells(const Unit& unit) {
-	PathMap path_map = findShortestPaths(unit);
+	PathMap path_map = getShortestPathsMap(unit);
 	std::vector<GridCell::Ref> cells = std::vector< GridCell::Ref>();
 	for (auto pair : path_map) {
-		cells.push_back(pair.first);
+		cells.emplace_back(pair.first);
 	}
 	std::vector<GridCell::Ref> allied_cells = getOtherAlliedCells(unit);
 	vectorSubtract(cells,allied_cells);
 	return cells;
 }
-PathMap MoveHelper::findShortestPaths(const Unit& unit) const{ 
-	return _map.findShortestPaths(_map[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); });
+PathMap MoveHelper::getShortestPathsMap(const Unit& unit) const{ 
+	return _map.getShortestPathsMap(_map[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); });
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@ std::vector<GridCell::Ref> MoveHelper::getAlliedCells(const Unit& unit) {
 	auto vec = std::vector<GridCell::Ref>();
 	for (Unit& ally : _map.getParty(unit).getUnits()) {
 		if (_map.hasUnit(ally)) {
-			vec.push_back(*_map.getCell(ally));
+			vec.emplace_back(*_map.getCell(ally));
 		}
 	}
 	return vec;
@@ -78,7 +78,7 @@ std::vector<GridCell::Ref> MoveHelper::getOtherAlliedCells(const Unit& unit) {
 	auto vec = std::vector<GridCell::Ref>();
 	for (Unit& ally : _map.getParty(unit).getOtherUnits(unit)) {
 		if (_map.hasUnit(ally)) {
-			vec.push_back(*_map.getCell(ally));
+			vec.emplace_back(*_map.getCell(ally));
 		}
 	}
 	return vec;

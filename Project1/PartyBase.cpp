@@ -19,11 +19,11 @@ PartyBase::PartyBase(PartyData data) :
 {}
 
 PartyBase::const_iterator PartyBase::getPosition(const Unit & unit) const {
-	return std::find_if(_units.cbegin(), _units.cend(), [&](const Unit::Ptr& a) -> bool { return a.get() == &unit; });
+	return std::find_if(_units.cbegin(), _units.cend(), [&](const Unit::UniquePtr& a) -> bool { return a.get() == &unit; });
 }
 
 PartyBase::iterator PartyBase::getPosition(const Unit & unit) {
-	return std::find_if(_units.begin(), _units.end(), [&](const Unit::Ptr& a) -> bool { return a.get() == &unit; });
+	return std::find_if(_units.begin(), _units.end(), [&](const Unit::UniquePtr& a) -> bool { return a.get() == &unit; });
 }
 
 void PartyBase::insertUnit(UnitData unit) {

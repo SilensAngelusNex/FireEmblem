@@ -14,11 +14,11 @@ struct PartyData {
 class PartyBase {
 protected:
 
-	using iterator = std::list<Unit::Ptr>::iterator;
-	using const_iterator = std::list<Unit::Ptr>::const_iterator;
+	using iterator = std::list<Unit::UniquePtr>::iterator;
+	using const_iterator = std::list<Unit::UniquePtr>::const_iterator;
 
 	std::string _party_name;
-	std::list<Unit::Ptr> _units;
+	std::list<Unit::UniquePtr> _units;
 
 	PartyBase();
 	PartyBase(std::string name);
@@ -32,7 +32,7 @@ protected:
 
 public:
 	Party& getParty(Passkey<GridMap> /*unused*/);
-	const Party& getParty(Passkey<GridMap>) const;
+	const Party& getParty(Passkey<GridMap> /*unused*/) const;
 
 	bool hasUnit(const Unit& unit) const;
 	bool operator==(const PartyBase& other) const;

@@ -19,7 +19,7 @@ class GridMap :
 private: 
 
 	template<typename lambda>
-	id_cost_map getShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) const;
+	id_cost_map getShortestPathsHelper(ID start, int max_move, MobilitySet mobility, lambda canPass) const;
 	using PathQueue = std::priority_queue<CostID>;
 public:
 
@@ -31,22 +31,22 @@ public:
 	const Party& getParty(const Unit& unit) const;
 
 
-	PathMap findShortestPaths(ID start, int max_move, MobilitySet mobility);
-	PathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible);
+	PathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility);
+	PathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible);
 	template<typename lambda>
-	PathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass);
+	PathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, lambda canPass);
 
-	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility) const;
-	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible) const;
+	constPathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility) const;
+	constPathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible) const;
 	template<typename lambda>
-	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) const;
+	constPathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, lambda canPass) const;
 
 	//CellPath<GridCell> getShortestPath(ID start, ID destination, int max_move, MobilitySet mobility);
 };
 
 
 template<typename lambda>
-inline id_cost_map GridMap::getShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) const
+inline id_cost_map GridMap::getShortestPathsHelper(ID start, int max_move, MobilitySet mobility, lambda canPass) const
 {
 	PathQueue queue = PathQueue();
 	id_cost_map path_map = id_cost_map();
@@ -73,10 +73,10 @@ inline id_cost_map GridMap::getShortestPaths(ID start, int max_move, MobilitySet
 }
 
 template<typename lambda>
-inline PathMap GridMap::findShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) {
-	return PathMap(*this, getShortestPaths(start, max_move, mobility, canPass));
+inline PathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobility, lambda canPass) {
+	return PathMap(*this, getShortestPathsHelper(start, max_move, mobility, canPass));
 }
 template<typename lambda>
-inline constPathMap GridMap::findShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) const{
-	return constPathMap(*this, getShortestPaths(start, max_move, mobility, canPass));
+inline constPathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobility, lambda canPass) const{
+	return constPathMap(*this, getShortestPathsHelper(start, max_move, mobility, canPass));
 }

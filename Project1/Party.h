@@ -12,15 +12,15 @@ public:
 	std::vector<Unit::Ref> getUnits();
 	std::vector<Unit::Ref> getOtherUnits(const Unit & unit);
 
-	std::vector<Unit::constRef> getUnits() const;
-	std::vector<Unit::constRef> getOtherUnits(const Unit& unit) const;
+	std::vector<Unit::ConstRef> getUnits() const;
+	std::vector<Unit::ConstRef> getOtherUnits(const Unit& unit) const;
 
 	void startTurn(PartyBase& turn_party);
-	void insertUnit(Unit::Ptr unit);
+	void insertUnit(Unit::UniquePtr unit);
 	void insertUnit(UnitData unit);
 
-	Unit::Ptr dropUnit(Unit& unit);
-	//Unit::Ptr dropUnit(const iterator& pos);
+	Unit::UniquePtr dropUnit(Unit& unit);
+	//Unit::UniquePtr dropUnit(const iterator& pos);
 
 
 	bool isDone() const;

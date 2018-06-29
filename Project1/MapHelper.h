@@ -28,8 +28,8 @@ public:
 	std::vector<Unit::Ref> getEnemiesWithin(Range range, ID pos, const PartyBase& party);
 
 	std::vector<GridCell::Ref> getCellsWithin(Range range, ID pos);
-	std::vector<GridCell::Ref> getAlliedCellsWithin(Range range, ID, const PartyBase& party);
-	std::vector<GridCell::Ref> getEnemyCellsWithin(Range range, ID, const PartyBase& party);
+	std::vector<GridCell::Ref> getAlliedCellsWithin(Range range, ID pos, const PartyBase& party);
+	std::vector<GridCell::Ref> getEnemyCellsWithin(Range range, ID pos, const PartyBase& party);
 	//std::vector<GridCell::Ref> getCellsWithin(Range range, GridCell& pos);
 };
 

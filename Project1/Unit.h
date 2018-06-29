@@ -109,7 +109,7 @@ public:
 	bool operator!=(const Unit & unit) const;
 
 	using Ref = std::reference_wrapper<Unit>;
-	using constRef = std::reference_wrapper<const Unit>;
-	using Ptr = std::unique_ptr<Unit>;
+	using ConstRef = std::reference_wrapper<const Unit>;
+	using UniquePtr = std::unique_ptr<Unit>;
 };
 //TODO (Weston): Is this an ok place for this?
