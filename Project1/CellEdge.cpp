@@ -16,6 +16,7 @@ std::optional<int> CellEdge::getCost(MobilitySet mobility_type) const {
 	return getCost(mobility_type, true);
 }
 
+//TODO(Torrey): fix intangible
 std::optional<int> CellEdge::getCost(MobilitySet mobility_type, bool intangible) const{
 	std::optional<int> cost;
 	for (MobilityType mobility : MobilityType::list) {

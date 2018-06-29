@@ -3,10 +3,11 @@
 #include "Party.h"
 #include "Unit.h"
 #include "GridCell.h"
-#include "CellPath.h"
+//#include "CellPath.h"
 #include "CellEdge.h"
 #include "Mobility.h"
 #include "Passkey.h"
+
 
 //Constructors//
 /////////////////////////////////////////////////////////////////////////
@@ -134,15 +135,14 @@ id_cost_map GridMap::getShortestPaths(ID start, int max_move, MobilitySet mobili
 	return path_map;
 }
 
-
-
 /*
-CellPath GridMap::getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilitySet mobility) {
-	Path_Map path_map = findShortestPaths(start._id, max_move, mobility);
-	std::list<CellRef> path = std::list<CellRef>();
-	path.push_front(destination);
-	while (!(start == path.front().get())) {
-		path.push_front(path_map.at(&path.front().get()).second);
+CellPath<GridCell> GridMap::getShortestPath(ID start, ID destination, int max_move, MobilitySet mobility) {
+	PathMap path_map = findShortestPaths(start, max_move, mobility);
+	auto path = std::list<CellRef>();
+	path.emplace_front((*this)[destination]);
+	while (start != path.front().get()._id) {
+		path.emplace_front(path_map[path.front()].second);
 	}
-	return CellPath(path, mobility);
-}*/
+	return CellPath<GridCell>(mobility, path);
+}
+*/

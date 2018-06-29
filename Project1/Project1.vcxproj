@@ -130,7 +130,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AttributeList.cpp" />
-    <ClCompile Include="CellPath.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
     <ClCompile Include="DiceTest.cpp" />
@@ -173,11 +172,11 @@
     <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ID.h" />
+    <ClInclude Include="logic_pair.h" />
     <ClInclude Include="MapHelper.h" />
     <ClInclude Include="PathMap.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
-    <ClInclude Include="CellPath.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EnumContainer.h" />

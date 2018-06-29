@@ -88,6 +88,12 @@
     <Filter Include="inc\party">
       <UniqueIdentifier>{b79d346a-bc23-489b-bcd6-99fb3a6a0608}</UniqueIdentifier>
     </Filter>
+    <Filter Include="inc\map\cell_path">
+      <UniqueIdentifier>{e4b96af3-220c-4369-8b74-b4e38f80d9e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\map\cell_path">
+      <UniqueIdentifier>{af6a7b63-fffa-4eff-87d0-a02ab43158d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DiceTest.cpp">
@@ -172,9 +178,6 @@
       <Filter>src\map\gridcell</Filter>
     </ClCompile>
     <ClCompile Include="MoveHelper.cpp">
-      <Filter>src\map</Filter>
-    </ClCompile>
-    <ClCompile Include="CellPath.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
     <ClCompile Include="Healing.cpp">
@@ -314,9 +317,6 @@
     <ClInclude Include="MoveHelper.h">
       <Filter>inc\map</Filter>
     </ClInclude>
-    <ClInclude Include="CellPath.h">
-      <Filter>inc\map</Filter>
-    </ClInclude>
     <ClInclude Include="IterableBitset.h">
       <Filter>inc\util</Filter>
     </ClInclude>
@@ -366,6 +366,9 @@
       <Filter>inc\util</Filter>
     </ClInclude>
     <ClInclude Include="reference_logic.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="logic_pair.h">
       <Filter>inc\util</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,10 +4,9 @@
 #include "Unit.h"
 #include "FairDice.h"
 #include "MoveHelper.h"
-#include "CellPath.h"
+//#include "CellPath.h"
 #include "Party.h"
 #include "GridCell.h"
-#include "CellPath.h"
 #include "GridMap.h"
 
 bool test::runMapTest() {
@@ -54,8 +53,10 @@ bool test::runMapTest() {
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getAllAttackableCells(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
+	
 	std::cout << "How many cells are adjacent to Mia: " << map[mia2].getAdjacentCellIDs().size() << std::endl;
-	/*CellPath path = move_helper.getShortestPath(mia2, map[11][11]);
+	//AdjCellPath path = move_helper.getShortestPath(mia2, map[11][11]);
+	/*
 	move_helper.canWalk(mia2, path);
 	std::cout << "Can Mia move to (11, 11)?: " << move_helper.canWalk(mia2, path) << std::endl;
 	move_helper.walkPath(mia2, path);

@@ -3,7 +3,7 @@
 #include "CellEdge.h"
 #include "Unit.h"
 #include "Party.h"
-#include "CellPath.h"
+//#include "CellPath.h"
 #include "GridCell.h"
 #include "Range.h"
 
@@ -26,15 +26,15 @@ PathMap MoveHelper::findShortestPaths(const Unit& unit) const{
 
 ////////////////////////////////////////////////////////////////////////////////
 /*
-CellPath MoveHelper::getShortestPath(const Unit& unit, GridCell & destination) {
+AdjCellPath MoveHelper::getShortestPath(const Unit& unit, GridCell & destination) {
 	return _map.getShortestPath(_map[unit], destination, unit.getMobility().getMove(), unit.getMobility().getMobilitySet());
 }
 
-CellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination) {
+AdjCellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination) {
 	return _map.getShortestPath(start, destination, INT_MAX, MobilitySet(MobilityType::values::GROUNDED));
 }
 
-CellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination, int max_move) {
+AdjCellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination, int max_move) {
 	return _map.getShortestPath(start, destination, max_move, MobilitySet(MobilityType::values::GROUNDED));
 }
 */
@@ -84,15 +84,15 @@ std::vector<CellRef> MoveHelper::getOtherAlliedCells(const Unit& unit) {
 	return vec;
 }
 /*
-bool MoveHelper::canWalk(Unit& unit, CellPath path) {
+bool MoveHelper::canWalk(Unit& unit, AdjCellPath path) {
 	bool valid = path.getHead() == _map[unit];
-	for (CostID pair : path) {
-		valid = valid && pair.first <= unit.getMobility().getMove();
+	for (auto pair : path) {
+		valid &= pair.first <= unit.getMobility().getMove();
 	}
 	return valid;
 }
 
-void MoveHelper::walkPath(Unit & unit, CellPath path) {
+void MoveHelper::walkPath(Unit & unit, AdjCellPath path) {
 	Expects(canWalk(unit, path));
 	CellRef unit_cell = path.getHead();
 	for (auto it = std::next(path.begin()); it != path.end(); it++) {

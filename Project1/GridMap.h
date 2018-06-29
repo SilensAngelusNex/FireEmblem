@@ -1,17 +1,16 @@
 #pragma once
 #include "Grid.h"
+//#include "CellPath.h"
+#include "Party.h"
+#include "ID.h"
+#include "PathMap.h"
+
 #include <functional>
 #include <map>
 #include <vector>
 #include <list>
 #include <queue>
 #include <set>
-#include "CellPath.h"
-#include "Party.h"
-#include "ID.h"
-#include "PathMap.h"
-
-
 
 class GridMap :
 	public Grid
@@ -44,6 +43,6 @@ public:
 	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility) const;
 	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible) const;
 
-	//CellPath getShortestPath(GridCell & start, GridCell & destination, int max_move, MobilitySet mobility);
+	//CellPath<GridCell> getShortestPath(ID start, ID destination, int max_move, MobilitySet mobility);
 };
 

@@ -43,6 +43,10 @@ public:
 
 	bool operator==(const GridCell& cell) const;
 	bool operator!=(const GridCell& cell) const;
+	bool operator<(const GridCell& cell) const;
+	bool operator>(const GridCell& cell) const;
+	bool operator>=(const GridCell& cell) const;
+	bool operator<=(const GridCell& cell) const;
 };
 
 using CellRef = std::reference_wrapper<GridCell>;

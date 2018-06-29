@@ -3,7 +3,7 @@
 #include "Unit.h"
 #include "Mobility.h"
 #include "GridCell.h"
-#include "CellPath.h"
+//#include "CellPath.h"
 #include "CellEdge.h"
 //TODO(Torrey): Make more useful constructors
 Grid::Grid(int width, int height) {

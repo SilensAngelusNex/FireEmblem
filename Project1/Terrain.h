@@ -13,7 +13,7 @@ private:
 	Terrain(std::string name, MobilityCostSet costs);
 	Terrain();
 public:
-	constexpr static int BASE_COST = 10; //TODO(Torrey or Weston): somehow merge this with the one in Range
+	constexpr static int BASE_COST = 10; //TODO(Torrey or Weston): see Range
 	Terrain(const Terrain& cell) = default;
 	Terrain& operator=(const Terrain & edge) = default;
 	Terrain(Terrain&& cell) = default;

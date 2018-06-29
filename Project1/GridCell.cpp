@@ -103,3 +103,18 @@ bool GridCell::operator==(const GridCell & cell) const {
 bool GridCell::operator!=(const GridCell & cell) const {
 	return this != &cell;
 }
+
+bool GridCell::operator<(const GridCell & cell) const {
+	return this < &cell;
+}
+
+bool GridCell::operator>(const GridCell & cell) const {
+	return this > &cell;
+}
+bool GridCell::operator<=(const GridCell & cell) const {
+	return this <= &cell;
+}
+
+bool GridCell::operator>=(const GridCell & cell) const {
+	return this >= &cell;
+}

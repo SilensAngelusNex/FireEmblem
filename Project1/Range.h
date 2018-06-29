@@ -9,7 +9,7 @@
 class Range {
 public:
 	constexpr static int MAX_RANGE = 32;
-	constexpr static int MOVE_RATIO = 10;//TODO(Torrey or Weston): move this somewhere more appropriate
+	constexpr static int MOVE_RATIO = 10;//TODO(Torrey or Weston): move this somewhere more appropriate, Some global 10 for all move related stuff might be nice
 	using DistanceSet = IterableBitset<MAX_RANGE>;
 
 	MobilitySet _type;
@@ -21,7 +21,7 @@ public:
 	Range(MobilitySet move, DistanceSet dist);
 
 	constexpr bool hasDistance(int dist) const { 
-		Expects(dist >= 0 && MAX_RANGE > dist);
+		Expects(dist >= 0 && MAX_RANGE * MOVE_RATIO > dist);
 		return _range[(dist + MOVE_RATIO - 1) / MOVE_RATIO]; 
 	}
 	int maxRange() const {

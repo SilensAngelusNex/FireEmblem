@@ -1,16 +1,14 @@
 #pragma once
 #include "ID.h"
-#include "CellPath.h"
 #include <map>
 
-
 //TODO(Torrey): rename this class
-template <typename grid, typename cell>
-class Path_Map :
-	private id_cost_map
+template <typename grid>
+class Path_Map : private id_cost_map
 {
 private:
-	using CostCell = logic_pair<int, std::reference_wrapper<cell>>;
+	using cell_ref = decltype(std::declval<grid>()[std::declval<ID>()]);
+	using CostCell = logic_pair<int, cell_ref>;
 	//private iterator class that replaces ID with CellRef
 	template <typename iterator>
 	class path_map_iter : public iterator {
@@ -21,9 +19,9 @@ private:
 			iterator(parent),
 			_map(map)
 		{}
-		std::pair<CellRef, CostCell> operator*() const {
+		std::pair<cell_ref, CostCell> operator*() const {
 			auto temp = iterator::operator*();
-			return std::pair<CellRef, CostCell>(_map[temp.first], CostCell(temp.second.first, _map[temp.second.second]));
+			return std::pair<cell_ref, CostCell>(_map[temp.first], CostCell(temp.second.first, _map[temp.second.second]));
 		}
 	};
 
@@ -109,5 +107,5 @@ public:
 
 class GridMap;
 class GridCell;
-using PathMap = Path_Map<GridMap, GridCell>;
-using constPathMap = Path_Map<const GridMap, const GridCell>;
+using PathMap = Path_Map<GridMap>;
+using constPathMap = Path_Map<const GridMap>;
