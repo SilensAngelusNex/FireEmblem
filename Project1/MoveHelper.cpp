@@ -20,8 +20,8 @@ std::vector<GridCell::Ref> MoveHelper::getAccesibleCells(const Unit& unit) {
 	vectorSubtract(cells,allied_cells);
 	return cells;
 }
-PathMap MoveHelper::findShortestPaths(const Unit& unit) const{
-	return _map.findShortestPaths(unit);
+PathMap MoveHelper::findShortestPaths(const Unit& unit) const{ 
+	return _map.findShortestPaths(_map[unit]._id, unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); });
 }
 
 ////////////////////////////////////////////////////////////////////////////////

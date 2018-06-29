@@ -29,11 +29,18 @@ Grid::Grid(int width, int height, std::vector<PartyData> data) {
 	}
 }
 
-Unit* Grid::getUnit(const GridCell & index) {
+Unit* Grid::getUnit(const GridCell& index) {
 	return  hasUnit(index) ? _cell_to_unit[&index] : nullptr;
 }
-const Unit* Grid::getUnit(const GridCell & index) const{
+const Unit* Grid::getUnit(const GridCell& index) const{
 	return  hasUnit(index) ? _cell_to_unit.at(&index) : nullptr;
+}
+
+Unit* Grid::getUnit(const ID & index) {
+	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
+}
+const Unit* Grid::getUnit(const ID & index) const {
+	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
 }
 
 /**Inserts Eucildian Adjacencies
@@ -60,10 +67,7 @@ void Grid::insertParty(PartyData data) {
 }
 ////////////////////////////////////////////////////////////
 void Grid::moveUnit(GridCell& start, GridCell& destination) {
-	Expects(hasUnit(start));
-
-	Expects(!hasUnit(destination));
-	
+	Expects(hasUnit(start) && !hasUnit(destination));	
 	Unit* unit = &(*this)[start];
 	removeUnit(*unit);
 	insertUnit(*unit, destination);
@@ -73,6 +77,21 @@ void Grid::insertUnit(Unit& new_unit, GridCell& destination) {
 	_unit_to_cell.emplace(&new_unit, &destination);// Grid the Unit to the destination.
 	_cell_to_unit.emplace(&destination, &new_unit);
 }
+
+void Grid::moveUnit(ID& start, ID& destination) {
+	Expects(hasUnit(start) && !hasUnit(destination));
+	Unit* unit = getUnit(start);
+	removeUnit(*unit);
+	insertUnit(*unit, destination);
+}
+
+void Grid::insertUnit(Unit& new_unit, ID& destination) {
+	Expects(!hasUnit(destination) && !hasUnit(new_unit));
+	_unit_to_cell.emplace(&new_unit, &(*this)[destination]);// Grid the Unit to the destination.
+	_cell_to_unit.emplace(&(*this)[destination], &new_unit);
+}
+
+
 
 void Grid::removeUnit(Unit& unit) {
 	Expects(hasUnit(unit));
@@ -86,6 +105,10 @@ bool Grid::hasUnit(const GridCell& index) const{
 }
 bool Grid::hasUnit(const Unit& index) const{
 	return _unit_to_cell.count(&index) > 0;
+}
+
+bool Grid::hasUnit(const ID& index) const {
+	return _cell_to_unit.count(&(*this)[index]) > 0;
 }
 
 ///////////////////////////////////////////////////////////
@@ -110,7 +133,7 @@ const GridCell& Grid::operator[](const Unit& index) const {
 Grid::constGridRow Grid::operator[](size_t index) const {
 	return constGridRow(_grid.at(index));
 }
-const Unit& Grid::operator[](const GridCell & index) const {
+const Unit& Grid::operator[](const GridCell& index) const {
 	Expects(hasUnit(index));
 	return *_cell_to_unit.at(&index);
 }

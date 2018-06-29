@@ -17,8 +17,9 @@ class GridMap :
 {
 
 private: 
-	id_cost_map getShortestPaths(const Unit & unit) const;
-	id_cost_map getShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible) const;
+
+	template<typename lambda>
+	id_cost_map getShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) const;
 	using PathQueue = std::priority_queue<CostID>;
 public:
 
@@ -30,19 +31,52 @@ public:
 	const Party& getParty(const Unit& unit) const;
 
 
-	PathMap findShortestPaths(const Unit& unit);
-	PathMap findShortestPaths(size_t x, size_t y);
-	PathMap findShortestPaths(ID start);
 	PathMap findShortestPaths(ID start, int max_move, MobilitySet mobility);
 	PathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible);
+	template<typename lambda>
+	PathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass);
 
-
-	constPathMap findShortestPaths(const Unit& unit) const;
-	constPathMap findShortestPaths(size_t x, size_t y) const;
-	constPathMap findShortestPaths(ID start) const;
 	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility) const;
 	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, bool intangible) const;
+	template<typename lambda>
+	constPathMap findShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) const;
 
 	//CellPath<GridCell> getShortestPath(ID start, ID destination, int max_move, MobilitySet mobility);
 };
 
+
+template<typename lambda>
+inline id_cost_map GridMap::getShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) const
+{
+	PathQueue queue = PathQueue();
+	id_cost_map path_map = id_cost_map();
+	path_map.emplace(start, CostID(0, start));
+	queue.emplace(0, start);
+
+	while (!queue.empty()) {
+		auto top = queue.top();
+		queue.pop();
+		std::list<CellEdge> adj_edges = (*this)[top.second].getEdges();
+		for (auto& edge : adj_edges) {
+			std::optional<int> cost = edge.getCost(mobility);
+			if (canPass(getUnit(edge._id)) && cost.has_value()) {
+				cost = top.first + cost.value();
+
+				if (cost.value() <= max_move && (path_map.count(edge._id) == 0 || cost.value() < path_map.at(edge._id).first)) {
+					path_map.insert_or_assign(edge._id, CostID(cost.value(), top.second));
+					queue.emplace(cost.value(), edge._id);
+				}
+			}
+		}
+	}
+	return path_map;
+}
+
+template<typename lambda>
+inline PathMap GridMap::findShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) {
+	return PathMap(*this, getShortestPaths(start, max_move, mobility, canPass));
+}
+template<typename lambda>
+inline constPathMap GridMap::findShortestPaths(ID start, int max_move, MobilitySet mobility, lambda canPass) const{
+	return constPathMap(*this, getShortestPaths(start, max_move, mobility, canPass));
+}

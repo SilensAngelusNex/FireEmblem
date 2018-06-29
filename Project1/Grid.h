@@ -43,8 +43,6 @@ protected:
 	Grid(int width, int height, std::vector<PartyData> data);
 	~Grid() = default;
 
-	Unit* getUnit(const GridCell& index);
-	const Unit* getUnit(const GridCell& index) const;
 public:
 	
 	std::list<Party> _parties;
@@ -59,8 +57,18 @@ public:
 	void insertUnit(Unit& new_unit, GridCell& destination);
 	void removeUnit(Unit& unit);
 	
-	bool hasUnit(const GridCell & index) const;
+	void moveUnit(ID& start, ID& destination);
+	void insertUnit(Unit& new_unit, ID& destination);
+
+	bool hasUnit(const GridCell& index) const;
 	bool hasUnit(const Unit & unit) const;
+	bool hasUnit(const ID& id) const;
+
+	Unit* getUnit(const GridCell& index);
+	Unit* getUnit(const ID& id);
+
+	const Unit* getUnit(const GridCell& index) const;
+	const Unit* getUnit(const ID& id) const;
 
 	Unit& operator[](const GridCell& index);
 	GridCell& operator[](const Unit& index);

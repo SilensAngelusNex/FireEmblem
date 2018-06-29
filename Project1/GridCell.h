@@ -24,6 +24,7 @@ public:
 	void addAdjacentCell(GridCell& new_cell);
 	void addAdjacentCell(ID new_cell, MobilityCostSet costs);
 	void removeAdjacentCell(const GridCell& delete_cell);
+	void removeAdjacentCell(ID delete_cell);
 
 	Terrain& getTerrain();
 	std::list<CellEdge> getEdges();
@@ -35,9 +36,13 @@ public:
 	bool isAdjacent(const GridCell& other_cell, MobilityType mobility) const;
 	bool isAdjacent(const GridCell& other_cell, MobilitySet mobility) const;
 
+	bool isAdjacent(ID other_cell) const;
+	bool isAdjacent(ID other_cell, MobilityType mobility) const;
+	bool isAdjacent(ID other_cell, MobilitySet mobility) const;
+
 	const Terrain& getTerrain() const;
 	const std::list<CellEdge> getEdges() const;
-	const std::optional<CellEdge> getEdge(const GridCell & other_cell) const;
+	const std::optional<CellEdge> getEdge(const GridCell& other_cell) const;
 	const std::optional<CellEdge> getEdge(ID other_cell_id) const;
 	const std::vector<ID> getAdjacentCellIDs() const;
 

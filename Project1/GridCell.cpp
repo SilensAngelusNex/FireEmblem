@@ -59,15 +59,27 @@ void GridCell::removeAdjacentCell(const GridCell& delete_cell) {
 	Expects(edge.has_value());
 	_adjacent_cells.remove(edge.value());
 }
+void GridCell::removeAdjacentCell(ID delete_cell) {
+	std::optional<CellEdge> edge = getEdge(delete_cell);
+	Expects(edge.has_value());
+	_adjacent_cells.remove(edge.value());
+}
 bool GridCell::isAdjacent(const GridCell& other_cell) const{
 	return getEdge(other_cell).has_value();
 }
-bool GridCell::isAdjacent(const GridCell & other_cell, MobilityType mobility) const
-{
+bool GridCell::isAdjacent(const GridCell& other_cell, MobilityType mobility) const {
 	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
 }
-bool GridCell::isAdjacent(const GridCell & other_cell, MobilitySet mobility) const
-{
+bool GridCell::isAdjacent(const GridCell& other_cell, MobilitySet mobility) const {
+	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
+}
+bool GridCell::isAdjacent(ID other_cell) const {
+	return getEdge(other_cell).has_value();
+}
+bool GridCell::isAdjacent(ID other_cell, MobilityType mobility) const {
+	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
+}
+bool GridCell::isAdjacent(ID other_cell, MobilitySet mobility) const {
 	return isAdjacent(other_cell) && getEdge(other_cell).value().getCost(mobility).has_value();
 }
 const Terrain& GridCell::getTerrain() const{
@@ -96,25 +108,25 @@ const std::list<CellEdge> GridCell::getEdges() const{
 std::list<CellEdge> GridCell::getEdges() {
 	return _adjacent_cells;
 }
-bool GridCell::operator==(const GridCell & cell) const {
+bool GridCell::operator==(const GridCell& cell) const {
 	return this == &cell;
 }
 
-bool GridCell::operator!=(const GridCell & cell) const {
+bool GridCell::operator!=(const GridCell& cell) const {
 	return this != &cell;
 }
 
-bool GridCell::operator<(const GridCell & cell) const {
-	return this < &cell;
+bool GridCell::operator<(const GridCell& cell) const {
+	return (*this != cell) && _id < cell._id;
 }
 
-bool GridCell::operator>(const GridCell & cell) const {
-	return this > &cell;
+bool GridCell::operator>(const GridCell& cell) const {
+	return (*this != cell) && _id > cell._id;
 }
-bool GridCell::operator<=(const GridCell & cell) const {
-	return this <= &cell;
+bool GridCell::operator<=(const GridCell& cell) const {
+	return  _id < cell._id || *this == cell;
 }
 
-bool GridCell::operator>=(const GridCell & cell) const {
-	return this >= &cell;
+bool GridCell::operator>=(const GridCell& cell) const {
+	return  _id > cell._id || *this == cell;
 }
