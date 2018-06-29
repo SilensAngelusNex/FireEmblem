@@ -6,6 +6,7 @@
 #include <queue>
 #include "Party.h"
 #include "ID.h"
+#include "read_vector.h"
 /**
 Grid class. Holds a Matrix of GridCells. Should be initialized at the start of each chapter.
 */
@@ -14,20 +15,6 @@ class Unit;
 class Mobility;
 
 class Grid {
-public:
-	//vector wrapper that only allows [] op
-	template<typename VecCell>
-	class grid_row {
-	private:
-		VecCell& _row;
-		grid_row(VecCell& row) : _row(row) {}
-	public:
-		auto& operator[](size_t index) { return _row[index];}
-		const auto& operator[](size_t index) const { return _row[index];}
-		friend class Grid;
-	};
-	using GridRow = grid_row < std::vector<GridCell>>;
-	using constGridRow = grid_row<const std::vector<GridCell>>;
 private:
 
 	std::map<const Unit*, GridCell*> _unit_to_cell;
@@ -71,6 +58,10 @@ public:
 	const Unit* getUnit(const GridCell& index) const;
 	const Unit* getUnit(const ID& id) const;
 	const GridCell* getCell(const Unit& index) const;
+
+
+	using GridRow = read_vector< std::vector<GridCell>>;
+	using constGridRow = read_vector<const std::vector<GridCell>>;
 
 	Unit& operator[](const GridCell& index);
 	ID operator[](const Unit& index);

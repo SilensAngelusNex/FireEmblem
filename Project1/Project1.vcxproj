@@ -172,6 +172,7 @@
     <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ID.h" />
+    <ClInclude Include="read_vector.h" />
     <ClInclude Include="logic_pair.h" />
     <ClInclude Include="MapHelper.h" />
     <ClInclude Include="PathMap.h" />

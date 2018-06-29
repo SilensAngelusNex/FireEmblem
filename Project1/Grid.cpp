@@ -147,9 +147,6 @@ const Unit& Grid::operator[](const GridCell& index) const {
 	return *_cell_to_unit.at(&index);
 }
 
-
-
-
 const GridCell& Grid::operator[](const ID& index) const{
 	return _grid[index.first][index.second];
 }

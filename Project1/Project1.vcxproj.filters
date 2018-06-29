@@ -371,6 +371,9 @@
     <ClInclude Include="logic_pair.h">
       <Filter>inc\util</Filter>
     </ClInclude>
+    <ClInclude Include="read_vector.h">
+      <Filter>inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
