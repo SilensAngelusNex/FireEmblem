@@ -7,22 +7,20 @@
 #include "Range.h"
 
 
-/*
-AttackHelper::AttackHelper(GridMap& map) :
+
+AttackHelper::AttackHelper(GridMap & map) :
 	MapHelper(map)
 {}
-
-// Get Cells that a unit can attack without moving with Equipped Weapon
-std::vector<ID> AttackHelper::getAttackableCellIDs(const Unit& unit) {
-	return getAttackableCellIDs(unit, _map[unit]);
-}
-
-//Get Cells a Unit could attack with Equipped Weapon, if it were standing on cell
-std::vector<ID> AttackHelper::getAttackableCellIDs(const Unit& unit, ID cell) {
-	Range range = Range(); //sword //TODO(Torrey):get actual ranges from Unit
+//Gets Units attackable from current position woth currently equipped weapon
+std::vector<Unit::Ref> AttackHelper::getAttackableUnits(const Unit & unit) {
+	Range range = Range();
 	if (unit.getInventory().hasEquip(EquipSlot::values::ON_HAND)) {
 		range = unit.getInventory()[EquipSlot(EquipSlot::values::ON_HAND)].getAttackRange();
 	}
-	return getCellIDsWithin(range, cell);
+	return getEnemiesWithin(range, _map[unit], *unit.getParty());
 }
-*/
+//Gets if a Unit can attack another based on position, party, and equipped weapon
+bool AttackHelper::canAttack(const Unit & attacker, const Unit & defender) {
+	auto attackable_units = getAttackableUnits(attacker);
+	return std::count(attackable_units.begin(), attackable_units.end(), defender) > 0;
+}

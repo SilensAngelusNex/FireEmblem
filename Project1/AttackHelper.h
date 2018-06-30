@@ -11,11 +11,11 @@
 class Unit;
 class GridCell;
 class AttackHelper :
-	private MoveHelper
+	private MapHelper
 {
 public:
-	using MoveHelper::MoveHelper;
-	using MoveHelper::getEquipedAttackIDs;
-	using MoveHelper::getEquipableAttackIDs;
+	AttackHelper(GridMap& map);
+	std::vector<Unit::Ref> getAttackableUnits(const Unit& unit);
+	bool canAttack(const Unit& attacker, const Unit& defener);
 };
 
