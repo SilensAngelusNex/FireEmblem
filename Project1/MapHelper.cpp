@@ -12,7 +12,7 @@ MapHelper::MapHelper(GridMap & map) :
 	_map(map)
 {}
 
-std::vector<Unit::Ref> MapHelper::getUnits() {
+std::vector<Unit::Ref> MapHelper::getUnits() {//TODO(Torrey): code these
 	return std::vector<Unit::Ref>();
 }
 std::vector<Unit::Ref> MapHelper::getAllies(const Unit& unit) {

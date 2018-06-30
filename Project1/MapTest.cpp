@@ -4,6 +4,7 @@
 #include "Unit.h"
 #include "FairDice.h"
 #include "MoveHelper.h"
+#include "AttackHelper.h"
 //#include "CellPath.h"
 #include "Party.h"
 #include "GridCell.h"
@@ -29,7 +30,8 @@ bool test::runMapTest() {
 	party_vec.push_back(data2);
 
 	GridMap map = GridMap(20, 20, party_vec); // create a 20 x 20 map
-	auto move_helper = MoveHelper(map);
+	MoveHelper move_helper = MoveHelper(map);
+	AttackHelper attack_helper = AttackHelper(map);
 	Party& party = map._parties.front();
 	Party& party2 = map._parties.back();
 	party.insertUnit(std::move(mia));
@@ -44,20 +46,20 @@ bool test::runMapTest() {
 	mia2.getInventory().equip(ON_HAND, std::move(mias_sword));
 
 	map.insertUnit(mia2, map[10][10]);
-	std::vector <ID> cells = move_helper.getAccesibleCellIDs(mia2);
+	std::set <ID> cells = move_helper.getAccesibleCellIDs(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
-	cells = move_helper.getAllAttackableCellIDs(mia2);
+	cells = move_helper.getMaxEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	map.insertUnit(*ike2, map[10][11]);
 	cells = move_helper.getAccesibleCellIDs(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
-	cells = move_helper.getAllAttackableCellIDs(mia2);
+	cells = move_helper.getMaxEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	std::cout << "How many cells are adjacent to Mia: " << map[map[mia2]].getAdjacentCellIDs().size() << std::endl;
 	party2.insertUnit(party.dropUnit(*ike2));
 	cells = move_helper.getAccesibleCellIDs(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
-	cells = move_helper.getAllAttackableCellIDs(mia2);
+	cells = move_helper.getMaxEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	
 	std::cout << "How many cells are adjacent to Mia: " << map[map[mia2]].getAdjacentCellIDs().size() << std::endl;

@@ -6,12 +6,14 @@
 //#include "CellPath.h"
 #include "GridCell.h"
 #include "Range.h"
+#include "GridMap.h"
 
 MoveHelper::MoveHelper(GridMap& map) :
 	MapHelper(map)
 {}
+
 //Get Cells a Unit can move to
-std::vector<ID> MoveHelper::getAccesibleCellIDs(const Unit& unit) {
+std::set<ID> MoveHelper::getAccesibleCellIDs(const Unit& unit) {
 	PathMap path_map = getShortestPathsMap(unit);
 	std::set<ID> cells = std::set<ID>();
 	for (auto pair : path_map) {
@@ -21,7 +23,49 @@ std::vector<ID> MoveHelper::getAccesibleCellIDs(const Unit& unit) {
 	for (ID cell : allied_cells) {
 		cells.erase(cell);
 	}	
-	return std::vector<ID>(cells.begin(), cells.end());
+	return cells;
+}
+
+//Get Cell IDs Unit can Attack with Equipped Weapon Without moving
+std::vector<ID> MoveHelper::getEquipedAttackIDs(const Unit & unit) {
+	return getEquipedAttackIDs(unit, _map[unit]);
+}
+//Get Cell IDs Unit can Attack with Equipped Weapon Without moving from pos
+std::vector<ID> MoveHelper::getEquipedAttackIDs(const Unit & unit, ID pos) {
+	Range range = Range(); 
+	if (unit.getInventory().hasEquip(EquipSlot::values::ON_HAND)) {
+		range = unit.getInventory()[EquipSlot(EquipSlot::values::ON_HAND)].getAttackRange();
+	}
+	return getCellIDsWithin(range, pos);
+}
+//Get Cell IDs Unit can Attack with Equippable Weapons Without moving
+std::set<ID> MoveHelper::getEquipableAttackIDs(const Unit & unit) {
+	return getEquipableAttackIDs(unit, _map[unit]);
+}
+//Get Cell IDs Unit can Attack with Equippable Weapons Without moving from pos
+std::set<ID> MoveHelper::getEquipableAttackIDs(const Unit & unit, ID pos) {
+	auto range_map = unit.getInventory().getAttackRanges();
+	std::set<ID> ids;
+	for (auto range_pair : range_map) {
+		Range range = Range(range_pair.first, range_pair.second);
+		auto range_ids= getCellIDsWithin(range, pos);
+		for (auto id : range_ids) {
+			ids.emplace(id);
+		}
+	}
+	return ids;
+}
+//Get Cell IDs Unit Can Attack with any equippable Weapon from any Accessible Cell
+std::set<ID> MoveHelper::getMaxEquipableAttackIDs(const Unit & unit) {
+	auto acc_ids = getAccesibleCellIDs(unit);
+	std::set<ID> ids;
+	for (auto acc_id : acc_ids) {
+		auto atk_ids = getEquipableAttackIDs(unit, acc_id);
+		for (auto atk_id : atk_ids) {
+			ids.emplace(atk_id);
+		}
+	}
+	return ids;
 }
 //Get a PathMap used to find the shortest paths to any Accesible Cell
 PathMap MoveHelper::getShortestPathsMap(const Unit& unit) const{ 
@@ -30,34 +74,6 @@ PathMap MoveHelper::getShortestPathsMap(const Unit& unit) const{
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-// Get Cells that a unit can attack without moving with Equipped Weapon
-std::vector<ID> MoveHelper::getAttackableCellIDs(const Unit& unit) {
-	return getAttackableCellIDs(unit, _map[unit]);
-}
-
-//Get Cells a Unit could attack with Equipped Weapon, if it were standing on cell
-std::vector<ID> MoveHelper::getAttackableCellIDs(const Unit& unit, ID cell) {
-	Range range = Range(); //sword //TODO(Torrey):get actual ranges from Unit
-	if (unit.getInventory().hasEquip(EquipSlot::values::ON_HAND)) {
-		range = unit.getInventory()[EquipSlot(EquipSlot::values::ON_HAND)].getAttackRange();
-	}
-	return getCellIDsWithin(range, cell);
-}
-
-//Get Cells a Unit can Attack with Equipped Weapon including movement
-std::vector<ID> MoveHelper::getAllAttackableCellIDs(const Unit& unit) {
-	auto cells = std::set<ID>();
-	auto accesible_cells = getAccesibleCellIDs(unit);
-	for (auto acc_cell : accesible_cells) {
-		auto attack_cells = getAttackableCellIDs(unit, acc_cell);
-		//std::cout << attack_cells.size() << std::endl;
-		for (auto atk_cell : attack_cells) {
-				cells.insert(atk_cell);
-		}
-	}
-	std::vector<ID> vec = std::vector<ID>(cells.begin(), cells.end());
-	return vec;
-}
 std::vector<ID> MoveHelper::getAlliedCellIDs(const Unit& unit) {
 	auto vec = std::vector<ID>();
 	for (Unit& ally : _map.getParty(unit).getUnits()) {

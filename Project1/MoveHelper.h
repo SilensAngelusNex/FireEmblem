@@ -11,18 +11,21 @@ class Unit;
 class GridCell;
 
 class MoveHelper : 
-	public MapHelper 
+	private MapHelper 
 {
 public:
 	MoveHelper(GridMap& map);
-	std::vector<ID> getAccesibleCellIDs(const Unit& unit);
+
 	PathMap getShortestPathsMap(const Unit & unit) const;
+	std::set<ID> getAccesibleCellIDs(const Unit& unit);
 
-	std::vector<ID> getAttackableCellIDs(const Unit & unit);
-	std::vector<ID> getAttackableCellIDs(const Unit & unit, ID cell);
-	std::vector<ID> getAllAttackableCellIDs(const Unit & unit);
+	std::vector<ID> getEquipedAttackIDs(const Unit & unit);
+	std::vector<ID> getEquipedAttackIDs(const Unit & unit, ID pos);
+	std::set<ID> getEquipableAttackIDs(const Unit & unit);
+	std::set<ID> getEquipableAttackIDs(const Unit & unit, ID pos);	
+	std::set<ID> getMaxEquipableAttackIDs(const Unit& unit);
+
 	std::vector<ID> getAlliedCellIDs(const Unit & unit);
-
 	std::vector<ID> getOtherAlliedCellIDs(const Unit & unit);
 
 	//AdjCellPath getShortestPath(const Unit& unit,GridCell & destination);

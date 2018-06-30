@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttackHelper.cpp" />
     <ClCompile Include="AttributeList.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
@@ -168,6 +169,7 @@
     <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackHelper.h" />
     <ClInclude Include="BitsetIterator.h" />
     <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />

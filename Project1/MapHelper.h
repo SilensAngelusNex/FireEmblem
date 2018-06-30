@@ -12,9 +12,9 @@ class MapHelper
 protected:
 	GridMap& _map;
 	MapHelper(GridMap& map);
-	~MapHelper() = default;
 public:
-	
+	~MapHelper() = default;
+
 	std::vector<Unit::Ref> getUnits();
 	std::vector<Unit::Ref> getAllies(const Unit& unit);
 	std::vector<Unit::Ref> getEnemies(const Unit& unit);
