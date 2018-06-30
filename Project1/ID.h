@@ -4,15 +4,16 @@
 #include "logic_pair.h"
 
 class ID :
-	private std::pair<size_t, size_t>{
+	protected logic_pair<size_t, size_t>{
 private:
 
-	using std::pair<size_t, size_t>::pair;
+	using logic_pair<size_t, size_t>::logic_pair;
 	using std::pair<size_t, size_t>::operator=;
 	using std::pair<size_t, size_t>::swap;
 	using std::pair<size_t, size_t>::first;
 	using std::pair<size_t, size_t>::second;
 public:
+	
 	bool operator==(const ID& other) const {
 		return first == other.first && second == other.second;
 	}
@@ -45,7 +46,15 @@ public:
 		bool c = first == other.first;
 		return !(a | (c && b));
 	}
-
+	
+	/*
+	using logic_pair<size_t, size_t>::operator==;
+	using logic_pair<size_t, size_t>::operator!=;
+	using logic_pair<size_t, size_t>::operator<;
+	using logic_pair<size_t, size_t>::operator>;
+	using logic_pair<size_t, size_t>::operator<=;
+	using logic_pair<size_t, size_t>::operator>=;
+	*/
 	friend class Grid;
 };
 

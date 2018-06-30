@@ -67,6 +67,33 @@ std::set<ID> MoveHelper::getMaxEquipableAttackIDs(const Unit & unit) {
 	}
 	return ids;
 }
+///////////////////////////////////////////////////////////////////////////////////
+std::vector<ID> MoveHelper::getEquipedAssistIDs(const Unit & unit)
+{
+	return getEquipedAssistIDs(unit, _map[unit]);
+}
+//Get Cell IDs Unit can Assist with Equipped Weapon Without moving from pos
+std::vector<ID> MoveHelper::getEquipedAssistIDs(const Unit & unit, ID pos) {
+	Range range = Range();
+	if (unit.getInventory().hasEquip(EquipSlot::values::ON_HAND)) {
+		range = unit.getInventory()[EquipSlot(EquipSlot::values::ON_HAND)].getAssistRange();
+	}
+	return getCellIDsWithin(range, pos);
+}
+//Get Cell IDs Unit can Assist with Equippable Weapons Without moving
+std::set<ID> MoveHelper::getEquipableAssistIDs(const Unit & unit) {
+	return getEquipableAssistIDs(unit, _map[unit]);
+}
+//Get Cell IDs Unit can Assist with Equippable Weapons Without moving from pos
+std::set<ID> MoveHelper::getEquipableAssistIDs(const Unit & unit, ID pos) {
+	return getMaxEquipableIDs<AssistRangeMap>(unit);
+
+}
+//Get Cell IDs Unit Can Assist with any equippable Weapon from any Accessible Cell
+std::set<ID> MoveHelper::getMaxEquipableAssistIDs(const Unit & unit) {
+	return getMaxEquipableIDs<AttackRangeMap>(unit);
+}
+////////////////////////////////////////////////////////////////////////////////////
 //Get a PathMap used to find the shortest paths to any Accesible Cell
 PathMap MoveHelper::getShortestPathsMap(const Unit& unit) const{ 
 	return _map.getShortestPathsMap(_map[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); });
@@ -130,3 +157,17 @@ void MoveHelper::walkPath(Unit & unit, AdjCellPath path) {
 	}	
 }
 */
+
+template<typename RangeGetter>
+std::set<ID> MoveHelper::getMaxEquipableIDs(const Unit& unit) {
+	std::map<MobilitySet, Range::DistanceSet> range_map = RangeGetter::getRangeMap(unit);
+	std::set<ID> ids;
+	for (auto range_pair : range_map) {
+		Range range = Range(range_pair.first, range_pair.second);
+		auto range_ids = getCellIDsWithin(range, _map[unit]);
+		for (auto id : range_ids) {
+			ids.emplace(id);
+		}
+	}
+	return ids;
+}

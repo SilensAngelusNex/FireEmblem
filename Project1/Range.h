@@ -9,7 +9,7 @@
 class Range {
 public:
 	constexpr static int MAX_RANGE = 32;
-	constexpr static int MOVE_RATIO = 10;//TODO(Torrey or Weston): move this somewhere more appropriate, Some global 10 for all move related stuff might be nice
+	constexpr static int MOVE_RATIO = 10;
 	using DistanceSet = IterableBitset<MAX_RANGE>;
 
 	MobilitySet _type;

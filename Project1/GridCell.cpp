@@ -39,8 +39,9 @@ const std::optional<CellEdge> GridCell::getEdge(ID other_cell_id) const {
 
 GridCell::GridCell(TerrainType terrain, ID id) :
 	_terrain(Terrain::TerrainFactory(terrain)),
-		_id(std::move(id))
-{}
+	_id(std::move(id))
+{
+}
 
 void GridCell::addAdjacentCell(GridCell & new_cell)
 {
