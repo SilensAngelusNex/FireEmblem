@@ -15,7 +15,10 @@ class AttackHelper :
 {
 public:
 	AttackHelper(GridMap& map);
+
 	std::vector<Unit::Ref> getAttackableUnits(const Unit& unit);
-	bool canAttack(const Unit& attacker, const Unit& defener);
+	const std::vector<Unit::Ref> getAttackableUnits(const Unit& unit) const;
+
+	bool canAttack(const Unit& attacker, const Unit& defener) const;
 };
 

@@ -38,5 +38,5 @@ private:
 	struct AttackRangeMap { static std::map<MobilitySet, Range::DistanceSet> getRangeMap(const Unit& unit) { return unit.getInventory().getAttackRanges(); } };
 	struct AssistRangeMap { static std::map<MobilitySet, Range::DistanceSet> getRangeMap(const Unit& unit) { return unit.getInventory().getAssistRanges(); } };
 	template<typename RangeGetter>
-	std::set<ID> getMaxEquipableIDs(const Unit& unit);
+	std::set<ID> getMaxEquipableIDs(const Unit& unit) const;
 };

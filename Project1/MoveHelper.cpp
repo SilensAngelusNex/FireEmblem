@@ -122,7 +122,7 @@ std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) {
 	////////////////////////////////////////////////////////////////////////////////
 
 template<typename RangeGetter>
-std::set<ID> MoveHelper::getMaxEquipableIDs(const Unit& unit) {
+std::set<ID> MoveHelper::getMaxEquipableIDs(const Unit& unit) const{
 	std::map<MobilitySet, Range::DistanceSet> range_map = RangeGetter::getRangeMap(unit);
 	std::set<ID> ids;
 	for (auto range_pair : range_map) {
