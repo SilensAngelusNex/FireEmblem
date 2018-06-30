@@ -19,8 +19,9 @@ std::vector<Unit::Ref> AttackHelper::getAttackableUnits(const Unit & unit) {
 	}
 	return getEnemiesWithin(range, _map[unit], *unit.getParty());
 }
+
 //Gets if a Unit can attack another based on position, party, and equipped weapon
 bool AttackHelper::canAttack(const Unit & attacker, const Unit & defender) {
-	auto attackable_units = getAttackableUnits(attacker);
+	std::vector<Unit::Ref> attackable_units = getAttackableUnits(attacker);
 	return std::count(attackable_units.begin(), attackable_units.end(), defender) > 0;
 }

@@ -4,7 +4,8 @@
 #include "Unit.h"
 #include <vector>
 
-class GridMap;
+#include "GridMap.h"
+
 class Range;
 
 class MapHelper
@@ -35,6 +36,17 @@ public:
 	std::vector<ID> getAlliedCellIDsWithin(Range range, ID pos, const PartyBase& party);
 	std::vector<ID> getEnemyCellIDsWithin(Range range, ID pos, const PartyBase& party);
 
-	//std::vector<GridCell::Ref> getCellsWithin(Range range, GridCell& pos);
-};
+private:
+	template<typename hasUnit>
+	std::vector<GridCell::Ref> getCellsWithinHelper(Range range, ID pos, const PartyBase* party);
+	template<typename hasUnit>
+	std::vector<ID> getIDsWithinHelper(Range range, ID pos, const PartyBase* party);
+	template<typename hasUnit>
+	std::vector<Unit::Ref> getUnitsWithinHelper(Range range, ID pos, const PartyBase* party);
 
+
+	struct allies { static bool hasUnit(const PartyBase* party, const Unit* unit, const GridMap& map, ID pos) { return map.hasUnit(pos) && party->hasUnit(*unit); }};
+	struct enemies { static bool hasUnit(const PartyBase* party, const Unit* unit, const GridMap& map, ID pos) { return map.hasUnit(pos) && !party->hasUnit(*unit); } };
+	struct all { static bool hasUnit(const PartyBase* party, const Unit* unit, const GridMap& map, ID pos) { return true; } };
+
+};

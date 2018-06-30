@@ -120,43 +120,6 @@ std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) {
 	return vec;
 }
 	////////////////////////////////////////////////////////////////////////////////
-	/*
-	AdjCellPath MoveHelper::getShortestPath(const Unit& unit, GridCell & destination) {
-	return _map.getShortestPath(_map[unit], destination, unit.getMobility().getMove(), unit.getMobility().getMobilitySet());
-	}
-
-	AdjCellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination) {
-	return _map.getShortestPath(start, destination, INT_MAX, MobilitySet(MobilityType::values::GROUNDED));
-	}
-
-	AdjCellPath MoveHelper::getShortestPath(GridCell & start, GridCell & destination, int max_move) {
-	return _map.getShortestPath(start, destination, max_move, MobilitySet(MobilityType::values::GROUNDED));
-	}
-	*/
-	////////////////////////////////////////////////////////////////////////
-
-/*
-bool MoveHelper::canWalk(Unit& unit, AdjCellPath path) {
-	bool valid = path.getHead() == _map[unit];
-	for (auto pair : path) {
-		valid &= pair.first <= unit.getMobility().getMove();
-	}
-	return valid;
-}
-
-void MoveHelper::walkPath(Unit & unit, AdjCellPath path) {
-	Expects(canWalk(unit, path));
-	GridCell::Ref unit_cell = path.getHead();
-	for (auto it = std::next(path.begin()); it != path.end(); it++) {
-		if (unit_cell.get().getEdge(it->second).value().getCost(unit.getMobility().getMobilitySet()).has_value()) {
-			_map.moveUnit(unit_cell, it->second);
-		} else {// can't pass
-				return;
-		}
-		unit_cell = it->second;
-	}	
-}
-*/
 
 template<typename RangeGetter>
 std::set<ID> MoveHelper::getMaxEquipableIDs(const Unit& unit) {

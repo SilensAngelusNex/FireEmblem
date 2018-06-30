@@ -39,9 +39,4 @@ private:
 	struct AssistRangeMap { static std::map<MobilitySet, Range::DistanceSet> getRangeMap(const Unit& unit) { return unit.getInventory().getAssistRanges(); } };
 	template<typename RangeGetter>
 	std::set<ID> getMaxEquipableIDs(const Unit& unit);
-	//AdjCellPath getShortestPath(const Unit& unit,GridCell & destination);
-	//AdjCellPath getShortestPath(GridCell& start, GridCell& destination);
-	//AdjCellPath getShortestPath(GridCell& start, GridCell& destination, int max_move);
-	//bool canWalk(Unit & unit, AdjCellPath path);
-	//void walkPath(Unit& unit, AdjCellPath path);
 };
