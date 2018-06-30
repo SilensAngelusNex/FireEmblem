@@ -14,6 +14,7 @@
 #include "Experience.h"
 #include "Mobility.h"
 #include "Health.h"
+#include "logical_reference_wrapper.h"
 
 class PartyBase;
 using IDENTITY = std::string;
@@ -108,8 +109,8 @@ public:
 	bool operator==(const Unit & unit) const;
 	bool operator!=(const Unit & unit) const;
 
-	using Ref = std::reference_wrapper<Unit>;
-	using ConstRef = std::reference_wrapper<const Unit>;
+	using Ref = logical_reference_wrapper<Unit>;
+	using ConstRef = logical_reference_wrapper<const Unit>;
 	using UniquePtr = std::unique_ptr<Unit>;
 };
 //TODO (Weston): Is this an ok place for this?

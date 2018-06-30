@@ -220,7 +220,7 @@
       <Filter>src\map\map_heelper</Filter>
     </ClCompile>
     <ClCompile Include="AttackHelper.cpp">
-      <Filter>src</Filter>
+      <Filter>src\map\map_heelper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="AttackHelper.h">
       <Filter>inc\map\map_helper</Filter>
+    </ClInclude>
+    <ClInclude Include="logical_reference_wrapper.h">
+      <Filter>inc\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 #include "ID.h"
 #include <list>
 #include <vector>
+#include "logical_reference_wrapper.h"
 
 
 /** GridCell that composes the Grid. Holds a Tile.
@@ -53,6 +54,6 @@ public:
 	bool operator>=(const GridCell& cell) const;
 	bool operator<=(const GridCell& cell) const;
 
-	using Ref = std::reference_wrapper<GridCell>;
-	using ConstRef = std::reference_wrapper<const GridCell>;
+	using Ref = logical_reference_wrapper<GridCell>;
+	using ConstRef = logical_reference_wrapper<const GridCell>;
 };
