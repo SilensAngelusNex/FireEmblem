@@ -30,6 +30,11 @@ public:
 	std::vector<GridCell::Ref> getCellsWithin(Range range, ID pos);
 	std::vector<GridCell::Ref> getAlliedCellsWithin(Range range, ID pos, const PartyBase& party);
 	std::vector<GridCell::Ref> getEnemyCellsWithin(Range range, ID pos, const PartyBase& party);
+
+	std::vector<ID> getCellIDsWithin(Range range, ID pos);
+	std::vector<ID> getAlliedCellIDsWithin(Range range, ID pos, const PartyBase& party);
+	std::vector<ID> getEnemyCellIDsWithin(Range range, ID pos, const PartyBase& party);
+
 	//std::vector<GridCell::Ref> getCellsWithin(Range range, GridCell& pos);
 };
 
