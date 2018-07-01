@@ -16,6 +16,46 @@ struct allies { static bool hasUnit(const PartyBase* party, const GridMap& map, 
 struct enemies { static bool hasUnit(const PartyBase* party, const GridMap& map, ID pos) { return map.hasUnit(pos) && !party->hasUnit(*map.getUnit(pos)); } };
 struct all { static bool hasUnit(const PartyBase* party, const GridMap& map, ID pos) { return true; } };
 
+template<typename hasUnit>
+std::vector<GridCell::Ref> getCellsWithinHelper(Range range, ID pos, const PartyBase* party,  GridMap& map) {
+	PathMap path_map = map.getShortestPathsMap(pos, range.maxRange(), range._type);
+	auto vec = std::vector<GridCell::Ref>();
+	for (auto pair : path_map) {
+		if (range.hasDistance(pair.second.first)) {
+			if (hasUnit::hasUnit(party, map, pair.first._id))
+				vec.emplace_back(pair.first);
+		}
+	}
+	return vec;
+}
+
+template<typename hasUnit>
+std::vector<ID> getIDsWithinHelper(Range range, ID pos, const PartyBase* party,  GridMap& map) {
+	PathMap path_map = map.getShortestPathsMap(pos, range.maxRange(), range._type);
+	auto vec = std::vector<ID>();
+	for (auto pair : path_map) {
+		if (range.hasDistance(pair.second.first)) {
+			if (hasUnit::hasUnit(party, map, pair.first._id))
+				vec.emplace_back(pair.first._id);
+		}
+	}
+	return vec;
+}
+
+template<typename hasUnit>
+std::vector<Unit::Ref> getUnitsWithinHelper(Range range, ID pos, const PartyBase * party, GridMap& map) {
+	PathMap path_map = map.getShortestPathsMap(pos, range.maxRange(), range._type);
+	auto vec = std::vector<Unit::Ref>();
+	for (auto pair : path_map) {
+		if (range.hasDistance(pair.second.first) && map.hasUnit(pair.first)) {
+			if (hasUnit::hasUnit(party, map, pair.first._id))
+				vec.emplace_back(map[pair.first]);
+		}
+	}
+	return vec;
+}
+
+
 std::vector<Unit::Ref> MapHelper::getUnits() {
 	return std::as_const(*this).getUnits();
 }
@@ -58,131 +98,93 @@ const std::vector<Unit::Ref> MapHelper::getEnemies(const Unit& unit) const{
 
 std::vector<Unit::Ref> MapHelper::getUnitsWithin(const Unit& unit, Range range) {
 	Expects(_map.hasUnit(unit));
-	return getUnitsWithinHelper<all>(range, _map[unit], unit.getParty());
+	return getUnitsWithinHelper<all>(range, _map[unit], unit.getParty(), _map);
 }
 
 const std::vector<Unit::Ref> MapHelper::getUnitsWithin(const Unit& unit, Range range) const{
 	Expects(_map.hasUnit(unit));
-	return getUnitsWithinHelper<all>(range, _map[unit], unit.getParty());
+	return getUnitsWithinHelper<all>(range, _map[unit], unit.getParty(), _map);
 }
 
 std::vector<Unit::Ref> MapHelper::getAlliesWithin(const Unit& unit, Range range) {
 	Expects(_map.hasUnit(unit));
-	return getUnitsWithinHelper<allies>(range, _map[unit], unit.getParty());
+	return getUnitsWithinHelper<allies>(range, _map[unit], unit.getParty(), _map);
 }
 
 const std::vector<Unit::Ref> MapHelper::getAlliesWithin(const Unit& unit, Range range) const{
 	Expects(_map.hasUnit(unit));
-	return getUnitsWithinHelper<allies>(range, _map[unit], unit.getParty());
+	return getUnitsWithinHelper<allies>(range, _map[unit], unit.getParty(), _map);
 }
 
 std::vector<Unit::Ref> MapHelper::getEnemiesWithin(const Unit& unit, Range range) {
 	Expects(_map.hasUnit(unit));
-	return getUnitsWithinHelper<enemies>(range, _map[unit], unit.getParty());
+	return getUnitsWithinHelper<enemies>(range, _map[unit], unit.getParty(), _map);
 }
 
 const std::vector<Unit::Ref> MapHelper::getEnemiesWithin(const Unit& unit, Range range) const{
 	Expects(_map.hasUnit(unit));
-	return getUnitsWithinHelper<enemies>(range, _map[unit], unit.getParty());
+	return getUnitsWithinHelper<enemies>(range, _map[unit], unit.getParty(), _map);
 }
 
 std::vector<Unit::Ref> MapHelper::getUnitsWithin(Range range,ID pos) {
-	return getUnitsWithinHelper<all>(range, pos, nullptr);
+	return getUnitsWithinHelper<all>(range, pos, nullptr, _map);
 }
 
 const std::vector<Unit::Ref> MapHelper::getUnitsWithin(Range range, ID pos) const{
-	return getUnitsWithinHelper<all>(range, pos, nullptr);
+	return getUnitsWithinHelper<all>(range, pos, nullptr, _map);
 }
 
 std::vector<Unit::Ref> MapHelper::getAlliesWithin(Range range, ID pos, const PartyBase& party) {
-	return getUnitsWithinHelper<allies>(range, pos, nullptr);
+	return getUnitsWithinHelper<allies>(range, pos, nullptr, _map);
 }
 
 const std::vector<Unit::Ref> MapHelper::getAlliesWithin(Range range, ID pos, const PartyBase& party) const {
-	return getUnitsWithinHelper<allies>(range, pos, nullptr);
+	return getUnitsWithinHelper<allies>(range, pos, nullptr, _map);
 }
 
 std::vector<Unit::Ref> MapHelper::getEnemiesWithin(Range range, ID pos, const PartyBase& party) {
-	return getUnitsWithinHelper<enemies>(range, pos, nullptr);
+	return getUnitsWithinHelper<enemies>(range, pos, nullptr, _map);
 }
 
 const std::vector<Unit::Ref> MapHelper::getEnemiesWithin(Range range, ID pos, const PartyBase& party) const{
-	return getUnitsWithinHelper<enemies>(range, pos, nullptr);
+	return getUnitsWithinHelper<enemies>(range, pos, nullptr, _map);
 }
 
 
 std::vector<GridCell::Ref> MapHelper::getCellsWithin(Range range, ID pos) {
-	return getCellsWithinHelper<all>(range, pos, nullptr);
+	return getCellsWithinHelper<all>(range, pos, nullptr, _map);
 }
 
 const std::vector<GridCell::Ref> MapHelper::getCellsWithin(Range range, ID pos) const{
-	return getCellsWithinHelper<all>(range, pos, nullptr);
+	return getCellsWithinHelper<all>(range, pos, nullptr, _map);
 }
 
 std::vector<GridCell::Ref> MapHelper::getAlliedCellsWithin(Range range, ID pos, const PartyBase& party) {
-	return getCellsWithinHelper<allies>(range, pos, &party);
+	return getCellsWithinHelper<allies>(range, pos, &party, _map);
 }
 
 const std::vector<GridCell::Ref> MapHelper::getAlliedCellsWithin(Range range, ID pos, const PartyBase& party) const{
-	return getCellsWithinHelper<allies>(range, pos, &party);
+	return getCellsWithinHelper<allies>(range, pos, &party, _map);
 }
 
 std::vector<GridCell::Ref> MapHelper::getEnemyCellsWithin(Range range, ID pos, const PartyBase & party) {
-	return getCellsWithinHelper<enemies>(range, pos, &party);
+	return getCellsWithinHelper<enemies>(range, pos, &party, _map);
 }
 
 const std::vector<GridCell::Ref> MapHelper::getEnemyCellsWithin(Range range, ID pos, const PartyBase & party) const{
-	return getCellsWithinHelper<enemies>(range, pos, &party);
+	return getCellsWithinHelper<enemies>(range, pos, &party, _map);
 }
 
 std::vector<ID> MapHelper::getCellIDsWithin(Range range, ID pos) const {
-	return getIDsWithinHelper<all>(range, pos, nullptr);
+	return getIDsWithinHelper<all>(range, pos, nullptr, _map);
 }
 
 std::vector<ID> MapHelper::getAlliedCellIDsWithin(Range range, ID pos, const PartyBase& party) const{
-	return getIDsWithinHelper<allies>(range, pos, &party);
+	return getIDsWithinHelper<allies>(range, pos, &party, _map);
 }
 
 std::vector<ID> MapHelper::getEnemyCellIDsWithin(Range range, ID pos, const PartyBase & party) const{
-	return getIDsWithinHelper<enemies>(range, pos, &party);
+	return getIDsWithinHelper<enemies>(range, pos, &party, _map);
 }
 
-template<typename hasUnit>
-std::vector<GridCell::Ref> MapHelper::getCellsWithinHelper(Range range, ID pos, const PartyBase* party) const{
-	PathMap path_map = _map.getShortestPathsMap(pos, range.maxRange(), range._type);
-	auto vec = std::vector<GridCell::Ref>();
-	for (auto pair : path_map) {
-		if (range.hasDistance(pair.second.first)) {
-			if(hasUnit::hasUnit(party, _map, pair.first._id))
-			vec.emplace_back(pair.first);
-		}
-	}
-	return vec;
-}
 
-template<typename hasUnit>
-std::vector<ID> MapHelper::getIDsWithinHelper(Range range, ID pos, const PartyBase* party) const {
-	PathMap path_map = _map.getShortestPathsMap(pos, range.maxRange(), range._type);
-	auto vec = std::vector<ID>();
-	for (auto pair : path_map) {
-		if (range.hasDistance(pair.second.first)) {
-			if (hasUnit::hasUnit(party, _map, pair.first._id))
-				vec.emplace_back(pair.first._id);
-		}
-	}
-	return vec;
-}
-
-template<typename hasUnit>
-std::vector<Unit::Ref> MapHelper::getUnitsWithinHelper(Range range, ID pos, const PartyBase * party) const
-{
-	PathMap path_map = _map.getShortestPathsMap(pos, range.maxRange(), range._type);
-	auto vec = std::vector<Unit::Ref>();
-	for (auto pair : path_map) {
-		if (range.hasDistance(pair.second.first) && _map.hasUnit(pair.first)) {
-			if (hasUnit::hasUnit(party, _map, pair.first._id))
-				vec.emplace_back(_map[pair.first]);
-		}
-	}
-	return vec;
-}

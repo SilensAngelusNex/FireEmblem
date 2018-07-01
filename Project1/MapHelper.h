@@ -51,12 +51,4 @@ public:
 	 std::vector<ID> getCellIDsWithin(Range range, ID pos) const ;
 	 std::vector<ID> getAlliedCellIDsWithin(Range range, ID pos, const PartyBase& party) const;
 	 std::vector<ID> getEnemyCellIDsWithin(Range range, ID pos, const PartyBase& party) const;
-
-private:
-	template<typename hasUnit>
-	std::vector<GridCell::Ref> getCellsWithinHelper(Range range, ID pos, const PartyBase* party) const;
-	template<typename hasUnit>
-	std::vector<ID> getIDsWithinHelper(Range range, ID pos, const PartyBase* party) const;
-	template<typename hasUnit>
-	std::vector<Unit::Ref> getUnitsWithinHelper(Range range, ID pos, const PartyBase* party) const;
 };
