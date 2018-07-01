@@ -15,6 +15,7 @@
 #include "Mobility.h"
 #include "Health.h"
 #include "PartyBase.h"
+#include "BattleInfo.h"
 
 class PartyBase;
 using IDENTITY = std::string;
@@ -33,8 +34,8 @@ private:
 	Experience _exp;
 	Inventory _inv;
 	Combat _combat;
-	Health _health;
 	Mobility _mobility;
+	BattleInfo _battle_info;
 
 	//Location& _loc;
 public:
@@ -47,17 +48,15 @@ public:
 	const Mobility& getMobility() const;
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
-	const Health& getHealth() const;
-	//virtual const Location& getLocation() const;
+	const BattleInfo& getBattleInfo() const;
 
 	// Commandable Unit
 	InventoryCommandable& getInventory();
-	//virtual Location& getLocation();
+	BattleInfo& getBattleInfo();
 	Combat& getCombat();
 	void refresh();
 	void newTurn();
 	bool isTired() const;
-	Health& getHealth();
 
 	// Unit Internals
 	Stats& getStats();
@@ -67,12 +66,6 @@ public:
 	CONTEXT& getContext();
 	PartyBase* _party;
 
-
-	// Movement
-	//Point position() const = 0;
-	//void move(std::vector<Point>) = 0;
-	//std::map<Point, std::vector<Point>> possibleMoves() const = 0;
-	//std::set<Point, std::vector<Point>> possibleAttacks() const = 0;
 	 
 	// Observable
 	void attach(ObserverDamage* observer) {
@@ -100,6 +93,6 @@ public:
 	void detach(ObserverExp& observer) {
 		_exp.detach(observer);
 	}
-	bool operator==(const Unit & unit) const;
-	bool operator!=(const Unit & unit) const;
+	bool operator==(const Unit& unit) const;
+	bool operator!=(const Unit& unit) const;
 };

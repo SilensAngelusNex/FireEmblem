@@ -52,7 +52,7 @@ UnitPtr Party::dropUnit(Unit& unit) {
 bool Party::isDone() const{
 	bool isDone = true;
 	for (auto& unit : _units) {
-		isDone &= unit->isTired() || unit->getHealth().isDead();
+		isDone &= unit->isTired() || unit->getBattleInfo().isDead();
 	}
 	return isDone;
 }

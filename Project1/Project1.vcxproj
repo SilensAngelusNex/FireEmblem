@@ -129,7 +129,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions.cpp" />
     <ClCompile Include="AttributeList.cpp" />
+    <ClCompile Include="BattleInfo.cpp" />
     <ClCompile Include="CellPath.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
@@ -168,6 +170,8 @@
     <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actions.h" />
+    <ClInclude Include="BattleInfo.h" />
     <ClInclude Include="BitsetIterator.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
