@@ -14,7 +14,6 @@ class MoveHelper : 	private MapHelper {
 public:
 	MoveHelper(GridMap& map);
 
-	PathMap getShortestPathsMap(const Unit & unit) const;
 	std::set<ID> getAccesibleCellIDs(const Unit& unit);
 
 	std::vector<ID> getEquipedAttackIDs(const Unit & unit);
@@ -33,10 +32,7 @@ public:
 	std::vector<ID> getAlliedCellIDs(const Unit & unit);
 	std::vector<ID> getOtherAlliedCellIDs(const Unit & unit);
 
-
 private:
-	struct AttackRangeMap { static std::map<MobilitySet, Range::DistanceSet> getRangeMap(const Unit& unit) { return unit.getInventory().getAttackRanges(); } };
-	struct AssistRangeMap { static std::map<MobilitySet, Range::DistanceSet> getRangeMap(const Unit& unit) { return unit.getInventory().getAssistRanges(); } };
 	template<typename RangeGetter>
 	std::set<ID> getMaxEquipableIDs(const Unit& unit) const;
 };

@@ -8,6 +8,33 @@
 #include "Mobility.h"
 #include "Passkey.h"
 
+template<typename Lambda>
+id_cost_map getShortestPathsHelper(ID start, int max_move, MobilitySet mobility, Lambda canPass, const GridMap& map) {
+	PathQueue queue = PathQueue();
+	id_cost_map path_map = id_cost_map();
+	path_map.emplace(start, CostID(0, start));
+	queue.emplace(0, start);
+
+	while (!queue.empty()) {
+		auto top = queue.top();
+		queue.pop();
+		std::list<CellEdge> adj_edges = map[top.second].getEdges();
+		for (auto& edge : adj_edges) {
+			std::optional<int> cost = edge.getCost(mobility);
+			if (canPass(map.getUnit(edge._id)) && cost.has_value()) {
+				cost = top.first + cost.value();
+
+				if (cost.value() <= max_move && (path_map.count(edge._id) == 0 || cost.value() < path_map.at(edge._id).first)) {
+					path_map.insert_or_assign(edge._id, CostID(cost.value(), top.second));
+					queue.emplace(cost.value(), edge._id);
+				}
+			}
+		}
+	}
+	return path_map;
+}
+
+
 
 //Constructors//
 /////////////////////////////////////////////////////////////////////////
@@ -43,9 +70,11 @@ PathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobilit
 }
 
 PathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible) {
-	return PathMap(*this, getShortestPathsHelper(start, max_move, mobility, [intangible](const Unit* unit) { return intangible || unit == nullptr; }));
+	return PathMap( *this, getShortestPathsHelper(start, max_move, mobility, [intangible](const Unit* unit) { return intangible || unit == nullptr; }, *this));
 }
-
+PathMap GridMap::getShortestPathsMap(const Unit& unit) {
+	return PathMap( *this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); }, * this));
+}
 //const getShortestPathsMap()//
 /////////////////////////////////////////////////////////////////////////
 
@@ -55,10 +84,12 @@ constPathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mo
 }
 
 constPathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible) const {
-	return constPathMap(*this, getShortestPathsHelper(start, max_move, mobility, [intangible](const Unit* unit) { return intangible || unit == nullptr; }));
+	return constPathMap(*this, getShortestPathsHelper(start, max_move, mobility, [intangible](const Unit* unit) { return intangible || unit == nullptr; }, *this));
 }
 
-
+constPathMap GridMap::getShortestPathsMap(const Unit& unit) const{
+	return constPathMap(*this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); }, *this));
+}
 // private helper methods for getShortestPathsMap() //
 /////////////////////////////////////////////////////////////////////////
 
@@ -73,4 +104,3 @@ CellPath<GridCell> GridMap::getShortestPath(ID start, ID destination, int max_mo
 	return CellPath<GridCell>(mobility, path);
 }
 */
-

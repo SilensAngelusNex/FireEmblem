@@ -12,6 +12,10 @@ MapHelper::MapHelper(GridMap & map) :
 	_map(map)
 {}
 
+struct allies { static bool hasUnit(const PartyBase* party, const GridMap& map, ID pos) { return map.hasUnit(pos) && party->hasUnit(*map.getUnit(pos)); } };
+struct enemies { static bool hasUnit(const PartyBase* party, const GridMap& map, ID pos) { return map.hasUnit(pos) && !party->hasUnit(*map.getUnit(pos)); } };
+struct all { static bool hasUnit(const PartyBase* party, const GridMap& map, ID pos) { return true; } };
+
 std::vector<Unit::Ref> MapHelper::getUnits() {
 	return std::as_const(*this).getUnits();
 }

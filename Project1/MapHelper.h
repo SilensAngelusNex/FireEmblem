@@ -59,10 +59,4 @@ private:
 	std::vector<ID> getIDsWithinHelper(Range range, ID pos, const PartyBase* party) const;
 	template<typename hasUnit>
 	std::vector<Unit::Ref> getUnitsWithinHelper(Range range, ID pos, const PartyBase* party) const;
-
-
-	struct allies { static bool hasUnit(const PartyBase* party, const GridMap& map, ID pos) { return map.hasUnit(pos) && party->hasUnit(*map.getUnit(pos)); }};
-	struct enemies { static bool hasUnit(const PartyBase* party, const GridMap& map, ID pos) { return map.hasUnit(pos) && !party->hasUnit(*map.getUnit(pos)); } };
-	struct all { static bool hasUnit(const PartyBase* party, const GridMap& map, ID pos) { return true; } };
-
 };

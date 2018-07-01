@@ -8,13 +8,30 @@
 #include "Range.h"
 #include "GridMap.h"
 
+struct AttackRangeMap { static std::map<MobilitySet, Range::DistanceSet> getRangeMap(const Unit& unit) { return unit.getInventory().getAttackRanges(); } };
+struct AssistRangeMap { static std::map<MobilitySet, Range::DistanceSet> getRangeMap(const Unit& unit) { return unit.getInventory().getAssistRanges(); } };
+
+template<typename RangeGetter>
+std::set<ID> MoveHelper::getMaxEquipableIDs(const Unit& unit) const {
+	std::map<MobilitySet, Range::DistanceSet> range_map = RangeGetter::getRangeMap(unit);
+	std::set<ID> ids;
+	for (auto range_pair : range_map) {
+		Range range = Range(range_pair.first, range_pair.second);
+		auto range_ids = getCellIDsWithin(range, _map[unit]);
+		for (auto id : range_ids) {
+			ids.emplace(id);
+		}
+	}
+	return ids;
+}
+
 MoveHelper::MoveHelper(GridMap& map) :
 	MapHelper(map)
 {}
 
 //Get Cells a Unit can move to
 std::set<ID> MoveHelper::getAccesibleCellIDs(const Unit& unit) {
-	PathMap path_map = getShortestPathsMap(unit);
+	PathMap path_map = _map.getShortestPathsMap(unit);
 	std::set<ID> cells = std::set<ID>();
 	for (auto pair : path_map) {
 		cells.emplace(pair.first._id);
@@ -84,6 +101,7 @@ std::vector<ID> MoveHelper::getEquipedAssistIDs(const Unit & unit, ID pos) {
 std::set<ID> MoveHelper::getEquipableAssistIDs(const Unit & unit) {
 	return getEquipableAssistIDs(unit, _map[unit]);
 }
+
 //Get Cell IDs Unit can Assist with Equippable Weapons Without moving from pos
 std::set<ID> MoveHelper::getEquipableAssistIDs(const Unit & unit, ID pos) {
 	return getMaxEquipableIDs<AssistRangeMap>(unit);
@@ -94,12 +112,6 @@ std::set<ID> MoveHelper::getMaxEquipableAssistIDs(const Unit & unit) {
 	return getMaxEquipableIDs<AttackRangeMap>(unit);
 }
 ////////////////////////////////////////////////////////////////////////////////////
-//Get a PathMap used to find the shortest paths to any Accesible Cell
-PathMap MoveHelper::getShortestPathsMap(const Unit& unit) const{ 
-	return _map.getShortestPathsMap(_map[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); });
-}
-
-///////////////////////////////////////////////////////////////////////////////////
 
 std::vector<ID> MoveHelper::getAlliedCellIDs(const Unit& unit) {
 	auto vec = std::vector<ID>();
@@ -121,16 +133,3 @@ std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) {
 }
 	////////////////////////////////////////////////////////////////////////////////
 
-template<typename RangeGetter>
-std::set<ID> MoveHelper::getMaxEquipableIDs(const Unit& unit) const{
-	std::map<MobilitySet, Range::DistanceSet> range_map = RangeGetter::getRangeMap(unit);
-	std::set<ID> ids;
-	for (auto range_pair : range_map) {
-		Range range = Range(range_pair.first, range_pair.second);
-		auto range_ids = getCellIDsWithin(range, _map[unit]);
-		for (auto id : range_ids) {
-			ids.emplace(id);
-		}
-	}
-	return ids;
-}
