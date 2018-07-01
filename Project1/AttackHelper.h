@@ -4,7 +4,6 @@
 #include <vector>
 #include "GridMap.h"
 #include "MapHelper.h"
-#include "reference_logic.h"
 #include "GridCell.h"
 #include "ID.h"
 

@@ -368,9 +368,6 @@
     <ClInclude Include="ID.h">
       <Filter>inc\util</Filter>
     </ClInclude>
-    <ClInclude Include="reference_logic.h">
-      <Filter>inc\util</Filter>
-    </ClInclude>
     <ClInclude Include="logic_pair.h">
       <Filter>inc\util</Filter>
     </ClInclude>
