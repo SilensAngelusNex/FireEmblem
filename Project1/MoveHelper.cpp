@@ -12,25 +12,43 @@ struct AttackRangeMap { static std::map<MobilitySet, Range::DistanceSet> getRang
 struct AssistRangeMap { static std::map<MobilitySet, Range::DistanceSet> getRangeMap(const Unit& unit) { return unit.getInventory().getAssistRanges(); } };
 
 template<typename RangeGetter>
-std::set<ID> MoveHelper::getMaxEquipableIDs(const Unit& unit) const {
+std::set<ID> getEquipableRangesHelper(const Unit & unit, ID pos, const MapHelper* helper) {
 	std::map<MobilitySet, Range::DistanceSet> range_map = RangeGetter::getRangeMap(unit);
 	std::set<ID> ids;
 	for (auto range_pair : range_map) {
 		Range range = Range(range_pair.first, range_pair.second);
-		auto range_ids = getCellIDsWithin(range, _map[unit]);
+		auto range_ids = helper->getCellIDsWithin(range, pos);
 		for (auto id : range_ids) {
+			ids.emplace(id);
+		}
+	}
+	return ids;
+
+}
+
+template<typename RangeGetter>
+std::set<ID> getMoveEquipableRangesHelper(const Unit& unit, const MoveHelper* helper){
+	std::map<MobilitySet, Range::DistanceSet> range_map = RangeGetter::getRangeMap(unit);
+	std::set<ID> ids;
+	std::set<ID> acc_cells = helper->getAccesibleCellIDs(unit);
+	for (auto& acc_id : acc_cells) {
+		std::set<ID> eqp_ids = getEquipableRangesHelper<RangeGetter>(unit, acc_id, helper);
+		for (ID id: eqp_ids) {
 			ids.emplace(id);
 		}
 	}
 	return ids;
 }
 
+
+
+
 MoveHelper::MoveHelper(GridMap& map) :
 	MapHelper(map)
 {}
 
 //Get Cells a Unit can move to
-std::set<ID> MoveHelper::getAccesibleCellIDs(const Unit& unit) {
+std::set<ID> MoveHelper::getAccesibleCellIDs(const Unit& unit) const {
 	PathMap path_map = _map.getShortestPathsMap(unit);
 	std::set<ID> cells = std::set<ID>();
 	for (auto pair : path_map) {
@@ -44,11 +62,11 @@ std::set<ID> MoveHelper::getAccesibleCellIDs(const Unit& unit) {
 }
 
 //Get Cell IDs Unit can Attack with Equipped Weapon Without moving
-std::vector<ID> MoveHelper::getEquipedAttackIDs(const Unit & unit) {
+std::vector<ID> MoveHelper::getEquipedAttackIDs(const Unit & unit) const{
 	return getEquipedAttackIDs(unit, _map[unit]);
 }
 //Get Cell IDs Unit can Attack with Equipped Weapon Without moving from pos
-std::vector<ID> MoveHelper::getEquipedAttackIDs(const Unit & unit, ID pos) {
+std::vector<ID> MoveHelper::getEquipedAttackIDs(const Unit & unit, ID pos) const{
 	Range range = Range(); 
 	if (unit.getInventory().hasEquip(EquipSlot::values::ON_HAND)) {
 		range = unit.getInventory()[EquipSlot(EquipSlot::values::ON_HAND)].getAttackRange();
@@ -56,41 +74,23 @@ std::vector<ID> MoveHelper::getEquipedAttackIDs(const Unit & unit, ID pos) {
 	return getCellIDsWithin(range, pos);
 }
 //Get Cell IDs Unit can Attack with Equippable Weapons Without moving
-std::set<ID> MoveHelper::getEquipableAttackIDs(const Unit & unit) {
+std::set<ID> MoveHelper::getEquipableAttackIDs(const Unit & unit) const{
 	return getEquipableAttackIDs(unit, _map[unit]);
 }
 //Get Cell IDs Unit can Attack with Equippable Weapons Without moving from pos
-std::set<ID> MoveHelper::getEquipableAttackIDs(const Unit & unit, ID pos) {
-	auto range_map = unit.getInventory().getAttackRanges();
-	std::set<ID> ids;
-	for (auto range_pair : range_map) {
-		Range range = Range(range_pair.first, range_pair.second);
-		auto range_ids= getCellIDsWithin(range, pos);
-		for (auto id : range_ids) {
-			ids.emplace(id);
-		}
-	}
-	return ids;
+std::set<ID> MoveHelper::getEquipableAttackIDs(const Unit & unit, ID pos) const{
+	return getEquipableRangesHelper<AttackRangeMap>(unit, pos, this);
 }
 //Get Cell IDs Unit Can Attack with any equippable Weapon from any Accessible Cell
-std::set<ID> MoveHelper::getMaxEquipableAttackIDs(const Unit & unit) {
-	auto acc_ids = getAccesibleCellIDs(unit);
-	std::set<ID> ids;
-	for (auto acc_id : acc_ids) {
-		auto atk_ids = getEquipableAttackIDs(unit, acc_id);
-		for (auto atk_id : atk_ids) {
-			ids.emplace(atk_id);
-		}
-	}
-	return ids;
+std::set<ID> MoveHelper::getMoveEquipableAttackIDs(const Unit & unit) const{
+	return getMoveEquipableRangesHelper<AttackRangeMap>(unit, this);
 }
 ///////////////////////////////////////////////////////////////////////////////////
-std::vector<ID> MoveHelper::getEquipedAssistIDs(const Unit & unit)
-{
+std::vector<ID> MoveHelper::getEquipedAssistIDs(const Unit & unit) const{
 	return getEquipedAssistIDs(unit, _map[unit]);
 }
 //Get Cell IDs Unit can Assist with Equipped Weapon Without moving from pos
-std::vector<ID> MoveHelper::getEquipedAssistIDs(const Unit & unit, ID pos) {
+std::vector<ID> MoveHelper::getEquipedAssistIDs(const Unit & unit, ID pos) const{
 	Range range = Range();
 	if (unit.getInventory().hasEquip(EquipSlot::values::ON_HAND)) {
 		range = unit.getInventory()[EquipSlot(EquipSlot::values::ON_HAND)].getAssistRange();
@@ -98,22 +98,31 @@ std::vector<ID> MoveHelper::getEquipedAssistIDs(const Unit & unit, ID pos) {
 	return getCellIDsWithin(range, pos);
 }
 //Get Cell IDs Unit can Assist with Equippable Weapons Without moving
-std::set<ID> MoveHelper::getEquipableAssistIDs(const Unit & unit) {
+std::set<ID> MoveHelper::getEquipableAssistIDs(const Unit & unit) const{
 	return getEquipableAssistIDs(unit, _map[unit]);
 }
 
 //Get Cell IDs Unit can Assist with Equippable Weapons Without moving from pos
-std::set<ID> MoveHelper::getEquipableAssistIDs(const Unit & unit, ID pos) {
-	return getMaxEquipableIDs<AssistRangeMap>(unit);
+std::set<ID> MoveHelper::getEquipableAssistIDs(const Unit & unit, ID pos) const{
+	auto range_map = unit.getInventory().getAssistRanges();
+	std::set<ID> ids;
+	for (auto range_pair : range_map) {
+		Range range = Range(range_pair.first, range_pair.second);
+		auto range_ids = getCellIDsWithin(range, pos);
+		for (auto id : range_ids) {
+			ids.emplace(id);
+		}
+	}
+	return ids;
 
 }
 //Get Cell IDs Unit Can Assist with any equippable Weapon from any Accessible Cell
-std::set<ID> MoveHelper::getMaxEquipableAssistIDs(const Unit & unit) {
-	return getMaxEquipableIDs<AttackRangeMap>(unit);
+std::set<ID> MoveHelper::getMoveEquipableAssistIDs(const Unit & unit) const{
+	return getMoveEquipableRangesHelper<AssistRangeMap>(unit, this);
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
-std::vector<ID> MoveHelper::getAlliedCellIDs(const Unit& unit) {
+std::vector<ID> MoveHelper::getAlliedCellIDs(const Unit& unit) const{
 	auto vec = std::vector<ID>();
 	for (Unit& ally : _map.getParty(unit).getUnits()) {
 		if (_map.hasUnit(ally)) {
@@ -122,7 +131,7 @@ std::vector<ID> MoveHelper::getAlliedCellIDs(const Unit& unit) {
 	}
 	return vec;
 }
-std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) {
+std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) const{
 	auto vec = std::vector<ID>();
 	for (Unit& ally : _map.getParty(unit).getOtherUnits(unit)) {
 		if (_map.hasUnit(ally)) {

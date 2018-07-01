@@ -10,29 +10,25 @@
 class Unit;
 class GridCell;
 
-class MoveHelper : 	private MapHelper {
+class MoveHelper : 	public MapHelper {
 public:
 	MoveHelper(GridMap& map);
 
-	std::set<ID> getAccesibleCellIDs(const Unit& unit);
+	std::set<ID> getAccesibleCellIDs(const Unit& unit) const;
 
-	std::vector<ID> getEquipedAttackIDs(const Unit & unit);
-	std::vector<ID> getEquipedAttackIDs(const Unit & unit, ID pos);
-	std::set<ID> getEquipableAttackIDs(const Unit & unit);
-	std::set<ID> getEquipableAttackIDs(const Unit & unit, ID pos);	
-	std::set<ID> getMaxEquipableAttackIDs(const Unit& unit);
+	std::vector<ID> getEquipedAttackIDs(const Unit & unit) const;
+	std::vector<ID> getEquipedAttackIDs(const Unit & unit, ID pos) const;
+	std::set<ID> getEquipableAttackIDs(const Unit & unit) const;
+	std::set<ID> getEquipableAttackIDs(const Unit & unit, ID pos) const;	
+	std::set<ID> getMoveEquipableAttackIDs(const Unit& unit) const;
 
-	std::vector<ID> getEquipedAssistIDs(const Unit & unit);
-	std::vector<ID> getEquipedAssistIDs(const Unit & unit, ID pos);
-	std::set<ID> getEquipableAssistIDs(const Unit & unit);
-	std::set<ID> getEquipableAssistIDs(const Unit & unit, ID pos);
-	std::set<ID> getMaxEquipableAssistIDs(const Unit& unit);
+	std::vector<ID> getEquipedAssistIDs(const Unit & unit) const;
+	std::vector<ID> getEquipedAssistIDs(const Unit & unit, ID pos) const;
+	std::set<ID> getEquipableAssistIDs(const Unit & unit) const;
+	std::set<ID> getEquipableAssistIDs(const Unit & unit, ID pos) const;
+	std::set<ID> getMoveEquipableAssistIDs(const Unit& unit) const;
 
 
-	std::vector<ID> getAlliedCellIDs(const Unit & unit);
-	std::vector<ID> getOtherAlliedCellIDs(const Unit & unit);
-
-private:
-	template<typename RangeGetter>
-	std::set<ID> getMaxEquipableIDs(const Unit& unit) const;
+	std::vector<ID> getAlliedCellIDs(const Unit & unit) const;
+	std::vector<ID> getOtherAlliedCellIDs(const Unit & unit) const;
 };

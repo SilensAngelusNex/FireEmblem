@@ -49,7 +49,7 @@ public:
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
 	const Health& getHealth() const;
-	const PartyBase* const getParty() const;
+	const PartyBase* getParty() const;
 	//virtual const Location& getLocation() const;
 
 	// Commandable Unit

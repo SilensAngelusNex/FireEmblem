@@ -19,6 +19,6 @@ public:
 	std::vector<Unit::Ref> getAttackableUnits(const Unit& unit);
 	const std::vector<Unit::Ref> getAttackableUnits(const Unit& unit) const;
 
-	bool canAttack(const Unit& attacker, const Unit& defener) const;
+	bool canAttack(const Unit& attacker, const Unit& defender) const;
 };
 

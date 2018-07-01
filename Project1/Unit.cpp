@@ -37,7 +37,7 @@ const Health & Unit::getHealth() const {
 	return _health;
 }
 
-const PartyBase* const Unit::getParty() const{
+const PartyBase* Unit::getParty() const{
 	return _party;
 }
 

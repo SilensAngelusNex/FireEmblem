@@ -23,15 +23,15 @@ bool test::runMapTest() {
 	auto unit_vec = std::vector<UnitData>();
 	unit_vec.push_back(mia_data);
 	unit_vec.push_back(ike_data);
-	PartyData data1 = { "Greil Mercenaries" };
-	PartyData data2 = { "Daein" };
+	PartyData data1 = { "Greil Mercenaries", {} };
+	PartyData data2 = { "Daein" , {} };
 	std::vector<PartyData> party_vec = std::vector<PartyData>();
 	party_vec.push_back(data1);
 	party_vec.push_back(data2);
 
 	GridMap map = GridMap(20, 20, party_vec); // create a 20 x 20 map
-	MoveHelper move_helper = MoveHelper(map);
-	AttackHelper attack_helper = AttackHelper(map);
+	auto move_helper = MoveHelper(map);
+//	auto attack_helper = AttackHelper(map);
 	Party& party = map._parties.front();
 	Party& party2 = map._parties.back();
 	party.insertUnit(std::move(mia));
@@ -48,18 +48,18 @@ bool test::runMapTest() {
 	map.insertUnit(mia2, map[10][10]);
 	std::set <ID> cells = move_helper.getAccesibleCellIDs(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
-	cells = move_helper.getMaxEquipableAttackIDs(mia2);
+	cells = move_helper.getMoveEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	map.insertUnit(*ike2, map[10][11]);
 	cells = move_helper.getAccesibleCellIDs(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
-	cells = move_helper.getMaxEquipableAttackIDs(mia2);
+	cells = move_helper.getMoveEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	std::cout << "How many cells are adjacent to Mia: " << map[map[mia2]].getAdjacentCellIDs().size() << std::endl;
 	party2.insertUnit(party.dropUnit(*ike2));
 	cells = move_helper.getAccesibleCellIDs(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
-	cells = move_helper.getMaxEquipableAttackIDs(mia2);
+	cells = move_helper.getMoveEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	
 	std::cout << "How many cells are adjacent to Mia: " << map[map[mia2]].getAdjacentCellIDs().size() << std::endl;
