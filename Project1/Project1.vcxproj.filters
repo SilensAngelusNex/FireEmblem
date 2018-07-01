@@ -386,6 +386,9 @@
     <ClInclude Include="logical_reference_wrapper.h">
       <Filter>inc\util</Filter>
     </ClInclude>
+    <ClInclude Include="id_cost_map.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">
