@@ -27,6 +27,7 @@ private:
 
 private:
 	grid& _grid;
+	GridCell& origin;
 	CostCell convert(CostID pair) {
 		return CostCell(pair.first, _grid[pair.second]);
 	}

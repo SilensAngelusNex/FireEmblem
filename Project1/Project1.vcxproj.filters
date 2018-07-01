@@ -222,6 +222,12 @@
     <ClCompile Include="AttackHelper.cpp">
       <Filter>src\map\map_heelper</Filter>
     </ClCompile>
+    <ClCompile Include="PathBase.cpp">
+      <Filter>src\map\cell_path</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementPath.cpp">
+      <Filter>src\map\cell_path</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -385,6 +391,12 @@
     </ClInclude>
     <ClInclude Include="logical_reference_wrapper.h">
       <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="PathBase.h">
+      <Filter>inc\map\cell_path</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementPath.h">
+      <Filter>inc\map\cell_path</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
