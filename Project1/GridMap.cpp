@@ -22,7 +22,7 @@ id_cost_map getShortestPathsHelper(ID start, int max_move, MobilitySet mobility,
 		std::list<CellEdge> adj_edges = map[top.second].getEdges();
 		for (auto& edge : adj_edges) {
 			std::optional<int> cost = edge.getCost(mobility);
-			if (canPass(map.getUnit(edge._id)) && cost.has_value()) {
+			if (canPass(edge) && cost.has_value()) {
 				cost = top.first + cost.value();
 
 				if (cost.value() <= max_move && (path_map.count(edge._id) == 0 || cost.value() < path_map.at(edge._id).first)) {
@@ -71,10 +71,10 @@ PathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobilit
 }
 
 PathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible) {
-	return PathMap( *this, getShortestPathsHelper(start, max_move, mobility, [intangible](const Unit* unit) { return intangible || unit == nullptr; }, *this));
+	return PathMap( *this, getShortestPathsHelper(start, max_move, mobility, [intangible, this](CellEdge edge) { return intangible || !hasUnit(edge._id); }, *this));
 }
 PathMap GridMap::getShortestPathsMap(const Unit& unit) {
-	return PathMap( *this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); }, * this));
+	return PathMap( *this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, * this));
 }
 //const getShortestPathsMap()//
 /////////////////////////////////////////////////////////////////////////
@@ -85,11 +85,11 @@ constPathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mo
 }
 
 constPathMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible) const {
-	return constPathMap(*this, getShortestPathsHelper(start, max_move, mobility, [intangible](const Unit* unit) { return intangible || unit == nullptr; }, *this));
+	return constPathMap(*this, getShortestPathsHelper(start, max_move, mobility, [intangible, this](CellEdge edge) { return intangible || !hasUnit(edge._id); }, *this));
 }
 
 constPathMap GridMap::getShortestPathsMap(const Unit& unit) const{
-	return constPathMap(*this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit](const Unit* other) { return unit.getMobility().canPass(other); }, *this));
+	return constPathMap(*this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
 }
 // private helper methods for getShortestPathsMap() //
 /////////////////////////////////////////////////////////////////////////

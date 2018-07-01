@@ -7,13 +7,11 @@
 #include "Party.h"
 #include "ID.h"
 #include "read_vector.h"
-/**
-Grid class. Holds a Matrix of GridCells. Should be initialized at the start of each chapter.
-*/
+
 class GridCell;
 class Unit;
 class Mobility;
-
+//Grid class. Holds a Matrix of GridCells. Should be initialized at the start of each chapter.
 class Grid {
 private:
 
@@ -44,19 +42,19 @@ public:
 	void insertUnit(Unit& new_unit, GridCell& destination);
 	void removeUnit(Unit& unit);
 	
-	void moveUnit(ID& start, ID& destination);
-	void insertUnit(Unit& new_unit, ID& destination);
+	void moveUnit(ID start, ID destination);
+	void insertUnit(Unit& new_unit, ID destination);
 
 	bool hasUnit(const GridCell& index) const;
 	bool hasUnit(const Unit & index) const;
-	bool hasUnit(const ID& index) const;
+	bool hasUnit(ID index) const;
 
 	Unit* getUnit(const GridCell& index);
-	Unit* getUnit(const ID& index);
+	Unit* getUnit(ID index);
 	GridCell* getCell(const Unit& index);
 
 	const Unit* getUnit(const GridCell& index) const;
-	const Unit* getUnit(const ID& index) const;
+	const Unit* getUnit(ID index) const;
 	const GridCell* getCell(const Unit& index) const;
 
 
@@ -65,12 +63,12 @@ public:
 
 	Unit& operator[](const GridCell& index);
 	ID operator[](const Unit& index);
-	GridCell& operator[](const ID& index);
+	GridCell& operator[](ID index);
 	GridRow operator[](size_t index);
 
 	const Unit& operator[](const GridCell& index) const;
 	const ID operator[](const Unit& index) const;
-	const GridCell& operator[](const ID& index) const;
+	const GridCell& operator[](ID index) const;
 	constGridRow operator[](size_t index) const;
 
 };

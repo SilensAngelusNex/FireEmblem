@@ -20,10 +20,6 @@ public:
 	Terrain& operator=(Terrain&& edge) = default;
 
 	static Terrain TerrainFactory(TerrainType type);
-	
-
-
-
 	std::string& getName();
 	MobilityCostSet getCosts();
 

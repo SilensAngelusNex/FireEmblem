@@ -4,10 +4,11 @@
 //#include "GridMap.h" DO NOT INCLUDE THIS
 #include <map>
 
+class GridMap;
+class GridCell;
 
 template <typename grid>
-class path_map : public id_cost_map
-{
+class path_map : public id_cost_map {
 private:
 	using cell_ref = decltype(std::declval<grid>().operator[](std::declval<ID&>()));
 	using CostCell = logic_pair<int, cell_ref>;
@@ -74,7 +75,5 @@ public:
 	}
 };
 
-class GridMap;
-class GridCell;
 using PathMap = path_map<GridMap>;
 using constPathMap = path_map<const GridMap>;

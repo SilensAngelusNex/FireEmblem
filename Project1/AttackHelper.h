@@ -9,15 +9,11 @@
 
 class Unit;
 class GridCell;
-class AttackHelper :
-	private MapHelper
-{
+class AttackHelper : private MapHelper {
 public:
 	AttackHelper(GridMap& map);
-
 	std::vector<Unit::Ref> getAttackableUnits(const Unit& unit);
-	const std::vector<Unit::Ref> getAttackableUnits(const Unit& unit) const;
-
+	std::vector<Unit::ConstRef> getAttackableUnits(const Unit& unit) const;
 	bool canAttack(const Unit& attacker, const Unit& defender) const;
 };
 
