@@ -60,17 +60,17 @@ public:
 	//Element access;
 
 	CostCell operator[](const GridCell& key) {
-		return convert((*this)[key._id]);
+		return convert(id_cost_map::operator[](key._id));
 	}
 	CostCell operator[](const GridCell&& key) {
-		return convert((*this)[key._id]);
+		return convert(id_cost_map::operator[](key._id));
 	}
 
 	CostCell at(const GridCell& key) {
-		return convert(this->at(key._id));
+		return convert(id_cost_map::at(key._id));
 	}
 	const CostCell at(const ID& key) const {
-		return convert(this->at(key._id));
+		return convert(id_cost_map::at(key._id));
 	}
 };
 
