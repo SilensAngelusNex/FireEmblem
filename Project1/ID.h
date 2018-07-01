@@ -3,8 +3,7 @@
 
 #include "logic_pair.h"
 
-class ID :
-	protected logic_pair<size_t, size_t>{
+class ID :	protected logic_pair<size_t, size_t> {
 private:
 
 	using logic_pair<size_t, size_t>::logic_pair;

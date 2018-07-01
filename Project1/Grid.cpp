@@ -36,7 +36,7 @@ const Unit* Grid::getUnit(const GridCell& index) const{
 	return  hasUnit(index) ? _cell_to_unit.at(&index) : nullptr;
 }
 
-Unit* Grid::getUnit(const ID & index) {
+Unit* Grid::getUnit(ID index) {
 	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
 }
 GridCell * Grid::getCell(const Unit & index)
@@ -48,7 +48,7 @@ const GridCell * Grid::getCell(const Unit & index) const
 {
 	return  hasUnit(index) ? _unit_to_cell.at(&index) : nullptr;
 }
-const Unit* Grid::getUnit(const ID & index) const {
+const Unit* Grid::getUnit(ID index) const {
 	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
 }
 
@@ -87,14 +87,14 @@ void Grid::insertUnit(Unit& new_unit, GridCell& destination) {
 	_cell_to_unit.emplace(&destination, &new_unit);
 }
 
-void Grid::moveUnit(ID& start, ID& destination) {
+void Grid::moveUnit(ID start, ID destination) {
 	Expects(hasUnit(start) && !hasUnit(destination));
 	Unit* unit = getUnit(start);
 	removeUnit(*unit);
 	insertUnit(*unit, destination);
 }
 
-void Grid::insertUnit(Unit& new_unit, ID& destination) {
+void Grid::insertUnit(Unit& new_unit, ID destination) {
 	Expects(!hasUnit(destination) && !hasUnit(new_unit));
 	_unit_to_cell.emplace(&new_unit, &(*this)[destination]);// Grid the Unit to the destination.
 	_cell_to_unit.emplace(&(*this)[destination], &new_unit);
@@ -116,7 +116,7 @@ bool Grid::hasUnit(const Unit& index) const{
 	return _unit_to_cell.count(&index) > 0;
 }
 
-bool Grid::hasUnit(const ID& index) const {
+bool Grid::hasUnit(ID index) const {
 	return _cell_to_unit.count(&(*this)[index]) > 0;
 }
 
@@ -129,7 +129,7 @@ ID Grid::operator[](const Unit& index) {
 	Expects(hasUnit(index));
 	return _unit_to_cell[&index]->_id;
 }
-GridCell & Grid::operator[](const ID & index) {
+GridCell & Grid::operator[](ID index) {
 	return _grid[index.first][index.second];
 }
 Grid::GridRow Grid::operator[](size_t index) {
@@ -147,7 +147,7 @@ const Unit& Grid::operator[](const GridCell& index) const {
 	return *_cell_to_unit.at(&index);
 }
 
-const GridCell& Grid::operator[](const ID& index) const{
+const GridCell& Grid::operator[](ID index) const{
 	return _grid[index.first][index.second];
 }
 

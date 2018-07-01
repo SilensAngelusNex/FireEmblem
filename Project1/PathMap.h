@@ -3,12 +3,13 @@
 #include "id_cost_map.h"
 #include <map>
 
-//TODO(Torrey): rename this class
+class GridMap;
+class GridCell;
+
 template <typename grid>
-class path_map : public id_cost_map
-{
+class path_map : public id_cost_map {
 private:
-	using cell_ref = decltype(std::declval<grid>()[std::declval<ID>()]);
+	using cell_ref = decltype(std::declval<grid>().operator[](std::declval<ID&>()));
 	using CostCell = logic_pair<int, cell_ref>;
 	//private iterator class that replaces ID with GridCell::Ref
 	template <typename iterator>
@@ -73,7 +74,5 @@ public:
 	}
 };
 
-class GridMap;
-class GridCell;
 using PathMap = path_map<GridMap>;
 using constPathMap = path_map<const GridMap>;

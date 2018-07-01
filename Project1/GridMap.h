@@ -4,7 +4,6 @@
 #include "Party.h"
 #include "ID.h"
 #include "PathMap.h"
-
 #include <functional>
 #include <map>
 #include <vector>
@@ -13,13 +12,8 @@
 #include <set>
 
 using PathQueue = std::priority_queue<CostID>;
-class GridMap :
-	public Grid
-{
-
-
+class GridMap :	public Grid {
 public:
-
 
 	GridMap(int width, int height);
 	GridMap(int width, int height, std::vector<PartyData> data);
