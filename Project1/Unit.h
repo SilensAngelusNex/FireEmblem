@@ -49,15 +49,13 @@ public:
 	const Mobility& getMobility() const;
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
-	const Health& getHealth() const;
-	const PartyBase* const getParty() const;
+	const PartyBase* getParty() const;
 	const BattleInfo& getBattleInfo() const;
 
 	// Commandable Unit
 	InventoryCommandable& getInventory();
 	BattleInfo& getBattleInfo();
 	Combat& getCombat();
-	Health& getHealth();
 	// Move into identity component
 	PartyBase* getParty();
 	PartyBase* setParty(PartyBase* other_party);

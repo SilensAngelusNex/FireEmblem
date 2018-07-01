@@ -275,8 +275,9 @@ constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator+
 	return rhs;
 }
 template<typename EnumType>
-constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator-(EnumContainer<bool, EnumType> rhs) const {
-	rhs -= *this;
+constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator-(const EnumContainer<bool, EnumType>& rhs) const {
+	EnumContainer<bool, EnumType> result = *this;
+	result -= rhs;
 	return rhs;
 }
 template<typename EnumType>

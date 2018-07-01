@@ -33,12 +33,12 @@ const InventoryViewable& Unit::getInventory() const {
 	return _inv;
 }
 
-const BattleInfo& Unit::getBattleInfo() const {
-	return _battle_info;
+const PartyBase* Unit::getParty() const{
+	return _party;
 }
 
-const PartyBase* const Unit::getParty() const{
-	return _party;
+const BattleInfo& Unit::getBattleInfo() const {
+	return _battle_info;
 }
 
 InventoryCommandable& Unit::getInventory() {
