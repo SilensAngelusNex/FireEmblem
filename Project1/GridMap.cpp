@@ -7,11 +7,12 @@
 #include "CellEdge.h"
 #include "Mobility.h"
 #include "Passkey.h"
+#include "id_cost_map.h"
 
 template<typename Lambda>
 id_cost_map getShortestPathsHelper(ID start, int max_move, MobilitySet mobility, Lambda canPass, const GridMap& map) {
 	PathQueue queue = PathQueue();
-	id_cost_map path_map = id_cost_map();
+	id_cost_map path_map = id_cost_map(map[start]);
 	path_map.emplace(start, CostID(0, start));
 	queue.emplace(0, start);
 

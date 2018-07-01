@@ -398,6 +398,9 @@
     <ClInclude Include="MovementPath.h">
       <Filter>inc\map\cell_path</Filter>
     </ClInclude>
+    <ClInclude Include="id_cost_map.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

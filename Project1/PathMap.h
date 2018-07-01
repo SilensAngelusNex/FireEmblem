@@ -1,10 +1,11 @@
 #pragma once
 #include "ID.h"
+#include "id_cost_map.h"
 #include <map>
 
 //TODO(Torrey): rename this class
 template <typename grid>
-class Path_Map : private id_cost_map
+class path_map : public id_cost_map
 {
 private:
 	using cell_ref = decltype(std::declval<grid>()[std::declval<ID>()]);
@@ -34,17 +35,16 @@ private:
 	
 public:
 	//Constructors
-	Path_Map(grid& g) :
-		id_cost_map(),
+	path_map(grid& g, GridCell& origin) :
+		id_cost_map(origin),
 		_grid(g)
 	{}
-	Path_Map(grid& g, id_cost_map&& move) :
+	path_map(grid& g, id_cost_map&& move) :
 		id_cost_map(move),
 		_grid(g)
 	{}
 
-	using id_cost_map::operator=;
-	using id_cost_map::get_allocator;
+
 
 	//Iterator
 	using iterator = path_map_iter<id_cost_map::iterator>;
@@ -72,41 +72,9 @@ public:
 	const CostCell at(const ID& key) const {
 		return convert(this->at(key._id));
 	}
-	using id_cost_map::operator[];
-	using id_cost_map::at;
-
-	//Capacity
-	using id_cost_map::empty;
-	using id_cost_map::size;
-	using id_cost_map::max_size;
-
-
-	//modifiers
-	using id_cost_map::clear;
-	using id_cost_map::insert;
-	using id_cost_map::insert_or_assign;
-	using id_cost_map::emplace;
-	using id_cost_map::emplace_hint;
-	using id_cost_map::try_emplace;
-	using id_cost_map::erase;
-	using id_cost_map::swap;
-	using id_cost_map::extract;
-	using id_cost_map::merge;
-
-	//Lookup
-	using id_cost_map::count;
-	using id_cost_map::find;
-	using id_cost_map::equal_range;
-	using id_cost_map::lower_bound;
-	using id_cost_map::upper_bound;
-
-	//Observers
-	using id_cost_map::key_comp;
-	using id_cost_map::value_comp;
-
 };
 
 class GridMap;
 class GridCell;
-using PathMap = Path_Map<GridMap>;
-using constPathMap = Path_Map<const GridMap>;
+using PathMap = path_map<GridMap>;
+using constPathMap = path_map<const GridMap>;

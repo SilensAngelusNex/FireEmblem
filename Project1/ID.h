@@ -59,6 +59,5 @@ public:
 };
 
 using CostID = logic_pair<int, ID>;
-using id_cost_map = std::map<ID, CostID>;
 
 
