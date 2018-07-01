@@ -37,6 +37,10 @@ const BattleInfo& Unit::getBattleInfo() const {
 	return _battle_info;
 }
 
+const PartyBase* const Unit::getParty() const{
+	return _party;
+}
+
 InventoryCommandable& Unit::getInventory() {
 	return _inv;
 }
@@ -57,6 +61,15 @@ void Unit::newTurn() {
 }
 bool Unit::isTired() const {
 	return true; //TODO(Weston): Should this be in a component like isDead() ? 
+}
+
+PartyBase* Unit::getParty() {
+	return _party;
+}
+
+PartyBase* Unit::setParty(PartyBase* other_party) {
+	std::swap(_party, other_party);
+	return other_party;
 }
 
 Stats& Unit::getStats() {

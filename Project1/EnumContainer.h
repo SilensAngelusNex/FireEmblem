@@ -1,6 +1,8 @@
 #pragma once
 #include <array>
+#include <set>
 #include "IterableBitset.h"
+#include "EnumSetIterator.h"
 
 template<typename T, typename EnumType>
 class EnumContainer {
@@ -53,6 +55,7 @@ public:
 	constexpr bool operator>(const EnumContainer& rhs) const;
 
 	constexpr bool contains(T t) const;
+	constexpr size_t size() const;
 };
 
 template<typename T, typename EnumType>
@@ -142,6 +145,11 @@ constexpr bool EnumContainer<T, EnumType>::contains(T t) const {
 	return std::find(begin(), end(), t) != end();
 }
 
+template<typename T, typename EnumType>
+constexpr size_t EnumContainer<T, EnumType>::size() const {
+	return EnumType::size;
+}
+
 
 
 template<typename EnumType>
@@ -155,6 +163,7 @@ public:
 	EnumContainer() = default;
 	explicit EnumContainer(array init_values);
 	explicit EnumContainer(EnumType set_type);
+	EnumContainer(std::set<EnumType> set_types);
 
 	constexpr EnumContainer& operator+=(const EnumContainer& rhs);
 	constexpr EnumContainer& operator-=(const EnumContainer& rhs);
@@ -168,28 +177,30 @@ public:
 	constexpr EnumContainer operator|(EnumContainer rhs) const;
 	constexpr EnumContainer operator^(EnumContainer rhs) const;
 	constexpr EnumContainer operator~() const;
-	
-	using const_iterator = const_bits_iterator<EnumType::size>;
-	using iterator = bits_iterator<EnumType::size>;
+
+	using const_iterator = index_iterator<const container>;
+	using iterator = index_iterator<container>;
+
+	const bits_iterator_helper<EnumType> get_set_bits() const;
 
 	iterator begin() {
-		return iterator(*this, 0);
+		return iterator(_values, 0);
 	}
 	const_iterator begin() const {
-		return const_iterator(*this, 0);
+		return const_iterator(_values, 0);
 	}
 	const_iterator cbegin() const {
-		return const_iterator(*this, 0);
+		return const_iterator(_values, 0);
 	}
 
 	iterator end() {
-		return iterator(*this);
+		return iterator(_values);
 	}
 	const_iterator end() const {
-		return const_iterator(*this);
+		return const_iterator(_values);
 	}
 	const_iterator cend() const {
-		return const_iterator(*this);
+		return const_iterator(_values);
 	}
 
 	constexpr bool operator[](EnumType i) const;
@@ -207,6 +218,7 @@ public:
 	constexpr bool operator>(const EnumContainer& rhs) const;
 
 	constexpr bool contains(bool t) const;
+	constexpr size_t size() const;
 };
 
 
@@ -220,6 +232,15 @@ inline EnumContainer<bool, EnumType>::EnumContainer(EnumType set_type) :
 	_values()
 {
 	(*this)[set_type] = true;
+}
+
+template<typename EnumType>
+inline EnumContainer<bool, EnumType>::EnumContainer(std::set<EnumType> set_types) :
+	_values()
+{
+	for (EnumType t : set_types) {
+		(*this)[t] = true;
+	}
 }
 
 template<typename EnumType>
@@ -239,7 +260,7 @@ constexpr EnumContainer<bool, EnumType>& EnumContainer<bool, EnumType>::operator
 }
 template<typename EnumType>
 constexpr EnumContainer<bool, EnumType>& EnumContainer<bool, EnumType>::operator|=(const EnumContainer<bool, EnumType>& rhs) {
-	this->_values |= ~rhs._values;
+	this->_values |= rhs._values;
 	return *this;
 }
 template<typename EnumType>
@@ -254,10 +275,9 @@ constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator+
 	return rhs;
 }
 template<typename EnumType>
-constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator-(const EnumContainer<bool, EnumType>& rhs) const {
-	EnumContainer<bool, EnumType> result (*this);
-	result -= rhs;
-	return result;
+constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator-(EnumContainer<bool, EnumType> rhs) const {
+	rhs -= *this;
+	return rhs;
 }
 template<typename EnumType>
 constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator&(EnumContainer<bool, EnumType> rhs) const {
@@ -279,6 +299,11 @@ constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator~
 	EnumContainer<bool, EnumType> result;
 	result._values = ~this->_values;
 	return result;
+}
+
+template<typename EnumType>
+inline const bits_iterator_helper<EnumType> EnumContainer<bool, EnumType>::get_set_bits() const {
+	return bits_iterator_helper<EnumType>(_values);
 }
 
 template<typename EnumType>
@@ -338,4 +363,9 @@ constexpr bool EnumContainer<bool, EnumType>::operator>(const EnumContainer<bool
 template<typename EnumType>
 constexpr bool EnumContainer<bool, EnumType>::contains(bool t) const {
 	return std::find(begin(), end(), t) != end();
+}
+
+template<typename EnumType>
+constexpr size_t EnumContainer<bool, EnumType>::size() const {
+	return EnumType::size;
 }

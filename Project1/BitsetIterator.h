@@ -2,16 +2,16 @@
 #include <bitset>
 #include <gsl/gsl_assert>
 
-template<int size>
+template<size_t size>
 class set_bits_iterator {
 private:
 	const std::bitset<size>& _bits;
-	int _index;
+	size_t _index;
 public:
 	set_bits_iterator(const std::bitset<size>& b) : _bits(b), _index(size)
 	{}
 
-	set_bits_iterator(const std::bitset<size>& b, int i) : _bits(b), _index(i) {
+	set_bits_iterator(const std::bitset<size>& b, size_t i) : _bits(b), _index(i) {
 		while (_index < size && !_bits[_index]) {
 			++_index;
 		}
@@ -76,79 +76,72 @@ public:
 	}
 };
 
-
-template<int size>
-class const_bits_iterator {
-protected:
-	const std::bitset<size>& _bits;
-	int _index;
+template<typename T>
+class index_iterator {
+private:
+	T& _container;
+	size_t _index;
 public:
-	const_bits_iterator(const std::bitset<size>& b) :
-		_bits(b),
-		_index(size)
+	index_iterator(T& container) :
+		_container(container),
+		_index(_container.size())
 	{}
 
-	const_bits_iterator(const std::bitset<size>& b, int i) :
-		_bits(b),
+	index_iterator(T& container, size_t i) :
+		_container(container),
 		_index(i)
-	{}
+	{
+		Expects(i <= _container.size());
+	}
 
-	const_bits_iterator(const const_bits_iterator& rhs) :
-		_bits(rhs._bits),
+	index_iterator(const index_iterator& rhs) :
+		_container(rhs._container),
 		_index(rhs._index)
 	{}
 
-	const_bits_iterator(const_bits_iterator&& rhs) :
-		_bits(rhs._bits),
+	index_iterator(index_iterator&& rhs) :
+		_container(rhs._container),
 		_index(rhs._index)
 	{}
 
-	const_bits_iterator& operator++() {
-		Expects(_index < size);
+	index_iterator& operator++() {
+		Expects(_index < _container.size());
 		++_index;
 		return *this;
 	}
-	const_bits_iterator operator++(int) {
-		set_bits_iterator result(*this);
+	index_iterator operator++(int) {
+		index_iterator result(*this);
 		++(*this);
 		return result;
 	}
-	const_bits_iterator& operator--() {
+	index_iterator& operator--() {
 		Expects(_index > 0);
 		++_index;
 		return *this;
 	}
-	const_bits_iterator operator--(int) {
-		const_bits_iterator result(*this);
+	index_iterator operator--(int) {
+		index_iterator result(*this);
 		--(*this);
 		return result;
 	}
 
-	bool operator*() const {
-		return _bits[_index];
+	decltype(auto) operator*() const {
+		return _container[_index];
 	}
 
-	bool operator==(const const_bits_iterator& rhs) const {
-		bool b = &_bits == &rhs._bits;
+	bool operator==(const index_iterator& rhs) const {
+		bool b = &_container == &rhs._container;
 		bool i = _index == rhs._index;
 		return  b && i;
 	}
-	bool operator!=(const const_bits_iterator& rhs) const {
-		bool b = &_bits != &rhs._bits;
+	bool operator!=(const index_iterator& rhs) const {
+		bool b = &_container != &rhs._container;
 		bool i = _index != rhs._index;
 		return  b || i;
 	}
 
-	friend void swap(const_bits_iterator& lhs, const_bits_iterator& rhs) {
-		Expects(&lhs._bits == &rhs._bits);
+	friend void swap(index_iterator& lhs, index_iterator& rhs) {
+		Expects(&lhs._container == &rhs._container);
 		swap(lhs._index, rhs._index);
-	}
-};
-
-template<int size>
-class bits_iterator : public const_bits_iterator<size> {
-public:
-	typename std::bitset<size>::reference operator*() {
-		return _bits[_index];
 	}
 };

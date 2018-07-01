@@ -28,6 +28,8 @@ struct UnitData {
 class Unit : public Observable<ObserverDamage>, public Observable<ObserverExp> {
 private:
 	IDENTITY _id;
+	PartyBase* _party = nullptr;
+
 	CONTEXT& _context;
 
 	Stats _stats;
@@ -37,7 +39,6 @@ private:
 	Mobility _mobility;
 	BattleInfo _battle_info;
 
-	//Location& _loc;
 public:
 	Unit(IDENTITY name, CONTEXT& context, AttributeList stats);
 	Unit(UnitData data) : Unit(data.name, data.context, data.stats) {};
@@ -48,12 +49,19 @@ public:
 	const Mobility& getMobility() const;
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
+	const Health& getHealth() const;
+	const PartyBase* const getParty() const;
 	const BattleInfo& getBattleInfo() const;
 
 	// Commandable Unit
 	InventoryCommandable& getInventory();
 	BattleInfo& getBattleInfo();
 	Combat& getCombat();
+	Health& getHealth();
+	// Move into identity component
+	PartyBase* getParty();
+	PartyBase* setParty(PartyBase* other_party);
+	// Move into into battle info component
 	void refresh();
 	void newTurn();
 	bool isTired() const;
@@ -64,7 +72,6 @@ public:
 	Experience& getExperience();
 	Inventory& getInventoryInternal();
 	CONTEXT& getContext();
-	PartyBase* _party;
 
 	 
 	// Observable

@@ -5,11 +5,11 @@ EquipInfo::EquipInfo() :
 {}
 
 EquipInfo::EquipInfo(std::string name) :
-	EquipInfo(name, {}, Range())
+	EquipInfo(std::move(name), {}, Range())
 {}
 
 EquipInfo::EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats) :
-	EquipInfo(name, base_stats, std::vector<int>{})
+	EquipInfo(std::move(name), base_stats, std::vector<int>{})
 {}
 
 EquipInfo::EquipInfo(std::string name, std::array<int, CombatStats::size> base_stats, Range range) :
@@ -31,26 +31,26 @@ WeaponInfo::WeaponInfo() :
 {}
 
 WeaponInfo::WeaponInfo(std::string name, WeaponType type) :
-	WeaponInfo(name, type, AttribType::values::STR, AttribType::values::DEF, {}, std::vector<int>{ 1 })
+	WeaponInfo(std::move(name), type, AttribType::values::STR, AttribType::values::DEF, {}, std::vector<int>{ 1 })
 {}
 
 WeaponInfo::WeaponInfo(std::string name, WeaponType type, std::array<int, CombatStats::size> base_stats) :
-	WeaponInfo(name, type, AttribType::values::STR, AttribType::values::DEF, base_stats, std::vector<int>{ 1 })
+	WeaponInfo(std::move(name), type, AttribType::values::STR, AttribType::values::DEF, base_stats, std::vector<int>{ 1 })
 {}
 
 WeaponInfo::WeaponInfo(std::string name, WeaponType type, AttribType offensive_stat, AttribType defensive_stat, std::array<int, CombatStats::size> base_stats) :
-	WeaponInfo(name, type, offensive_stat, defensive_stat, base_stats, std::vector<int>{ 1 })
+	WeaponInfo(std::move(name), type, offensive_stat, defensive_stat, base_stats, std::vector<int>{ 1 })
 {}
 
 WeaponInfo::WeaponInfo(std::string name, WeaponType type, AttribType offensive_stat, AttribType defensive_stat, std::array<int, CombatStats::size> base_stats, Range range) :
-	EquipInfo(name, base_stats, range),
+	EquipInfo(std::move(name), base_stats, range),
 	_type(type),
 	_offensive(offensive_stat),
 	_defensive(defensive_stat)
 {}
 
 WeaponInfo::WeaponInfo(EquipInfo info, WeaponType type) :
-	WeaponInfo(info, type, AttribType::values::STR, AttribType::values::DEF)
+	WeaponInfo(std::move(info), type, AttribType::values::STR, AttribType::values::DEF)
 {}
 
 WeaponInfo::WeaponInfo(EquipInfo info, WeaponType type, AttribType offensive_stat, AttribType defensive_stat) :

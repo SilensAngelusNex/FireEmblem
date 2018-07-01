@@ -73,7 +73,7 @@ bool Map::hasUnit(Unit& unit) const{
 	return _unit_to_cell.count(&unit) > 0;
 }
 Party& Map::getParty(Unit & unit) {
-	return unit._party->getParty(Passkey<Map>()); //This is probably bad
+	return unit.getParty()->getParty(Passkey<Map>()); //This is probably bad
 }
 const GridCell& Map::getGridCell(int x_pos, int y_pos) const{
 	Expects(x_pos > 0 && y_pos > 0 && x_pos < _grid.size() && y_pos < _grid[0].size());
@@ -83,7 +83,7 @@ const GridCell& Map::getGridCell(Unit & unit) const{
 	return *_unit_to_cell.at(&unit);
 }
 const Party& Map::getParty(Unit & unit) const {
-	return unit._party->getParty(Passkey<Map>()); //This is probably bad
+	return unit.getParty()->getParty(Passkey<Map>()); //This is probably bad
 }
 ///////////////////////////////////////////////////////////
 PathMap Map::findShortestPaths(GridCell& start) {

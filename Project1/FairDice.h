@@ -3,7 +3,7 @@
 #include "Dice.h"
 #include <random>
 
-template<int sides>
+template<size_t sides>
 class FairDice : public Dice<sides> {
 private:
 	std::mt19937 _generator;
