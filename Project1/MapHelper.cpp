@@ -5,6 +5,7 @@
 #include "GridCell.h"
 #include "PartyBase.h"
 #include "Range.h"
+#include "MovementPath.h"
 #include <vector>
 
 

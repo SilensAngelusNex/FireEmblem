@@ -1,6 +1,7 @@
 #include "MovementPath.h"
 #include "MobilityList.h"
 #include "GridCell.h"
+#include "GridMap.h"
 
 MovementPath::MovementPath() {}
 
@@ -14,13 +15,22 @@ MovementPath::MovementPath(MobilitySet mobility, GridCell & head) :
 	_path.emplace_back(0, head);
 }
 
+MovementPath::MovementPath(PathMap map, GridCell & destination) {
+	GridCell* curr = &destination;
+	do {
+		_path.emplace_front(map[*curr]);
+		curr = &_path.front().second;
+	} while (map[*curr].first != 0);
+}
+
+
 void MovementPath::addTail(GridCell & tail) {
 	if (_path.size() == 0) {
 		_path.emplace_back(0, tail);
 	}
 	else {
-		Expects(getBack().isAdjacent(tail));
-		int cost = getCost() + getBack().getEdge(tail).value().getCost(_mobility_set).value();
+		Expects(back().isAdjacent(tail));
+		int cost = getCost() + back().getEdge(tail).value().getCost(_mobility_set).value();
 		_path.emplace_back(cost, tail);
 	}
 }
@@ -32,14 +42,3 @@ int MovementPath::getCost() const{
 	else return _path.back().first;
 }
 
-GridCell& MovementPath::getBack() {
-	Expects(_path.size() > 0); {
-		return _path.back().second;
-	}
-}
-
-const GridCell& MovementPath::getBack() const{
-	Expects(_path.size() > 0); {
-		return _path.back().second;
-	}
-}

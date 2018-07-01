@@ -1,14 +1,15 @@
 #pragma once
 #include "ID.h"
 #include "id_cost_map.h"
+//#include "GridMap.h" DO NOT INCLUDE THIS
 #include <map>
 
-//TODO(Torrey): rename this class
+
 template <typename grid>
 class path_map : public id_cost_map
 {
 private:
-	using cell_ref = decltype(std::declval<grid>()[std::declval<ID>()]);
+	using cell_ref = decltype(std::declval<grid>().operator[](std::declval<ID&>()));
 	using CostCell = logic_pair<int, cell_ref>;
 	//private iterator class that replaces ID with GridCell::Ref
 	template <typename iterator>
@@ -59,17 +60,17 @@ public:
 	//Element access;
 
 	CostCell operator[](const GridCell& key) {
-		return convert((*this)[key._id]);
+		return convert(id_cost_map::operator[](key._id));
 	}
 	CostCell operator[](const GridCell&& key) {
-		return convert((*this)[key._id]);
+		return convert(id_cost_map::operator[](key._id));
 	}
 
 	CostCell at(const GridCell& key) {
-		return convert(this->at(key._id));
+		return convert(id_cost_map::at(key._id));
 	}
 	const CostCell at(const ID& key) const {
-		return convert(this->at(key._id));
+		return convert(id_cost_map::at(key._id));
 	}
 };
 

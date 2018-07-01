@@ -11,6 +11,7 @@
 #include "GridMap.h"
 #include "Weapon.h"
 #include "Swords.h"
+#include "MovementPath.h"
 
 bool test::runMapTest() {
 	std::cout << "Grid test start:" << std::endl;
@@ -63,6 +64,7 @@ bool test::runMapTest() {
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	
 	std::cout << "How many cells are adjacent to Mia: " << map[map[mia2]].getAdjacentCellIDs().size() << std::endl;
+	MovementPath a = move_helper.getShortestPath(mia2, map[11][11]._id);
 	//AdjCellPath path = move_helper.getShortestPath(mia2, map[11][11]);
 	/*
 	move_helper.canWalk(mia2, path);

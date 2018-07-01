@@ -142,3 +142,6 @@ std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) const{
 }
 	////////////////////////////////////////////////////////////////////////////////
 
+MovementPath MoveHelper::getShortestPath(const Unit& unit, ID destination) {
+	return MovementPath(_map.getShortestPathsMap(unit), _map[destination]);
+}

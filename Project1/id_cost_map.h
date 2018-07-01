@@ -3,10 +3,10 @@
 #include "ID.h"
 #include "logic_pair.h"
 #include "GridCell.h"
-class id_cost_map : private std::map<ID, CostID>
+class id_cost_map : private std::map<const ID, CostID>
 {
 private:
-	using Map = std::map<ID, CostID>;
+	using Map = std::map<const ID, CostID>;
 public:
 	const GridCell& _origin;
 	id_cost_map(const GridCell& origin) :

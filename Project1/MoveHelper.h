@@ -5,6 +5,7 @@
 #include "MapHelper.h"
 #include "GridCell.h"
 #include "ID.h"
+#include "MovementPath.h"
 
 class Unit;
 class GridCell;
@@ -30,4 +31,6 @@ public:
 
 	std::vector<ID> getAlliedCellIDs(const Unit & unit) const;
 	std::vector<ID> getOtherAlliedCellIDs(const Unit & unit) const;
+
+	MovementPath getShortestPath(const Unit & unit, ID destination);
 };
