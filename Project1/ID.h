@@ -34,16 +34,16 @@ public:
 		return a || (c && b);
 	}
 	bool operator>=(const ID& other) const {
-		bool a = first < other.first;
+		bool a = first > other.first;
 		bool b = second < other.second;
 		bool c = first == other.first;
-		return !a && !(c || b);
+		return a || (c && !b);
 	}
 	bool operator<=(const ID& other) const {
-		bool a = first > other.first;
+		bool a = first < other.first;
 		bool b = second > other.second;
 		bool c = first == other.first;
-		return !a && (c || b);
+		return a || (c && !b);
 	}
 	
 	/*

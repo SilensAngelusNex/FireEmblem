@@ -34,17 +34,17 @@ public:
 	}
 	template<typename pair>
 	bool operator>=(const pair& other) const {
-		bool a = first < other.first;
+		bool a = first > other.first;
 		bool b = second < other.second;
 		bool c = first == other.first;
-		return !a && !(c || b);
+		return a || (c && !b);
 	}
 	template<typename pair>
 	bool operator<=(const pair& other) const {
-		bool a = first > other.first;
+		bool a = first < other.first;
 		bool b = second > other.second;
 		bool c = first == other.first;
-		return !a && !(c || b);
+		return a || (c && !b);
 	}
 
 };
