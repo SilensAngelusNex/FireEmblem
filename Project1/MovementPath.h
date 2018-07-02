@@ -12,7 +12,7 @@ class Unit;
 class MovementPath :public PathBase {
 public:
 	const Unit& _unit;
-	MovementPath(const Unit& unit);
+	const GridCell& _head;
 	MovementPath(const Unit& unit, GridCell& head);
 	MovementPath(const Unit& unit, CostMap map, GridCell& destination);
 
