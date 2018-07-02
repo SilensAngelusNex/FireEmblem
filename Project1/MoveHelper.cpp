@@ -143,7 +143,35 @@ std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) const{
 	////////////////////////////////////////////////////////////////////////////////
 
 MovementPath MoveHelper::getShortestPath(const Unit& unit, ID destination) {
-	return MovementPath(_map.getShortestPathsMap(unit), _map[destination]);
+	return MovementPath(unit, _map.getShortestPathsMap(unit), _map[destination]);
+}
+
+//TODO(Torrey): optomize this
+MovementPath& MoveHelper::reRoutePath(MovementPath& path, ID destination) {
+	if (path.contains(destination)) {
+		path.trimPath(destination);
+		return path;
+	}
+	if (path.back().isAdjacent(destination)) { //Take Adjacent option if available
+		auto cost = path.back().getEdge(destination).value().getCost(path._unit.getMobility().getMobilitySet());
+		if (cost && cost.value() + path.getCost() <= path._unit.getMobility().getMove()) {
+			path.push_back(_map[destination]);
+			return path;
+		}
+	}
+	CostMap cost_map = _map.getShortestPathsMap(path._unit);
+	if (!cost_map.hasKey(destination)) { //If impossible, cut our losses
+		return path;
+	}
+	while (!path.empty()) { //Keep as much of our current path as possible
+		CostMap cost_map = _map.getShortestPathsMap(path._unit, path.back()._id, path._unit.getMobility().getMove() - path.getCost());
+		if (cost_map.hasKey(destination)) {
+			return path + MovementPath(path._unit, cost_map, _map[destination]);
+		}
+		path.pop_back();
+	}
+	Expects(false);
+	return path;
 }
 
 void MoveHelper::walkPath(Unit & unit, MovementPath path) {

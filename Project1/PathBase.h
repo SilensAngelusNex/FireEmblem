@@ -15,8 +15,10 @@ public:
 	using iterator = List::iterator;
 	using const_iterator = List::const_iterator;
 	iterator begin() { return _path.begin(); }
+	const_iterator begin() const { return _path.begin(); }
 	const_iterator cbegin() const { return _path.cbegin(); }
 	iterator end() { return _path.end(); }
+	const_iterator end() const { return _path.end(); }
 	const_iterator cend() const { return _path.cend(); }
 protected:
 	//Helper Methods

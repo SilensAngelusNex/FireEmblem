@@ -48,6 +48,11 @@ bool test::runMapTest() {
 
 	map.insertUnit(mia2, map[10][10]);
 	std::set <ID> cells = move_helper.getAccesibleCellIDs(mia2);
+	MovementPath path = move_helper.getShortestPath(mia2, map[10][13]._id);
+	move_helper.reRoutePath(path, map[11][12]._id);
+	move_helper.walkPath(mia2, path);
+
+	/*
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getMoveEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;

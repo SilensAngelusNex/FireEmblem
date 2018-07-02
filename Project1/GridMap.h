@@ -10,6 +10,7 @@
 #include <list>
 #include <queue>
 #include <set>
+#include "PathBase.h"
 
 using PathQueue = std::priority_queue<CostID>;
 class GridMap :	public Grid {
@@ -24,10 +25,15 @@ public:
 	CostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility);
 	CostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible);
 	CostMap getShortestPathsMap(const Unit& unit);
+	CostMap getShortestPathsMap(const Unit& unit, ID start);
+	CostMap getShortestPathsMap(const Unit& unit, ID start, int remaining_move);
 
 	constCostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility) const;
 	constCostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible) const;
 	constCostMap getShortestPathsMap(const Unit& unit) const;
+	constCostMap getShortestPathsMap(const Unit& unit, ID start) const;
+	constCostMap getShortestPathsMap(const Unit& unit, ID start, int remaining_move) const;
+
 
 	//CellPath<GridCell> getShortestPath(ID start, ID destination, int max_move, MobilitySet mobility);
 };

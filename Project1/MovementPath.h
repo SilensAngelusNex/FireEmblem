@@ -7,20 +7,20 @@
 #include "GridCell.h"
 #include "PathBase.h"
 
+class Unit;
 
 class MovementPath :public PathBase {
-private:
-	MobilitySet _mobility_set;
 public:
-	MovementPath();
-	MovementPath(MobilitySet mobility);
-	MovementPath(MobilitySet mobility, GridCell& head);
-	MovementPath(CostMap map, GridCell& destination);
+	const Unit& _unit;
+	MovementPath(const Unit& unit);
+	MovementPath(const Unit& unit, GridCell& head);
+	MovementPath(const Unit& unit, CostMap map, GridCell& destination);
 
 	//Modifiers
 	void push_back(GridCell & tail);
 
 	//Element Access
 	int getCost() const;
+	MovementPath& operator+(const MovementPath& path);
 };
 

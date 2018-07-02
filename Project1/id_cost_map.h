@@ -9,6 +9,7 @@ public:
 	id_cost_map(const GridCell& origin) :
 		_origin(origin)
 	{}
+	bool hasKey(ID key) const { return count(key) != 0; }
 
 };
 

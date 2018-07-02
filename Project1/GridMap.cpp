@@ -25,7 +25,7 @@ id_cost_map getShortestPathsHelper(ID start, int max_move, MobilitySet mobility,
 			if (canPass(edge) && cost.has_value()) {
 				cost = top.first + cost.value();
 
-				if (cost.value() <= max_move && (cost_map.count(edge._id) == 0 || cost.value() < cost_map.at(edge._id).first)) {
+				if (cost.value() <= max_move && (!cost_map.hasKey(edge._id) || cost.value() < cost_map.at(edge._id).first)) {
 					cost_map.insert_or_assign(edge._id, CostID(cost.value(), top.second));
 					queue.emplace(cost.value(), edge._id);
 				}
@@ -76,6 +76,14 @@ CostMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobilit
 CostMap GridMap::getShortestPathsMap(const Unit& unit) {
 	return CostMap( *this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, * this));
 }
+CostMap GridMap::getShortestPathsMap(const Unit & unit, ID start) {
+	return CostMap(*this, getShortestPathsHelper(start, unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
+}
+
+CostMap GridMap::getShortestPathsMap(const Unit & unit, ID start, int remaining_move) {
+	return CostMap(*this, getShortestPathsHelper(start, remaining_move, unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
+}
+
 //const getShortestPathsMap()//
 /////////////////////////////////////////////////////////////////////////
 
@@ -90,6 +98,14 @@ constCostMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mo
 
 constCostMap GridMap::getShortestPathsMap(const Unit& unit) const{
 	return constCostMap(*this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
+}
+
+constCostMap GridMap::getShortestPathsMap(const Unit & unit, ID start) const{
+	return constCostMap(*this, getShortestPathsHelper(start, unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
+}
+
+constCostMap GridMap::getShortestPathsMap(const Unit & unit, ID start, int remaining_move) const{
+	return constCostMap(*this, getShortestPathsHelper(start, remaining_move, unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
 }
 // private helper methods for getShortestPathsMap() //
 /////////////////////////////////////////////////////////////////////////
