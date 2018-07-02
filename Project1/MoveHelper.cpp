@@ -185,7 +185,7 @@ void MoveHelper::walkPath(Unit & unit, MovementPath path) {
 			return;
 		}
 		if (!_map.hasUnit(pair.second)) { //Skip over units we can move through
-			_map.moveUnit(*current_cell, pair.second);
+			_map.moveUnit(current_cell->_id, pair.second.get()._id);
 			current_cell = _map.getCell(unit);
 		}
 	}

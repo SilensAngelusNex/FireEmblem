@@ -6,10 +6,12 @@
 
 class PathBase {
 protected:
-	using CostCell = logic_pair<int, GridCell::Ref>;
+	using CostCell = logic_pair<int, GridCell::ConstRef>;
 	using List = std::list<CostCell>;
 	List _path;
+	const GridCell* _head;
 	PathBase() = default;
+	PathBase(const GridCell& head);
 public:
 	//Iterator
 	using iterator = List::iterator;
@@ -29,19 +31,18 @@ protected:
 public:
 
 	//Modifiers
-	void push_back(GridCell& tail);
+	void push_back(const GridCell& tail);
 	void pop_back();
 	void trimPath(const GridCell& end);
 	void trimPath(ID end_id);
 
+	PathBase & operator+(const PathBase & path);
+
 	//Element Access
-	GridCell& front();
-	GridCell& back();
-	const GridCell& front() const;
 	const GridCell& back() const;
 
 	//Capacity
-	bool empty() const { return _path.empty(); }
+	bool empty() const { return _head == nullptr; }
 	bool contains(const GridCell& cell) const;
 	bool contains(ID id) const;
 	size_t size() const {	return _path.size(); }

@@ -5,7 +5,6 @@
 #include "FairDice.h"
 #include "MoveHelper.h"
 #include "AttackHelper.h"
-//#include "CellPath.h"
 #include "Party.h"
 #include "GridCell.h"
 #include "GridMap.h"
@@ -46,17 +45,17 @@ bool test::runMapTest() {
 
 	mia2.getInventory().equip(ON_HAND, std::move(mias_sword));
 
-	map.insertUnit(mia2, map[10][10]);
+	map.insertUnit(mia2, map[10][10]._id);
 	std::set <ID> cells = move_helper.getAccesibleCellIDs(mia2);
 	MovementPath path = move_helper.getShortestPath(mia2, map[10][13]._id);
-	move_helper.reRoutePath(path, map[10][7]._id);
+	move_helper.reRoutePath(path, map[11][12]._id);
 	move_helper.walkPath(mia2, path);
-
-	/*
+	move_helper.walkPath(mia2, move_helper.getShortestPath(mia2, map[10][10]._id));
+	
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getMoveEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
-	map.insertUnit(*ike2, map[10][11]);
+	map.insertUnit(*ike2, map[10][11]._id);
 	MovementPath a = move_helper.getShortestPath(mia2, map[10][12]._id);
 	move_helper.walkPath(mia2, a);
 	MovementPath b = move_helper.getShortestPath(mia2, map[10][10]._id);
@@ -68,21 +67,15 @@ bool test::runMapTest() {
 	std::cout << "How many cells are adjacent to Mia: " << map[map[mia2]].getAdjacentCellIDs().size() << std::endl;
 	party2.insertUnit(party.dropUnit(*ike2));
 	cells = move_helper.getAccesibleCellIDs(mia2);
+	MovementPath path2 = move_helper.getShortestPath(mia2, map[10][12]._id);
+	move_helper.walkPath(mia2, path2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getMoveEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	
 	std::cout << "How many cells are adjacent to Mia: " << map[map[mia2]].getAdjacentCellIDs().size() << std::endl;
-	MovementPath c = move_helper.getShortestPath(mia2, map[10][12]._id);
-	move_helper.walkPath(mia2, c);
-	//AdjCellPath path = move_helper.getShortestPath(mia2, map[11][11]);
-	/*
-	move_helper.canWalk(mia2, path);
-	std::cout << "Can Mia move to (11, 11)?: " << move_helper.canWalk(mia2, path) << std::endl;
-	move_helper.walkPath(mia2, path);
-	std::cout << "Attempted to walk" << std::endl;
-	std::cout << "Is Mia at (11, 11)?" << (map[mia2] == map[11][11]) << std::endl;;
-	*/
+
+
 	
 	return true;
 }

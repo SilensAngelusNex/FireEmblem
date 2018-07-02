@@ -1,4 +1,9 @@
 #include "PathBase.h"
+#include "GridCell.h"
+
+PathBase::PathBase(const GridCell& head) :
+	_head(&head)
+{}
 
 PathBase::iterator PathBase::position(const GridCell & end) {
 	return std::find_if(_path.begin(), _path.end(), [&](const CostCell& a) -> bool { return a.second == end; });
@@ -15,30 +20,13 @@ PathBase::const_iterator PathBase::position(ID id) const {
 }
 
 
-void PathBase::push_back(GridCell & tail) {
+void PathBase::push_back(const GridCell & tail) {
 	_path.emplace_back(0, tail);
 }
 
 void PathBase::pop_back() {
 	Expects(!empty());
 	_path.pop_back();
-}
-
-GridCell & PathBase::front() {
-	Expects(!empty());
-	return _path.front().second;
-
-}
-
-const GridCell & PathBase::front() const {
-	Expects(!empty());
-	return _path.front().second;
-
-}
-GridCell& PathBase::back() {
-	Expects(!empty());
-	return _path.back().second;
-
 }
 
 const GridCell& PathBase::back() const {
@@ -48,21 +36,29 @@ const GridCell& PathBase::back() const {
 }
 
 bool PathBase::contains(const GridCell & cell) const{
-	return position(cell) != cend();
+	return *_head == cell || position(cell) != cend();
 }
 
 bool PathBase::contains(ID id) const {
-	return position(id) != cend();
+	return _head->_id == id || position(id) != cend();
 }
 
 void PathBase::trimPath(const GridCell & end) {
-	while (!empty() && back() != end ) {
+	while (!_path.empty() && back() != end ) {
 		pop_back();
 	}	
 }
 
 void PathBase::trimPath(ID end_id) {
-	while (!empty() && back()._id != end_id) {
+	while (!_path.empty() && back()._id != end_id) {
 		pop_back();
 	}
+}
+
+PathBase & PathBase::operator+(const PathBase & path) {
+	Expects(back() == *path._head);
+	for (auto& pair : path) {
+		push_back(pair.second);
+	}
+	return *this;
 }

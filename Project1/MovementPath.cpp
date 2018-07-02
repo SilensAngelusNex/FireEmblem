@@ -4,33 +4,43 @@
 #include "GridMap.h"
 #include "Unit.h"
 
-MovementPath::MovementPath(const Unit& unit, GridCell & head) :
-	_unit(unit),
-	_head(head)
+MovementPath::MovementPath(const Unit& unit) :
+	_unit(unit)
 {}
 
-MovementPath::MovementPath(const Unit& unit, CostMap map, GridCell & destination) :
-	_unit(unit),
-	_head(map._origin)
+
+MovementPath::MovementPath(const Unit& unit, const GridCell & head) :
+	PathBase(head),
+	_unit(unit)
+{}
+
+MovementPath::MovementPath(const Unit& unit, CostMap map, const GridCell & destination) :
+	PathBase(map._origin),
+	_unit(unit)
 {
-	GridCell* curr = &destination;
+	const GridCell* curr = &destination;
 	while (map[*curr].first != 0) {
+		auto temp = *curr;
 		_path.emplace_front(map[*curr].first, *curr);
 		curr = &map[_path.front().second].second;
 	} 
 }
 
 
-void MovementPath::push_back(GridCell & tail) {
-	if (tail == _head) {
+void MovementPath::push_back(const GridCell & tail) {
+	if (empty()) {
+		_head = &tail;
+		return;
+	}
+	if (tail == *_head) {
 		_path.clear();
 		return;
 	}
-	if( contains(tail)) {
+	if(contains(tail)) {
 		trimPath(tail);
 		return;
 	}
-	const GridCell* back_cell = &_head;
+	const GridCell* back_cell = _head;
 	if (!empty()) {
 		back_cell = &back();
 	}
@@ -44,12 +54,11 @@ int MovementPath::getCost() const{
 	if (empty()) {
 		return 0;
 	}
-	else return _path.back().first;
+	return _path.back().first;
 }
 
-//Should this be const?
 MovementPath & MovementPath::operator+(const MovementPath & path) {
-	Expects(_unit == path._unit);
+	Expects(_unit == path._unit && back() == *path._head);
 	for (auto& pair : path) {
 		push_back(pair.second);
 	}

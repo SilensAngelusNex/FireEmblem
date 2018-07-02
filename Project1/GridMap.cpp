@@ -3,7 +3,6 @@
 #include "Party.h"
 #include "Unit.h"
 #include "GridCell.h"
-//#include "CellPath.h"
 #include "CellEdge.h"
 #include "Mobility.h"
 #include "Passkey.h"

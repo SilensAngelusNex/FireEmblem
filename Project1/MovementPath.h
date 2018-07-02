@@ -12,15 +12,14 @@ class Unit;
 class MovementPath :public PathBase {
 public:
 	const Unit& _unit;
-	const GridCell& _head;
-	MovementPath(const Unit& unit, GridCell& head);
-	MovementPath(const Unit& unit, CostMap map, GridCell& destination);
+	MovementPath(const Unit& unit);
+	MovementPath(const Unit& unit, const GridCell& head);
+	MovementPath(const Unit& unit, CostMap map, const GridCell& destination);
 
 	//Modifiers
-	void push_back(GridCell & tail);
+	void push_back(const GridCell & tail);
 
 	//Element 
-	const GridCell& front() const { return _head; }
 	int getCost() const;
 	MovementPath& operator+(const MovementPath& path);
 };
