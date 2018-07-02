@@ -183,7 +183,7 @@
     <ClInclude Include="read_vector.h" />
     <ClInclude Include="logic_pair.h" />
     <ClInclude Include="MapHelper.h" />
-    <ClInclude Include="PathMap.h" />
+    <ClInclude Include="CostMap.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="Combat.h" />

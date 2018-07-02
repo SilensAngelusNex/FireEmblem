@@ -49,9 +49,9 @@ MoveHelper::MoveHelper(GridMap& map) :
 
 //Get Cells a Unit can move to
 std::set<ID> MoveHelper::getAccesibleCellIDs(const Unit& unit) const {
-	PathMap path_map = _map.getShortestPathsMap(unit);
+	CostMap cost_map = _map.getShortestPathsMap(unit);
 	std::set<ID> cells = std::set<ID>();
-	for (auto pair : path_map) {
+	for (auto pair : cost_map) {
 		cells.emplace(pair.first._id);
 	}
 	std::vector<ID> allied_cells = getOtherAlliedCellIDs(unit);

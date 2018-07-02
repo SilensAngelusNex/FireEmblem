@@ -3,7 +3,7 @@
 //#include "CellPath.h"
 #include "Party.h"
 #include "ID.h"
-#include "PathMap.h"
+#include "CostMap.h"
 #include <functional>
 #include <map>
 #include <vector>
@@ -21,13 +21,13 @@ public:
 	Party& getParty(const Unit& unit);
 	const Party& getParty(const Unit& unit) const;
 
-	PathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility);
-	PathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible);
-	PathMap getShortestPathsMap(const Unit& unit);
+	CostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility);
+	CostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible);
+	CostMap getShortestPathsMap(const Unit& unit);
 
-	constPathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility) const;
-	constPathMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible) const;
-	constPathMap getShortestPathsMap(const Unit& unit) const;
+	constCostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility) const;
+	constCostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible) const;
+	constCostMap getShortestPathsMap(const Unit& unit) const;
 
 	//CellPath<GridCell> getShortestPath(ID start, ID destination, int max_move, MobilitySet mobility);
 };

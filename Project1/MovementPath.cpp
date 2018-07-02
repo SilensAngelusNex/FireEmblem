@@ -15,7 +15,7 @@ MovementPath::MovementPath(MobilitySet mobility, GridCell & head) :
 	_path.emplace_back(0, head);
 }
 
-MovementPath::MovementPath(PathMap map, GridCell & destination) {
+MovementPath::MovementPath(CostMap map, GridCell & destination) {
 	GridCell* curr = &destination;
 	while (map[*curr].first != 0) {
 		_path.emplace_front(map[*curr].first, *curr);
@@ -26,7 +26,7 @@ MovementPath::MovementPath(PathMap map, GridCell & destination) {
 
 
 void MovementPath::push_back(GridCell & tail) {
-	if (_path.size() == 0) {
+	if (empty()) {
 		_path.emplace_back(0, tail);
 	}
 	else {
@@ -37,7 +37,7 @@ void MovementPath::push_back(GridCell & tail) {
 }
 
 int MovementPath::getCost() const{
-	if (_path.size() == 0) {
+	if (empty()) {
 		return 0;
 	}
 	else return _path.back().first;

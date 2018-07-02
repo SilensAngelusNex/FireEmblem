@@ -3,7 +3,7 @@
 #include "MobilityList.h"
 #include "EnumContainer.h"
 #include "GridCell.h"
-#include "PathMap.h"
+#include "CostMap.h"
 #include "GridCell.h"
 #include "PathBase.h"
 
@@ -15,11 +15,12 @@ public:
 	MovementPath();
 	MovementPath(MobilitySet mobility);
 	MovementPath(MobilitySet mobility, GridCell& head);
-	MovementPath(PathMap map, GridCell& destination);
+	MovementPath(CostMap map, GridCell& destination);
 
-
+	//Modifiers
 	void push_back(GridCell & tail);
 
+	//Element Access
 	int getCost() const;
 };
 

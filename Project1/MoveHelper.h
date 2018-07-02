@@ -33,5 +33,6 @@ public:
 	std::vector<ID> getOtherAlliedCellIDs(const Unit & unit) const;
 
 	MovementPath getShortestPath(const Unit & unit, ID destination);
+	//MovementPath& reRoutePath(MovementPath& path);
 	void walkPath(Unit& unit, MovementPath path);
 };

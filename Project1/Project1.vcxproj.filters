@@ -368,9 +368,6 @@
     <ClInclude Include="GridMap.h">
       <Filter>inc\map</Filter>
     </ClInclude>
-    <ClInclude Include="PathMap.h">
-      <Filter>inc\map</Filter>
-    </ClInclude>
     <ClInclude Include="ID.h">
       <Filter>inc\util</Filter>
     </ClInclude>
@@ -399,6 +396,9 @@
       <Filter>inc\map\cell_path</Filter>
     </ClInclude>
     <ClInclude Include="id_cost_map.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
+    <ClInclude Include="CostMap.h">
       <Filter>inc\map</Filter>
     </ClInclude>
   </ItemGroup>
