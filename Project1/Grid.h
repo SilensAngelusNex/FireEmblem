@@ -45,17 +45,17 @@ public:
 	void moveUnit(ID start, ID destination);
 	void insertUnit(Unit& new_unit, ID destination);
 
-	bool hasUnit(const GridCell& index) const;
-	bool hasUnit(const Unit & index) const;
+	bool hasUnit(const GridCell& key) const;
+	bool hasUnit(const Unit & key) const;
 	bool hasUnit(ID index) const;
 
-	Unit* getUnit(const GridCell& index);
+	Unit* getUnit(const GridCell& key);
 	Unit* getUnit(ID index);
-	GridCell* getCell(const Unit& index);
+	GridCell* getCell(const Unit& key);
 
-	const Unit* getUnit(const GridCell& index) const;
+	const Unit* getUnit(const GridCell& key) const;
 	const Unit* getUnit(ID index) const;
-	const GridCell* getCell(const Unit& index) const;
+	const GridCell* getCell(const Unit& key) const;
 
 
 	using GridRow = read_vector< std::vector<GridCell>>;

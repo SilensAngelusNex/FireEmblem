@@ -29,24 +29,24 @@ Grid::Grid(int width, int height, std::vector<PartyData> data) {
 	}
 }
 
-Unit* Grid::getUnit(const GridCell& index) {
-	return  hasUnit(index) ? _cell_to_unit[&index] : nullptr;
+Unit* Grid::getUnit(const GridCell& key) {
+	return  hasUnit(key) ? _cell_to_unit[&key] : nullptr;
 }
-const Unit* Grid::getUnit(const GridCell& index) const{
-	return  hasUnit(index) ? _cell_to_unit.at(&index) : nullptr;
+const Unit* Grid::getUnit(const GridCell& key) const{
+	return  hasUnit(key) ? _cell_to_unit.at(&key) : nullptr;
 }
 
 Unit* Grid::getUnit(ID index) {
 	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
 }
-GridCell * Grid::getCell(const Unit & index)
+GridCell * Grid::getCell(const Unit & key)
 {
-	return  hasUnit(index) ? _unit_to_cell[&index] : nullptr;
+	return  hasUnit(key) ? _unit_to_cell[&key] : nullptr;
 }
 
-const GridCell * Grid::getCell(const Unit & index) const
+const GridCell * Grid::getCell(const Unit & key) const
 {
-	return  hasUnit(index) ? _unit_to_cell.at(&index) : nullptr;
+	return  hasUnit(key) ? _unit_to_cell.at(&key) : nullptr;
 }
 const Unit* Grid::getUnit(ID index) const {
 	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
@@ -109,11 +109,11 @@ void Grid::removeUnit(Unit& unit) {
 }
 /////////////////////////////////////////////////////////////
 
-bool Grid::hasUnit(const GridCell& index) const{
-	return _cell_to_unit.count(&index) > 0;
+bool Grid::hasUnit(const GridCell& key) const{
+	return _cell_to_unit.count(&key) > 0;
 }
-bool Grid::hasUnit(const Unit& index) const{
-	return _unit_to_cell.count(&index) > 0;
+bool Grid::hasUnit(const Unit& key) const{
+	return _unit_to_cell.count(&key) > 0;
 }
 
 bool Grid::hasUnit(ID index) const {
