@@ -22,6 +22,14 @@ MovementPath::MovementPath(const Unit& unit, CostMap map, GridCell & destination
 
 
 void MovementPath::push_back(GridCell & tail) {
+	if (tail == _head) {
+		_path.clear();
+		return;
+	}
+	if( contains(tail)) {
+		trimPath(tail);
+		return;
+	}
 	const GridCell* back_cell = &_head;
 	if (!empty()) {
 		back_cell = &back();

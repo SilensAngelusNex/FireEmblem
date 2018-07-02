@@ -56,15 +56,13 @@ bool PathBase::contains(ID id) const {
 }
 
 void PathBase::trimPath(const GridCell & end) {
-	Expects(contains(end));
-	while (back() != end) {
+	while (!empty() && back() != end ) {
 		pop_back();
 	}	
 }
 
 void PathBase::trimPath(ID end_id) {
-	Expects(contains(end_id));
-	while (back()._id != end_id) {
+	while (!empty() && back()._id != end_id) {
 		pop_back();
 	}
 }

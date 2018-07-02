@@ -49,7 +49,7 @@ bool test::runMapTest() {
 	map.insertUnit(mia2, map[10][10]);
 	std::set <ID> cells = move_helper.getAccesibleCellIDs(mia2);
 	MovementPath path = move_helper.getShortestPath(mia2, map[10][13]._id);
-	move_helper.reRoutePath(path, map[11][12]._id);
+	move_helper.reRoutePath(path, map[10][7]._id);
 	move_helper.walkPath(mia2, path);
 
 	/*
