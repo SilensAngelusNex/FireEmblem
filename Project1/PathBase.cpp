@@ -1,6 +1,6 @@
 #include "PathBase.h"
 
-void PathBase::addTail(GridCell & tail) {
+void PathBase::push_back(GridCell & tail) {
 	_path.emplace_back(0, tail);
 }
 

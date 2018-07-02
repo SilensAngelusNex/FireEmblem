@@ -18,7 +18,7 @@ public:
 	MovementPath(PathMap map, GridCell& destination);
 
 
-	void addTail(GridCell & tail);
+	void push_back(GridCell & tail);
 
 	int getCost() const;
 };

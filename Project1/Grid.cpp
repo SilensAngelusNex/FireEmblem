@@ -76,6 +76,9 @@ void Grid::insertParty(PartyData data) {
 }
 ////////////////////////////////////////////////////////////
 void Grid::moveUnit(GridCell& start, GridCell& destination) {
+	if (start == destination) {
+		return;
+	}
 	Expects(hasUnit(start) && !hasUnit(destination));	
 	Unit* unit = &(*this)[start];
 	removeUnit(*unit);

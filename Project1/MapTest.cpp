@@ -52,6 +52,10 @@ bool test::runMapTest() {
 	cells = move_helper.getMoveEquipableAttackIDs(mia2);
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	map.insertUnit(*ike2, map[10][11]);
+	MovementPath a = move_helper.getShortestPath(mia2, map[10][12]._id);
+	move_helper.walkPath(mia2, a);
+	MovementPath b = move_helper.getShortestPath(mia2, map[10][10]._id);
+	move_helper.walkPath(mia2, b);
 	cells = move_helper.getAccesibleCellIDs(mia2);
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;
 	cells = move_helper.getMoveEquipableAttackIDs(mia2);
@@ -64,7 +68,8 @@ bool test::runMapTest() {
 	std::cout << "How many cells can Mia Attack?: " << cells.size() << std::endl;
 	
 	std::cout << "How many cells are adjacent to Mia: " << map[map[mia2]].getAdjacentCellIDs().size() << std::endl;
-	MovementPath a = move_helper.getShortestPath(mia2, map[11][11]._id);
+	MovementPath c = move_helper.getShortestPath(mia2, map[10][12]._id);
+	move_helper.walkPath(mia2, c);
 	//AdjCellPath path = move_helper.getShortestPath(mia2, map[11][11]);
 	/*
 	move_helper.canWalk(mia2, path);

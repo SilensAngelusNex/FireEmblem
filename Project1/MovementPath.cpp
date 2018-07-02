@@ -17,14 +17,15 @@ MovementPath::MovementPath(MobilitySet mobility, GridCell & head) :
 
 MovementPath::MovementPath(PathMap map, GridCell & destination) {
 	GridCell* curr = &destination;
-	do {
-		_path.emplace_front(map[*curr]);
-		curr = &_path.front().second;
-	} while (map[*curr].first != 0);
+	while (map[*curr].first != 0) {
+		_path.emplace_front(map[*curr].first, *curr);
+		curr = &map[front()].second;
+	} 
+	_path.emplace_front(map[*curr].first, *curr);
 }
 
 
-void MovementPath::addTail(GridCell & tail) {
+void MovementPath::push_back(GridCell & tail) {
 	if (_path.size() == 0) {
 		_path.emplace_back(0, tail);
 	}

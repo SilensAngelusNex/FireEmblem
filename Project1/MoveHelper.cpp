@@ -145,3 +145,21 @@ std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) const{
 MovementPath MoveHelper::getShortestPath(const Unit& unit, ID destination) {
 	return MovementPath(_map.getShortestPathsMap(unit), _map[destination]);
 }
+
+void MoveHelper::walkPath(Unit & unit, MovementPath path) {
+	GridCell* current_cell = _map.getCell(unit);
+	std::cout << "Start walking " << unit.getIdentity() << " from space:" << _map[unit] << " to space " << path.back()._id << std::endl;
+	for (auto& pair : path) {
+		std::cout << "Moving " << unit.getIdentity() << " from " << current_cell->_id << " to " << pair.second.get()._id << std::endl;
+		if (!unit.getMobility().canPass(_map.getUnit(pair.second))) {
+			// Walked into a stealthed unit or the like
+			//Add logic for that
+			return;
+		}
+		if (!_map.hasUnit(pair.second)) { //Skip over units we can move through
+			_map.moveUnit(*current_cell, pair.second);
+			current_cell = _map.getCell(unit);
+		}
+	}
+
+}
