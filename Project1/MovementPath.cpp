@@ -16,7 +16,7 @@ MovementPath::MovementPath(const Unit& unit, CostMap map, GridCell & destination
 	GridCell* curr = &destination;
 	while (map[*curr].first != 0) {
 		_path.emplace_front(map[*curr].first, *curr);
-		curr = &map[front()].second;
+		curr = &map[_path.front().second].second;
 	} 
 }
 

@@ -19,7 +19,8 @@ public:
 	//Modifiers
 	void push_back(GridCell & tail);
 
-	//Element Access
+	//Element 
+	const GridCell& front() const { return _head; }
 	int getCost() const;
 	MovementPath& operator+(const MovementPath& path);
 };
