@@ -1,14 +1,8 @@
 #pragma once
-#include <list>
-#include "MobilityList.h"
-#include "EnumContainer.h"
-#include "GridCell.h"
-#include "CostMap.h"
-#include "GridCell.h"
 #include "PathBase.h"
+#include "CostMap.h"
 
 class Unit;
-
 class MovementPath :public PathBase {
 public:
 	const Unit& _unit;

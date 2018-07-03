@@ -1,6 +1,5 @@
 #pragma once
 #include "Grid.h"
-//#include "CellPath.h"
 #include "Party.h"
 #include "ID.h"
 #include "CostMap.h"
@@ -34,8 +33,6 @@ public:
 	constCostMap getShortestPathsMap(const Unit& unit, ID start) const;
 	constCostMap getShortestPathsMap(const Unit& unit, ID start, int remaining_move) const;
 
-
-	//CellPath<GridCell> getShortestPath(ID start, ID destination, int max_move, MobilitySet mobility);
 };
 
 

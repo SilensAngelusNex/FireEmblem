@@ -1,9 +1,9 @@
 
 #include "MoveHelper.h"
+#include "MovementPath.h"
 #include "CellEdge.h"
 #include "Unit.h"
 #include "Party.h"
-//#include "CellPath.h"
 #include "GridCell.h"
 #include "Range.h"
 #include "GridMap.h"

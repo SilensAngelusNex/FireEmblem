@@ -1,7 +1,6 @@
 #pragma once
 #include "ID.h"
 #include "id_cost_map.h"
-//#include "GridMap.h" DO NOT INCLUDE THIS
 #include <map>
 
 class GridMap;

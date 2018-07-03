@@ -395,11 +395,11 @@
     <ClInclude Include="MovementPath.h">
       <Filter>inc\map\cell_path</Filter>
     </ClInclude>
-    <ClInclude Include="id_cost_map.h">
-      <Filter>inc\map</Filter>
-    </ClInclude>
     <ClInclude Include="CostMap.h">
-      <Filter>inc\map</Filter>
+      <Filter>inc\map\cell_path</Filter>
+    </ClInclude>
+    <ClInclude Include="id_cost_map.h">
+      <Filter>inc\map\cell_path</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

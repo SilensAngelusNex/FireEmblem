@@ -1,8 +1,8 @@
 #include "AttackHelper.h"
+#include "GridMap.h"
 #include "CellEdge.h"
 #include "Unit.h"
 #include "Party.h"
-//#include "CellPath.h"
 #include "GridCell.h"
 #include "Range.h"
 

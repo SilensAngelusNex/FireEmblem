@@ -1,14 +1,10 @@
 #pragma once
-
-#include <vector>
-#include "GridMap.h"
 #include "MapHelper.h"
-#include "GridCell.h"
-#include "ID.h"
-#include "MovementPath.h"
+#include <set>
 
+class MovementPath;
+class GridMap;
 class Unit;
-class GridCell;
 
 class MoveHelper : 	public MapHelper {
 public:

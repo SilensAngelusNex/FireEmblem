@@ -106,17 +106,3 @@ constCostMap GridMap::getShortestPathsMap(const Unit & unit, ID start) const{
 constCostMap GridMap::getShortestPathsMap(const Unit & unit, ID start, int remaining_move) const{
 	return constCostMap(*this, getShortestPathsHelper(start, remaining_move, unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
 }
-// private helper methods for getShortestPathsMap() //
-/////////////////////////////////////////////////////////////////////////
-
-/*
-CellPath<GridCell> GridMap::getShortestPath(ID start, ID destination, int max_move, MobilitySet mobility) {
-	CostMap cell_cost_map = getShortestPathsMap(start, max_move, mobility);
-	auto path = std::list<GridCell::Ref>();
-	path.emplace_front((*this)[destination]);
-	while (start != path.front().get()._id) {
-		path.emplace_front(cell_cost_map[path.front()].second);
-	}
-	return CellPath<GridCell>(mobility, path);
-}
-*/
