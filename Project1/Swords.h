@@ -12,8 +12,8 @@ public:
 	BasicWeapon& operator=(BasicWeapon&& rhs) = default;
 	~BasicWeapon() override = default;
 
-	bool can_equip(Unit& unit) const override;
-	bool can_equip(Unit& unit, EquipSlot slot) const override;
+	bool can_equip(const Unit& unit) const override;
+	bool can_equip(const Unit& unit, EquipSlot slot) const override;
 };
 
 class WeaponFactory {

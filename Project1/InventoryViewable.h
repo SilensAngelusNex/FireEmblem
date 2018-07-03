@@ -12,6 +12,8 @@ public:
 	const Item& operator[](int item_index) const;
 	const ItemEquip& operator[](EquipSlot slot) const;
 
+	bool hasEquip(EquipSlot slot) const;
+
 	std::map<MobilitySet, Range::DistanceSet> getAttackRanges() const;
 	std::map<MobilitySet, Range::DistanceSet> getAssistRanges() const;
 

@@ -129,13 +129,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttackHelper.cpp" />
     <ClCompile Include="AttributeList.cpp" />
-    <ClCompile Include="CellPath.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
     <ClCompile Include="DiceTest.cpp" />
     <ClCompile Include="Experience.cpp" />
     <ClCompile Include="GridCell.cpp" />
+    <ClCompile Include="GridMap.cpp" />
     <ClCompile Include="Healing.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="Inventory.cpp" />
@@ -146,7 +147,8 @@
     <ClCompile Include="ItemEquip.cpp" />
     <ClCompile Include="ItemInfo.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="MapHelper.cpp" />
     <ClCompile Include="MoveHelper.cpp" />
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="Mobility.cpp" />
@@ -159,7 +161,6 @@
     <ClCompile Include="TestObservers.cpp" />
     <ClCompile Include="Stats.cpp" />
     <ClCompile Include="Swords.cpp" />
-    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="CellEdge.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitTest.cpp" />
@@ -168,11 +169,19 @@
     <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackHelper.h" />
     <ClInclude Include="BitsetIterator.h" />
     <ClInclude Include="EnumSetIterator.h" />
+    <ClInclude Include="GridMap.h" />
+    <ClInclude Include="ID.h" />
+    <ClInclude Include="id_cost_map.h" />
+    <ClInclude Include="logical_reference_wrapper.h" />
+    <ClInclude Include="read_vector.h" />
+    <ClInclude Include="logic_pair.h" />
+    <ClInclude Include="MapHelper.h" />
+    <ClInclude Include="PathMap.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
-    <ClInclude Include="CellPath.h" />
     <ClInclude Include="Combat.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="EnumContainer.h" />
@@ -184,7 +193,7 @@
     <ClInclude Include="InventoryViewable.h" />
     <ClInclude Include="ItemEquip.h" />
     <ClInclude Include="Enum.h" />
-    <ClInclude Include="Map.h" />
+    <ClInclude Include="Grid.h" />
     <ClInclude Include="MoveHelper.h" />
     <ClInclude Include="Mobility.h" />
     <ClInclude Include="MobilityList.h" />
@@ -196,6 +205,7 @@
     <ClInclude Include="PartyBase.h" />
     <ClInclude Include="optional_pair.h" />
     <ClInclude Include="Passkey.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="Swords.h" />
     <ClInclude Include="Damage.h" />
@@ -209,7 +219,6 @@
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TestObservers.h" />
     <ClInclude Include="ObserverDamage.h" />
-    <ClInclude Include="Tile.h" />
     <ClInclude Include="CellEdge.h" />
     <ClInclude Include="UniquePtrIterator.h" />
     <ClInclude Include="Unit.h" />
@@ -217,6 +226,9 @@
     <ClInclude Include="UtilTests.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponList.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

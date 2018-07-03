@@ -14,7 +14,7 @@
 #include "Experience.h"
 #include "Mobility.h"
 #include "Health.h"
-#include "PartyBase.h"
+#include "logical_reference_wrapper.h"
 
 class PartyBase;
 using IDENTITY = std::string;
@@ -49,7 +49,7 @@ public:
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
 	const Health& getHealth() const;
-	const PartyBase* const getParty() const;
+	const PartyBase* getParty() const;
 	//virtual const Location& getLocation() const;
 
 	// Commandable Unit
@@ -108,4 +108,9 @@ public:
 	}
 	bool operator==(const Unit & unit) const;
 	bool operator!=(const Unit & unit) const;
+
+	using Ref = logical_reference_wrapper<Unit>;
+	using ConstRef = logical_reference_wrapper<const Unit>;
+	using UniquePtr = std::unique_ptr<Unit>;
 };
+//TODO (Weston): Is this an ok place for this?

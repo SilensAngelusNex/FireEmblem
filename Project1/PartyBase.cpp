@@ -19,11 +19,11 @@ PartyBase::PartyBase(PartyData data) :
 {}
 
 PartyBase::const_iterator PartyBase::getPosition(const Unit & unit) const {
-	return std::find_if(_units.cbegin(), _units.cend(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
+	return std::find_if(_units.cbegin(), _units.cend(), [&](const Unit::UniquePtr& a) -> bool { return a.get() == &unit; });
 }
 
 PartyBase::iterator PartyBase::getPosition(const Unit & unit) {
-	return std::find_if(_units.begin(), _units.end(), [&](const UnitPtr& a) -> bool { return a.get() == &unit; });
+	return std::find_if(_units.begin(), _units.end(), [&](const Unit::UniquePtr& a) -> bool { return a.get() == &unit; });
 }
 
 void PartyBase::insertUnit(UnitData unit) {
@@ -31,8 +31,12 @@ void PartyBase::insertUnit(UnitData unit) {
 	_units.back()->setParty(this);
 }
 
-Party& PartyBase::getParty(Passkey<Map> /*unused*/) {
+Party& PartyBase::getParty(Passkey<GridMap> /*unused*/) {
 	return *reinterpret_cast<Party*>(this);
+}
+
+const Party& PartyBase::getParty(Passkey<GridMap> /*unused*/) const {
+	return *reinterpret_cast<const Party*>(this);
 }
 
 bool PartyBase::hasUnit(const Unit& unit) const {

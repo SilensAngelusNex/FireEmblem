@@ -88,6 +88,18 @@
     <Filter Include="inc\party">
       <UniqueIdentifier>{b79d346a-bc23-489b-bcd6-99fb3a6a0608}</UniqueIdentifier>
     </Filter>
+    <Filter Include="inc\map\cell_path">
+      <UniqueIdentifier>{e4b96af3-220c-4369-8b74-b4e38f80d9e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\map\cell_path">
+      <UniqueIdentifier>{af6a7b63-fffa-4eff-87d0-a02ab43158d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\map\map_helper">
+      <UniqueIdentifier>{d96ccf23-0a1f-48f4-a1a4-2db5cc633901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\map\map_heelper">
+      <UniqueIdentifier>{d389ecde-3081-4548-9780-9e814633d92a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DiceTest.cpp">
@@ -153,9 +165,6 @@
     <ClCompile Include="Swords.cpp">
       <Filter>src\item\items</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>src\map</Filter>
-    </ClCompile>
     <ClCompile Include="MapTest.cpp">
       <Filter>src\tests</Filter>
     </ClCompile>
@@ -173,15 +182,6 @@
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>src\map\gridcell</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>src\map\gridcell</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveHelper.cpp">
-      <Filter>src\map</Filter>
-    </ClCompile>
-    <ClCompile Include="CellPath.cpp">
-      <Filter>src\map</Filter>
     </ClCompile>
     <ClCompile Include="Healing.cpp">
       <Filter>src\unit</Filter>
@@ -206,6 +206,21 @@
     </ClCompile>
     <ClCompile Include="PartyBase.cpp">
       <Filter>src\party</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>src\map</Filter>
+    </ClCompile>
+    <ClCompile Include="GridMap.cpp">
+      <Filter>src\map</Filter>
+    </ClCompile>
+    <ClCompile Include="MapHelper.cpp">
+      <Filter>src\map\map_heelper</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveHelper.cpp">
+      <Filter>src\map\map_heelper</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackHelper.cpp">
+      <Filter>src\map\map_heelper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -296,9 +311,6 @@
     <ClInclude Include="ItemInfo.h">
       <Filter>inc\item</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>inc\map</Filter>
-    </ClInclude>
     <ClInclude Include="CellEdge.h">
       <Filter>inc\map\gridcell</Filter>
     </ClInclude>
@@ -310,15 +322,6 @@
     </ClInclude>
     <ClInclude Include="Terrain.h">
       <Filter>inc\map\gridcell</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>inc\map\gridcell</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveHelper.h">
-      <Filter>inc\map</Filter>
-    </ClInclude>
-    <ClInclude Include="CellPath.h">
-      <Filter>inc\map</Filter>
     </ClInclude>
     <ClInclude Include="IterableBitset.h">
       <Filter>inc\util</Filter>
@@ -350,6 +353,47 @@
     <ClInclude Include="Mobility.h">
       <Filter>inc\unit\component</Filter>
     </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="GridMap.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
+    <ClInclude Include="PathMap.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
+    <ClInclude Include="ID.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="logic_pair.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="read_vector.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="MapHelper.h">
+      <Filter>inc\map\map_helper</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveHelper.h">
+      <Filter>inc\map\map_helper</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackHelper.h">
+      <Filter>inc\map\map_helper</Filter>
+    </ClInclude>
+    <ClInclude Include="logical_reference_wrapper.h">
+      <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="id_cost_map.h">
+      <Filter>inc\map</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
     <ClInclude Include="EnumSetIterator.h">
       <Filter>inc\util</Filter>
     </ClInclude>
