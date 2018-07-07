@@ -61,15 +61,9 @@ std::vector<ReturnType> getUnitsWithinHelper(Range range, ID pos, const PartyBas
 
 
 std::vector<Unit::Ref> MapHelper::getUnits()  {
-	auto vec = std::vector<Unit::Ref>();
-	for (auto& party : _map._parties) {
-		for (auto& unit : party) {
-			vec.emplace_back(*unit);
-		}
-	}
-	return vec;
+	return _map.getUnits();
 }
-std::vector<Unit::Ref> MapHelper::getAllies(const Unit& unit)  {
+std::vector<Unit::Ref> MapHelper::getAllies(Unit& unit)  {
 	Expects(_map.hasUnit(unit));
 	auto vec = std::vector<Unit::Ref>();
 	for (auto& unit_ptr : _map.getParty(unit)) {
@@ -77,31 +71,23 @@ std::vector<Unit::Ref> MapHelper::getAllies(const Unit& unit)  {
 	}
 	return vec;
 }
-std::vector<Unit::Ref> MapHelper::getEnemies(const Unit& unit)  {
+std::vector<Unit::Ref> MapHelper::getEnemies(Unit& unit)  {
 	Expects(_map.hasUnit(unit));
 	auto vec = std::vector<Unit::Ref>();
-	for (auto& party : _map._parties) {
-		if (_map.getParty(unit) != party) {
-			for (auto& unit : party) {
-				vec.emplace_back(*unit);
-			}
+	for (auto& unit_ref : _map.getUnits()) {
+		if (!unit_ref.get().getParty()->hasUnit(unit)) {
+			vec.emplace_back(unit_ref);
 		}
 	}
 	return vec;
 }
 
 std::vector<Unit::ConstRef> MapHelper::getUnits() const{
-	auto vec =std::vector<Unit::ConstRef>();
-	for (auto& party : _map._parties) {
-		for (auto& unit : party) {
-			vec.emplace_back(*unit);
-		}
-	}
-	return vec;
+	return std::as_const(_map).getUnits();
 }
 std::vector<Unit::ConstRef> MapHelper::getAllies(const Unit& unit) const{
 	Expects(_map.hasUnit(unit));
-	auto vec =std::vector<Unit::ConstRef>(); 
+	auto vec = std::vector<Unit::ConstRef>();
 	for (auto& unit_ptr : _map.getParty(unit)) {
 		vec.emplace_back(*unit_ptr);
 	}
@@ -109,18 +95,16 @@ std::vector<Unit::ConstRef> MapHelper::getAllies(const Unit& unit) const{
 }
 std::vector<Unit::ConstRef> MapHelper::getEnemies(const Unit& unit) const{
 	Expects(_map.hasUnit(unit));
-	auto vec =std::vector<Unit::ConstRef>();
-	for (auto& party : _map._parties) {
-		if (_map.getParty(unit) != party) {
-			for (auto& unit : party) {
-				vec.emplace_back(*unit);
-			}
+	auto vec = std::vector<Unit::ConstRef>();
+	for (auto& unit_ref : _map.getUnits()) {
+		if (!unit_ref.get().getParty()->hasUnit(unit)) {
+			vec.emplace_back(unit_ref);
 		}
 	}
 	return vec;
 }
 
-std::vector<Unit::Ref> MapHelper::getUnitsWithin(const Unit& unit, Range range) {
+std::vector<Unit::Ref> MapHelper::getUnitsWithin(Unit& unit, Range range) {
 	Expects(_map.hasUnit(unit));
 	return getUnitsWithinHelper<all, Unit::Ref>(range, _map[unit], unit.getParty(), _map);
 }
@@ -130,7 +114,7 @@ std::vector<Unit::ConstRef> MapHelper::getUnitsWithin(const Unit& unit, Range ra
 	return getUnitsWithinHelper<all, Unit::ConstRef>(range, _map[unit], unit.getParty(), _map);
 }
 
-std::vector<Unit::Ref> MapHelper::getAlliesWithin(const Unit& unit, Range range) {
+std::vector<Unit::Ref> MapHelper::getAlliesWithin(Unit& unit, Range range) {
 	Expects(_map.hasUnit(unit));
 	return getUnitsWithinHelper<allies, Unit::Ref>(range, _map[unit], unit.getParty(), _map);
 }
@@ -140,7 +124,7 @@ std::vector<Unit::ConstRef> MapHelper::getAlliesWithin(const Unit& unit, Range r
 	return getUnitsWithinHelper<allies, Unit::ConstRef>(range, _map[unit], unit.getParty(), _map);
 }
 
-std::vector<Unit::Ref> MapHelper::getEnemiesWithin(const Unit& unit, Range range) {
+std::vector<Unit::Ref> MapHelper::getEnemiesWithin(Unit& unit, Range range) {
 	Expects(_map.hasUnit(unit));
 	return getUnitsWithinHelper<enemies, Unit::Ref>(range, _map[unit], unit.getParty(), _map);
 }

@@ -16,10 +16,10 @@ class GridMap :	public Grid {
 public:
 
 	GridMap(int width, int height);
-	GridMap(int width, int height, std::vector<PartyData> data);
 
-	Party& getParty(const Unit& unit);
+	Party& getParty(Unit& unit);
 	const Party& getParty(const Unit& unit) const;
+
 
 	CostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility);
 	CostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible);

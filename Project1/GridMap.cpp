@@ -42,19 +42,11 @@ GridMap::GridMap(int width, int height) :
 	Grid(width, height)
 {}
 
-GridMap::GridMap(int width, int height, std::vector<PartyData> data) :
-	Grid(width, height, data)
-{}
 
 //Party Access//
 /////////////////////////////////////////////////////////////////////////
-Party& GridMap::getParty(const Unit & unit) {
-	for (auto & party : _parties) {
-		if (*unit.getParty() == party) {
-			return party;
-		}
-	}
-	Expects(false);
+Party& GridMap::getParty(Unit & unit) {
+	return unit.getParty()->getParty(Passkey<GridMap>());
 }
 
 const Party& GridMap::getParty(const Unit & unit) const {

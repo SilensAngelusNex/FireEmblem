@@ -152,6 +152,7 @@
     <ClCompile Include="MoveHelper.cpp" />
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="Mobility.cpp" />
+    <ClCompile Include="Chapter.cpp" />
     <ClCompile Include="UnitPath.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
     <ClCompile Include="ObservableDamage.cpp" />
@@ -172,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="AttackHelper.h" />
     <ClInclude Include="BitsetIterator.h" />
+    <ClInclude Include="Chapter.h" />
     <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ID.h" />

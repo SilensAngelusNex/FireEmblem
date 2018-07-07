@@ -15,12 +15,12 @@ public:
 	~MapHelper() = default;
 
 	std::vector<Unit::Ref> getUnits();
-	std::vector<Unit::Ref> getAllies(const Unit& unit);
-	std::vector<Unit::Ref> getEnemies(const Unit& unit);
+	std::vector<Unit::Ref> getAllies(Unit& unit);
+	std::vector<Unit::Ref> getEnemies(Unit& unit);
 
-	std::vector<Unit::Ref> getUnitsWithin(const Unit& unit, Range range);
-	std::vector<Unit::Ref> getAlliesWithin(const Unit& unit, Range range);
-	std::vector<Unit::Ref> getEnemiesWithin(const Unit& unit, Range range);
+	std::vector<Unit::Ref> getUnitsWithin(Unit& unit, Range range);
+	std::vector<Unit::Ref> getAlliesWithin(Unit& unit, Range range);
+	std::vector<Unit::Ref> getEnemiesWithin(Unit& unit, Range range);
 
 	std::vector<Unit::Ref> getUnitsWithin(Range range, ID pos);
 	std::vector<Unit::Ref> getAlliesWithin(Range range, ID pos, const PartyBase& party);

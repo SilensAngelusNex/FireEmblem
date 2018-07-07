@@ -8,6 +8,7 @@
 #include "ID.h"
 #include "read_vector.h"
 
+
 class GridCell;
 class Unit;
 class Mobility;
@@ -25,19 +26,15 @@ protected:
 	std::vector<std::vector<GridCell>> _grid;
 
 	Grid(int width, int height);
-	Grid(int width, int height, std::vector<PartyData> data);
 	~Grid() = default;
 
 public:
 	
-	std::list<Party> _parties;
-
 	Grid(const Grid& map) = delete;
 	Grid& operator=(const Grid & map) = delete;
 	Grid(Grid&& map) = default;
 	Grid& operator=(Grid&& map) = default;
 		
-	void insertParty(PartyData data);
 	void moveUnit(GridCell& start, GridCell& destination);
 	void insertUnit(Unit& new_unit, GridCell& destination);
 	void removeUnit(Unit& unit);
@@ -51,11 +48,13 @@ public:
 
 	Unit* getUnit(const GridCell& key);
 	Unit* getUnit(ID index);
+	std::vector<Unit::Ref> getUnits();
 	GridCell* getCell(const Unit& key);
 
 	const Unit* getUnit(const GridCell& key) const;
 	const Unit* getUnit(ID index) const;
 	const GridCell* getCell(const Unit& key) const;
+	std::vector<Unit::ConstRef> getUnits() const;
 
 
 	using GridRow = read_vector< std::vector<GridCell>>;

@@ -124,7 +124,7 @@ std::set<ID> MoveHelper::getMoveEquipableAssistIDs(const Unit & unit) const{
 
 std::vector<ID> MoveHelper::getAlliedCellIDs(const Unit& unit) const{
 	auto vec = std::vector<ID>();
-	for (Unit& ally : _map.getParty(unit).getUnits()) {
+	for (auto& ally : _map.getParty(unit).getUnits()) {
 		if (_map.hasUnit(ally)) {
 			vec.emplace_back(_map[ally]);
 		}
@@ -133,7 +133,7 @@ std::vector<ID> MoveHelper::getAlliedCellIDs(const Unit& unit) const{
 }
 std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) const{
 	auto vec = std::vector<ID>();
-	for (Unit& ally : _map.getParty(unit).getOtherUnits(unit)) {
+	for (auto& ally : _map.getParty(unit).getOtherUnits(unit)) {
 		if (_map.hasUnit(ally)) {
 			vec.emplace_back(_map[ally]);
 		}

@@ -100,6 +100,12 @@
     <Filter Include="src\map\map_heelper">
       <UniqueIdentifier>{d389ecde-3081-4548-9780-9e814633d92a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\chapter">
+      <UniqueIdentifier>{3a6e0251-d094-477d-8eb0-fa719c7966fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\chapter">
+      <UniqueIdentifier>{e6058025-02f3-4b57-8bc3-a3c174100709}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DiceTest.cpp">
@@ -224,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="UnitPath.cpp">
       <Filter>src\map\cell_path</Filter>
+    </ClCompile>
+    <ClCompile Include="Chapter.cpp">
+      <Filter>src\chapter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,6 +406,9 @@
     </ClInclude>
     <ClInclude Include="UnitPath.h">
       <Filter>inc\map\cell_path</Filter>
+    </ClInclude>
+    <ClInclude Include="Chapter.h">
+      <Filter>inc\chapter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

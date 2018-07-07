@@ -37,8 +37,5 @@ public:
 	bool hasUnit(const Unit& unit) const;
 	bool operator==(const PartyBase& other) const;
 	bool operator!=(const PartyBase& other) const;
-
-	PartyBase(const PartyBase& party) = delete;
-	PartyBase& operator=(const PartyBase & party) = delete;
 };
 

@@ -15,18 +15,6 @@ Grid::Grid(int width, int height) {
 	insertAdjacencies();
 }
 
-Grid::Grid(int width, int height, std::vector<PartyData> data) {
-	for (int i = 0; i < width; i++) {
-		_grid.emplace_back();
-		for (int j = 0; j < height; j++) {
-			_grid[i].emplace_back(TerrainType::values::PLAINS, ID(i, j));
-		}
-	}
-	insertAdjacencies();
-	for (auto& party : data) {
-		insertParty(party);
-	}
-}
 
 Unit* Grid::getUnit(const GridCell& key) {
 	return  hasUnit(key) ? _cell_to_unit[&key] : nullptr;
@@ -37,6 +25,14 @@ const Unit* Grid::getUnit(const GridCell& key) const{
 
 Unit* Grid::getUnit(ID index) {
 	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
+}
+std::vector<Unit::Ref> Grid::getUnits() {
+
+	auto vec = std::vector<Unit::Ref>();
+	for (auto& pair : _cell_to_unit) {
+		vec.emplace_back(*pair.second);
+	}
+	return vec;
 }
 GridCell * Grid::getCell(const Unit & key)
 {
@@ -50,7 +46,14 @@ const GridCell * Grid::getCell(const Unit & key) const
 const Unit* Grid::getUnit(ID index) const {
 	return  hasUnit(index) ? _cell_to_unit.at(&(*this)[index]) : nullptr;
 }
+std::vector<Unit::ConstRef> Grid::getUnits() const{
 
+	auto vec = std::vector<Unit::ConstRef>();
+	for (auto& pair : _cell_to_unit) {
+		vec.emplace_back(*pair.second);
+	}
+	return vec;
+}
 /**Inserts Eucildian Adjacencies
 */
 void Grid::insertAdjacencies() {
@@ -69,9 +72,6 @@ void Grid::insertAdjacencies() {
 			}
 		}
 	}
-}
-void Grid::insertParty(PartyData data) {
-	_parties.emplace_back(data);
 }
 ////////////////////////////////////////////////////////////
 void Grid::moveUnit(GridCell& start, GridCell& destination) {

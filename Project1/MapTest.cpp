@@ -23,11 +23,11 @@ bool test::runMapTest() {
 	PartyData data2 = { "Daein" , {} };
 	std::vector<PartyData> party_vec = { data1, data2 };
 
-	GridMap map = GridMap(20, 20, party_vec); // create a 20 x 20 map
+	GridMap map = GridMap(20, 20); // create a 20 x 20 map
 	auto move_helper = MoveHelper(map);
 //	auto attack_helper = AttackHelper(map);
-	Party& party = map._parties.front();
-	Party& party2 = map._parties.back();
+	Party party = Party(data1);
+	Party party2 = Party(data2);
 
 	//Get my Units
 	auto it = party.begin();
