@@ -8,7 +8,9 @@ MoveCommand::MoveCommand(Chapter& chapter, UnitPath path) :
 {}
 
 bool MoveCommand::isValid() const {
-	return true; //temp
+	bool my_turn = *_path._unit.getParty() == _chapter.getTurnParty();
+	bool tired = _path._unit.isTired();
+	return my_turn && !tired;
 }
 
 bool MoveCommand::doExecute() {

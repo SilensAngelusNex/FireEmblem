@@ -19,9 +19,15 @@ bool test::runChapterTest() {
 	PartyData data2 = { "Daein" ,{} };
 	
 	Chapter chapter = Chapter();
+
 	chapter.addParty(data1);
 	chapter.addParty(data2);
 	
+
+	chapter.start();	
+	chapter.newTurn();
+	chapter.newTurn();
+
 	auto it = chapter._parties.front().begin();
 	Unit::UniquePtr& mia_ptr = *it++;
 	Unit& mia = *mia_ptr;
