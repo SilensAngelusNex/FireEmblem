@@ -164,12 +164,12 @@ UnitPath& MoveHelper::routePathTo(UnitPath& path, ID destination) {
 	if (!cost_map.hasKey(destination)) { //If impossible, cut our losses
 		return path;
 	}
-	while (!path.empty()) { //Keep as much of our current path as possible
+	while (path.size() > 0) { //Keep as much of our current path as possible
 		CostMap cost_map = _map.getShortestPathsMap(path._unit, path.back()._id, path._unit.getMobility().getMove() - path.getCost());
 		if (cost_map.hasKey(destination)) {
 			return path + UnitPath(path._unit, cost_map, _map[destination]);
 		}
-		path.pop_back();
+		path.pop_back(); //GSL will throw if we reach here when size = 1, but we should never do that anyways.
 	}
 	Ensures(false);
 	return path;

@@ -30,26 +30,19 @@ UnitPath::UnitPath(const Unit& unit, CostMap map, const GridCell & destination) 
 
 
 void UnitPath::push_back(const GridCell & tail) {
-	if (tail == _head) {
-		_path.clear();
-		return;
-	}
 	if(contains(tail)) {
 		trimPath(tail);
 		return;
 	}
-	const GridCell* back_cell = &_head;
-	if (!empty()) {
-		back_cell = &back();
-	}
-	Expects(back_cell->isAdjacent(tail));
-	int cost = getCost() + back_cell->getEdge(tail).value().getCost(_unit.getMobility().getMobilitySet()).value();
+	const GridCell& back_cell = back();
+	Expects(back_cell.isAdjacent(tail));
+	int cost = getCost() + back_cell.getEdge(tail).value().getCost(_unit.getMobility().getMobilitySet()).value();
 	Expects(cost <= _unit.getMobility().getMove());
 	_path.emplace_back(cost, tail);	
 }
 
 int UnitPath::getCost() const{
-	if (empty()) {
+	if (_path.empty()) {
 		return 0;
 	}
 	return _path.back().first;

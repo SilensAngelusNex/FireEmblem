@@ -39,13 +39,14 @@ public:
 	PathBase & operator+(const PathBase & path);
 
 	//Element Access
+	Cell& back();
 	const Cell& back() const;
 
 	//Capacity
-	bool empty() const { return _path.empty(); }
+	//bool empty() const { return _path.empty(); }
 	bool contains(const Cell& cell) const;
 	bool contains(ID id) const;
-	size_t size() const {	return _path.size(); }
+	size_t size() const {	return _path.size() + 1; }
 };
 
 template<typename Cell>
@@ -59,12 +60,23 @@ void PathBase<Cell>::push_back(Cell & tail) {
 }
 template<typename Cell>
 void PathBase<Cell>::pop_back() {
-	Expects(!empty());
+	Expects(!_path.empty());
 	_path.pop_back();
 }
 template<typename Cell>
+Cell& PathBase<Cell>::back() {
+	if (_path.empty()) {
+		return _head;
+	}
+	return _path.back().second;
+
+}
+
+template<typename Cell>
 const Cell& PathBase<Cell>::back() const {
-	Expects(!empty());
+	if (_path.empty()) {
+		return _head;
+	}
 	return _path.back().second;
 
 }
@@ -83,7 +95,7 @@ void PathBase<Cell>::trimPath(const Cell & end) {
 		_path.clear();
 		return;
 	}
-	while (back() != end) {
+	while (_path.back().second != end) {
 		pop_back();
 	}
 }
@@ -94,7 +106,7 @@ void PathBase<Cell>::trimPath(ID end_id) {
 		_path.clear();
 		return;
 	}
-	while (back()._id != end_id) {
+	while (_path.back().second.get()._id != end_id) {
 		pop_back();
 	}
 }
