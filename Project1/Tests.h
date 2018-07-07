@@ -1,6 +1,4 @@
-#ifndef TESTS_H
-#define TESTS_H
-
+#pragma once
 
 namespace test {
 	//bool runAttribTest() {
@@ -10,6 +8,6 @@ namespace test {
 	bool runDiceTest();
 	bool runUnitTest();
 	bool runMapTest();
+	bool runChapterTest();
 }
 
-#endif // !TESTS_H

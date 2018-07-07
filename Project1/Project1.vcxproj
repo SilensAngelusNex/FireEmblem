@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="AttackHelper.cpp" />
     <ClCompile Include="AttributeList.cpp" />
+    <ClCompile Include="ChapterTest.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
     <ClCompile Include="DiceTest.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="MapHelper.cpp" />
+    <ClCompile Include="MoveCommand.cpp" />
     <ClCompile Include="MoveHelper.cpp" />
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="Mobility.cpp" />
@@ -174,11 +176,15 @@
     <ClInclude Include="AttackHelper.h" />
     <ClInclude Include="BitsetIterator.h" />
     <ClInclude Include="Chapter.h" />
+    <ClInclude Include="CommandBase.h" />
+    <ClInclude Include="CommandType.h" />
     <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />
+    <ClInclude Include="ChapterCommand.h" />
     <ClInclude Include="ID.h" />
     <ClInclude Include="id_cost_map.h" />
     <ClInclude Include="logical_reference_wrapper.h" />
+    <ClInclude Include="MoveCommand.h" />
     <ClInclude Include="UnitPath.h" />
     <ClInclude Include="PathBase.h" />
     <ClInclude Include="read_vector.h" />

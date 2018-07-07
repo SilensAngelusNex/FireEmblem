@@ -35,5 +35,8 @@ int main(int  /*argc*/, char ** /*argv*/) {
 	if (iterTest()) {
 		std::cout << "Iterators passed!" << std::endl;
 	}
+	if (test::runChapterTest()) {
+		std::cout << "Chapter passed!" << std::endl;
+	}
 	return 0;
 }

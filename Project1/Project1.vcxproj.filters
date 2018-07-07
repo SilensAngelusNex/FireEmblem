@@ -106,6 +106,12 @@
     <Filter Include="inc\chapter">
       <UniqueIdentifier>{e6058025-02f3-4b57-8bc3-a3c174100709}</UniqueIdentifier>
     </Filter>
+    <Filter Include="inc\chapter\command">
+      <UniqueIdentifier>{1a57001e-edd6-432b-9c78-d848821ff853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\chapter\command">
+      <UniqueIdentifier>{08be9f52-c133-4da8-a453-45f5ed3489b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DiceTest.cpp">
@@ -233,6 +239,12 @@
     </ClCompile>
     <ClCompile Include="Chapter.cpp">
       <Filter>src\chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="ChapterTest.cpp">
+      <Filter>src\tests</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>src\chapter\command</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -409,6 +421,18 @@
     </ClInclude>
     <ClInclude Include="Chapter.h">
       <Filter>inc\chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="ChapterCommand.h">
+      <Filter>inc\chapter\command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandType.h">
+      <Filter>inc\chapter\command</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>inc\chapter\command</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandBase.h">
+      <Filter>inc\chapter\command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
