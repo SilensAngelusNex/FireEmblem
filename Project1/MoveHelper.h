@@ -29,6 +29,6 @@ public:
 	std::vector<ID> getOtherAlliedCellIDs(const Unit & unit) const;
 
 	UnitPath getShortestPath(const Unit & unit, ID destination);
-	UnitPath& reRoutePath(UnitPath& path, ID destination);
+	UnitPath& routePathTo(UnitPath& path, ID destination);
 	void walkPath(Unit& unit, UnitPath path);
 };

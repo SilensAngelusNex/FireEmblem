@@ -44,7 +44,7 @@ bool test::runMapTest() {
 	map.insertUnit(mia, map[10][10]._id);
 	std::set <ID> cells = move_helper.getAccesibleCellIDs(mia);
 	UnitPath path = move_helper.getShortestPath(mia, map[10][13]._id);
-	move_helper.reRoutePath(path, map[11][12]._id);
+	move_helper.routePathTo(path, map[11][12]._id);
 	std::cout << "Start walking " << mia.getIdentity() << " from space:" << map[mia] << " to space " << path.back()._id << std::endl;
 	move_helper.walkPath(mia, path);
 	std::cout << "Start walking " << mia.getIdentity() << " from space:" << map[mia] << " to space " << path.back()._id << std::endl;

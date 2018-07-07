@@ -147,8 +147,8 @@ UnitPath MoveHelper::getShortestPath(const Unit& unit, ID destination) {
 	return UnitPath(unit, _map.getShortestPathsMap(unit), _map[destination]);
 }
 
-//TODO(Torrey): optomize this
-UnitPath& MoveHelper::reRoutePath(UnitPath& path, ID destination) {
+//Modify path to add destination while keeping the path legal, and using as much of the current path as possible
+UnitPath& MoveHelper::routePathTo(UnitPath& path, ID destination) {
 	if (path.contains(destination)) {
 		path.trimPath(destination);
 		return path;
