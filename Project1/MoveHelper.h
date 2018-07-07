@@ -1,13 +1,10 @@
 #pragma once
-
-#include <vector>
-#include "GridMap.h"
 #include "MapHelper.h"
-#include "GridCell.h"
-#include "ID.h"
+#include <set>
 
+class UnitPath;
+class GridMap;
 class Unit;
-class GridCell;
 
 class MoveHelper : 	public MapHelper {
 public:
@@ -30,4 +27,8 @@ public:
 
 	std::vector<ID> getAlliedCellIDs(const Unit & unit) const;
 	std::vector<ID> getOtherAlliedCellIDs(const Unit & unit) const;
+
+	UnitPath getShortestPath(const Unit & unit, ID destination);
+	UnitPath& routePathTo(UnitPath& path, ID destination);
+	void walkPath(Unit& unit, UnitPath path);
 };

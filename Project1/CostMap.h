@@ -7,17 +7,17 @@ class GridMap;
 class GridCell;
 
 template <typename grid>
-class path_map : public id_cost_map {
+class cell_cost_map : public id_cost_map {
 private:
 	using cell_ref = decltype(std::declval<grid>().operator[](std::declval<ID&>()));
 	using CostCell = logic_pair<int, cell_ref>;
 	//private iterator class that replaces ID with GridCell::Ref
 	template <typename iterator>
-	class path_map_iter : public iterator {
+	class cost_map_iter : public iterator {
 	private:
 		grid & _map;
 	public:
-		path_map_iter(iterator&& parent, grid& map) :
+		cost_map_iter(iterator&& parent, grid& map) :
 			iterator(parent),
 			_map(map)
 		{}
@@ -35,11 +35,11 @@ private:
 	
 public:
 	//Constructors
-	path_map(grid& g, GridCell& origin) :
+	cell_cost_map(grid& g, GridCell& origin) :
 		id_cost_map(origin),
 		_grid(g)
 	{}
-	path_map(grid& g, id_cost_map&& move) :
+	cell_cost_map(grid& g, id_cost_map&& move) :
 		id_cost_map(move),
 		_grid(g)
 	{}
@@ -47,8 +47,8 @@ public:
 
 
 	//Iterator
-	using iterator = path_map_iter<id_cost_map::iterator>;
-	using const_iterator = path_map_iter<id_cost_map::const_iterator>;
+	using iterator = cost_map_iter<id_cost_map::iterator>;
+	using const_iterator = cost_map_iter<id_cost_map::const_iterator>;
 
 	iterator begin() { return iterator(id_cost_map::begin(), _grid); }
 	const iterator begin() const { return iterator(id_cost_map::begin(), _grid); }
@@ -74,5 +74,5 @@ public:
 	}
 };
 
-using PathMap = path_map<GridMap>;
-using constPathMap = path_map<const GridMap>;
+using CostMap = cell_cost_map<GridMap>;
+using constCostMap = cell_cost_map<const GridMap>;

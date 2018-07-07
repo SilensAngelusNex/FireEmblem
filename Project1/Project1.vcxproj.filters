@@ -222,6 +222,9 @@
     <ClCompile Include="AttackHelper.cpp">
       <Filter>src\map\map_heelper</Filter>
     </ClCompile>
+    <ClCompile Include="UnitPath.cpp">
+      <Filter>src\map\cell_path</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -362,9 +365,6 @@
     <ClInclude Include="GridMap.h">
       <Filter>inc\map</Filter>
     </ClInclude>
-    <ClInclude Include="PathMap.h">
-      <Filter>inc\map</Filter>
-    </ClInclude>
     <ClInclude Include="ID.h">
       <Filter>inc\util</Filter>
     </ClInclude>
@@ -386,8 +386,17 @@
     <ClInclude Include="logical_reference_wrapper.h">
       <Filter>inc\util</Filter>
     </ClInclude>
+    <ClInclude Include="PathBase.h">
+      <Filter>inc\map\cell_path</Filter>
+    </ClInclude>
+    <ClInclude Include="CostMap.h">
+      <Filter>inc\map\cell_path</Filter>
+    </ClInclude>
     <ClInclude Include="id_cost_map.h">
-      <Filter>inc\map</Filter>
+      <Filter>inc\map\cell_path</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitPath.h">
+      <Filter>inc\map\cell_path</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

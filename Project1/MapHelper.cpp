@@ -1,10 +1,11 @@
 #include "MapHelper.h"
 #include "GridMap.h"
-#include "PathMap.h"
+#include "CostMap.h"
 #include "Unit.h"
 #include "GridCell.h"
 #include "PartyBase.h"
 #include "Range.h"
+#include "UnitPath.h"
 #include <vector>
 
 
@@ -18,9 +19,9 @@ struct all { static bool hasUnit(const PartyBase*  /*unused*/, const GridMap&  /
 
 template<typename hasUnit, typename ReturnType>
 std::vector<ReturnType> getCellsWithinHelper(Range range, ID pos, const PartyBase* party,  GridMap& map) {
-	PathMap path_map = map.getShortestPathsMap(pos, range.maxRange(), range._type);
+	CostMap cost_map = map.getShortestPathsMap(pos, range.maxRange(), range._type);
 	auto vec = std::vector<ReturnType>();
-	for (auto pair : path_map) {
+	for (auto pair : cost_map) {
 		if (range.hasDistance(pair.second.first)) {
 			if (hasUnit::hasUnit(party, map, pair.first._id)) {
 				vec.emplace_back(pair.first);
@@ -32,9 +33,9 @@ std::vector<ReturnType> getCellsWithinHelper(Range range, ID pos, const PartyBas
 
 template<typename hasUnit>
 std::vector<ID> getIDsWithinHelper(Range range, ID pos, const PartyBase* party,  GridMap& map) {
-	PathMap path_map = map.getShortestPathsMap(pos, range.maxRange(), range._type);
+	CostMap cost_map = map.getShortestPathsMap(pos, range.maxRange(), range._type);
 	auto vec = std::vector<ID>();
-	for (auto pair : path_map) {
+	for (auto pair : cost_map) {
 		if (range.hasDistance(pair.second.first)) {
 			if (hasUnit::hasUnit(party, map, pair.first._id)) {
 				vec.emplace_back(pair.first._id);
@@ -46,9 +47,9 @@ std::vector<ID> getIDsWithinHelper(Range range, ID pos, const PartyBase* party, 
 
 template<typename hasUnit, typename ReturnType>
 std::vector<ReturnType> getUnitsWithinHelper(Range range, ID pos, const PartyBase * party, GridMap& map) {
-	PathMap path_map = map.getShortestPathsMap(pos, range.maxRange(), range._type);
+	CostMap cost_map = map.getShortestPathsMap(pos, range.maxRange(), range._type);
 	auto vec = std::vector<ReturnType>();
-	for (auto pair : path_map) {
+	for (auto pair : cost_map) {
 		if (range.hasDistance(pair.second.first) && map.hasUnit(pair.first)) {
 			if (hasUnit::hasUnit(party, map, pair.first._id)) {
 				vec.emplace_back(map[pair.first]);

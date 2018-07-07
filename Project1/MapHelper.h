@@ -1,11 +1,10 @@
 #pragma once
-#include "PartyBase.h"
 #include "GridCell.h"
 #include "Unit.h"
 #include <vector>
 
-#include "GridMap.h"
-
+class GridMap;
+class PartyBase;
 class Range;
 
 class MapHelper {

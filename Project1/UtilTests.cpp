@@ -10,8 +10,8 @@
 bool bitsetTest() {
 	constexpr int size = 10;
 	std::array<bool, size> init_array{true, true, false, true, false, true, false, false, false, true};
-	std::vector<int> init_vec;
-	for (int i = 0; i < size; ++i) {
+	std::vector<size_t> init_vec;
+	for (size_t i = 0; i < size; ++i) {
 		if (init_array[i]) {
 			init_vec.push_back(i);
 			
@@ -21,15 +21,15 @@ bool bitsetTest() {
 	IterableBitset<size> set1(init_array);
 	IterableBitset<size> set2(init_vec);
 
-	std::vector<int> result1;
-	for (int i : set1) {
+	std::vector<size_t> result1;
+	for (size_t i : set1) {
 		result1.push_back(i);
 		std::cout << i << " ";
 	}
 	std::cout << std::endl;
 
-	std::vector<int> result2;
-	for (int i : set2) {
+	std::vector<size_t> result2;
+	for (size_t i : set2) {
 		result2.push_back(i);
 		std::cout << i << " ";
 	}
@@ -42,8 +42,8 @@ bool enumTest1() {
 	enum class myenum { A, B, C, D, ENUM_END };
 	using MyEnum = Enum<myenum>;
 
-	std::vector<int> expected { 0, 1, 2, 3 };
-	std::vector<int> result;
+	std::vector<size_t> expected { 0, 1, 2, 3 };
+	std::vector<size_t> result;
 
 	for (MyEnum e : MyEnum::list) {
 		size_t e_pos = MyEnum::positionOf(e);
