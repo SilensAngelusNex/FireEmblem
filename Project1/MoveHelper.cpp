@@ -1,6 +1,6 @@
 
 #include "MoveHelper.h"
-#include "MovementPath.h"
+#include "UnitPath.h"
 #include "CellEdge.h"
 #include "Unit.h"
 #include "Party.h"
@@ -142,12 +142,13 @@ std::vector<ID> MoveHelper::getOtherAlliedCellIDs(const Unit& unit) const{
 }
 	////////////////////////////////////////////////////////////////////////////////
 
-MovementPath MoveHelper::getShortestPath(const Unit& unit, ID destination) {
-	return MovementPath(unit, _map.getShortestPathsMap(unit), _map[destination]);
+UnitPath MoveHelper::getShortestPath(const Unit& unit, ID destination) {
+	Expects(_map.getShortestPathsMap(unit).hasKey(destination));
+	return UnitPath(unit, _map.getShortestPathsMap(unit), _map[destination]);
 }
 
 //TODO(Torrey): optomize this
-MovementPath& MoveHelper::reRoutePath(MovementPath& path, ID destination) {
+UnitPath& MoveHelper::reRoutePath(UnitPath& path, ID destination) {
 	if (path.contains(destination)) {
 		path.trimPath(destination);
 		return path;
@@ -166,25 +167,25 @@ MovementPath& MoveHelper::reRoutePath(MovementPath& path, ID destination) {
 	while (!path.empty()) { //Keep as much of our current path as possible
 		CostMap cost_map = _map.getShortestPathsMap(path._unit, path.back()._id, path._unit.getMobility().getMove() - path.getCost());
 		if (cost_map.hasKey(destination)) {
-			return path + MovementPath(path._unit, cost_map, _map[destination]);
+			return path + UnitPath(path._unit, cost_map, _map[destination]);
 		}
 		path.pop_back();
 	}
-	Expects(false);
+	Ensures(false);
 	return path;
 }
 
-void MoveHelper::walkPath(Unit & unit, MovementPath path) {
+void MoveHelper::walkPath(Unit & unit, UnitPath path) {
 	GridCell* current_cell = _map.getCell(unit);
-	std::cout << "Start walking " << unit.getIdentity() << " from space:" << _map[unit] << " to space " << path.back()._id << std::endl;
+	//std::cout << "Start walking " << unit.getIdentity() << " from space:" << _map[unit] << " to space " << path.back()._id << std::endl;
 	for (auto& pair : path) {
-		std::cout << "Moving " << unit.getIdentity() << " from " << current_cell->_id << " to " << pair.second.get()._id << std::endl;
+		//std::cout << "Moving " << unit.getIdentity() << " from " << current_cell->_id << " to " << pair.second.get()._id << std::endl;
 		if (!unit.getMobility().canPass(_map.getUnit(pair.second))) {
 			// Walked into a stealthed unit or the like
 			//Add logic for that
 			return;
 		}
-		if (!_map.hasUnit(pair.second)) { //Skip over units we can move through
+		if (!_map.hasUnit(pair.second)) { //Skip over units we can move through add skill logic for that
 			_map.moveUnit(current_cell->_id, pair.second.get()._id);
 			current_cell = _map.getCell(unit);
 		}

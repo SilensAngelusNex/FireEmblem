@@ -99,9 +99,6 @@ constCostMap GridMap::getShortestPathsMap(const Unit& unit) const{
 	return constCostMap(*this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
 }
 
-constCostMap GridMap::getShortestPathsMap(const Unit & unit, ID start) const{
-	return constCostMap(*this, getShortestPathsHelper(start, unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
-}
 
 constCostMap GridMap::getShortestPathsMap(const Unit & unit, ID start, int remaining_move) const{
 	return constCostMap(*this, getShortestPathsHelper(start, remaining_move, unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));

@@ -2,7 +2,7 @@
 #include "MapHelper.h"
 #include <set>
 
-class MovementPath;
+class UnitPath;
 class GridMap;
 class Unit;
 
@@ -28,7 +28,7 @@ public:
 	std::vector<ID> getAlliedCellIDs(const Unit & unit) const;
 	std::vector<ID> getOtherAlliedCellIDs(const Unit & unit) const;
 
-	MovementPath getShortestPath(const Unit & unit, ID destination);
-	MovementPath& reRoutePath(MovementPath& path, ID destination);
-	void walkPath(Unit& unit, MovementPath path);
+	UnitPath getShortestPath(const Unit & unit, ID destination);
+	UnitPath& reRoutePath(UnitPath& path, ID destination);
+	void walkPath(Unit& unit, UnitPath path);
 };

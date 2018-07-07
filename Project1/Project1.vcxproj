@@ -152,12 +152,11 @@
     <ClCompile Include="MoveHelper.cpp" />
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="Mobility.cpp" />
-    <ClCompile Include="MovementPath.cpp" />
+    <ClCompile Include="UnitPath.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
     <ClCompile Include="ObservableDamage.cpp" />
     <ClCompile Include="Party.cpp" />
     <ClCompile Include="PartyBase.cpp" />
-    <ClCompile Include="PathBase.cpp" />
     <ClCompile Include="Range.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestObservers.cpp" />
@@ -178,7 +177,7 @@
     <ClInclude Include="ID.h" />
     <ClInclude Include="id_cost_map.h" />
     <ClInclude Include="logical_reference_wrapper.h" />
-    <ClInclude Include="MovementPath.h" />
+    <ClInclude Include="UnitPath.h" />
     <ClInclude Include="PathBase.h" />
     <ClInclude Include="read_vector.h" />
     <ClInclude Include="logic_pair.h" />

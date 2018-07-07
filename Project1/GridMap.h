@@ -30,7 +30,6 @@ public:
 	constCostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility) const;
 	constCostMap getShortestPathsMap(ID start, int max_move, MobilitySet mobility, bool intangible) const;
 	constCostMap getShortestPathsMap(const Unit& unit) const;
-	constCostMap getShortestPathsMap(const Unit& unit, ID start) const;
 	constCostMap getShortestPathsMap(const Unit& unit, ID start, int remaining_move) const;
 
 };

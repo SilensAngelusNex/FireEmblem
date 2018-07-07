@@ -222,10 +222,7 @@
     <ClCompile Include="AttackHelper.cpp">
       <Filter>src\map\map_heelper</Filter>
     </ClCompile>
-    <ClCompile Include="PathBase.cpp">
-      <Filter>src\map\cell_path</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementPath.cpp">
+    <ClCompile Include="UnitPath.cpp">
       <Filter>src\map\cell_path</Filter>
     </ClCompile>
   </ItemGroup>
@@ -392,13 +389,13 @@
     <ClInclude Include="PathBase.h">
       <Filter>inc\map\cell_path</Filter>
     </ClInclude>
-    <ClInclude Include="MovementPath.h">
-      <Filter>inc\map\cell_path</Filter>
-    </ClInclude>
     <ClInclude Include="CostMap.h">
       <Filter>inc\map\cell_path</Filter>
     </ClInclude>
     <ClInclude Include="id_cost_map.h">
+      <Filter>inc\map\cell_path</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitPath.h">
       <Filter>inc\map\cell_path</Filter>
     </ClInclude>
   </ItemGroup>
