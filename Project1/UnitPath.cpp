@@ -37,7 +37,7 @@ void UnitPath::push_back(const GridCell & tail) {
 	const GridCell& back_cell = back();
 	Expects(back_cell.isAdjacent(tail));
 	int cost = getCost() + back_cell.getEdge(tail).value().getCost(_unit.getMobility().getMobilitySet()).value();
-	Expects(cost <= _unit.getMobility().getMove());
+	Expects(cost <= _unit.getTurnInfo().getRemainingMove());
 	_path.emplace_back(cost, tail);	
 }
 

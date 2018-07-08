@@ -65,10 +65,10 @@ CostMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mobilit
 	return CostMap( *this, getShortestPathsHelper(start, max_move, mobility, [intangible, this](CellEdge edge) { return intangible || !hasUnit(edge._id); }, *this));
 }
 CostMap GridMap::getShortestPathsMap(const Unit& unit) {
-	return CostMap( *this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, * this));
+	return CostMap( *this, getShortestPathsHelper((*this)[unit], unit.getTurnInfo().getRemainingMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, * this));
 }
 CostMap GridMap::getShortestPathsMap(const Unit & unit, ID start) {
-	return CostMap(*this, getShortestPathsHelper(start, unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
+	return CostMap(*this, getShortestPathsHelper(start, unit.getTurnInfo().getRemainingMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
 }
 
 CostMap GridMap::getShortestPathsMap(const Unit & unit, ID start, int remaining_move) {
@@ -88,7 +88,7 @@ constCostMap GridMap::getShortestPathsMap(ID start, int max_move, MobilitySet mo
 }
 
 constCostMap GridMap::getShortestPathsMap(const Unit& unit) const{
-	return constCostMap(*this, getShortestPathsHelper((*this)[unit], unit.getMobility().getMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
+	return constCostMap(*this, getShortestPathsHelper((*this)[unit], unit.getTurnInfo().getRemainingMove(), unit.getMobility().getMobilitySet(), [&unit, this](CellEdge edge) { return unit.getMobility().canPass(getUnit(edge._id)); }, *this));
 }
 
 

@@ -14,6 +14,7 @@
 #include "Experience.h"
 #include "Mobility.h"
 #include "Health.h"
+#include "TurnInfo.h"
 #include "logical_reference_wrapper.h"
 
 class PartyBase;
@@ -37,6 +38,7 @@ private:
 	Combat _combat;
 	Health _health;
 	Mobility _mobility;
+	TurnInfo _turn_info;
 
 public:
 	Unit(IDENTITY name, CONTEXT& context, AttributeList stats);
@@ -49,6 +51,7 @@ public:
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
 	const Health& getHealth() const;
+	const TurnInfo& getTurnInfo() const;
 	const PartyBase* getParty() const;
 	//virtual const Location& getLocation() const;
 
@@ -57,6 +60,7 @@ public:
 	//virtual Location& getLocation();
 	Combat& getCombat();
 	Health& getHealth();
+	TurnInfo& getTurnInfo();
 	// Move into identity component
 	PartyBase* getParty();
 	PartyBase* setParty(PartyBase* other_party);

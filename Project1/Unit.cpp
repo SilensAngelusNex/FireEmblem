@@ -10,7 +10,8 @@ Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
 	_inv(*this),
 	_combat(*this),
 	_health(*this),
-	_mobility(*this, 50, MobilitySet(std::array<bool, MobilityType::size>{true}))
+	_mobility(*this, 50, MobilitySet(std::array<bool, MobilityType::size>{true})),
+	_turn_info(*this)
 {}
 
 const IDENTITY& Unit::getIdentity() const {
@@ -37,6 +38,11 @@ const Health & Unit::getHealth() const {
 	return _health;
 }
 
+const TurnInfo & Unit::getTurnInfo() const
+{
+	return _turn_info;
+}
+
 const PartyBase* Unit::getParty() const{
 	return _party;
 }
@@ -50,17 +56,21 @@ Combat& Unit::getCombat() {
 }
 
 void Unit::refresh() {
-	//TODO(T or W): Code start of turn stuff.
-	_mobility._tired = false;
+	_turn_info.refresh();
 }
 void Unit::newTurn() {
 	//TODO(T or W): code start of turn stuff.
 }
 bool Unit::isTired() const {
-	return _mobility.isTired(); //TODO(Weston): Should this be in a component like isDead() ? 
+	return _turn_info.isTired(); //TODO(Weston): Should this be in a component like isDead() ? 
 }
 Health & Unit::getHealth() {
 	return _health;
+}
+
+TurnInfo & Unit::getTurnInfo()
+{
+	return _turn_info;
 }
 
 PartyBase* Unit::getParty() {

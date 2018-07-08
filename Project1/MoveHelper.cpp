@@ -155,7 +155,7 @@ UnitPath& MoveHelper::routePathTo(UnitPath& path, ID destination) {
 	}
 	if (path.back().isAdjacent(destination)) { //Take Adjacent option if available
 		auto cost = path.back().getEdge(destination).value().getCost(path._unit.getMobility().getMobilitySet());
-		if (cost && cost.value() + path.getCost() <= path._unit.getMobility().getMove()) {
+		if (cost && cost.value() + path.getCost() <= path._unit.getTurnInfo().getRemainingMove()) {
 			path.push_back(_map[destination]);
 			return path;
 		}
@@ -165,7 +165,7 @@ UnitPath& MoveHelper::routePathTo(UnitPath& path, ID destination) {
 		return path;
 	}
 	while (path.size() > 0) { //Keep as much of our current path as possible
-		CostMap cost_map = _map.getShortestPathsMap(path._unit, path.back()._id, path._unit.getMobility().getMove() - path.getCost());
+		CostMap cost_map = _map.getShortestPathsMap(path._unit, path.back()._id, path._unit.getTurnInfo().getRemainingMove() - path.getCost());
 		if (cost_map.hasKey(destination)) {
 			return path + UnitPath(path._unit, cost_map, _map[destination]);
 		}

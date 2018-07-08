@@ -38,14 +38,14 @@ bool test::runChapterTest() {
 
 
 	chapter._map.insertUnit(mia, chapter._map[10][10]);
-	UnitPath path = move_helper.getShortestPath(mia, chapter._map[10][13]._id);
-	ChapterCommand<MoveCommand> move_command = ChapterCommand<MoveCommand>(MoveCommand(chapter, path));
+	UnitPath path = move_helper.getShortestPath(mia, chapter._map[10][12]._id);
+	ChapterCommand<MoveCommand> move_command = ChapterCommand<MoveCommand>(MoveCommand(chapter, mia, path));
 	chapter.acceptCommand(move_command);
 	UnitPath path2 = move_helper.getShortestPath(mia, chapter._map[10][10]._id);
-	ChapterCommand<MoveCommand> move_command2 = ChapterCommand<MoveCommand>(MoveCommand(chapter, path2));
+	ChapterCommand<MoveCommand> move_command2 = ChapterCommand<MoveCommand>(MoveCommand(chapter, mia, path2));
 	chapter.acceptCommand(move_command2);
 	chapter.acceptCommand(move_command2);
-	return chapter._map.getUnit(chapter._map[10][13]) == &mia;
+	return chapter._map.getUnit(chapter._map[10][12]) == &mia;
 
 	return true;
 }

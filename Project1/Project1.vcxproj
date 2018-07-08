@@ -156,6 +156,7 @@
     <ClCompile Include="MapTest.cpp" />
     <ClCompile Include="Mobility.cpp" />
     <ClCompile Include="Chapter.cpp" />
+    <ClCompile Include="TurnInfo.cpp" />
     <ClCompile Include="UnitPath.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
     <ClCompile Include="ObservableDamage.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ChapterCommand.h" />
+    <ClInclude Include="TurnInfo.h" />
     <ClInclude Include="ID.h" />
     <ClInclude Include="id_cost_map.h" />
     <ClInclude Include="logical_reference_wrapper.h" />

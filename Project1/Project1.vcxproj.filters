@@ -249,6 +249,9 @@
     <ClCompile Include="EndCommand.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="TurnInfo.cpp">
+      <Filter>src\unit\component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -439,6 +442,9 @@
     </ClInclude>
     <ClInclude Include="EndCommand.h">
       <Filter>inc</Filter>
+    </ClInclude>
+    <ClInclude Include="TurnInfo.h">
+      <Filter>inc\unit\component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

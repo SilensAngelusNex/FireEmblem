@@ -22,9 +22,6 @@ public:
 
 	bool canPass(const Unit * unit) const;
 	std::optional<int> getCost(const CellEdge& edge) const;
-	mutable bool _tired;
 
-	bool isTired() const { return _tired; }
-	void tire() const { _tired = true; };
 };
 
