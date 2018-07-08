@@ -3,10 +3,20 @@
 #include "ChapterCommand.h"
 #include "MoveCommand.h"
 #include "Party.h"
+#include "AttackHelper.h"
+#include "MoveHelper.h"
+#include "HelperContainer.h"
+
+void Chapter::setHelpers(){
+	AttackContainer::setHelper(AttackHelper(_map));
+	MoveContainer::setHelper(MoveHelper(_map));
+}
 
 Chapter::Chapter() :
 	_map(20, 20)
-{}
+{
+	setHelpers();
+}
 
 Party & Chapter::getTurnParty() {
 	Expects(turn > 0);

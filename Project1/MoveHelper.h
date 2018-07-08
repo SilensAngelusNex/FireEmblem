@@ -1,5 +1,6 @@
 #pragma once
 #include "MapHelper.h"
+#include "HelperContainer.h"
 #include <set>
 
 class UnitPath;
@@ -32,3 +33,5 @@ public:
 	UnitPath& routePathTo(UnitPath& path, ID destination);
 	void walkPath(Unit& unit, UnitPath path);
 };
+
+using MoveContainer = HelperContainer<MoveHelper>;

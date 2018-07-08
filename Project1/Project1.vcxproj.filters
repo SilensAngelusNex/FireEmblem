@@ -452,6 +452,9 @@
     <ClInclude Include="WaitCommand.h">
       <Filter>inc\chapter\command</Filter>
     </ClInclude>
+    <ClInclude Include="HelperContainer.h">
+      <Filter>inc\map\map_helper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Game.rc">

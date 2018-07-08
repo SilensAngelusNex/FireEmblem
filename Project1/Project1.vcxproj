@@ -185,6 +185,7 @@
     <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ChapterCommand.h" />
+    <ClInclude Include="HelperContainer.h" />
     <ClInclude Include="WaitCommand.h" />
     <ClInclude Include="TurnInfo.h" />
     <ClInclude Include="ID.h" />

@@ -8,10 +8,12 @@
 #include "Inventory.h"
 #include "Experience.h"
 #include "optional_pair.h"
+#include "AttackHelper.h"
+
 
 class Unit;
 
-class Combat : Component<Unit>, public ObservableDamage {
+class Combat : Component<Unit>, public ObservableDamage, private AttackContainer {
 private:
 	// Combat and Strike Skills
 public:

@@ -1,5 +1,6 @@
 #include "Combat.h"
 #include "Unit.h"
+#include "AttackHelper.h"
 #include <iostream>
 
 Combat::Combat(Unit& owner) : Component<Unit>(owner) {}

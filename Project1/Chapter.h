@@ -8,6 +8,7 @@ class Chapter {
 private: 
 	int turn = 0;
 	std::list<Party>::iterator _turn_iterator;
+	void setHelpers();
 	//std::vector<Listeners>
 public:
 	Chapter();
