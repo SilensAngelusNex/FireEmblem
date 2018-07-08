@@ -9,12 +9,14 @@ MoveCommand::MoveCommand(Chapter& chapter, UnitPath path) :
 
 bool MoveCommand::isValid() const {
 	bool my_turn = *_path._unit.getParty() == _chapter.getTurnParty();
-	bool tired = _path._unit.isTired();
-	return my_turn && !tired;
+	bool is_located = &_path.front() == _chapter._map.getCell(_path._unit);
+	return my_turn && is_located && !_path._unit.isTired() && !_path._unit.getHealth().isDead();
 }
 
 bool MoveCommand::doExecute() {
+
 	const Unit& unit = _path._unit;
+	unit.getMobility().tire();
 	GridCell* current_cell = _chapter._map.getCell(unit);
 	for (auto& pair : _path) {
 		if (!unit.getMobility().canPass(_chapter._map.getUnit(pair.second))) {

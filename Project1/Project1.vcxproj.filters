@@ -246,6 +246,9 @@
     <ClCompile Include="MoveCommand.cpp">
       <Filter>src\chapter\command</Filter>
     </ClCompile>
+    <ClCompile Include="EndCommand.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -433,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="CommandBase.h">
       <Filter>inc\chapter\command</Filter>
+    </ClInclude>
+    <ClInclude Include="EndCommand.h">
+      <Filter>inc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

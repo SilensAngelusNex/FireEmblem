@@ -41,6 +41,10 @@ bool test::runChapterTest() {
 	UnitPath path = move_helper.getShortestPath(mia, chapter._map[10][13]._id);
 	ChapterCommand<MoveCommand> move_command = ChapterCommand<MoveCommand>(MoveCommand(chapter, path));
 	chapter.acceptCommand(move_command);
+	UnitPath path2 = move_helper.getShortestPath(mia, chapter._map[10][10]._id);
+	ChapterCommand<MoveCommand> move_command2 = ChapterCommand<MoveCommand>(MoveCommand(chapter, path2));
+	chapter.acceptCommand(move_command2);
+	chapter.acceptCommand(move_command2);
 	return chapter._map.getUnit(chapter._map[10][13]) == &mia;
 
 	return true;

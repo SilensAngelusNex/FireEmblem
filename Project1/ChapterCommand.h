@@ -20,6 +20,6 @@ void ChapterCommand<typename Base>::execute() {
 		Base::doExecute();
 	}
 	else {
-		//c.notifyInvalidCommand();
+		std::cout << "Command invalid" << std::endl;
 	}
 }

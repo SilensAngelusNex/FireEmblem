@@ -39,7 +39,9 @@ public:
 	PathBase & operator+(const PathBase & path);
 
 	//Element Access
+	Cell& front();
 	Cell& back();
+	const Cell& front() const;
 	const Cell& back() const;
 
 	//Capacity
@@ -64,6 +66,10 @@ void PathBase<Cell>::pop_back() {
 	_path.pop_back();
 }
 template<typename Cell>
+Cell & PathBase<Cell>::front() {
+	return _head;
+}
+template<typename Cell>
 Cell& PathBase<Cell>::back() {
 	if (_path.empty()) {
 		return _head;
@@ -71,7 +77,10 @@ Cell& PathBase<Cell>::back() {
 	return _path.back().second;
 
 }
-
+template<typename Cell>
+const Cell & PathBase<Cell>::front() const {
+	return _head;
+}
 template<typename Cell>
 const Cell& PathBase<Cell>::back() const {
 	if (_path.empty()) {
