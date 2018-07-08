@@ -1,11 +1,13 @@
 #pragma once
 #include "CommandBase.h"
 
+class Unit;
 class Party;
-class EndCommand : public CommandBase {
+class WaitCommand : public CommandBase {
 private:
+	Unit& _unit;
 public:
-	EndCommand(Chapter& chapter);
+	WaitCommand(Chapter& chapter, Unit& unit);
 	bool isValid() const;
 	bool doExecute();
 };

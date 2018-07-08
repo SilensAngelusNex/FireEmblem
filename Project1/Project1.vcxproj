@@ -171,6 +171,7 @@
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitTest.cpp" />
     <ClCompile Include="UtilTests.cpp" />
+    <ClCompile Include="WaitCommand.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
@@ -184,6 +185,7 @@
     <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ChapterCommand.h" />
+    <ClInclude Include="WaitCommand.h" />
     <ClInclude Include="TurnInfo.h" />
     <ClInclude Include="ID.h" />
     <ClInclude Include="id_cost_map.h" />

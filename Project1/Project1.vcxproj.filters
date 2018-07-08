@@ -246,11 +246,14 @@
     <ClCompile Include="MoveCommand.cpp">
       <Filter>src\chapter\command</Filter>
     </ClCompile>
-    <ClCompile Include="EndCommand.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="TurnInfo.cpp">
       <Filter>src\unit\component</Filter>
+    </ClCompile>
+    <ClCompile Include="EndCommand.cpp">
+      <Filter>src\chapter\command</Filter>
+    </ClCompile>
+    <ClCompile Include="WaitCommand.cpp">
+      <Filter>src\chapter\command</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -440,11 +443,14 @@
     <ClInclude Include="CommandBase.h">
       <Filter>inc\chapter\command</Filter>
     </ClInclude>
-    <ClInclude Include="EndCommand.h">
-      <Filter>inc</Filter>
-    </ClInclude>
     <ClInclude Include="TurnInfo.h">
       <Filter>inc\unit\component</Filter>
+    </ClInclude>
+    <ClInclude Include="EndCommand.h">
+      <Filter>inc\chapter\command</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitCommand.h">
+      <Filter>inc\chapter\command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

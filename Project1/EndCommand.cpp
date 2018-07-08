@@ -2,12 +2,11 @@
 #include "Chapter.h"
 #include "Party.h"
 
-EndCommand::EndCommand(Chapter& chapter, const Party& party) :
-	CommandBase(chapter, CommandType::values::END),
-	_party(party)
+EndCommand::EndCommand(Chapter& chapter) :
+	CommandBase(chapter, CommandType::values::END)
 {}
 bool EndCommand::isValid() const {
-	return _party == _chapter.getTurnParty();
+	return true;
 }
 bool EndCommand::doExecute() {
 	_chapter.newTurn();

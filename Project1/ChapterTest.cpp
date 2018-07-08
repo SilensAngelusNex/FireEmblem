@@ -5,6 +5,8 @@
 #include "UnitPath.h"
 #include "ChapterCommand.h"
 #include "MoveCommand.h"
+#include "WaitCommand.h"
+#include "EndCommand.h"
 
 
 
@@ -40,7 +42,9 @@ bool test::runChapterTest() {
 	chapter._map.insertUnit(mia, chapter._map[10][10]);
 	UnitPath path = move_helper.getShortestPath(mia, chapter._map[10][12]._id);
 	ChapterCommand<MoveCommand> move_command = ChapterCommand<MoveCommand>(MoveCommand(chapter, mia, path));
+	ChapterCommand<WaitCommand> wait_command = ChapterCommand<WaitCommand>(WaitCommand(chapter, mia));
 	chapter.acceptCommand(move_command);
+	chapter.acceptCommand(wait_command);
 	UnitPath path2 = move_helper.getShortestPath(mia, chapter._map[10][10]._id);
 	ChapterCommand<MoveCommand> move_command2 = ChapterCommand<MoveCommand>(MoveCommand(chapter, mia, path2));
 	chapter.acceptCommand(move_command2);
