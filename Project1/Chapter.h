@@ -1,6 +1,7 @@
 #pragma once
 #include "GridMap.h"
 #include "ChapterCommand.h"
+#include "logical_reference_wrapper.h"
 #include <optional>
 
 class MoveCommand;
@@ -12,7 +13,7 @@ private:
 	void setHelpers();
 	//std::vector<Listeners>
 public:
-	std::list<MoveCommand> _reversable_moves;
+	std::list<logical_reference_wrapper<MoveCommand>> _reversable_moves;
 	Chapter();
 
 	template<typename T>

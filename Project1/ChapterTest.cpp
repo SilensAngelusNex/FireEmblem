@@ -44,13 +44,9 @@ bool test::runChapterTest() {
 	UnitPath path = move_helper.getShortestPath(mia, chapter._map[10][12]._id);
 	ChapterCommand<MoveCommand> move_command = ChapterCommand<MoveCommand>(MoveCommand(chapter, mia, path));
 	chapter.acceptCommand(move_command);
-	ChapterCommand<WaitCommand> wait_command = ChapterCommand<WaitCommand>(WaitCommand(chapter, mia));
-	chapter.acceptCommand(wait_command);
-	UnitPath path2 = move_helper.getShortestPath(mia, chapter._map[10][10]._id);
-	ChapterCommand<MoveCommand> move_command2 = ChapterCommand<MoveCommand>(MoveCommand(chapter, mia, path2));
-	chapter.acceptCommand(move_command2);
-	chapter.acceptCommand(move_command2);
-	return chapter._map.getUnit(chapter._map[10][12]) == &mia;
+	ChapterCommand<UndoMoveCommand> undo_move_command = ChapterCommand<UndoMoveCommand>(UndoMoveCommand(chapter, mia));
+	chapter.acceptCommand(undo_move_command);
+	return chapter._map.getUnit(chapter._map[10][10]) == &mia;
 
 	return true;
 }
