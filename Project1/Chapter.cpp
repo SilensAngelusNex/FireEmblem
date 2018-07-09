@@ -6,14 +6,17 @@
 #include "AttackHelper.h"
 #include "MoveHelper.h"
 #include "HelperContainer.h"
+#include "AttackCommand.h"
 
 void Chapter::setHelpers(){
-	AttackContainer::setHelper(AttackHelper(_map));
-	MoveContainer::setHelper(MoveHelper(_map));
+	AttackContainer::setHelper(_attack_helper);
+	MoveContainer::setHelper(_move_helper);
 }
 
 Chapter::Chapter() :
-	_map(20, 20)
+	_map(20, 20),
+	_attack_helper(_map),
+	_move_helper(_map)
 {
 	setHelpers();
 }

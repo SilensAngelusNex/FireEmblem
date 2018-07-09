@@ -20,12 +20,14 @@ bool MoveCommand::isValid() const {
 }
 
 bool MoveCommand::doExecute() {
-
+	if (_unit.getTurnInfo().getLastMove().has_value()) {
+		_chapter._reversable_moves.remove(_unit.getTurnInfo().getLastMove().value());
+		_unit.getTurnInfo().clearLastMove();
+	}
 	GridCell* current_cell = _chapter._map.getCell(_unit);
 	for (auto& pair : _path) {
 		if (!_unit.getMobility().canPass(_chapter._map.getUnit(pair.second))) {
 			_unit.getTurnInfo().useMovement(pair.first);//still attempted to step there, so you pay for it
-			_unit.getTurnInfo().clearLastMove();
 			_chapter._reversable_moves.clear();
 			// Walked into a stealthed unit or the like
 			//Add logic for that

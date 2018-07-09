@@ -97,9 +97,6 @@
     <Filter Include="inc\map\map_helper">
       <UniqueIdentifier>{d96ccf23-0a1f-48f4-a1a4-2db5cc633901}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\map\map_heelper">
-      <UniqueIdentifier>{d389ecde-3081-4548-9780-9e814633d92a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="src\chapter">
       <UniqueIdentifier>{3a6e0251-d094-477d-8eb0-fa719c7966fc}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,9 @@
     </Filter>
     <Filter Include="src\chapter\command">
       <UniqueIdentifier>{08be9f52-c133-4da8-a453-45f5ed3489b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\map\map_helper">
+      <UniqueIdentifier>{d389ecde-3081-4548-9780-9e814633d92a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -226,13 +226,13 @@
       <Filter>src\map</Filter>
     </ClCompile>
     <ClCompile Include="MapHelper.cpp">
-      <Filter>src\map\map_heelper</Filter>
+      <Filter>src\map\map_helper</Filter>
     </ClCompile>
     <ClCompile Include="MoveHelper.cpp">
-      <Filter>src\map\map_heelper</Filter>
+      <Filter>src\map\map_helper</Filter>
     </ClCompile>
     <ClCompile Include="AttackHelper.cpp">
-      <Filter>src\map\map_heelper</Filter>
+      <Filter>src\map\map_helper</Filter>
     </ClCompile>
     <ClCompile Include="UnitPath.cpp">
       <Filter>src\map\cell_path</Filter>
@@ -258,7 +258,10 @@
     <ClCompile Include="UndoMoveCommand.cpp">
       <Filter>src\chapter\command</Filter>
     </ClCompile>
-    <ClCompile Include="ChapterBase.cpp">
+    <ClCompile Include="AttackCommand.cpp">
+      <Filter>src\chapter\command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandBase.cpp">
       <Filter>src\chapter\command</Filter>
     </ClCompile>
   </ItemGroup>
@@ -462,6 +465,9 @@
       <Filter>inc\map\map_helper</Filter>
     </ClInclude>
     <ClInclude Include="UndoMoveCommand.h">
+      <Filter>inc\chapter\command</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackCommand.h">
       <Filter>inc\chapter\command</Filter>
     </ClInclude>
   </ItemGroup>

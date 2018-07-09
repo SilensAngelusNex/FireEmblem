@@ -8,7 +8,7 @@
 
 
 
-AttackHelper::AttackHelper(GridMap & map) :
+AttackHelper::AttackHelper(GridMap& map) :
 	MapHelper(map)
 {}
 

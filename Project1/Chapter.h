@@ -2,6 +2,8 @@
 #include "GridMap.h"
 #include "ChapterCommand.h"
 #include "logical_reference_wrapper.h"
+#include "AttackHelper.h"
+#include "MoveHelper.h"
 #include <optional>
 
 class MoveCommand;
@@ -27,6 +29,9 @@ public:
 	void newTurn();
 	GridMap _map;
 	std::list<Party> _parties;
+private:
+	AttackHelper _attack_helper;
+	MoveHelper _move_helper;
 
 };
 

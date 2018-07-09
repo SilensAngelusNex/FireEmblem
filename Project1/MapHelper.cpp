@@ -9,7 +9,7 @@
 #include <vector>
 
 
-MapHelper::MapHelper(GridMap & map) :
+MapHelper::MapHelper(GridMap& map) :
 	_map(map)
 {}
 

@@ -129,9 +129,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttackCommand.cpp" />
     <ClCompile Include="AttackHelper.cpp" />
     <ClCompile Include="AttributeList.cpp" />
-    <ClCompile Include="ChapterBase.cpp" />
+    <ClCompile Include="CommandBase.cpp" />
     <ClCompile Include="ChapterTest.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="EnumSetIterator.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ChapterCommand.h" />
+    <ClInclude Include="AttackCommand.h" />
     <ClInclude Include="HelperContainer.h" />
     <ClInclude Include="UndoMoveCommand.h" />
     <ClInclude Include="WaitCommand.h" />
