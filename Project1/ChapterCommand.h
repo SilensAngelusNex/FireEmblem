@@ -1,5 +1,4 @@
 #pragma once
-#include "MoveCommand.h"
 class Chapter;
 
 template<typename Base>

@@ -19,7 +19,7 @@ Chapter::Chapter() :
 }
 
 Party & Chapter::getTurnParty() {
-	Expects(turn > 0);
+	Expects(_turn > 0);
 	return *_turn_iterator;
 }
 
@@ -35,8 +35,8 @@ void Chapter::dropParty(Party & party) {
 }
 
 void Chapter::start() {
-	Expects(turn == 0 && !_parties.empty());
-	turn++;
+	Expects(_turn == 0 && !_parties.empty());
+	_turn++;
 	_turn_iterator = _parties.begin();
 	for (auto& party : _parties) {
 		party.startTurn(getTurnParty());
@@ -44,8 +44,8 @@ void Chapter::start() {
 }
 
 void Chapter::newTurn() {
-	Expects(turn > 0 && !_parties.empty());
-	turn++;
+	Expects(_turn > 0 && !_parties.empty());
+	_turn++;
 	_turn_iterator++;
 	if (_turn_iterator == _parties.end()) {
 		_turn_iterator = _parties.begin();
@@ -53,5 +53,5 @@ void Chapter::newTurn() {
 	for (auto& party : _parties) {
 		party.startTurn(getTurnParty());
 	}
+	_reversable_moves.clear();
 }
-

@@ -62,7 +62,7 @@ void Unit::newTurn() {
 	//TODO(T or W): code start of turn stuff.
 }
 bool Unit::isTired() const {
-	return _turn_info.isTired(); //TODO(Weston): Should this be in a component like isDead() ? 
+	return _turn_info.isTired(); 
 }
 Health & Unit::getHealth() {
 	return _health;

@@ -6,7 +6,7 @@ EndCommand::EndCommand(Chapter& chapter) :
 	CommandBase(chapter, CommandType::values::END)
 {}
 bool EndCommand::isValid() const {
-	return true;
+	return CommandBase::isValid();
 }
 bool EndCommand::doExecute() {
 	_chapter.newTurn();

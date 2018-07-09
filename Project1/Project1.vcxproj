@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="AttackHelper.cpp" />
     <ClCompile Include="AttributeList.cpp" />
+    <ClCompile Include="ChapterBase.cpp" />
     <ClCompile Include="ChapterTest.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Mobility.cpp" />
     <ClCompile Include="Chapter.cpp" />
     <ClCompile Include="TurnInfo.cpp" />
+    <ClCompile Include="UndoMoveCommand.cpp" />
     <ClCompile Include="UnitPath.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
     <ClCompile Include="ObservableDamage.cpp" />
@@ -186,6 +188,7 @@
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ChapterCommand.h" />
     <ClInclude Include="HelperContainer.h" />
+    <ClInclude Include="UndoMoveCommand.h" />
     <ClInclude Include="WaitCommand.h" />
     <ClInclude Include="TurnInfo.h" />
     <ClInclude Include="ID.h" />

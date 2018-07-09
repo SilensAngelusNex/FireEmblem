@@ -5,6 +5,7 @@
 #include "UnitPath.h"
 #include "ChapterCommand.h"
 #include "MoveCommand.h"
+#include "UndoMoveCommand.h"
 #include "WaitCommand.h"
 #include "EndCommand.h"
 
@@ -20,7 +21,7 @@ bool test::runChapterTest() {
 	PartyData data1 = { "Greil Mercenaries", unit_vec };
 	PartyData data2 = { "Daein" ,{} };
 	
-	Chapter chapter = Chapter();
+	Chapter chapter = std::move(Chapter());
 
 	chapter.addParty(data1);
 	chapter.addParty(data2);
@@ -42,8 +43,8 @@ bool test::runChapterTest() {
 	chapter._map.insertUnit(mia, chapter._map[10][10]);
 	UnitPath path = move_helper.getShortestPath(mia, chapter._map[10][12]._id);
 	ChapterCommand<MoveCommand> move_command = ChapterCommand<MoveCommand>(MoveCommand(chapter, mia, path));
-	ChapterCommand<WaitCommand> wait_command = ChapterCommand<WaitCommand>(WaitCommand(chapter, mia));
 	chapter.acceptCommand(move_command);
+	ChapterCommand<WaitCommand> wait_command = ChapterCommand<WaitCommand>(WaitCommand(chapter, mia));
 	chapter.acceptCommand(wait_command);
 	UnitPath path2 = move_helper.getShortestPath(mia, chapter._map[10][10]._id);
 	ChapterCommand<MoveCommand> move_command2 = ChapterCommand<MoveCommand>(MoveCommand(chapter, mia, path2));

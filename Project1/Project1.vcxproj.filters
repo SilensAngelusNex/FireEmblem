@@ -255,6 +255,12 @@
     <ClCompile Include="WaitCommand.cpp">
       <Filter>src\chapter\command</Filter>
     </ClCompile>
+    <ClCompile Include="UndoMoveCommand.cpp">
+      <Filter>src\chapter\command</Filter>
+    </ClCompile>
+    <ClCompile Include="ChapterBase.cpp">
+      <Filter>src\chapter\command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -454,6 +460,9 @@
     </ClInclude>
     <ClInclude Include="HelperContainer.h">
       <Filter>inc\map\map_helper</Filter>
+    </ClInclude>
+    <ClInclude Include="UndoMoveCommand.h">
+      <Filter>inc\chapter\command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

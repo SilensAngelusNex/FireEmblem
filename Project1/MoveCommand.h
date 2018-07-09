@@ -10,6 +10,7 @@ public:
 	MoveCommand(Chapter& chapter, Unit& unit, UnitPath path); 
 	bool isValid() const;
 	bool doExecute();
+	friend class UndoMoveCommand;
 };
 
 

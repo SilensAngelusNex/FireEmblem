@@ -1,20 +1,22 @@
 #pragma once
 #include "GridMap.h"
 #include "ChapterCommand.h"
-#include "MoveCommand.h"
+#include <optional>
 
+class MoveCommand;
 
 class Chapter {
 private: 
-	int turn = 0;
+	int _turn = 0;
 	std::list<Party>::iterator _turn_iterator;
 	void setHelpers();
 	//std::vector<Listeners>
 public:
+	std::list<MoveCommand> _reversable_moves;
 	Chapter();
 
 	template<typename T>
-	void acceptCommand(ChapterCommand<T> to_execute);
+	void acceptCommand(ChapterCommand<T>& to_execute);
 
 	Party& getTurnParty();
 	void addParty(PartyData data);
@@ -28,6 +30,6 @@ public:
 };
 
 template<typename T>
-void Chapter::acceptCommand(ChapterCommand<T> to_execute) {
+void Chapter::acceptCommand(ChapterCommand<T>& to_execute) {
 	to_execute.execute();
 }
