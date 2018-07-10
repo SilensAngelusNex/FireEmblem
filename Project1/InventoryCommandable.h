@@ -17,10 +17,15 @@ public:
 	void equip(EquipSlot slot, Item& item);
 	void equip(EquipSlot slot, std::unique_ptr<Item> item);
 	void dequip(EquipSlot slot);
+	
+	bool canEquip(EquipSlot slot, int item_index) const;
+	bool canEquip(EquipSlot slot, const Item& item) const;
+	bool canEquip(EquipSlot slot, const Item* item) const;
+
 protected:
 	explicit InventoryCommandable(Unit& owner);
 
-	int findItem(Item& item);
+	int findItem(const Item& item) const;
 	std::unique_ptr<Item> dequip0(EquipSlot slot);
 	void equip0(EquipSlot slot, std::unique_ptr<Item> item);
 };

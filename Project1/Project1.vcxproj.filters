@@ -264,6 +264,9 @@
     <ClCompile Include="CommandBase.cpp">
       <Filter>src\chapter\command</Filter>
     </ClCompile>
+    <ClCompile Include="EquipCommand.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -468,6 +471,9 @@
       <Filter>inc\chapter\command</Filter>
     </ClInclude>
     <ClInclude Include="AttackCommand.h">
+      <Filter>inc\chapter\command</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipCommand.h">
       <Filter>inc\chapter\command</Filter>
     </ClInclude>
   </ItemGroup>

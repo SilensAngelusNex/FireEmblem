@@ -13,7 +13,7 @@ bool AttackCommand::isValid() const {
 	auto helper = AttackHelper(_chapter._map);
 	bool valid = CommandBase::isValid();
 	valid &= *_attacker.getParty() == _chapter.getTurnParty();
-	//valid &= std::find(attackable_units.begin(), attackable_units.end(), _defender) != attackable_units.end();
+	valid &= std::find(attackable_units.begin(), attackable_units.end(), _defender) != attackable_units.end();
 	valid &= _attacker.getTurnInfo().getActionsUsed() < TurnInfo::TOTAL_ACTIONS;
 	valid &= _attacker.getTurnInfo().getMajorActionsUsed() < TurnInfo::TOTAL_MAJOR_ACTIONS;
 	return valid && !_attacker.isTired() && !_attacker.getHealth().isDead() && !_defender.getHealth().isDead();

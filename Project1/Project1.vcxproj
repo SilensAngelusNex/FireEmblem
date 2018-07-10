@@ -138,6 +138,7 @@
     <ClCompile Include="Damage.cpp" />
     <ClCompile Include="DiceTest.cpp" />
     <ClCompile Include="EndCommand.cpp" />
+    <ClCompile Include="EquipCommand.cpp" />
     <ClCompile Include="Experience.cpp" />
     <ClCompile Include="GridCell.cpp" />
     <ClCompile Include="GridMap.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="CommandType.h" />
     <ClInclude Include="EndCommand.h" />
     <ClInclude Include="EnumSetIterator.h" />
+    <ClInclude Include="EquipCommand.h" />
     <ClInclude Include="GridMap.h" />
     <ClInclude Include="ChapterCommand.h" />
     <ClInclude Include="AttackCommand.h" />

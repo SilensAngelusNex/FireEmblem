@@ -59,21 +59,21 @@ void InventoryCommandable::swap(Item& a, Item& b) {
 }
 
 void InventoryCommandable::equip(EquipSlot slot, int item_index) {
-	Expects(item_index < _number_items_held && _items[item_index]->is_equippable());
+	Expects(canEquip(slot, item_index));
 
 	_items[item_index]->equip(_owner, slot);
 	equip0(slot, drop(item_index));
 }
 
 void InventoryCommandable::equip(EquipSlot slot, Item& item) {
-	Expects(findItem(item) < _number_items_held && item.is_equippable());
+	Expects(canEquip(slot, item));
 
 	item.equip(_owner, slot);
 	equip0(slot, drop(item));
 }
 
 void InventoryCommandable::equip(EquipSlot slot, std::unique_ptr<Item> item) {
-	Expects(item->is_equippable() && (_equipment[slot] == nullptr || _number_items_held < _MAX_NUMBER_ITEMS));
+	Expects(canEquip(slot, item.get()));
 	if (_equipment[slot] != nullptr) {
 		dequip(slot);
 	}
@@ -86,7 +86,20 @@ void InventoryCommandable::dequip(EquipSlot slot) {
 	add(dequip0(slot));
 }
 
-int InventoryCommandable::findItem(Item& item) {
+bool InventoryCommandable::canEquip(EquipSlot slot, int item_index) const{
+	return item_index < _number_items_held && _items[item_index]->is_equippable();
+}
+
+bool InventoryCommandable::canEquip(EquipSlot slot, const Item& item) const{
+	return findItem(item) < _number_items_held && item.is_equippable();
+}
+
+bool InventoryCommandable::canEquip(EquipSlot slot, const Item* item) const{
+	return item->is_equippable() && (_equipment[slot] == nullptr || _number_items_held < _MAX_NUMBER_ITEMS);
+
+}
+
+int InventoryCommandable::findItem(const Item& item) const{
 	int result = _number_items_held;
 	for (int i = 0; i < _number_items_held; i++) {
 		if (_items[i].get() == &item) {
