@@ -21,7 +21,7 @@ public:
 	bool canEquip(EquipSlot slot, int item_index) const;
 	bool canEquip(EquipSlot slot, const Item& item) const;
 	bool canEquip(EquipSlot slot, const Item* item) const;
-
+	bool canDequip(EquipSlot slot) const;
 protected:
 	explicit InventoryCommandable(Unit& owner);
 

@@ -82,7 +82,7 @@ void InventoryCommandable::equip(EquipSlot slot, std::unique_ptr<Item> item) {
 }
 
 void InventoryCommandable::dequip(EquipSlot slot) {
-	Expects(_number_items_held < _MAX_NUMBER_ITEMS);
+	Expects(canDequip(slot));
 	add(dequip0(slot));
 }
 
@@ -99,6 +99,10 @@ bool InventoryCommandable::canEquip(EquipSlot slot, const Item* item) const{
 
 }
 
+bool InventoryCommandable::canDequip(EquipSlot slot) const {
+	return _number_items_held < _MAX_NUMBER_ITEMS;// && _equipment_owners[slot] != nullptr; THIS IS BLACK MAGIC WTF WESTON WHY DOES THIS NOT COMPILE WTF
+}
+
 int InventoryCommandable::findItem(const Item& item) const{
 	int result = _number_items_held;
 	for (int i = 0; i < _number_items_held; i++) {
@@ -112,7 +116,7 @@ int InventoryCommandable::findItem(const Item& item) const{
 
 std::unique_ptr<Item> InventoryCommandable::dequip0(EquipSlot slot) {
 	Expects(_equipment_owners[slot] != nullptr);
-
+	
 	std::unique_ptr<Item> result = std::move(_equipment_owners[slot]);
 	_equipment_owners[slot] = nullptr;
 	_equipment[slot] = nullptr;

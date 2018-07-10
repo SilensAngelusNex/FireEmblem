@@ -161,6 +161,7 @@
     <ClCompile Include="Chapter.cpp" />
     <ClCompile Include="TurnInfo.cpp" />
     <ClCompile Include="UndoMoveCommand.cpp" />
+    <ClCompile Include="UnEquipCommand.cpp" />
     <ClCompile Include="UnitPath.cpp" />
     <ClCompile Include="ObservableExp.cpp" />
     <ClCompile Include="ObservableDamage.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="AttackCommand.h" />
     <ClInclude Include="HelperContainer.h" />
     <ClInclude Include="UndoMoveCommand.h" />
+    <ClInclude Include="UnEquipCommand.h" />
     <ClInclude Include="WaitCommand.h" />
     <ClInclude Include="TurnInfo.h" />
     <ClInclude Include="ID.h" />
