@@ -15,7 +15,6 @@
 #include "Experience.h"
 #include "Mobility.h"
 #include "Health.h"
-#include "PartyBase.h"
 #include "BattleInfo.h"
 #include "logical_reference_wrapper.h"
 

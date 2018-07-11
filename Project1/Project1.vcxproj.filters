@@ -99,6 +99,7 @@
     </Filter>
     <Filter Include="inc\unit\util">
       <UniqueIdentifier>{0d829fa7-c6c2-4a8d-a672-cc6a9f33e2b2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="inc\map\cell_path">
       <UniqueIdentifier>{e4b96af3-220c-4369-8b74-b4e38f80d9e3}</UniqueIdentifier>
     </Filter>
@@ -185,7 +186,6 @@
     <ClCompile Include="Terrain.cpp">
       <Filter>src\map\gridcell</Filter>
     </ClCompile>
-    </ClCompile>
     <ClCompile Include="Range.cpp">
       <Filter>src\item</Filter>
     </ClCompile>
@@ -233,6 +233,7 @@
     </ClCompile>
     <ClCompile Include="UnitCommandable.cpp">
       <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="Grid.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
