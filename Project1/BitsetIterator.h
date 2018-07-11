@@ -45,7 +45,7 @@ public:
 		Expects(_index > 0); // And greater than first set bit
 		do {
 			--_index;
-		} while (index > 0 && !_bits[_index]);
+		} while (_index > 0 && !_bits[_index]);
 		return *this;
 	}
 	set_bits_iterator operator--(int) {
