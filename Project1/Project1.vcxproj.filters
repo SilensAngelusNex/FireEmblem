@@ -159,12 +159,6 @@
     <ClCompile Include="InventoryCommandable.cpp">
       <Filter>src\unit\component\inventory</Filter>
     </ClCompile>
-    <ClCompile Include="AttributeList.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponList.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="ItemInfo.cpp">
       <Filter>src\item</Filter>
     </ClCompile>
@@ -231,9 +225,6 @@
     <ClCompile Include="UnitViewable.cpp">
       <Filter>src\unit</Filter>
     </ClCompile>
-    <ClCompile Include="UnitCommandable.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Grid.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
@@ -251,6 +242,15 @@
     </ClCompile>
     <ClCompile Include="UnitPath.cpp">
       <Filter>src\map\cell_path</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitCommandable.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponList.cpp">
+      <Filter>src\unit\util</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeList.cpp">
+      <Filter>src\unit\util</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -389,9 +389,6 @@
     <ClInclude Include="Grid.h">
       <Filter>inc\map</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>inc</Filter>
-    </ClInclude>
     <ClInclude Include="GridMap.h">
       <Filter>inc\map</Filter>
     </ClInclude>
@@ -430,9 +427,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Game.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
     <ClInclude Include="EnumSetIterator.h">
       <Filter>inc\util</Filter>
     </ClInclude>

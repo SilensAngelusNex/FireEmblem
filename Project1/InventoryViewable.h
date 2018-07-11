@@ -9,7 +9,7 @@
 
 class InventoryViewable : public InventoryBase {
 public:
-	const Item& operator[](int item_index) const;
+	const Item& operator[](size_t item_index) const;
 	const ItemEquip& operator[](EquipSlot slot) const;
 
 	bool hasEquip(EquipSlot slot) const;

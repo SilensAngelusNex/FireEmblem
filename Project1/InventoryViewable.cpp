@@ -11,7 +11,7 @@ InventoryViewable::InventoryViewable(Unit & owner) :
 {}
 
 
-const Item & InventoryViewable::operator[](int item_index) const {
+const Item & InventoryViewable::operator[](size_t item_index) const {
 	Expects(item_index < _number_items_held);
 	return *_items[item_index];
 }
