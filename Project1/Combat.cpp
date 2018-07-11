@@ -6,9 +6,9 @@
 Combat::Combat(Unit& owner) : Component<Unit>(owner) {}
 
 
-void Combat::combat(Unit& defender) {
+void Combat::combat(Unit& defender, bool can_retaliate) {
 	Expects(&_owner != &defender);
-	optional_pair<int> largest_strikes = do_combat(defender);
+	optional_pair<int> largest_strikes = do_combat(defender, can_retaliate);
 
 	_owner.getExperience().gainCombatExp(defender, largest_strikes.first);
 	defender.getExperience().gainCombatExp(_owner, largest_strikes.second);
@@ -67,21 +67,21 @@ int Combat::takeDamage(Damage dealt) {
 	return result;
 }
 
-optional_pair<int, int> Combat::do_combat(Unit& defender) {
-	auto combat = [](Unit& attacker, Unit& defender) {
+optional_pair<int, int> Combat::do_combat(Unit& defender, bool can_retaliate) {
+	auto combat = [can_retaliate](Unit& attacker, Unit& defender) {
 
 		optional_pair<int> result;
 		int spd_adv = attacker.getStats().atk_spd() - defender.getStats().atk_spd();
 
 		result.first = std::max(result.first, attacker.getCombat().strike(defender));
 
-		if (!defender.getHealth().isDead()) {
+		if (can_retaliate && !defender.getHealth().isDead()) {
 			result.second = std::max(result.second, defender.getCombat().strike(attacker));
 		}
 		if (spd_adv > SPEED_DIFFERENCE_TO_DOUBLE && !attacker.getHealth().isDead()) {
 			result.first = std::max(result.first, attacker.getCombat().strike(defender));
 		}
-		if (spd_adv < -SPEED_DIFFERENCE_TO_DOUBLE && !defender.getHealth().isDead()) {
+		if (can_retaliate && spd_adv < -SPEED_DIFFERENCE_TO_DOUBLE && !defender.getHealth().isDead()) {
 			result.second = std::max(result.second, defender.getCombat().strike(attacker));
 		}
 		return result;
