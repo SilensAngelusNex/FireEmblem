@@ -9,18 +9,18 @@ public:
 	Party(std::string name, std::vector<UnitData> unit_data);
 	Party(PartyData data);
 
-	std::vector<UnitRef> getUnits();
-	std::vector<UnitRef> getOtherUnits(const Unit & unit);
+	std::vector<Unit::Ref> getUnits();
+	std::vector<Unit::Ref> getOtherUnits(const Unit & unit);
 
-	std::vector<constUnitRef> getUnits() const;
-	std::vector<constUnitRef> getOtherUnits(const Unit& unit) const;
+	std::vector<Unit::ConstRef> getUnits() const;
+	std::vector<Unit::ConstRef> getOtherUnits(const Unit& unit) const;
 
 	void startTurn(PartyBase& turn_party);
-	void insertUnit(UnitPtr unit);
+	void insertUnit(Unit::UniquePtr unit);
 	void insertUnit(UnitData unit);
 
-	UnitPtr dropUnit(Unit& unit);
-	//UnitPtr dropUnit(const iterator& pos);
+	Unit::UniquePtr dropUnit(Unit& unit);
+	//Unit::UniquePtr dropUnit(const iterator& pos);
 
 
 	bool isDone() const;

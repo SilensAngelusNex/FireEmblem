@@ -2,12 +2,10 @@
 #include "Unit.h"
 #include <list>
 
-class Map;
+class GridMap;
 class Party;
 class party_iterator;
-using UnitRef = std::reference_wrapper<Unit>;
-using constUnitRef = std::reference_wrapper<const Unit>;
-using UnitPtr = std::unique_ptr<Unit>;
+
 struct UnitData;
 struct PartyData {
 	std::string name;
@@ -16,11 +14,11 @@ struct PartyData {
 class PartyBase {
 protected:
 
-	using iterator = std::list<UnitPtr>::iterator;
-	using const_iterator = std::list<UnitPtr>::const_iterator;
+	using iterator = std::list<Unit::UniquePtr>::iterator;
+	using const_iterator = std::list<Unit::UniquePtr>::const_iterator;
 
 	std::string _party_name;
-	std::list<UnitPtr> _units;
+	std::list<Unit::UniquePtr> _units;
 
 	PartyBase();
 	PartyBase(std::string name);
@@ -33,7 +31,8 @@ protected:
 	iterator getPosition(const Unit& unit);
 
 public:
-	Party& getParty(Passkey<Map> /*unused*/);
+	Party& getParty(Passkey<GridMap> /*unused*/);
+	const Party& getParty(Passkey<GridMap> /*unused*/) const;
 
 	bool hasUnit(const Unit& unit) const;
 	bool operator==(const PartyBase& other) const;
