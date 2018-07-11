@@ -2,18 +2,24 @@
 
 #include <utility>
 
-Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
-	_id(std::move(name)),
+Unit::Unit(std::string id, CONTEXT & context, AttributeList stats) :
+	Unit(Identity(std::move(id)), context, stats)
+{}
+
+Unit::Unit(Identity id, CONTEXT& context, AttributeList stats) :
+	_id(std::move(id)),
 	_context(context),	
 	_stats(*this, stats),
 	_exp(*this, context),
 	_inv(*this),
 	_combat(*this),
-	_health(*this),
-	_mobility(*this, 50, MobilitySet(std::array<bool, MobilityType::size>{true}))
+	_mobility(*this, 50, MobilitySet(std::array<bool, MobilityType::size>{true})),
+	_battle_info(*this)
 {}
 
-const IDENTITY& Unit::getIdentity() const {
+Unit::Unit(UnitData data) : Unit(Identity(data.name), data.context, data.stats) {};
+
+const Identity& Unit::getIdentity() const {
 	return _id;
 }
 
@@ -33,16 +39,20 @@ const InventoryViewable& Unit::getInventory() const {
 	return _inv;
 }
 
-const Health & Unit::getHealth() const {
-	return _health;
+const PartyBase* Unit::getParty() const{
+	return _id.getParty();
 }
 
-const PartyBase* Unit::getParty() const{
-	return _party;
+const BattleInfo& Unit::getBattleInfo() const {
+	return _battle_info;
 }
 
 InventoryCommandable& Unit::getInventory() {
 	return _inv;
+}
+
+BattleInfo& Unit::getBattleInfo() {
+	return _battle_info;
 }
 
 Combat& Unit::getCombat() {
@@ -58,17 +68,13 @@ void Unit::newTurn() {
 bool Unit::isTired() const {
 	return true; //TODO(Weston): Should this be in a component like isDead() ? 
 }
-Health & Unit::getHealth() {
-	return _health;
-}
 
 PartyBase* Unit::getParty() {
-	return _party;
+	return _id.getParty();
 }
 
 PartyBase* Unit::setParty(PartyBase* other_party) {
-	std::swap(_party, other_party);
-	return other_party;
+	return _id.setParty(other_party);
 }
 
 Stats& Unit::getStats() {

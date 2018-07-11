@@ -88,6 +88,18 @@
     <Filter Include="inc\party">
       <UniqueIdentifier>{b79d346a-bc23-489b-bcd6-99fb3a6a0608}</UniqueIdentifier>
     </Filter>
+    <Filter Include="inc\unit\component\battle">
+      <UniqueIdentifier>{bbea0a26-af95-47fb-a0b9-0c49867c5444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\unit\component\battle">
+      <UniqueIdentifier>{e8244dc7-eba6-4d05-bb19-4186ed82453d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\unit\util">
+      <UniqueIdentifier>{ebe9f324-7f62-4593-ba51-49c855e6bc8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inc\unit\util">
+      <UniqueIdentifier>{0d829fa7-c6c2-4a8d-a672-cc6a9f33e2b2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="inc\map\cell_path">
       <UniqueIdentifier>{e4b96af3-220c-4369-8b74-b4e38f80d9e3}</UniqueIdentifier>
     </Filter>
@@ -135,12 +147,6 @@
     <ClCompile Include="Stats.cpp">
       <Filter>src\unit\component</Filter>
     </ClCompile>
-    <ClCompile Include="Damage.cpp">
-      <Filter>src\unit</Filter>
-    </ClCompile>
-    <ClCompile Include="Health.cpp">
-      <Filter>src\unit\component</Filter>
-    </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>src\unit\component\inventory</Filter>
     </ClCompile>
@@ -153,12 +159,6 @@
     <ClCompile Include="InventoryCommandable.cpp">
       <Filter>src\unit\component\inventory</Filter>
     </ClCompile>
-    <ClCompile Include="AttributeList.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponList.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="ItemInfo.cpp">
       <Filter>src\item</Filter>
     </ClCompile>
@@ -167,9 +167,6 @@
     </ClCompile>
     <ClCompile Include="MapTest.cpp">
       <Filter>src\tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Mobility.cpp">
-      <Filter>src\unit</Filter>
     </ClCompile>
     <ClCompile Include="CellEdge.cpp">
       <Filter>src\map\gridcell</Filter>
@@ -182,9 +179,6 @@
     </ClCompile>
     <ClCompile Include="Terrain.cpp">
       <Filter>src\map\gridcell</Filter>
-    </ClCompile>
-    <ClCompile Include="Healing.cpp">
-      <Filter>src\unit</Filter>
     </ClCompile>
     <ClCompile Include="Range.cpp">
       <Filter>src\item</Filter>
@@ -207,6 +201,30 @@
     <ClCompile Include="PartyBase.cpp">
       <Filter>src\party</Filter>
     </ClCompile>
+    <ClCompile Include="Mobility.cpp">
+      <Filter>src\unit\component</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleInfo.cpp">
+      <Filter>src\unit\component\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions.cpp">
+      <Filter>src\unit\component\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>src\unit\component\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="Damage.cpp">
+      <Filter>src\unit\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Healing.cpp">
+      <Filter>src\unit\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Identity.cpp">
+      <Filter>src\unit\util</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitViewable.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
     <ClCompile Include="Grid.cpp">
       <Filter>src\map</Filter>
     </ClCompile>
@@ -225,6 +243,15 @@
     <ClCompile Include="UnitPath.cpp">
       <Filter>src\map\cell_path</Filter>
     </ClCompile>
+    <ClCompile Include="UnitCommandable.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponList.cpp">
+      <Filter>src\unit\util</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeList.cpp">
+      <Filter>src\unit\util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -236,17 +263,11 @@
     <ClInclude Include="FairDice.h">
       <Filter>inc\dice</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>inc\unit</Filter>
-    </ClInclude>
     <ClInclude Include="Observable.h">
       <Filter>inc\util\observer\observable</Filter>
     </ClInclude>
     <ClInclude Include="ObserverDamage.h">
       <Filter>inc\util\observer</Filter>
-    </ClInclude>
-    <ClInclude Include="AttributeList.h">
-      <Filter>inc\unit</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>inc\item</Filter>
@@ -284,9 +305,6 @@
     <ClInclude Include="Stats.h">
       <Filter>inc\unit\component</Filter>
     </ClInclude>
-    <ClInclude Include="Damage.h">
-      <Filter>inc\unit</Filter>
-    </ClInclude>
     <ClInclude Include="Inventory.h">
       <Filter>inc\unit\component\inventory</Filter>
     </ClInclude>
@@ -295,9 +313,6 @@
     </ClInclude>
     <ClInclude Include="InventoryViewable.h">
       <Filter>inc\unit\component\inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="Health.h">
-      <Filter>inc\unit\component</Filter>
     </ClInclude>
     <ClInclude Include="InventoryBase.h">
       <Filter>inc\unit\component\inventory</Filter>
@@ -335,9 +350,6 @@
     <ClInclude Include="optional_pair.h">
       <Filter>inc\util</Filter>
     </ClInclude>
-    <ClInclude Include="Healing.h">
-      <Filter>inc\unit</Filter>
-    </ClInclude>
     <ClInclude Include="Range.h">
       <Filter>inc\item</Filter>
     </ClInclude>
@@ -356,11 +368,26 @@
     <ClInclude Include="Mobility.h">
       <Filter>inc\unit\component</Filter>
     </ClInclude>
+    <ClInclude Include="BattleInfo.h">
+      <Filter>inc\unit\component\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions.h">
+      <Filter>inc\unit\component\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>inc\unit\component\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="AttributeList.h">
+      <Filter>inc\unit\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Healing.h">
+      <Filter>inc\unit\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Damage.h">
+      <Filter>inc\unit\util</Filter>
+    </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>inc\map</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>inc</Filter>
     </ClInclude>
     <ClInclude Include="GridMap.h">
       <Filter>inc\map</Filter>
@@ -400,14 +427,23 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Game.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
     <ClInclude Include="EnumSetIterator.h">
       <Filter>inc\util</Filter>
     </ClInclude>
     <ClInclude Include="UniquePtrIterator.h">
       <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitViewable.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitCommandable.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Identity.h">
+      <Filter>inc\unit\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>inc\unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

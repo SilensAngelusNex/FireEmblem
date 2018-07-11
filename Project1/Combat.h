@@ -20,9 +20,10 @@ public:
 	explicit Combat(Unit& owner);
 
 	void combat(Unit& defender);
-	bool doesAvoid(Unit& attacker);
+	
 	std::optional<int> strike(Unit& defender);
 	int takeDamage(Damage dealt);
 protected:
+	bool doesAvoid(Unit& attacker);
 	optional_pair<int> do_combat(Unit& defender);
 };

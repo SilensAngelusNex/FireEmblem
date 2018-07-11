@@ -43,7 +43,7 @@ GridMap::GridMap(int width, int height) :
 {}
 
 GridMap::GridMap(int width, int height, std::vector<PartyData> data) :
-	Grid(width, height, data)
+	Grid(width, height, std::move(data))
 {}
 
 //Party Access//

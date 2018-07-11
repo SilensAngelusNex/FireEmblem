@@ -129,8 +129,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actions.cpp" />
     <ClCompile Include="AttackHelper.cpp" />
     <ClCompile Include="AttributeList.cpp" />
+    <ClCompile Include="BattleInfo.cpp" />
     <ClCompile Include="Combat.cpp" />
     <ClCompile Include="Damage.cpp" />
     <ClCompile Include="DiceTest.cpp" />
@@ -139,6 +141,7 @@
     <ClCompile Include="GridMap.cpp" />
     <ClCompile Include="Healing.cpp" />
     <ClCompile Include="Health.cpp" />
+    <ClCompile Include="Identity.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBase.cpp" />
     <ClCompile Include="InventoryCommandable.cpp" />
@@ -164,12 +167,17 @@
     <ClCompile Include="Swords.cpp" />
     <ClCompile Include="CellEdge.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitCommandable.cpp" />
     <ClCompile Include="UnitTest.cpp" />
+    <ClCompile Include="UnitViewable.cpp" />
     <ClCompile Include="UtilTests.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponList.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actions.h" />
+    <ClInclude Include="BattleInfo.h" />
+    <ClInclude Include="Identity.h" />
     <ClInclude Include="AttackHelper.h" />
     <ClInclude Include="BitsetIterator.h" />
     <ClInclude Include="EnumSetIterator.h" />
@@ -208,7 +216,6 @@
     <ClInclude Include="PartyBase.h" />
     <ClInclude Include="optional_pair.h" />
     <ClInclude Include="Passkey.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Stats.h" />
     <ClInclude Include="Swords.h" />
     <ClInclude Include="Damage.h" />
@@ -226,12 +233,11 @@
     <ClInclude Include="UniquePtrIterator.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="ListDice.h" />
+    <ClInclude Include="UnitCommandable.h" />
+    <ClInclude Include="UnitViewable.h" />
     <ClInclude Include="UtilTests.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponList.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -45,9 +45,9 @@ bool test::runMapTest() {
 	std::set <ID> cells = move_helper.getAccesibleCellIDs(mia);
 	UnitPath path = move_helper.getShortestPath(mia, map[10][13]._id);
 	move_helper.routePathTo(path, map[11][12]._id);
-	std::cout << "Start walking " << mia.getIdentity() << " from space:" << map[mia] << " to space " << path.back()._id << std::endl;
+	std::cout << "Start walking " << mia.getIdentity().getName() << " from space:" << map[mia] << " to space " << path.back()._id << std::endl;
 	move_helper.walkPath(mia, path);
-	std::cout << "Start walking " << mia.getIdentity() << " from space:" << map[mia] << " to space " << path.back()._id << std::endl;
+	std::cout << "Start walking " << mia.getIdentity().getName() << " from space:" << map[mia] << " to space " << path.back()._id << std::endl;
 	move_helper.walkPath(mia, move_helper.getShortestPath(mia, map[10][10]._id));
 	
 	std::cout << "How many cells Mia can Reach: " << cells.size() << std::endl;

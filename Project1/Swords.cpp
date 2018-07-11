@@ -4,7 +4,7 @@ BasicWeapon::BasicWeapon(std::shared_ptr<WeaponInfo> info) :
 	Weapon(std::move(info))
 {}
 
-bool BasicWeapon::can_equip(const Unit & /*unit*/) const {
+bool BasicWeapon::can_equip(const Unit& /*unit*/) const {
 	// TODO(Weston): check weapon rank
 	return true;
 }

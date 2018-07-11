@@ -67,10 +67,10 @@ public:
 	}
 
 	CostCell at(const GridCell& key) {
-		return convert(id_cost_map::at(key._id));
+		return convert(id_cost_map::at(key));
 	}
 	const CostCell at(const ID& key) const {
-		return convert(id_cost_map::at(key._id));
+		return convert(id_cost_map::at(key));
 	}
 };
 

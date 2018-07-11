@@ -3,24 +3,24 @@
 #include "TestObservers.h"
 
 
-void DmgObserver::notifyMiss(const std::string&  name) {
-	std::cout << "The strike missed " << name << "!" << std::endl;
+void DmgObserver::notifyMiss(const Identity&  name) {
+	std::cout << "The strike missed " << name.getName() << "!" << std::endl;
 }
 
-void DmgObserver::notifyDeflect(const std::string&  name) {
-	std::cout << name << " deflected the strike!" << std::endl;
+void DmgObserver::notifyDeflect(const Identity&  name) {
+	std::cout << name.getName() << " deflected the strike!" << std::endl;
 }
 
-void DmgObserver::notifyDamage(const std::string&  name, int dmg) {
-	std::cout << name << " took " << dmg << " damage." << std::endl;
+void DmgObserver::notifyDamage(const Identity&  name, int dmg) {
+	std::cout << name.getName() << " took " << dmg << " damage." << std::endl;
 }
 
-void DmgObserver::notifyCrit(const std::string&  name, int dmg) {
-	std::cout << name << " took " << dmg << " crit damage." << std::endl;
+void DmgObserver::notifyCrit(const Identity&  name, int dmg) {
+	std::cout << name.getName() << " took " << dmg << " crit damage." << std::endl;
 }
 
-void DmgObserver::notifyHeal(const std::string&  name, int heal) {
-	std::cout << name << " healed for " << heal << " points." << std::endl;
+void DmgObserver::notifyHeal(const Identity&  name, int heal) {
+	std::cout << name.getName() << " healed for " << heal << " points." << std::endl;
 }
 
 

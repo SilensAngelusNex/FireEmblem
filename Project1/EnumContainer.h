@@ -17,7 +17,7 @@ public:
 	constexpr EnumContainer& operator+=(const EnumContainer& rhs);
 	constexpr EnumContainer& operator-=(const EnumContainer& rhs);
 	constexpr EnumContainer operator+(EnumContainer rhs) const;
-	constexpr EnumContainer operator-(EnumContainer rhs) const;
+	constexpr EnumContainer operator-(const EnumContainer& rhs) const;
 
 	using iterator = std::_Array_iterator<T, EnumType::size> ;
 	using const_iterator = std::_Array_const_iterator<T, EnumType::size>;
@@ -83,8 +83,10 @@ constexpr EnumContainer<T, EnumType> EnumContainer<T, EnumType>::operator+(EnumC
 	return rhs += *this;
 }
 template<typename T, typename EnumType>
-constexpr EnumContainer<T, EnumType> EnumContainer<T, EnumType>::operator-(EnumContainer<T, EnumType> rhs) const {
-	return rhs -= *this;
+constexpr EnumContainer<T, EnumType> EnumContainer<T, EnumType>::operator-(const EnumContainer<T, EnumType>& rhs) const {
+	EnumContainer<T, EnumType> result = *this;
+	result -= rhs;
+	return result;
 }
 
 template<typename T, typename EnumType>
@@ -170,7 +172,7 @@ public:
 	constexpr EnumContainer& operator^=(const EnumContainer& rhs);
 
 	constexpr EnumContainer operator+(EnumContainer rhs) const;
-	constexpr EnumContainer operator-(EnumContainer rhs) const;
+	constexpr EnumContainer operator-(const EnumContainer& rhs) const;
 	constexpr EnumContainer operator&(EnumContainer rhs) const;
 	constexpr EnumContainer operator|(EnumContainer rhs) const;
 	constexpr EnumContainer operator^(EnumContainer rhs) const;
@@ -273,8 +275,9 @@ constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator+
 	return rhs;
 }
 template<typename EnumType>
-constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator-(EnumContainer<bool, EnumType> rhs) const {
-	rhs -= *this;
+constexpr EnumContainer<bool, EnumType> EnumContainer<bool, EnumType>::operator-(const EnumContainer<bool, EnumType>& rhs) const {
+	EnumContainer<bool, EnumType> result = *this;
+	result -= rhs;
 	return rhs;
 }
 template<typename EnumType>

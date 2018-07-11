@@ -55,7 +55,7 @@ std::optional<int> Combat::strike(Unit& defender) {
 }
 
 int Combat::takeDamage(Damage dealt) {
-	int result = _owner.getHealth().takeDamage(dealt);
+	int result = _owner.getBattleInfo().takeDamage(dealt);
 	// TODO(Weston): Move these into Health so we can remove this function
 	if (dealt.isCrit()) {
 		notifyAllCrit(_owner.getIdentity(), result);
@@ -74,13 +74,13 @@ optional_pair<int, int> Combat::do_combat(Unit& defender) {
 
 		result.first = std::max(result.first, attacker.getCombat().strike(defender));
 
-		if (!defender.getHealth().isDead()) {
+		if (!defender.getBattleInfo().isDead()) {
 			result.second = std::max(result.second, defender.getCombat().strike(attacker));
 		}
-		if (spd_adv > SPEED_DIFFERENCE_TO_DOUBLE && !attacker.getHealth().isDead()) {
+		if (spd_adv > SPEED_DIFFERENCE_TO_DOUBLE && !attacker.getBattleInfo().isDead()) {
 			result.first = std::max(result.first, attacker.getCombat().strike(defender));
 		}
-		if (spd_adv < -SPEED_DIFFERENCE_TO_DOUBLE && !defender.getHealth().isDead()) {
+		if (spd_adv < -SPEED_DIFFERENCE_TO_DOUBLE && !defender.getBattleInfo().isDead()) {
 			result.second = std::max(result.second, defender.getCombat().strike(attacker));
 		}
 		return result;
