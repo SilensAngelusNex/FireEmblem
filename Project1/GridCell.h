@@ -1,41 +1,59 @@
 #pragma once
-#include "Tile.h"
+#include "Terrain.h"
 #include "CellEdge.h"
+#include "ID.h"
 #include <list>
 #include <vector>
+#include "logical_reference_wrapper.h"
 
-/** GridCell that composes the Map. Holds a Tile.
+
+/** GridCell that composes the Grid. Holds a Tile.
 */
+
 class GridCell {
 private:
-	Tile _tile = Tile();
+	Terrain _terrain;
 	std::list<CellEdge> _adjacent_cells = std::list<CellEdge>(); 
 public:
+	const ID _id;
 	GridCell(const GridCell& cell) = default;
 	GridCell(GridCell&& cell) = default;
 
-	GridCell() = default;
 	~GridCell() = default;
-	GridCell(Tile tile);
+	GridCell(TerrainType terrain, ID id);
 
 	void addAdjacentCell(GridCell& new_cell);
-	void addAdjacentCell(GridCell& new_cell, MobilityCostSet costs);
+	void addAdjacentCell(ID new_cell, MobilityCostSet costs);
 	void removeAdjacentCell(const GridCell& delete_cell);
+	void removeAdjacentCell(ID delete_cell);
 
-	Tile& getTile();
+	Terrain& getTerrain();
 	std::list<CellEdge> getEdges();
 	std::optional<CellEdge> getEdge(const GridCell& other_cell);
-	std::vector<GridCell*> getAdjacentCells();
+	std::optional<CellEdge> getEdge(ID other_cell_id);
+	std::vector<ID> getAdjacentCellIDs();
 
 	bool isAdjacent(const GridCell& other_cell) const;
 	bool isAdjacent(const GridCell& other_cell, MobilityType mobility) const;
 	bool isAdjacent(const GridCell& other_cell, MobilitySet mobility) const;
 
-	const Tile& getTile() const;
+	bool isAdjacent(ID other_cell) const;
+	bool isAdjacent(ID other_cell, MobilityType mobility) const;
+	bool isAdjacent(ID other_cell, MobilitySet mobility) const;
+
+	const Terrain& getTerrain() const;
 	const std::list<CellEdge> getEdges() const;
-	const std::optional<CellEdge> getEdge(const GridCell & other_cell) const;
-	const std::vector<GridCell*> getAdjacentCells() const;
+	const std::optional<CellEdge> getEdge(const GridCell& other_cell) const;
+	const std::optional<CellEdge> getEdge(ID other_cell_id) const;
+	const std::vector<ID> getAdjacentCellIDs() const;
 
 	bool operator==(const GridCell& cell) const;
 	bool operator!=(const GridCell& cell) const;
+	bool operator<(const GridCell& cell) const;
+	bool operator>(const GridCell& cell) const;
+	bool operator>=(const GridCell& cell) const;
+	bool operator<=(const GridCell& cell) const;
+
+	using Ref = logical_reference_wrapper<GridCell>;
+	using ConstRef = logical_reference_wrapper<const GridCell>;
 };

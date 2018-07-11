@@ -17,6 +17,7 @@
 #include "Health.h"
 #include "PartyBase.h"
 #include "BattleInfo.h"
+#include "logical_reference_wrapper.h"
 
 class PartyBase;
 using CONTEXT = Dice<100>;
@@ -54,6 +55,8 @@ public:
 	using ObservableExp::attach;
 	using ObservableExp::detach;
 
+
+
 	// Commandable Unit
 	InventoryCommandable& getInventory();
 	BattleInfo& getBattleInfo();
@@ -73,6 +76,11 @@ public:
 	Inventory& getInventoryInternal();
 	CONTEXT& getContext();
 
+
 	bool operator==(const Unit& unit) const;
 	bool operator!=(const Unit& unit) const;
+
+	using Ref = logical_reference_wrapper<Unit>;
+	using ConstRef = logical_reference_wrapper<const Unit>;
+	using UniquePtr = std::unique_ptr<Unit>;
 };

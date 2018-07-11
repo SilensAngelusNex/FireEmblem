@@ -54,7 +54,7 @@ public:
 		return result;
 	}
 
-	int operator*() const {
+	size_t operator*() const {
 		return _index;
 	}
 

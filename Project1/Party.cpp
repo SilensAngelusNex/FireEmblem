@@ -32,16 +32,16 @@ void Party::insertUnit(UnitData unit) {
 	_units.back()->setParty(this);
 }
 
-void Party::insertUnit(UnitPtr unit) {
+void Party::insertUnit(Unit::UniquePtr unit) {
 	Expects(unit != nullptr && unit->getParty() == nullptr);
 	_units.emplace_back(std::move(unit));
 	_units.back()->setParty(this);
 }
 
-UnitPtr Party::dropUnit(Unit& unit) {
+Unit::UniquePtr Party::dropUnit(Unit& unit) {
 	Expects(hasUnit(unit));
 	auto it = getPosition(unit);
-	UnitPtr temp = std::move(*it);
+	Unit::UniquePtr temp = std::move(*it);
 	_units.erase(it);
 	temp->setParty(nullptr);
 	return temp;
@@ -57,16 +57,16 @@ bool Party::isDone() const{
 	return isDone;
 }
 
-std::vector<UnitRef> Party::getUnits() {
-	auto vec = std::vector<UnitRef>();
+std::vector<Unit::Ref> Party::getUnits() {
+	auto vec = std::vector<Unit::Ref>();
 	for (auto& unit : _units) {
 		vec.emplace_back(*unit);
 	}
 	return vec;
 }
 
-std::vector<UnitRef> Party::getOtherUnits(const Unit& unit) {
-	auto vec = std::vector<UnitRef>();
+std::vector<Unit::Ref> Party::getOtherUnits(const Unit& unit) {
+	auto vec = std::vector<Unit::Ref>();
 	for (auto& other : _units) {
 		if (unit != *other) {
 			vec.emplace_back(*other);
@@ -75,16 +75,16 @@ std::vector<UnitRef> Party::getOtherUnits(const Unit& unit) {
 	return vec;
 }
 
-std::vector<constUnitRef> Party::getUnits() const {
-	auto vec = std::vector<constUnitRef>();
+std::vector<Unit::ConstRef> Party::getUnits() const {
+	auto vec = std::vector<Unit::ConstRef>();
 	for (auto& unit : _units) {
 		vec.emplace_back(*unit);
 	}
 	return vec;
 }
 
-std::vector<constUnitRef> Party::getOtherUnits(const Unit& unit) const{
-	auto vec = std::vector<constUnitRef>();
+std::vector<Unit::ConstRef> Party::getOtherUnits(const Unit& unit) const{
+	auto vec = std::vector<Unit::ConstRef>();
 	for (auto& other : _units) {
 		if (unit != *other) {
 			vec.emplace_back(*other);

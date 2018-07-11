@@ -1,6 +1,7 @@
 #include "Mobility.h"
 #include "CellEdge.h"
 #include "GridCell.h"
+#include "PartyBase.h"
 #include "Unit.h"
 
 
@@ -38,7 +39,7 @@ bool Mobility::canPass(const Unit* unit) const {
 std::optional<int> Mobility::getCost(const CellEdge & edge) const {
 	std::optional<int> cost;
 	for (MobilityType type : MobilityType::list) {
-		if (_mobility[type] && canPass(edge._cell.getTile()._unit)) {
+		if (_mobility[type]) {
 			std::optional<int> edge_cost = edge.getCost(type);
 			if (edge_cost &&(!cost || cost > edge_cost)) { // if we can step on the tile
 				cost = edge_cost.value();
