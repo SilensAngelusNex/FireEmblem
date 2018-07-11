@@ -225,6 +225,15 @@
     <ClCompile Include="Healing.cpp">
       <Filter>src\unit\util</Filter>
     </ClCompile>
+    <ClCompile Include="Identity.cpp">
+      <Filter>src\unit\util</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitViewable.cpp">
+      <Filter>src\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitCommandable.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ListDice.h">
@@ -235,9 +244,6 @@
     </ClInclude>
     <ClInclude Include="FairDice.h">
       <Filter>inc\dice</Filter>
-    </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>inc\unit</Filter>
     </ClInclude>
     <ClInclude Include="Observable.h">
       <Filter>inc\util\observer\observable</Filter>
@@ -379,6 +385,18 @@
     </ClInclude>
     <ClInclude Include="UniquePtrIterator.h">
       <Filter>inc\util</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitViewable.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitCommandable.h">
+      <Filter>inc\unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Identity.h">
+      <Filter>inc\unit\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>inc\unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

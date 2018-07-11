@@ -1,10 +1,8 @@
 #pragma once
 
-#include <string>
-
 #include "ObserverDamage.h"
 #include "ObserverExp.h"
-
+#include "Identity.h"
 
 class ExpObserver : public ObserverExp {
 public:
@@ -15,9 +13,9 @@ public:
 
 class DmgObserver : public ObserverDamage {
 public:
-	void notifyMiss(const std::string&  name) override;
-	void notifyDeflect(const std::string&  name) override;
-	void notifyDamage(const std::string&  name, int dmg) override;
-	void notifyCrit(const std::string&  name, int dmg) override;
-	void notifyHeal(const std::string&  name, int heal) override;
+	void notifyMiss(const Identity&  name) override;
+	void notifyDeflect(const Identity&  name) override;
+	void notifyDamage(const Identity&  name, int dmg) override;
+	void notifyCrit(const Identity&  name, int dmg) override;
+	void notifyHeal(const Identity&  name, int heal) override;
 };

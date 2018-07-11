@@ -8,5 +8,7 @@ class Unit;
 
 class BattleInfo : public Health, public Actions {
 public:
+	using Actions::ActionId;
+
 	BattleInfo(Unit& owner);
 };

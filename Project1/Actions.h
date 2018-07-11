@@ -4,9 +4,9 @@
 #include <string>
 
 class Actions {
-private:
+public:
 	using ActionId = std::string;
-
+private:
 	int _used_move;
 	bool _major_remaining;
 	bool _minor_remaining;

@@ -2,8 +2,12 @@
 
 #include <utility>
 
-Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
-	_id(std::move(name)),
+Unit::Unit(std::string id, CONTEXT & context, AttributeList stats) :
+	Unit(Identity(id), context, stats)
+{}
+
+Unit::Unit(Identity id, CONTEXT& context, AttributeList stats) :
+	_id(std::move(id)),
 	_context(context),	
 	_stats(*this, stats),
 	_exp(*this, context),
@@ -13,7 +17,9 @@ Unit::Unit(IDENTITY name, CONTEXT& context, AttributeList stats) :
 	_battle_info(*this)
 {}
 
-const IDENTITY& Unit::getIdentity() const {
+Unit::Unit(UnitData data) : Unit(Identity(data.name), data.context, data.stats) {};
+
+const Identity& Unit::getIdentity() const {
 	return _id;
 }
 
@@ -34,7 +40,7 @@ const InventoryViewable& Unit::getInventory() const {
 }
 
 const PartyBase* Unit::getParty() const{
-	return _party;
+	return _id.getParty();
 }
 
 const BattleInfo& Unit::getBattleInfo() const {
@@ -64,12 +70,11 @@ bool Unit::isTired() const {
 }
 
 PartyBase* Unit::getParty() {
-	return _party;
+	return _id.getParty();
 }
 
 PartyBase* Unit::setParty(PartyBase* other_party) {
-	std::swap(_party, other_party);
-	return other_party;
+	return _id.setParty(other_party);
 }
 
 Stats& Unit::getStats() {

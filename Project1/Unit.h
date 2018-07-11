@@ -8,6 +8,7 @@
 #include "ObserverExp.h"
 #include "AttributeList.h"
 #include "Damage.h"
+#include "Identity.h"
 #include "Inventory.h"
 #include "Combat.h"
 #include "Dice.h"
@@ -18,20 +19,16 @@
 #include "BattleInfo.h"
 
 class PartyBase;
-using IDENTITY = std::string;
 using CONTEXT = Dice<100>;
 struct UnitData {
-	IDENTITY name;
+	std::string name;
 	CONTEXT& context;
 	AttributeList stats;
 };
-class Unit : public Observable<ObserverDamage>, public Observable<ObserverExp> {
+class Unit : public ObservableDamage, public ObservableExp {
 private:
-	IDENTITY _id;
-	PartyBase* _party = nullptr;
-
+	Identity _id;
 	CONTEXT& _context;
-
 	Stats _stats;
 	Experience _exp;
 	Inventory _inv;
@@ -40,17 +37,22 @@ private:
 	BattleInfo _battle_info;
 
 public:
-	Unit(IDENTITY name, CONTEXT& context, AttributeList stats);
-	Unit(UnitData data) : Unit(data.name, data.context, data.stats) {};
+	Unit(std::string id, CONTEXT& context, AttributeList stats);
+	Unit(Identity id, CONTEXT& context, AttributeList stats);
+	Unit(UnitData data);
 
 	// Viewable Unit
-	const IDENTITY& getIdentity() const;
+	const Identity& getIdentity() const;
 	const Stats& getStats() const;
 	const Mobility& getMobility() const;
 	const Experience& getExperience() const;
 	const InventoryViewable& getInventory() const;
 	const PartyBase* getParty() const;
 	const BattleInfo& getBattleInfo() const;
+	using ObservableDamage::attach;
+	using ObservableDamage::detach;
+	using ObservableExp::attach;
+	using ObservableExp::detach;
 
 	// Commandable Unit
 	InventoryCommandable& getInventory();
@@ -71,33 +73,6 @@ public:
 	Inventory& getInventoryInternal();
 	CONTEXT& getContext();
 
-	 
-	// Observable
-	void attach(ObserverDamage* observer) {
-		_combat.attach(observer);
-	}
-	void attach(ObserverDamage& observer) {
-		_combat.attach(observer);
-	}
-	void detach(ObserverDamage* observer) {
-		_combat.detach(observer);
-	}
-	void detach(ObserverDamage& observer) {
-		_combat.detach(observer);
-	}
-	
-	void attach(ObserverExp* observer) {
-		_exp.attach(observer);
-	}
-	void attach(ObserverExp& observer) {
-		_exp.attach(observer);
-	}
-	void detach(ObserverExp* observer) {
-		_exp.detach(observer);
-	}
-	void detach(ObserverExp& observer) {
-		_exp.detach(observer);
-	}
 	bool operator==(const Unit& unit) const;
 	bool operator!=(const Unit& unit) const;
 };

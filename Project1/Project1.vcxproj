@@ -140,6 +140,7 @@
     <ClCompile Include="GridCell.cpp" />
     <ClCompile Include="Healing.cpp" />
     <ClCompile Include="Health.cpp" />
+    <ClCompile Include="Identity.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryBase.cpp" />
     <ClCompile Include="InventoryCommandable.cpp" />
@@ -164,7 +165,9 @@
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="CellEdge.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitCommandable.cpp" />
     <ClCompile Include="UnitTest.cpp" />
+    <ClCompile Include="UnitViewable.cpp" />
     <ClCompile Include="UtilTests.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponList.cpp" />
@@ -174,6 +177,7 @@
     <ClInclude Include="BattleInfo.h" />
     <ClInclude Include="BitsetIterator.h" />
     <ClInclude Include="EnumSetIterator.h" />
+    <ClInclude Include="Identity.h" />
     <ClInclude Include="Range.h" />
     <ClInclude Include="AttributeList.h" />
     <ClInclude Include="CellPath.h" />
@@ -218,6 +222,8 @@
     <ClInclude Include="UniquePtrIterator.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="ListDice.h" />
+    <ClInclude Include="UnitCommandable.h" />
+    <ClInclude Include="UnitViewable.h" />
     <ClInclude Include="UtilTests.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponList.h" />
