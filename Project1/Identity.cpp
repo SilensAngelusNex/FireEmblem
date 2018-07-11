@@ -1,7 +1,7 @@
 #include "Identity.h"
 
 Identity::Identity(std::string name, PartyBase* party) :
-	_name(name),
+	_name(std::move(name)),
 	_party(party)
 {}
 
@@ -9,7 +9,7 @@ const std::string& Identity::getName() const {
 	return _name;
 }
 
-PartyBase * Identity::getParty() const {
+PartyBase* Identity::getParty() const {
 	return _party;
 }
 

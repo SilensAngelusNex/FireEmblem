@@ -16,7 +16,7 @@ protected:
 	EquipArray<ItemEquip*> _equipment{};
 	EquipArray<std::unique_ptr<Item>> _equipment_owners{};
 	std::array<std::unique_ptr<Item>, _MAX_NUMBER_ITEMS> _items{};
-	int _number_items_held{0};
+	size_t _number_items_held{0};
 public:
 	InventoryBase(const InventoryBase& that) = delete;
 	InventoryBase& operator=(const InventoryBase& that) = delete;

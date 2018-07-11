@@ -3,7 +3,7 @@
 #include <utility>
 
 Unit::Unit(std::string id, CONTEXT & context, AttributeList stats) :
-	Unit(Identity(id), context, stats)
+	Unit(Identity(std::move(id)), context, stats)
 {}
 
 Unit::Unit(Identity id, CONTEXT& context, AttributeList stats) :

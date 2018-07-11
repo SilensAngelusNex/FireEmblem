@@ -2,12 +2,7 @@
 
 #include <gsl/gsl_assert>
 
-Actions::Actions() :
-	_used_move(0),
-	_major_remaining(true),
-	_minor_remaining(true),
-	_independent_used()
-{}
+Actions::Actions() = default;
 
 bool Actions::hasMajor() const {
 	return _major_remaining;
@@ -21,7 +16,7 @@ int Actions::moveUsed() const {
 	return _used_move;
 }
 
-bool Actions::hasIndependent(ActionId action) const {
+bool Actions::hasIndependent(const ActionId& action) const {
 	return std::find(_independent_used.begin(), _independent_used.end(), action) == _independent_used.end();
 }
 
@@ -52,7 +47,7 @@ void Actions::useMove(int used) {
 void Actions::useIndependent(ActionId used) {
 	Expects(hasIndependent(used));
 
-	_independent_used.insert(used);
+	_independent_used.insert(std::move(used));
 }
 
 void Actions::refresh() {

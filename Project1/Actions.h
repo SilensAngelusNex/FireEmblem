@@ -7,9 +7,9 @@ class Actions {
 public:
 	using ActionId = std::string;
 private:
-	int _used_move;
-	bool _major_remaining;
-	bool _minor_remaining;
+	int _used_move = 0;
+	bool _major_remaining = true;
+	bool _minor_remaining = true;
 	std::set<ActionId> _independent_used;
 
 public:
@@ -18,7 +18,7 @@ public:
 	bool hasMajor() const;
 	bool hasMinor() const;
 	int moveUsed() const;
-	bool hasIndependent(ActionId action) const;
+	bool hasIndependent(const ActionId& action) const;
 	const std::set<ActionId>& usedIndependents() const;
 
 	void useMajor();

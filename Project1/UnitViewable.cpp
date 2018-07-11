@@ -124,7 +124,7 @@ int UnitViewable::moveUsed() const {
 	return _ptr->getBattleInfo().moveUsed();
 }
 
-bool UnitViewable::hasIndependent(BattleInfo::ActionId action) const {
+bool UnitViewable::hasIndependent(const BattleInfo::ActionId& action) const {
 	return _ptr->getBattleInfo().hasIndependent(action);
 }
 

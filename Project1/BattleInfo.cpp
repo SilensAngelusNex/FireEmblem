@@ -1,7 +1,6 @@
 #include "BattleInfo.h"
 
 BattleInfo::BattleInfo(Unit &owner) :
-	Health(owner),
-	Actions()
+	Health(owner)
 {}
 

@@ -13,7 +13,7 @@ void InventoryCommandable::add(std::unique_ptr<Item> item) {
 	_number_items_held++;
 }
 
-std::unique_ptr<Item> InventoryCommandable::drop(int item_index) {
+std::unique_ptr<Item> InventoryCommandable::drop(size_t item_index) {
 	Expects(0 <= item_index && item_index < _number_items_held);
 	std::unique_ptr<Item> result = std::move(_items[item_index]);
 
@@ -32,33 +32,31 @@ std::unique_ptr<Item> InventoryCommandable::drop(Item& item) {
 	return drop(findItem(item));
 }
 
-void InventoryCommandable::swap(int i, int j) {
+void InventoryCommandable::swap(size_t i, size_t j) {
 	// 0 <= (i, j) < _number_items_held
 	Expects(0 <= i && i < _number_items_held && 0 <= j && j < _number_items_held);
 	std::swap(_items[i], _items[j]);
 }
 
 void InventoryCommandable::swap(Item& a, Item& b) {
-	int i = -1;
-	int j = -1;
+	size_t i = _number_items_held;
+	size_t j = _number_items_held;
 
-	int k = 0;
-	while (k < _number_items_held) {
+	for (size_t k = 0; k < _number_items_held; ++k) {
 		if (_items[k].get() == &a) {
 			i = k;
 		}
 		if (_items[k].get() == &b) {
 			j = k;
 		}
-		k++;
 	}
 
 	// 0 <= (i, j) < _number_items_held
-	Ensures(0 <= i && i < _number_items_held && 0 <= j && j < _number_items_held);
+	Ensures(i < _number_items_held && j < _number_items_held);
 	std::swap(_items[i], _items[j]);
 }
 
-void InventoryCommandable::equip(EquipSlot slot, int item_index) {
+void InventoryCommandable::equip(EquipSlot slot, size_t item_index) {
 	Expects(item_index < _number_items_held && _items[item_index]->is_equippable());
 
 	_items[item_index]->equip(_owner, slot);
@@ -86,9 +84,9 @@ void InventoryCommandable::dequip(EquipSlot slot) {
 	add(dequip0(slot));
 }
 
-int InventoryCommandable::findItem(Item& item) {
-	int result = _number_items_held;
-	for (int i = 0; i < _number_items_held; i++) {
+size_t InventoryCommandable::findItem(Item& item) {
+	size_t result = _number_items_held;
+	for (size_t i = 0; i < _number_items_held; i++) {
 		if (_items[i].get() == &item) {
 			result = i;
 		}

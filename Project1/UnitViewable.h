@@ -57,7 +57,7 @@ public:
 	bool hasMajor() const;
 	bool hasMinor() const;
 	int moveUsed() const;
-	bool hasIndependent(BattleInfo::ActionId action) const;
+	bool hasIndependent(const BattleInfo::ActionId& action) const;
 	const std::set<BattleInfo::ActionId>& usedIndependents() const;
 
 	// Subscript operators
